@@ -334,6 +334,16 @@
   }
   .nav-menu .nav-phone-m,.nav-menu .btn-m{display:none}
 </style>
+
+<style id="mobile-safety">
+/* Защита от горизонтального переполнения на мобильных */
+@media (max-width:768px){
+  html,body{overflow-x:hidden;max-width:100%;}
+  *{min-width:0;}
+  img,svg,video{max-width:100%;}
+  table{max-width:100%;}
+}
+</style>
 </head>
 <body>
 

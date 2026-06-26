@@ -401,6 +401,23 @@ input{font-family:inherit}
   .reveal{opacity:1;transform:none}
 }
 </style>
+
+<style id="mobile-safety">
+/* Защита от горизонтального переполнения на мобильных */
+@media (max-width:768px){
+  html,body{overflow-x:hidden;max-width:100%;}
+  *{min-width:0;}
+  img,svg,video{max-width:100%;}
+  table{max-width:100%;}
+}
+</style>
+
+<style id="mobile-safety-dental">
+@media (max-width:768px){
+  #mobileMenu{width:100%!important;left:0!important;right:0!important;box-sizing:border-box!important;}
+  #mobileMenu *{box-sizing:border-box!important;max-width:100%!important;}
+}
+</style>
 </head>
 <body>
 
