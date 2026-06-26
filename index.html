@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Портфолио — Веб-дизайн и вёрстка лендингов</title>
+<meta name="description" content="Портфолио лендингов: клининг, кофейня, фитнес, стоматология, SaaS, барбершоп, доставка цветов, детейлинг, суши, школа робототехники.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d12; --bg2:#14141c; --card:#1a1a24; --line:#262633;
+    --txt:#f4f4f7; --muted:#9a9aac; --accent:#6366f1; --accent2:#a855f7;
+    --radius:20px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.15}
+  a{color:inherit;text-decoration:none}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(13,13,18,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px}
+  .logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .badge{font-size:13px;color:var(--muted);border:1px solid var(--line);padding:6px 14px;border-radius:999px}
+
+  /* hero */
+  .hero{padding:90px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -10%,rgba(99,102,241,.25),transparent 70%);pointer-events:none}
+  .hero h1{font-size:clamp(34px,6vw,60px);font-weight:700;letter-spacing:-1px}
+  .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{max-width:620px;margin:20px auto 0;color:var(--muted);font-size:18px}
+  .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+  .stats b{font-family:'Space Grotesk';font-size:32px;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stats small{color:var(--muted);font-size:14px}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:50px 0 90px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 20px 50px -20px rgba(99,102,241,.5)}
+  .thumb{height:190px;display:flex;align-items:flex-end;padding:18px;position:relative;color:#fff;overflow:hidden}
+  .thumb .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:0}
+  .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 55%);z-index:1}
+  .thumb .emoji{position:absolute;top:16px;right:18px;font-size:30px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45));z-index:2}
+  .thumb .tag{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:999px;backdrop-filter:blur(4px);position:relative;z-index:2}
+  .card .body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column}
+  .card h3{font-size:21px;font-weight:700}
+  .card .desc{color:var(--muted);font-size:14.5px;margin:8px 0 18px;flex:1}
+  .open{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--txt);align-self:flex-start}
+  .open svg{transition:transform .2s}
+  .card:hover .open svg{transform:translateX(5px)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;color:var(--muted);font-size:14px}
+
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}.badge{display:none}.stats{gap:26px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="logo">💼 <span>Веб&nbsp;Портфолио</span></div>
+    <div class="badge">Лендинги · вёрстка · адаптив</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Делаю <em>лендинги</em>,<br>которые продают</h1>
+    <p>Современная адаптивная вёрстка под ключ. Ниже — 10 работ под разные ниши: от кофейни до SaaS. Откройте любую — это живая страница.</p>
+    <div class="stats">
+      <div><b>10</b><small>проектов</small></div>
+      <div><b>100%</b><small>адаптив</small></div>
+      <div><b>HTML/CSS/JS</b><small>чистый код</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="grid" id="grid"></div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 · Портфолио лендингов · Сделано на чистом HTML/CSS/JS</div>
+</footer>
+
+<script>
+const works = [
+  {f:'landings/01-robotrek.html', img:'screenshots/01-robotrek-cover.png', n:'РОБОТРЕК', t:'Образование', d:'Школа робототехники и программирования для детей 7–14 лет.', e:'🤖', g:'linear-gradient(135deg,#4F46E5,#F59E0B)'},
+  {f:'landings/02-chistodom.html', img:'screenshots/02-chistodom-cover.png', n:'ЧистоДом', t:'Услуги', d:'Клининговая компания: уборка квартир и офисов.', e:'🧽', g:'linear-gradient(135deg,#06B6D4,#22C55E)'},
+  {f:'landings/03-zerno.html', img:'screenshots/03-zerno-cover.png', n:'Зерно', t:'HoReCa', d:'Кофейня-пекарня со своей обжаркой.', e:'☕', g:'linear-gradient(135deg,#6F4E37,#C75D3C)'},
+  {f:'landings/04-puls.html', img:'screenshots/04-puls-cover.png', n:'Пульс', t:'Фитнес', d:'Фитнес и EMS-студия. Результат за 8 недель.', e:'💪', g:'linear-gradient(135deg,#0B0B0F,#A3E635)'},
+  {f:'landings/05-dental.html', img:'screenshots/05-dental-cover.png', n:'Дентал Студия', t:'Медицина', d:'Стоматология: лечение, имплантация, отбеливание.', e:'🦷', g:'linear-gradient(135deg,#2563EB,#14B8A6)'},
+  {f:'landings/06-flowtask.html', img:'screenshots/06-flowtask-cover.png', n:'Flowtask', t:'SaaS', d:'Облачный таск-менеджер для команд.', e:'🚀', g:'linear-gradient(135deg,#6366F1,#A855F7)'},
+  {f:'landings/07-britva.html', img:'screenshots/07-britva-cover.png', n:'Бритва', t:'Бьюти', d:'Барбершоп премиум-класса.', e:'💈', g:'linear-gradient(135deg,#1A1A1A,#C9A227)'},
+  {f:'landings/08-buketnaya.html', img:'screenshots/08-buketnaya-cover.png', n:'Букетная', t:'Доставка', d:'Доставка цветов за 2 часа с фото перед отправкой.', e:'💐', g:'linear-gradient(135deg,#E8A0BF,#A3B18A)'},
+  {f:'landings/09-glyanec.html', img:'screenshots/09-glyanec-cover.png', n:'Глянец', t:'Авто', d:'Детейлинг-центр: керамика, полировка, химчистка.', e:'🚗', g:'linear-gradient(135deg,#0A0A0A,#DC2626)'},
+  {f:'landings/10-sakura.html', img:'screenshots/10-sakura-cover.png', n:'Сакура', t:'Доставка еды', d:'Доставка суши и роллов за 60 минут.', e:'🍣', g:'linear-gradient(135deg,#111111,#E11D48)'},
+];
+document.getElementById('grid').innerHTML = works.map(w=>`
+  <a class="card" href="${w.f}">
+    <div class="thumb" style="background:${w.g}">
+      <img class="shot" src="${w.img}" alt="Превью лендинга ${w.n}" loading="lazy" onerror="this.remove()">
+      <span class="emoji">${w.e}</span>
+      <span class="tag">${w.t}</span>
+    </div>
+    <div class="body">
+      <h3>${w.n}</h3>
+      <p class="desc">${w.d}</p>
+      <span class="open">Открыть лендинг
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+  </a>`).join('');
+</script>
+</body>
+</html>

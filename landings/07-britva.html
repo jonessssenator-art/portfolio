@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бритва — премиальный барбершоп в центре города</title>
+<meta name="description" content="«Бритва» — барбершоп для мужчин со вкусом. Стрижка, моделирование бороды, королевское бритьё опасной бритвой, камуфляж седины. 6 мастеров, 8 лет, 10000+ клиентов. Запишитесь онлайн.">
+<meta name="theme-color" content="#1A1A1A">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Бритва — премиальный барбершоп">
+<meta property="og:description" content="Стрижка, борода, королевское бритьё опасной бритвой. 6 мастеров, 8 лет опыта, премиальная косметика. Запишитесь онлайн.">
+<meta property="og:image" content="https://picsum.photos/seed/britva-og/1200/630">
+<meta property="og:locale" content="ru_RU">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AA%92%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --graphite:#1A1A1A;
+    --graphite-2:#202020;
+    --card:#222222;
+    --card-2:#262626;
+    --line:#333333;
+    --gold:#C9A227;
+    --gold-soft:#e0bd4f;
+    --beige:#d8c7a8;
+    --text:#EDE9E0;
+    --muted:#9b958a;
+    --shadow:0 20px 60px rgba(0,0,0,.55);
+    --shadow-soft:0 10px 30px rgba(0,0,0,.4);
+    --radius:18px;
+    --radius-sm:12px;
+    --container:1200px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--graphite);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body.lock{overflow:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ul{list-style:none}
+  h1,h2,h3{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.05;letter-spacing:.5px}
+  .container{max-width:var(--container);margin:0 auto;padding:0 24px}
+  section{padding:96px 0}
+  .gold{color:var(--gold)}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Oswald',sans-serif;text-transform:uppercase;
+    letter-spacing:3px;font-size:13px;font-weight:600;color:var(--gold);
+    margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--gold)}
+  .sec-title{font-size:clamp(34px,5vw,58px);text-transform:uppercase;margin-bottom:16px}
+  .sec-sub{color:var(--muted);max-width:620px;font-size:17px;margin-bottom:48px}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1.5px;
+    font-weight:600;font-size:15px;cursor:pointer;border:none;
+    padding:16px 32px;border-radius:var(--radius-sm);transition:.28s ease;
+  }
+  .btn-gold{background:var(--gold);color:#161616;box-shadow:0 10px 30px rgba(201,162,39,.28)}
+  .btn-gold:hover{background:var(--gold-soft);transform:translateY(-3px);box-shadow:0 16px 40px rgba(201,162,39,.4)}
+  .btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+
+  /* HEADER */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(20,20,20,.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);transition:.3s;
+  }
+  header.scrolled{background:rgba(16,16,16,.96);box-shadow:0 8px 30px rgba(0,0,0,.5)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:84px;gap:24px}
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px}
+  .logo svg{width:34px;height:34px}
+  .logo b{color:var(--gold)}
+  .nav-menu{display:flex;gap:34px}
+  .nav-menu a{
+    font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;
+    font-size:14px;font-weight:500;color:var(--text);position:relative;padding:6px 0;
+  }
+  .nav-menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold);transition:.28s}
+  .nav-menu a:hover{color:var(--gold)}
+  .nav-menu a:hover::after{width:100%}
+  .nav-right{display:flex;align-items:center;gap:22px}
+  .nav-phone{font-family:'Oswald',sans-serif;font-weight:600;font-size:17px;white-space:nowrap}
+  .nav-phone:hover{color:var(--gold)}
+  .burger{display:none;flex-direction:column;gap:5px;width:42px;height:42px;background:transparent;border:1px solid var(--line);border-radius:10px;cursor:pointer;align-items:center;justify-content:center}
+  .burger span{width:20px;height:2px;background:var(--text);transition:.3s}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* HERO */
+  .hero{position:relative;padding:120px 0 110px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-2;
+    background:
+      radial-gradient(900px 500px at 85% 10%, rgba(201,162,39,.14), transparent 60%),
+      radial-gradient(700px 500px at 10% 90%, rgba(201,162,39,.07), transparent 60%),
+      var(--graphite);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(46px,7vw,86px);text-transform:uppercase;margin-bottom:24px}
+  .hero h1 span{color:var(--gold)}
+  .hero p.lead{font-size:19px;color:var(--muted);max-width:520px;margin-bottom:36px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px}
+  .hero-marks{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-marks li{
+    display:flex;align-items:center;gap:10px;font-size:14px;color:var(--beige);
+    background:var(--card);border:1px solid var(--line);border-radius:50px;padding:10px 18px;
+  }
+  .hero-marks svg{width:18px;height:18px;color:var(--gold);flex-shrink:0}
+  .hero-visual{position:relative}
+  .hero-img{
+    border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+    border:1px solid var(--line);aspect-ratio:4/5;
+    background:linear-gradient(150deg,#2a2a2a,#161616);
+  }
+  .hero-img img{width:100%;height:100%;object-fit:cover}
+  .hero-badge{
+    position:absolute;bottom:-26px;left:-26px;
+    background:var(--gold);color:#161616;border-radius:var(--radius-sm);
+    padding:20px 26px;box-shadow:var(--shadow-soft);
+  }
+  .hero-badge b{font-family:'Bebas Neue',sans-serif;font-size:42px;display:block;line-height:1}
+  .hero-badge span{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:12px;font-weight:600}
+
+  /* FEATURES */
+  .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .feature{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:34px 28px;transition:.3s;
+  }
+  .feature:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow-soft)}
+  .feature-ico{
+    width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(150deg,rgba(201,162,39,.18),rgba(201,162,39,.04));
+    border:1px solid rgba(201,162,39,.35);margin-bottom:22px;
+  }
+  .feature-ico svg{width:30px;height:30px;color:var(--gold)}
+  .feature h3{font-size:22px;text-transform:uppercase;margin-bottom:10px}
+  .feature p{color:var(--muted);font-size:15px}
+
+  /* SERVICES */
+  .services{background:var(--graphite-2)}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .service{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px;display:flex;flex-direction:column;transition:.3s;position:relative;overflow:hidden;
+  }
+  .service.featured{border-color:var(--gold);background:linear-gradient(160deg,#262119,#1d1d1d)}
+  .service:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft)}
+  .service-tag{
+    position:absolute;top:18px;right:18px;font-family:'Oswald',sans-serif;
+    text-transform:uppercase;letter-spacing:1px;font-size:11px;font-weight:600;
+    background:var(--gold);color:#161616;padding:5px 12px;border-radius:50px;
+  }
+  .service-ico{width:48px;height:48px;color:var(--gold);margin-bottom:20px}
+  .service h3{font-size:24px;text-transform:uppercase;margin-bottom:10px;padding-right:20px}
+  .service p{color:var(--muted);font-size:15px;margin-bottom:22px;flex-grow:1}
+  .service-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:20px}
+  .service-price{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--gold);letter-spacing:1px}
+  .service-price small{font-size:14px;color:var(--muted);font-family:'Inter';letter-spacing:0}
+  .service-time{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .service-time svg{width:15px;height:15px}
+
+  /* STEPS */
+  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .step{position:relative;padding:34px 26px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);transition:.3s}
+  .step:hover{border-color:var(--gold);transform:translateY(-6px)}
+  .step-num{font-family:'Bebas Neue',sans-serif;font-size:58px;color:var(--gold);line-height:.8;opacity:.85;margin-bottom:16px}
+  .step h3{font-size:20px;text-transform:uppercase;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:15px}
+
+  /* BARBERS */
+  .barbers{background:var(--graphite-2)}
+  .barbers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .barber{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.3s}
+  .barber:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow-soft)}
+  .barber-photo{aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,#2a2a2a,#161616);position:relative}
+  .barber-photo img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .barber:hover .barber-photo img{transform:scale(1.06)}
+  .barber-body{padding:22px 22px 26px}
+  .barber-body h3{font-size:22px;text-transform:uppercase;margin-bottom:4px}
+  .barber-role{color:var(--gold);font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:13px;font-weight:500;margin-bottom:10px}
+  .barber-body p{color:var(--muted);font-size:14px}
+
+  /* STATS + REVIEWS */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:64px}
+  .stat{text-align:center;padding:36px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+  .stat b{font-family:'Bebas Neue',sans-serif;font-size:60px;color:var(--gold);line-height:.9;display:block;letter-spacing:2px}
+  .stat span{color:var(--muted);font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:14px}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:.3s}
+  .review:hover{border-color:var(--gold);transform:translateY(-4px)}
+  .review-stars{color:var(--gold);margin-bottom:16px;display:flex;gap:3px}
+  .review-stars svg{width:18px;height:18px}
+  .review p{font-size:15px;margin-bottom:22px;color:var(--text)}
+  .review-author{display:flex;align-items:center;gap:14px}
+  .review-ava{width:48px;height:48px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0;background:#2a2a2a}
+  .review-ava img{width:100%;height:100%;object-fit:cover}
+  .review-author b{font-family:'Oswald',sans-serif;font-size:16px;display:block}
+  .review-author span{color:var(--muted);font-size:13px}
+
+  /* FAQ */
+  .faq{background:var(--graphite-2)}
+  .faq-wrap{max-width:860px;margin:0 auto}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:14px;overflow:hidden;transition:.3s}
+  .faq-item.active{border-color:var(--gold)}
+  .faq-q{
+    width:100%;text-align:left;background:transparent;border:none;cursor:pointer;color:var(--text);
+    font-family:'Oswald',sans-serif;font-size:18px;font-weight:500;padding:24px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .faq-q:hover{color:var(--gold)}
+  .faq-icon{width:24px;height:24px;flex-shrink:0;position:relative;transition:.3s}
+  .faq-icon::before,.faq-icon::after{content:"";position:absolute;background:var(--gold);border-radius:2px}
+  .faq-icon::before{top:11px;left:3px;width:18px;height:2px}
+  .faq-icon::after{top:3px;left:11px;width:2px;height:18px;transition:.3s}
+  .faq-item.active .faq-icon::after{transform:rotate(90deg);opacity:0}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .faq-a-inner{padding:0 28px 26px;color:var(--muted);font-size:15px}
+
+  /* CTA FORM */
+  .cta-section{position:relative;overflow:hidden}
+  .cta-section::before{
+    content:"";position:absolute;inset:0;z-index:-1;
+    background:radial-gradient(800px 500px at 80% 50%, rgba(201,162,39,.12), transparent 65%),var(--graphite);
+  }
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .cta-left h2{font-size:clamp(34px,5vw,54px);text-transform:uppercase;margin-bottom:18px}
+  .cta-left p{color:var(--muted);font-size:17px;margin-bottom:30px;max-width:460px}
+  .cta-points li{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:16px}
+  .cta-points svg{width:22px;height:22px;color:var(--gold);flex-shrink:0}
+  .form-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:38px;box-shadow:var(--shadow)}
+  .form-card h3{font-size:26px;text-transform:uppercase;margin-bottom:24px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'Oswald';text-transform:uppercase;letter-spacing:1px}
+  .field input{
+    width:100%;background:var(--graphite);border:1.5px solid var(--line);border-radius:var(--radius-sm);
+    padding:15px 16px;color:var(--text);font-size:15px;font-family:'Inter';transition:.25s;
+  }
+  .field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,39,.12)}
+  .field input.err{border-color:#d4564a;box-shadow:0 0 0 4px rgba(212,86,74,.12)}
+  .field .err-msg{color:#e07a70;font-size:12.5px;margin-top:6px;display:none}
+  .field.invalid .err-msg{display:block}
+  .check{display:flex;align-items:flex-start;gap:11px;margin-bottom:24px;cursor:pointer}
+  .check input{width:20px;height:20px;accent-color:var(--gold);margin-top:2px;flex-shrink:0;cursor:pointer}
+  .check span{font-size:13px;color:var(--muted)}
+  .check a{color:var(--gold);text-decoration:underline}
+  .form-card .btn{width:100%}
+  .form-success{
+    display:none;background:rgba(201,162,39,.1);border:1px solid var(--gold);border-radius:var(--radius-sm);
+    padding:22px;text-align:center;margin-top:4px;
+  }
+  .form-success.show{display:block;animation:pop .4s ease}
+  @keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+  .form-success svg{width:44px;height:44px;color:var(--gold);margin:0 auto 10px}
+  .form-success b{font-family:'Oswald';font-size:20px;display:block;margin-bottom:6px;text-transform:uppercase}
+  .form-success p{color:var(--muted);font-size:14px}
+
+  /* FOOTER */
+  footer{background:#121212;border-top:1px solid var(--line);padding:72px 0 32px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+  .foot-col h4{font-family:'Oswald';text-transform:uppercase;letter-spacing:1px;font-size:15px;margin-bottom:20px;color:var(--gold)}
+  .foot-col .logo{margin-bottom:18px}
+  .foot-col p,.foot-col li{color:var(--muted);font-size:14.5px;margin-bottom:10px}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-contact li{display:flex;align-items:flex-start;gap:10px}
+  .foot-contact svg{width:18px;height:18px;color:var(--gold);flex-shrink:0;margin-top:3px}
+  .socials{display:flex;gap:12px;margin-top:6px}
+  .socials a{
+    width:42px;height:42px;border-radius:12px;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;transition:.28s;
+  }
+  .socials a:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-3px)}
+  .socials a:hover svg{color:#161616}
+  .socials svg{width:20px;height:20px;color:var(--text);transition:.28s}
+  .foot-bottom{border-top:1px solid var(--line);padding-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot-bottom p,.foot-bottom a{color:var(--muted);font-size:13.5px}
+  .foot-bottom a:hover{color:var(--gold)}
+
+  /* BACK TO TOP */
+  .to-top{
+    position:fixed;right:26px;bottom:26px;width:52px;height:52px;border-radius:14px;
+    background:var(--gold);color:#161616;border:none;cursor:pointer;z-index:90;
+    display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;
+    transform:translateY(20px);transition:.3s;box-shadow:0 10px 28px rgba(201,162,39,.35);
+  }
+  .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+  .to-top:hover{background:var(--gold-soft);transform:translateY(-3px)}
+  .to-top svg{width:24px;height:24px}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.16,.84,.44,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .features-grid,.steps-grid,.barbers-grid,.stats-grid{grid-template-columns:repeat(2,1fr)}
+    .services-grid,.reviews-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-grid{gap:40px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:768px){
+    section{padding:72px 0}
+    .nav-menu{
+      position:fixed;top:84px;left:0;right:0;background:rgba(16,16,16,.98);
+      flex-direction:column;gap:0;padding:8px 24px 24px;border-bottom:1px solid var(--line);
+      transform:translateY(-130%);transition:.4s;backdrop-filter:blur(14px);
+    }
+    .nav-menu.open{transform:translateY(0)}
+    .nav-menu a{padding:16px 0;border-bottom:1px solid var(--line);font-size:18px}
+    .burger{display:flex}
+    .nav-phone,.nav .btn-gold{display:none}
+    .hero-grid,.cta-grid{grid-template-columns:1fr}
+    .hero-visual{order:-1;max-width:420px;margin:0 auto}
+    .services-grid,.reviews-grid{grid-template-columns:1fr}
+    .hero h1{font-size:clamp(40px,12vw,64px)}
+  }
+  @media(max-width:480px){
+    .container{padding:0 18px}
+    .features-grid,.steps-grid,.barbers-grid,.stats-grid{grid-template-columns:1fr}
+    .hero-cta{flex-direction:column}
+    .hero-cta .btn{width:100%}
+    .hero-badge{left:0;bottom:-20px;padding:16px 20px}
+    .form-card{padding:26px 20px}
+    .stat b{font-size:50px}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="#hero" class="logo" aria-label="Бритва — на главную">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M3 12c4-5 8-7 14-8-1 6-3 10-8 14L3 12z" stroke="#C9A227"/>
+          <path d="M3 12l5 4" stroke="#C9A227"/>
+        </svg>
+        <span>БРИТ<b>ВА</b></span>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#features">О нас</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#steps">Запись</a></li>
+        <li><a href="#barbers">Мастера</a></li>
+        <li><a href="#faq">Вопросы</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="tel:+74951234567" class="nav-phone">+7 (495) 123-45-67</a>
+        <a href="#book" class="btn btn-gold">Записаться</a>
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <span class="eyebrow">Барбершоп с характером</span>
+          <h1>Стрижка как <span>ритуал.</span> Стиль как статус.</h1>
+          <p class="lead">«Бритва» — место, куда мужчины возвращаются. Опытные мастера, опасная бритва, премиальная косметика и крепкий кофе. Здесь вас понимают без лишних слов.</p>
+          <div class="hero-cta">
+            <a href="#book" class="btn btn-gold">Записаться онлайн</a>
+            <a href="#services" class="btn btn-ghost">Услуги и цены</a>
+          </div>
+          <ul class="hero-marks">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>6 мастеров</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>10000+ клиентов</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>8 лет на одном месте</li>
+          </ul>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-img">
+            <img src="https://picsum.photos/seed/britva-hero/720/900" width="720" height="900" alt="Мастер барбершопа «Бритва» делает мужскую стрижку" loading="eager">
+          </div>
+          <div class="hero-badge">
+            <b>4.9</b>
+            <span>средний рейтинг<br>по 2300 отзывам</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="container">
+      <span class="eyebrow reveal">Почему «Бритва»</span>
+      <h2 class="sec-title reveal">Не просто стрижка —<br>мужской ритуал</h2>
+      <p class="sec-sub reveal">Мы собрали всё, ради чего сюда стоит приходить снова: руки мастеров, атмосферу и внимание к деталям.</p>
+      <div class="features-grid">
+        <article class="feature reveal">
+          <div class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 9a6 6 0 0112 0v3l2 4H4l2-4V9z"/><path d="M9 19a3 3 0 006 0"/></svg></div>
+          <h3>Мастера с опытом</h3>
+          <p>6 барберов с опытом от 5 лет. Регулярно учимся у российских и зарубежных коллег.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg></div>
+          <h3>Премиальная косметика</h3>
+          <p>Работаем только на проверенных профессиональных брендах для волос, кожи и бороды.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Точно вовремя</h3>
+          <p>Никаких очередей. Приходите к назначенному времени — мастер уже готов и ждёт именно вас.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h4l2 7 4-16 2 9h6"/></svg></div>
+          <h3>Атмосфера клуба</h3>
+          <p>Виски или кофе за счёт заведения, винил, тёплый свет. Сюда хочется приходить просто отдохнуть.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <span class="eyebrow reveal">Услуги и цены</span>
+      <h2 class="sec-title reveal">Прайс без сюрпризов</h2>
+      <p class="sec-sub reveal">Честные цены за честную работу. Финальную стоимость мастер назовёт ещё до того, как возьмёт ножницы.</p>
+      <div class="services-grid">
+        <article class="service reveal">
+          <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.5 8L20 18M8.5 16L20 6"/></svg>
+          <h3>Мужская стрижка</h3>
+          <p>Подбираем форму под тип волос и образ жизни. Машинка, ножницы, укладка и горячее полотенце.</p>
+          <div class="service-foot">
+            <div class="service-price">1900 <small>₽</small></div>
+            <div class="service-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>45 мин</div>
+          </div>
+        </article>
+
+        <article class="service reveal">
+          <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c-3 4-6 5-6 9a6 6 0 0012 0c0-4-3-5-6-9z"/></svg>
+          <h3>Моделирование бороды</h3>
+          <p>Чёткий контур, окантовка опасной бритвой, уход маслом. Борода, которая держит форму.</p>
+          <div class="service-foot">
+            <div class="service-price">1400 <small>₽</small></div>
+            <div class="service-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>40 мин</div>
+          </div>
+        </article>
+
+        <article class="service featured reveal">
+          <span class="service-tag">Хит</span>
+          <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l9-9M14 10l7-7M9 3l3 3M21 15l-3 3"/><circle cx="6" cy="6" r="2.5"/></svg>
+          <h3>Комплекс «Бритва»</h3>
+          <p>Стрижка + моделирование бороды + укладка одной сессией. Полный образ за один визит и выгоднее.</p>
+          <div class="service-foot">
+            <div class="service-price">2900 <small>₽</small></div>
+            <div class="service-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>80 мин</div>
+          </div>
+        </article>
+
+        <article class="service reveal">
+          <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 13c4-5 8-7 16-9-1 7-4 11-9 15l-7-6z"/><path d="M4 13l4 3"/></svg>
+          <h3>Королевское бритьё</h3>
+          <p>Опасная бритва, горячее полотенце, массаж лица и уход. Классика, которую невозможно повторить дома.</p>
+          <div class="service-foot">
+            <div class="service-price">1700 <small>₽</small></div>
+            <div class="service-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>50 мин</div>
+          </div>
+        </article>
+
+        <article class="service reveal">
+          <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M5 8c2-2 4-2 7 0s5 2 7 0M5 16c2-2 4-2 7 0s5 2 7 0"/></svg>
+          <h3>Камуфляж седины</h3>
+          <p>Деликатное тонирование волос и бороды. Естественный цвет без эффекта «закрашенности».</p>
+          <div class="service-foot">
+            <div class="service-price">1600 <small>₽</small></div>
+            <div class="service-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>35 мин</div>
+          </div>
+        </article>
+
+        <article class="service reveal">
+          <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 13v6M16 13v6M4 9h16l-1.5 4h-13L4 9z"/><path d="M9 9V6a3 3 0 016 0v3"/></svg>
+          <h3>Стрижка отца и сына</h3>
+          <p>Двойной визит для папы и ребёнка до 12 лет. Первый поход к барберу — спокойно и без слёз.</p>
+          <div class="service-foot">
+            <div class="service-price">2600 <small>₽</small></div>
+            <div class="service-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>70 мин</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section id="steps">
+    <div class="container">
+      <span class="eyebrow reveal">Как записаться</span>
+      <h2 class="sec-title reveal">Четыре шага до кресла</h2>
+      <p class="sec-sub reveal">Запись занимает меньше минуты. Дальше всё сделаем мы.</p>
+      <div class="steps-grid">
+        <article class="step reveal">
+          <div class="step-num">01</div>
+          <h3>Оставьте заявку</h3>
+          <p>Заполните форму на сайте или позвоните — выберем удобное время вместе.</p>
+        </article>
+        <article class="step reveal">
+          <div class="step-num">02</div>
+          <h3>Подтвердим запись</h3>
+          <p>Перезвоним в течение 15 минут, уточним услугу и закрепим мастера за вами.</p>
+        </article>
+        <article class="step reveal">
+          <div class="step-num">03</div>
+          <h3>Приходите вовремя</h3>
+          <p>Без очередей. Встречаем кофе, обсуждаем образ и приступаем к работе.</p>
+        </article>
+        <article class="step reveal">
+          <div class="step-num">04</div>
+          <h3>Уходите в форме</h3>
+          <p>Получаете результат, советы по уходу и приятную скидку на следующий визит.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BARBERS -->
+  <section class="barbers" id="barbers">
+    <div class="container">
+      <span class="eyebrow reveal">Наша команда</span>
+      <h2 class="sec-title reveal">Мастера, которым доверяют</h2>
+      <p class="sec-sub reveal">Каждый барбер «Бритвы» — со своим почерком. Выбирайте мастера или доверьтесь нашему совету.</p>
+      <div class="barbers-grid">
+        <article class="barber reveal">
+          <div class="barber-photo"><img src="https://picsum.photos/seed/britva-m1/480/640" width="480" height="640" alt="Барбер Артём — топ-мастер барбершопа «Бритва»" loading="lazy"></div>
+          <div class="barber-body">
+            <h3>Артём Волков</h3>
+            <div class="barber-role">Топ-мастер · основатель</div>
+            <p>12 лет в профессии. Фейды, классика и сложные текстуры. Финалист чемпионата барберов.</p>
+          </div>
+        </article>
+        <article class="barber reveal">
+          <div class="barber-photo"><img src="https://picsum.photos/seed/britva-m2/480/640" width="480" height="640" alt="Барбер Денис — мастер по бороде барбершопа «Бритва»" loading="lazy"></div>
+          <div class="barber-body">
+            <h3>Денис Громов</h3>
+            <div class="barber-role">Мастер бороды</div>
+            <p>9 лет опыта. Король опасной бритвы и идеального контура. Любит сложные формы бороды.</p>
+          </div>
+        </article>
+        <article class="barber reveal">
+          <div class="barber-photo"><img src="https://picsum.photos/seed/britva-m3/480/640" width="480" height="640" alt="Барбер Илья — барбер-стилист барбершопа «Бритва»" loading="lazy"></div>
+          <div class="barber-body">
+            <h3>Илья Северов</h3>
+            <div class="barber-role">Барбер-стилист</div>
+            <p>7 лет практики. Современные стрижки и работа с седыми волосами. Внимателен к деталям.</p>
+          </div>
+        </article>
+        <article class="barber reveal">
+          <div class="barber-photo"><img src="https://picsum.photos/seed/britva-m4/480/640" width="480" height="640" alt="Барбер Максим — барбер барбершопа «Бритва»" loading="lazy"></div>
+          <div class="barber-body">
+            <h3>Максим Орлов</h3>
+            <div class="barber-role">Барбер</div>
+            <p>5 лет в кресле. Отлично ладит с детьми и теми, кто пришёл в барбершоп впервые.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS + REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <span class="eyebrow reveal">Нам доверяют</span>
+      <h2 class="sec-title reveal">Цифры и люди</h2>
+      <p class="sec-sub reveal">За восемь лет через наши кресла прошли тысячи мужчин. Вот что осталось в сухом остатке.</p>
+      <div class="stats-grid">
+        <div class="stat reveal"><b>8</b><span>лет работы</span></div>
+        <div class="stat reveal"><b>10K+</b><span>довольных клиентов</span></div>
+        <div class="stat reveal"><b>6</b><span>мастеров в команде</span></div>
+        <div class="stat reveal"><b>4.9</b><span>рейтинг на картах</span></div>
+      </div>
+      <div class="reviews-grid">
+        <article class="review reveal">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+          </div>
+          <p>«Хожу к Артёму третий год. Один раз объяснил, чего хочу — теперь просто сажусь в кресло и доверяю. Каждый раз выхожу как с обложки.»</p>
+          <div class="review-author">
+            <div class="review-ava"><img src="https://picsum.photos/seed/britva-r1/96/96" width="96" height="96" alt="Фото клиента Сергея"></div>
+            <div><b>Сергей М.</b><span>клиент с 2023 года</span></div>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+          </div>
+          <p>«Королевское бритьё — отдельный вид отдыха. Горячее полотенце, опасная бритва, тишина. Выхожу как заново родился. Денис — мастер от бога.»</p>
+          <div class="review-author">
+            <div class="review-ava"><img src="https://picsum.photos/seed/britva-r2/96/96" width="96" height="96" alt="Фото клиента Андрея"></div>
+            <div><b>Андрей К.</b><span>постоянный гость</span></div>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
+          </div>
+          <p>«Привёл сына 6 лет, боялся, что будет истерика. Максим за пять минут нашёл общий язык, ребёнок сидел спокойно. Теперь стрижёмся только вдвоём.»</p>
+          <div class="review-author">
+            <div class="review-ava"><img src="https://picsum.photos/seed/britva-r3/96/96" width="96" height="96" alt="Фото клиента Павла"></div>
+            <div><b>Павел Т.</b><span>клиент с сыном</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <span class="eyebrow reveal">Вопросы и ответы</span>
+      <h2 class="sec-title reveal">Частые вопросы</h2>
+      <div class="faq-wrap">
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Нужно ли записываться заранее?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Да, рекомендуем. У популярных мастеров расписание заполнено на несколько дней вперёд. Запись гарантирует, что вас примут точно вовремя, без ожидания.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Сколько длится визит?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Стрижка — около 45 минут, моделирование бороды — 40 минут, комплекс «Бритва» — около 80 минут. Точное время мастер сориентирует при записи.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Можно ли прийти просто на бритьё?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Конечно. Королевское бритьё опасной бритвой — отдельная услуга. Горячее полотенце, массаж лица и уход включены в стоимость.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Какой косметикой вы пользуетесь?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Работаем только на профессиональной премиальной косметике для волос, кожи и бороды. Понравившиеся средства можно купить у нас на ресепшене.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Делаете ли вы детские стрижки?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Да. У нас есть формат «отец и сын» для детей до 12 лет. Мастера умеют находить подход к ребёнку, чтобы первый поход к барберу прошёл спокойно.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false">Как можно оплатить?<span class="faq-icon"></span></button>
+          <div class="faq-a"><div class="faq-a-inner">Принимаем наличные, банковские карты и оплату по QR-коду через СБП. Для постоянных клиентов действует накопительная программа лояльности.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + FORM -->
+  <section class="cta-section" id="book">
+    <div class="container">
+      <div class="cta-grid">
+        <div class="cta-left reveal">
+          <span class="eyebrow">Запись онлайн</span>
+          <h2>Время выглядеть на все сто</h2>
+          <p>Оставьте заявку — перезвоним в течение 15 минут, подберём мастера и удобное время. Первая стрижка со скидкой 15%.</p>
+          <ul class="cta-points">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>Перезвоним за 15 минут</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>Скидка 15% на первый визит</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>Никаких очередей и ожидания</li>
+          </ul>
+        </div>
+        <div class="form-card reveal">
+          <h3>Записаться в «Бритву»</h3>
+          <form id="bookForm" novalidate>
+            <div class="field" id="fName">
+              <label for="name">Ваше имя</label>
+              <input type="text" id="name" name="name" placeholder="Например, Александр" autocomplete="name">
+              <div class="err-msg">Пожалуйста, введите имя (минимум 2 буквы).</div>
+            </div>
+            <div class="field" id="fPhone">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+              <div class="err-msg">Введите корректный номер телефона.</div>
+            </div>
+            <label class="check" id="fAgree">
+              <input type="checkbox" id="agree" name="agree">
+              <span>Я соглашаюсь на обработку <a href="#privacy">персональных данных</a> и принимаю политику конфиденциальности.</span>
+            </label>
+            <div class="err-msg" id="agreeErr" style="margin:-18px 0 18px;display:none">Нужно согласиться на обработку данных.</div>
+            <button type="submit" class="btn btn-gold">Записаться</button>
+          </form>
+          <div class="form-success" id="formSuccess" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+            <b>Заявка принята!</b>
+            <p>Спасибо! Администратор перезвонит вам в течение 15 минут, чтобы подтвердить запись.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <a href="#hero" class="logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M3 12c4-5 8-7 14-8-1 6-3 10-8 14L3 12z" stroke="#C9A227"/>
+            <path d="M3 12l5 4" stroke="#C9A227"/>
+          </svg>
+          <span>БРИТ<b>ВА</b></span>
+        </a>
+        <p>Барбершоп для мужчин, которые ценят своё время и внешний вид. 8 лет, 6 мастеров, премиальная косметика.</p>
+        <div class="socials">
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></a>
+          <a href="#" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 16.3c-5 0-8.3-3.5-8.4-9.3h2.5c.1 4.3 2 6 3.5 6.4V7h2.4v3.6c1.5-.2 3-1.8 3.6-3.6h2.3c-.4 2.2-2 3.8-3.1 4.5 1.1.6 2.9 2 3.6 4.4h-2.6c-.5-1.7-1.9-3-3.8-3.2v3.2h-1.6z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.7 2.6 4.1 3.5 1.9.8 2 .5 2.4.5.4 0 1.2-.5 1.4-1 .2-.5.2-.9.1-1z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="#features">О нас</a></li>
+          <li><a href="#services">Услуги и цены</a></li>
+          <li><a href="#barbers">Мастера</a></li>
+          <li><a href="#faq">Вопросы</a></li>
+          <li><a href="#book">Запись</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Контакты</h4>
+        <ul class="foot-contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 16.5v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 013.2 2h3a2 2 0 012 1.7c.1 1 .4 2 .7 3a2 2 0 01-.5 2.1L9.1 10a16 16 0 006 6l1.2-1.3a2 2 0 012.1-.4c1 .3 2 .6 3 .7a2 2 0 011.6 2z"/></svg><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg><a href="mailto:hello@britva-barber.ru">hello@britva-barber.ru</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Москва, ул. Ленина, 28, 1 этаж</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Часы работы</h4>
+        <ul>
+          <li>Пн – Пт: 10:00 – 22:00</li>
+          <li>Сб – Вс: 10:00 – 21:00</li>
+          <li>Без выходных и перерывов</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Барбершоп «Бритва». Все права защищены.</p>
+      <a href="#privacy">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Наверх">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  'use strict';
+
+  // Sticky header shadow
+  var header = document.getElementById('header');
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    var y = window.pageYOffset;
+    header.classList.toggle('scrolled', y > 20);
+    toTop.classList.toggle('show', y > 600);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Burger menu
+  var burger = document.getElementById('burger');
+  var navMenu = document.getElementById('navMenu');
+  function closeMenu(){
+    burger.classList.remove('open');
+    navMenu.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    document.body.classList.remove('lock');
+  }
+  burger.addEventListener('click', function(){
+    var open = burger.classList.toggle('open');
+    navMenu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('lock', open);
+  });
+  navMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Back to top
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    var ans = item.querySelector('.faq-a');
+    btn.addEventListener('click', function(){
+      var active = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(function(it){
+        it.classList.remove('active');
+        it.querySelector('.faq-a').style.maxHeight = null;
+        it.querySelector('.faq-q').setAttribute('aria-expanded','false');
+      });
+      if(!active){
+        item.classList.add('active');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  // Reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Phone mask
+  var phone = document.getElementById('phone');
+  phone.addEventListener('input', function(){
+    var d = phone.value.replace(/\D/g,'');
+    if(d.startsWith('8')) d = '7' + d.slice(1);
+    if(!d.startsWith('7')) d = '7' + d;
+    d = d.slice(0,11);
+    var out = '+7';
+    if(d.length > 1) out += ' (' + d.slice(1,4);
+    if(d.length >= 4) out += ') ' + d.slice(4,7);
+    if(d.length >= 7) out += '-' + d.slice(7,9);
+    if(d.length >= 9) out += '-' + d.slice(9,11);
+    phone.value = out;
+  });
+
+  // Form validation
+  var form = document.getElementById('bookForm');
+  var name = document.getElementById('name');
+  var agree = document.getElementById('agree');
+  var success = document.getElementById('formSuccess');
+  var fName = document.getElementById('fName');
+  var fPhone = document.getElementById('fPhone');
+  var fAgree = document.getElementById('fAgree');
+  var agreeErr = document.getElementById('agreeErr');
+
+  function setErr(group, input, bad){
+    group.classList.toggle('invalid', bad);
+    if(input) input.classList.toggle('err', bad);
+  }
+
+  name.addEventListener('input', function(){ if(name.value.trim().length>=2) setErr(fName,name,false); });
+  agree.addEventListener('change', function(){ if(agree.checked) agreeErr.style.display='none'; });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = true;
+    if(name.value.trim().length < 2){ setErr(fName,name,true); ok=false; } else setErr(fName,name,false);
+    var digits = phone.value.replace(/\D/g,'');
+    if(digits.length < 11){ setErr(fPhone,phone,true); ok=false; } else setErr(fPhone,phone,false);
+    if(!agree.checked){ agreeErr.style.display='block'; ok=false; } else agreeErr.style.display='none';
+    if(!ok) return;
+    form.style.display = 'none';
+    success.classList.add('show');
+    success.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сакура — доставка суши и роллов за 60 минут | Свежая рыба ежедневно</title>
+<meta name="description" content="Доставка суши и роллов «Сакура»: доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4.8, более 200 000 заказов. Закажите онлайн прямо сейчас.">
+<meta name="theme-color" content="#111111">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Сакура — доставка суши и роллов за 60 минут">
+<meta property="og:description" content="Доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4.8, более 200 000 заказов.">
+<meta property="og:image" content="https://picsum.photos/seed/sakuraog/1200/630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Сакура">
+
+<!-- Favicon: emoji SVG data-URI -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%A3%3C/text%3E%3C/svg%3E">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --black:#111111;
+  --black-2:#171717;
+  --card:#1c1c1e;
+  --card-2:#232326;
+  --red:#E11D48;
+  --red-soft:#f43f5e;
+  --gold:#D4AF37;
+  --gold-soft:#e6c862;
+  --text:#f4f4f5;
+  --muted:#a1a1aa;
+  --line:rgba(255,255,255,.08);
+  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --shadow-sm:0 8px 24px rgba(0,0,0,.35);
+  --radius:20px;
+  --radius-lg:28px;
+  --maxw:1200px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--black);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.logo{font-family:'Manrope',sans-serif;line-height:1.1;letter-spacing:-.02em}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none}
+ul{list-style:none}
+
+.container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--gold)}
+.section-head{max-width:680px;margin:0 auto 56px;text-align:center}
+.section-head .eyebrow{justify-content:center}
+.section-head h2{font-size:clamp(30px,4vw,46px);font-weight:800}
+.section-head p{color:var(--muted);margin-top:16px;font-size:18px}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:700;font-size:16px;padding:14px 28px;border-radius:999px;
+  transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+  white-space:nowrap;
+}
+.btn-primary{background:linear-gradient(135deg,var(--red),#be123c);color:#fff;box-shadow:0 10px 28px rgba(225,29,72,.4)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(225,29,72,.55)}
+.btn-gold{background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#1a1a1a;box-shadow:0 10px 28px rgba(212,175,55,.35)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(212,175,55,.5)}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px)}
+
+/* ---------- HEADER ---------- */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(17,17,17,.72);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s ease;
+}
+.header.scrolled{box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px;color:#fff}
+.logo span{color:var(--red)}
+.logo .petal{font-size:26px;filter:drop-shadow(0 2px 6px rgba(225,29,72,.5))}
+.menu{display:flex;align-items:center;gap:32px}
+.menu a{font-weight:500;font-size:15px;color:var(--muted);position:relative;transition:color .2s}
+.menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--gold);transition:width .25s var(--ease)}
+.menu a:hover{color:var(--text)}
+.menu a:hover::after{width:100%}
+.nav-actions{display:flex;align-items:center;gap:18px}
+.phone{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;color:#fff;white-space:nowrap}
+.phone svg{color:var(--gold)}
+.burger{display:none;flex-direction:column;gap:5px;width:44px;height:44px;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border-radius:12px;border:1px solid var(--line)}
+.burger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:.3s var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding:80px 0 96px;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(225,29,72,.22),transparent 70%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:-150px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,.12),transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);color:var(--gold-soft);padding:8px 16px;border-radius:999px;font-size:14px;font-weight:600;margin-bottom:24px}
+.hero h1{font-size:clamp(40px,6vw,68px);font-weight:800;margin-bottom:20px}
+.hero h1 .accent{color:var(--red);position:relative}
+.hero h1 .gold{background:linear-gradient(120deg,var(--gold-soft),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p.lead{font-size:20px;color:var(--muted);max-width:520px;margin-bottom:32px}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px}
+.hero-markers{display:flex;gap:14px;flex-wrap:wrap}
+.marker{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600}
+.marker svg{color:var(--gold);flex-shrink:0}
+.marker b{color:#fff}
+.hero-visual{position:relative}
+.hero-photo{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);background:linear-gradient(135deg,#2a1015,#1a1a1a);aspect-ratio:4/5;position:relative;border:1px solid var(--line)}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-float{position:absolute;background:rgba(28,28,30,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:12px}
+.hero-float.top{top:24px;left:-24px}
+.hero-float.bottom{bottom:28px;right:-20px}
+.hero-float .ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(225,29,72,.25),rgba(212,175,55,.18));color:var(--gold);flex-shrink:0}
+.hero-float .t{font-size:13px;color:var(--muted)}
+.hero-float .v{font-size:18px;font-weight:800;color:#fff;font-family:'Manrope'}
+.stars{color:var(--gold)}
+
+/* ---------- FEATURES ---------- */
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+.feature:hover{transform:translateY(-6px);border-color:rgba(212,175,55,.4);box-shadow:var(--shadow-sm)}
+.feature .fi{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(225,29,72,.18),rgba(212,175,55,.12));color:var(--gold);margin-bottom:20px}
+.feature h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.feature p{color:var(--muted);font-size:15px}
+
+/* ---------- MENU ---------- */
+.menu-tabs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:11px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:.25s var(--ease)}
+.tab.active{background:linear-gradient(135deg,var(--red),#be123c);color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(225,29,72,.35)}
+.tab:hover:not(.active){color:#fff;border-color:rgba(212,175,55,.4)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.dish{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.dish:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:rgba(212,175,55,.35)}
+.dish-img{position:relative;aspect-ratio:16/11;overflow:hidden;background:linear-gradient(135deg,#2a1015,#1f1f22)}
+.dish-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.dish:hover .dish-img img{transform:scale(1.07)}
+.dish-tag{position:absolute;top:14px;left:14px;background:var(--gold);color:#1a1a1a;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;z-index:2}
+.dish-tag.hit{background:var(--red);color:#fff}
+.dish-body{padding:22px;display:flex;flex-direction:column;flex:1}
+.dish-body h3{font-size:19px;font-weight:700;margin-bottom:8px}
+.dish-body .compo{color:var(--muted);font-size:14px;margin-bottom:8px;flex:1}
+.dish-meta{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;margin-bottom:16px}
+.dish-meta span{display:inline-flex;align-items:center;gap:5px}
+.dish-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dish-price{font-family:'Manrope';font-size:24px;font-weight:800;color:#fff}
+.dish-price s{font-size:15px;color:var(--muted);font-weight:500;margin-right:8px}
+.add-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.35);color:var(--gold-soft);font-weight:700;font-size:14px;padding:10px 18px;border-radius:999px;transition:.25s var(--ease)}
+.add-btn:hover{background:var(--gold);color:#1a1a1a;border-color:transparent;transform:scale(1.04)}
+.add-btn.added{background:var(--red);color:#fff;border-color:transparent}
+
+/* ---------- PROMOS ---------- */
+.promos-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:24px}
+.promo{position:relative;border-radius:var(--radius-lg);padding:36px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:flex-end;min-height:280px;transition:transform .3s var(--ease)}
+.promo:hover{transform:translateY(-6px)}
+.promo::before{content:"";position:absolute;inset:0;z-index:0}
+.promo.p1::before{background:linear-gradient(135deg,#3b0a18,#1a0c10);}
+.promo.p2::before{background:linear-gradient(135deg,#2a230f,#161310)}
+.promo.p3::before{background:linear-gradient(135deg,#1d1d20,#141416)}
+.promo>*{position:relative;z-index:1}
+.promo .pchip{display:inline-flex;width:fit-content;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:16px;color:var(--gold-soft)}
+.promo h3{font-size:clamp(24px,3vw,32px);font-weight:800;margin-bottom:10px}
+.promo p{color:var(--muted);font-size:15px;margin-bottom:20px}
+.promo .pbig{font-family:'Manrope';font-size:48px;font-weight:800;color:var(--gold);line-height:1}
+.promo .pcode{display:inline-block;background:rgba(0,0,0,.4);border:1px dashed rgba(212,175,55,.5);color:#fff;padding:6px 14px;border-radius:10px;font-weight:700;letter-spacing:.08em;margin-top:8px}
+
+/* ---------- STEPS ---------- */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px 26px;text-align:center}
+.step .num{font-family:'Manrope';font-size:54px;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px}
+.step .si{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(212,175,55,.12);color:var(--gold)}
+.step h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.step p{color:var(--muted);font-size:14px}
+
+/* ---------- SOCIAL PROOF ---------- */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:64px}
+.stat{text-align:center;padding:28px 16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+.stat .sv{font-family:'Manrope';font-size:clamp(34px,4vw,48px);font-weight:800;background:linear-gradient(135deg,var(--gold-soft),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat .sl{color:var(--muted);font-size:15px;margin-top:6px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.review{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.review .rstars{color:var(--gold);margin-bottom:14px;font-size:18px;letter-spacing:2px}
+.review p{font-size:15px;margin-bottom:20px;color:#e4e4e7}
+.review .rperson{display:flex;align-items:center;gap:12px}
+.review .ravatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Manrope';color:#1a1a1a;background:linear-gradient(135deg,var(--gold-soft),var(--gold));flex-shrink:0}
+.review .rname{font-weight:700;font-size:15px}
+.review .rmeta{color:var(--muted);font-size:13px}
+
+/* ---------- FAQ ---------- */
+.faq-wrap{max-width:820px;margin:0 auto}
+.faq-item{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden;transition:border-color .3s}
+.faq-item.open{border-color:rgba(212,175,55,.4)}
+.faq-q{width:100%;background:none;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;padding:22px 26px;font-size:17px;font-weight:600;font-family:'Manrope'}
+.faq-q .chev{flex-shrink:0;transition:transform .3s var(--ease);color:var(--gold)}
+.faq-item.open .chev{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.faq-a p{padding:0 26px 24px;color:var(--muted);font-size:15px}
+
+/* ---------- CTA / FORM ---------- */
+.cta-wrap{position:relative;background:linear-gradient(135deg,#2a0e16,#16161a);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.cta-wrap::before{content:"";position:absolute;top:-150px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(225,29,72,.25),transparent 70%)}
+.cta-left{padding:56px 48px;position:relative;z-index:1}
+.cta-left h2{font-size:clamp(28px,3.5vw,40px);font-weight:800;margin-bottom:16px}
+.cta-left h2 .gold{color:var(--gold)}
+.cta-left p{color:var(--muted);font-size:17px;margin-bottom:28px}
+.cta-perks{display:flex;flex-direction:column;gap:14px}
+.cta-perks li{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500}
+.cta-perks svg{color:var(--gold);flex-shrink:0}
+.cta-form{background:var(--card);padding:48px;position:relative;z-index:1}
+.cta-form h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.cta-form .fsub{color:var(--muted);font-size:14px;margin-bottom:24px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:7px}
+.field input[type=text],.field input[type=tel]{
+  width:100%;background:var(--black-2);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;color:var(--text);font-size:15px;font-family:inherit;transition:border-color .2s,box-shadow .2s;
+}
+.field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.15)}
+.field input.invalid{border-color:var(--red);box-shadow:0 0 0 3px rgba(225,29,72,.15)}
+.field .err{display:none;color:var(--red-soft);font-size:13px;margin-top:6px}
+.field.show-err .err{display:block}
+.consent{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);margin-bottom:22px;cursor:pointer}
+.consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--gold);flex-shrink:0;cursor:pointer}
+.consent a{color:var(--gold-soft);text-decoration:underline}
+.cta-form .btn{width:100%}
+.form-success{display:none;text-align:center;padding:20px 0}
+.form-success.show{display:block}
+.form-success .ok{width:72px;height:72px;margin:0 auto 18px;border-radius:50%;background:rgba(212,175,55,.15);display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.form-success h3{font-size:24px;margin-bottom:10px}
+.form-success p{color:var(--muted);font-size:15px}
+
+/* ---------- FOOTER ---------- */
+.footer{background:var(--black-2);border-top:1px solid var(--line);padding:64px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:48px}
+.footer .logo{margin-bottom:16px}
+.footer-about p{color:var(--muted);font-size:14px;max-width:280px}
+.footer-col h4{font-size:15px;font-weight:700;margin-bottom:18px;font-family:'Manrope'}
+.footer-col ul li{margin-bottom:11px}
+.footer-col a,.footer-col p{color:var(--muted);font-size:14px;transition:color .2s}
+.footer-col a:hover{color:var(--gold-soft)}
+.footer-contact .ci{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;color:var(--muted);font-size:14px}
+.footer-contact .ci svg{color:var(--gold);flex-shrink:0;margin-top:2px}
+.socials{display:flex;gap:12px;margin-top:18px}
+.socials a{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);transition:.25s var(--ease)}
+.socials a:hover{background:var(--gold);color:#1a1a1a;border-color:transparent;transform:translateY(-3px)}
+.footer-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.footer-bottom a{color:var(--muted)}
+.footer-bottom a:hover{color:var(--gold-soft)}
+
+/* ---------- TO TOP ---------- */
+.to-top{position:fixed;right:28px;bottom:28px;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--red),#be123c);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(225,29,72,.45);opacity:0;visibility:hidden;transform:translateY(20px);transition:.3s var(--ease);z-index:90}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+.to-top:hover{transform:translateY(-4px)}
+
+/* ---------- REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:1024px){
+  .section{padding:80px 0}
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .promos-grid{grid-template-columns:1fr 1fr}
+  .promo.p1{grid-column:1/-1}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .reviews-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:768px){
+  .menu{position:fixed;top:76px;left:0;right:0;background:rgba(17,17,17,.98);backdrop-filter:blur(20px);flex-direction:column;gap:0;padding:16px 24px 28px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .4s var(--ease);box-shadow:var(--shadow)}
+  .menu.open{transform:translateY(0)}
+  .menu a{width:100%;padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+  .menu a::after{display:none}
+  .burger{display:flex}
+  .phone{display:none}
+  .nav-actions .btn{padding:11px 20px;font-size:15px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-visual{max-width:440px;margin:0 auto;width:100%}
+  .hero-float.top{left:0}
+  .hero-float.bottom{right:0}
+  .cta-wrap{grid-template-columns:1fr}
+  .cta-left{padding:40px 32px}
+  .cta-form{padding:36px 32px}
+  .reviews-grid{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .container{padding:0 18px}
+  .section{padding:64px 0}
+  .features-grid,.menu-grid,.steps-grid,.stats-row,.promos-grid{grid-template-columns:1fr}
+  .promo.p1{grid-column:auto}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn{width:100%}
+  .nav-actions .btn span.lbl{display:none}
+  .section-head{margin-bottom:40px}
+  .to-top{right:16px;bottom:16px}
+  .hero-float{padding:10px 14px}
+  .hero-float .v{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="top">
+  <div class="container">
+    <nav class="nav">
+      <a href="#top" class="logo" aria-label="Сакура — на главную">
+        <span class="petal">🌸</span>Саку<span>ра</span>
+      </a>
+      <ul class="menu" id="menu">
+        <li><a href="#menu">Меню</a></li>
+        <li><a href="#promos">Акции</a></li>
+        <li><a href="#delivery">Доставка</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="tel:+78005551050" class="phone" aria-label="Позвонить">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.18a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg>
+          +7 800 555-10-50
+        </a>
+        <a href="#order" class="btn btn-primary"><span class="lbl">Заказать</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text reveal">
+        <span class="hero-badge">🔥 Бесплатная доставка при заказе от 1 200 ₽</span>
+        <h1>Доставим за <span class="accent">60 минут</span><br>или ролл <span class="gold">в подарок</span></h1>
+        <p class="lead">Готовим суши и роллы из свежей рыбы каждый день. Острый нож, идеальный рис и щедрая начинка — собираем заказ при вас и привозим тёплыми.</p>
+        <div class="hero-cta">
+          <a href="#menu" class="btn btn-gold">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+            Смотреть меню
+          </a>
+          <a href="#order" class="btn btn-ghost">Заказать со скидкой</a>
+        </div>
+        <div class="hero-markers">
+          <div class="marker">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Доставка <b>60 мин</b>
+          </div>
+          <div class="marker">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
+            Рейтинг <b>4.8</b>
+          </div>
+          <div class="marker">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+            <b>200 000+</b> заказов
+          </div>
+          <div class="marker">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12c2-4 6.5-7 11.5-7-1 4.5-4 8.5-8.5 10"/><path d="M5.5 12c-1 2 0 4 0 4s2 1 4 0"/></svg>
+            Свежая рыба <b>ежедневно</b>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-photo">
+          <img src="https://picsum.photos/seed/sakurahero/640/800" alt="Большой сет роллов «Сакура» на тёмной тарелке с имбирём и васаби" loading="eager">
+        </div>
+        <div class="hero-float top">
+          <div class="ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5-5 18-4-7-9-6z"/></svg>
+          </div>
+          <div><div class="t">Среднее время</div><div class="v">47 минут</div></div>
+        </div>
+        <div class="hero-float bottom">
+          <div class="ic">⭐</div>
+          <div><div class="t">Оценок 12 480</div><div class="v stars">4.8 / 5.0</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Почему «Сакура»</span>
+      <h2>Вкусно, быстро и честно</h2>
+      <p>Мы отвечаем за каждый ролл: качество рыбы, скорость курьера и точность веса в каждом заказе.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature reveal">
+        <div class="fi">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <h3>60 минут или подарок</h3>
+        <p>Не успели за час — добавим фирменный ролл к заказу бесплатно. Следим за временем каждой доставки.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="fi">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12c2-4 6.5-7 11.5-7-1 4.5-4 8.5-8.5 10"/><path d="M5.5 12c-1 2 0 4 0 4s2 1 4 0"/><path d="M16 5c1 1.5 1.5 3.5 1.5 6"/></svg>
+        </div>
+        <h3>Свежая рыба каждый день</h3>
+        <p>Лосось и тунец поступают на кухню ежедневно. Никакой заморозки «впрок» — только охлаждённое филе.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="fi">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+        </div>
+        <h3>Честный вес и состав</h3>
+        <p>Граммовку указываем без округлений. Начинки кладём щедро — проверьте на любом ролле из меню.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="fi">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="15" height="13" rx="2"/><path d="M16 9h4l3 3v4a2 2 0 0 1-2 2h-1"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+        </div>
+        <h3>Бесплатная доставка</h3>
+        <p>Привозим бесплатно от 1 200 ₽ по всему городу. Курьер с термосумкой — еда приезжает тёплой.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="section" id="menu" style="background:var(--black-2)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Наше меню</span>
+      <h2>Хиты, которые заказывают чаще всего</h2>
+      <p>Выберите категорию — или соберите свой набор. Все цены указаны за готовую порцию.</p>
+    </div>
+
+    <div class="menu-tabs reveal" id="tabs">
+      <button class="tab active" data-cat="all">Всё меню</button>
+      <button class="tab" data-cat="sets">Сеты</button>
+      <button class="tab" data-cat="rolls">Роллы</button>
+      <button class="tab" data-cat="sushi">Суши</button>
+      <button class="tab" data-cat="wok">Горячее / Wok</button>
+    </div>
+
+    <div class="menu-grid" id="dishes">
+
+      <!-- SETS -->
+      <article class="dish reveal" data-cat="sets">
+        <div class="dish-img">
+          <span class="dish-tag hit">Хит</span>
+          <img src="https://picsum.photos/seed/setfilad/480/330" alt="Сет «Филадельфия микс» из четырёх видов роллов с лососем" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Сет «Филадельфия микс»</h3>
+          <p class="compo">Филадельфия, Филадельфия с угрём, Калифорния, запечённый ролл с лососем — 32 шт.</p>
+          <div class="dish-meta"><span>🍣 32 шт</span><span>⚖ 1 180 г</span><span>👥 на 3–4</span></div>
+          <div class="dish-foot">
+            <div class="dish-price"><s>2 290 ₽</s>1 690 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="sets">
+        <div class="dish-img">
+          <span class="dish-tag">Выгодно</span>
+          <img src="https://picsum.photos/seed/setdrakon/480/330" alt="Сет «Дракон» из запечённых и классических роллов с тунцом" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Сет «Дракон»</h3>
+          <p class="compo">Запечённый с тунцом, Дракон с угрём, темпура с креветкой, Спайси лосось — 40 шт.</p>
+          <div class="dish-meta"><span>🍣 40 шт</span><span>⚖ 1 460 г</span><span>👥 на 4–5</span></div>
+          <div class="dish-foot">
+            <div class="dish-price"><s>2 790 ₽</s>2 090 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="sets">
+        <div class="dish-img">
+          <img src="https://picsum.photos/seed/setvegan/480/330" alt="Овощной сет «Сакура грин» с роллами из авокадо и огурца" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Сет «Сакура грин»</h3>
+          <p class="compo">Овощной, с авокадо, с огурцом и кунжутом, спайси-тофу — лёгкий вегетарианский набор, 24 шт.</p>
+          <div class="dish-meta"><span>🍣 24 шт</span><span>⚖ 820 г</span><span>👥 на 2–3</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">1 190 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- ROLLS -->
+      <article class="dish reveal" data-cat="rolls">
+        <div class="dish-img">
+          <span class="dish-tag hit">Хит</span>
+          <img src="https://picsum.photos/seed/philarol/480/330" alt="Ролл Филадельфия с лососем и сливочным сыром" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Филадельфия классик</h3>
+          <p class="compo">Лосось, сливочный сыр, огурец, рис, нори. Тот самый вкус, с которого всё начинается.</p>
+          <div class="dish-meta"><span>🍣 8 шт</span><span>⚖ 240 г</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">419 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="rolls">
+        <div class="dish-img">
+          <img src="https://picsum.photos/seed/califrol/480/330" alt="Ролл Калифорния с крабом, авокадо и икрой тобико" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Калифорния с тобико</h3>
+          <p class="compo">Снежный краб, авокадо, огурец, икра тобико, японский майонез. Сочно и нежно.</p>
+          <div class="dish-meta"><span>🍣 8 шт</span><span>⚖ 230 г</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">389 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="rolls">
+        <div class="dish-img">
+          <span class="dish-tag">Острый</span>
+          <img src="https://picsum.photos/seed/spicyrol/480/330" alt="Запечённый спайси-ролл с лососем и острым соусом" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Спайси запечённый</h3>
+          <p class="compo">Лосось, спайси-соус, сыр, унаги, кунжут. Запекаем до золотистой корочки — подаём горячим.</p>
+          <div class="dish-meta"><span>🍣 8 шт</span><span>⚖ 250 г</span><span>🌶 остро</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">449 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- SUSHI -->
+      <article class="dish reveal" data-cat="sushi">
+        <div class="dish-img">
+          <img src="https://picsum.photos/seed/nigirisalmon/480/330" alt="Нигири с лососем — два кусочка на рисе" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Нигири лосось</h3>
+          <p class="compo">Толстый ломтик охлаждённого лосося на прессованном рисе. Минимум — и идеально.</p>
+          <div class="dish-meta"><span>🍣 2 шт</span><span>⚖ 70 г</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">149 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="sushi">
+        <div class="dish-img">
+          <span class="dish-tag">Премиум</span>
+          <img src="https://picsum.photos/seed/nigirieel/480/330" alt="Нигири с угрём унаги под соусом терияки" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Нигири угорь унаги</h3>
+          <p class="compo">Копчёный угорь под соусом унаги и кунжутом. Насыщенный карамельный вкус.</p>
+          <div class="dish-meta"><span>🍣 2 шт</span><span>⚖ 75 г</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">199 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="sushi">
+        <div class="dish-img">
+          <img src="https://picsum.photos/seed/gunkanmix/480/330" alt="Гункан-микс с икрой, тунцом и спайси-лососем" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Гункан-микс</h3>
+          <p class="compo">Три гункана: спайси-лосось, тунец, икра тобико. Ассорти для знатоков вкуса.</p>
+          <div class="dish-meta"><span>🍣 3 шт</span><span>⚖ 120 г</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">279 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- WOK -->
+      <article class="dish reveal" data-cat="wok">
+        <div class="dish-img">
+          <span class="dish-tag hit">Хит</span>
+          <img src="https://picsum.photos/seed/wokchicken/480/330" alt="Удон вок с курицей и овощами в соусе терияки" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Удон с курицей терияки</h3>
+          <p class="compo">Пшеничная лапша удон, куриное филе, болгарский перец, лук, соус терияки, кунжут.</p>
+          <div class="dish-meta"><span>🍜 1 порция</span><span>⚖ 380 г</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">359 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="wok">
+        <div class="dish-img">
+          <span class="dish-tag">Острый</span>
+          <img src="https://picsum.photos/seed/wokshrimp/480/330" alt="Рисовая лапша вок с тигровыми креветками" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Рисовый вок с креветкой</h3>
+          <p class="compo">Рисовая лапша, тигровые креветки, овощи, чили-соус, арахис. Огненно и ароматно.</p>
+          <div class="dish-meta"><span>🍜 1 порция</span><span>⚖ 400 г</span><span>🌶 остро</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">449 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="dish reveal" data-cat="wok">
+        <div class="dish-img">
+          <img src="https://picsum.photos/seed/misosoup/480/330" alt="Японский суп мисо с тофу и водорослями" loading="lazy">
+        </div>
+        <div class="dish-body">
+          <h3>Суп мисо с тофу</h3>
+          <p class="compo">Бульон даси, паста мисо, тофу, водоросли вакамэ, зелёный лук. Тёплое начало ужина.</p>
+          <div class="dish-meta"><span>🥣 1 порция</span><span>⚖ 300 г</span></div>
+          <div class="dish-foot">
+            <div class="dish-price">219 ₽</div>
+            <button class="add-btn">В заказ</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROMOS ============ -->
+<section class="section" id="promos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Акции и скидки</span>
+      <h2>Выгоднее с «Сакурой»</h2>
+      <p>Закажите больше — заплатите меньше. Промокоды можно применить прямо при оформлении.</p>
+    </div>
+    <div class="promos-grid">
+      <div class="promo p1 reveal">
+        <span class="pchip">🎁 Каждому первому заказу</span>
+        <div class="pbig">−20%</div>
+        <h3>Скидка на первый заказ</h3>
+        <p>Знакомимся вкусно: минус 20% на весь чек для новых гостей. Действует на меню без ограничений.</p>
+        <span class="pcode">ПЕРВЫЙ20</span>
+      </div>
+      <div class="promo p2 reveal">
+        <span class="pchip">🍣 Сет дня</span>
+        <h3>Ролл в подарок</h3>
+        <p>При заказе любого сета от 1 600 ₽ добавим Калифорнию бесплатно. Каждый день недели.</p>
+        <span class="pcode">ПОДАРОК</span>
+      </div>
+      <div class="promo p3 reveal">
+        <span class="pchip">📅 Будни 12:00–16:00</span>
+        <h3>Ланч −30%</h3>
+        <p>Дневное предложение на горячее и wok. Идеально для обеда в офисе или дома.</p>
+        <span class="pcode">ЛАНЧ30</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEPS / DELIVERY ============ -->
+<section class="section" id="delivery" style="background:var(--black-2)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Как заказать</span>
+      <h2>Четыре шага до ужина</h2>
+      <p>От выбора до звонка в дверь — без сложностей и долгого ожидания.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="num">01</div>
+        <div class="si">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+        </div>
+        <h3>Выберите блюда</h3>
+        <p>Соберите заказ из меню или возьмите готовый сет — так выгоднее.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">02</div>
+        <div class="si">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/></svg>
+        </div>
+        <h3>Оформите за минуту</h3>
+        <p>Укажите имя, телефон и адрес. Подтверждение придёт сразу после отправки.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">03</div>
+        <div class="si">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h7l2-3 3 6 2-3h6"/></svg>
+        </div>
+        <h3>Готовим и везём</h3>
+        <p>Повар собирает заказ из свежих продуктов, курьер выезжает в термосумке.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">04</div>
+        <div class="si">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+        </div>
+        <h3>Приятного аппетита</h3>
+        <p>Получаете тёплый заказ за 60 минут. Оплата картой, наличными или онлайн.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL PROOF ============ -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Нам доверяют</span>
+      <h2>Цифры и отзывы гостей</h2>
+      <p>За 7 лет работы мы накормили целый город. Вот что говорят те, кто заказывает у нас.</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat reveal"><div class="sv">200 000+</div><div class="sl">довольных заказов</div></div>
+      <div class="stat reveal"><div class="sv">4.8</div><div class="sl">средняя оценка</div></div>
+      <div class="stat reveal"><div class="sv">47 мин</div><div class="sl">среднее время доставки</div></div>
+      <div class="stat reveal"><div class="sv">7 лет</div><div class="sl">готовим для города</div></div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review reveal">
+        <div class="rstars">★★★★★</div>
+        <p>«Заказываем каждую пятницу всей семьёй. Филадельфия — огонь, рис не разваливается, рыбы много. Приехали за 40 минут, всё ещё прохладное и свежее.»</p>
+        <div class="rperson">
+          <div class="ravatar">АК</div>
+          <div><div class="rname">Анна Ковалёва</div><div class="rmeta">постоянный гость · 38 заказов</div></div>
+        </div>
+      </div>
+      <div class="review reveal">
+        <div class="rstars">★★★★★</div>
+        <p>«Сет „Дракон“ взяли на компанию — хватило на всех с запасом. Курьер вежливый, привёз раньше срока. Спайси запечённый теперь мой фаворит.»</p>
+        <div class="rperson">
+          <div class="ravatar">ДС</div>
+          <div><div class="rname">Дмитрий Соколов</div><div class="rmeta">заказывал в офис</div></div>
+        </div>
+      </div>
+      <div class="review reveal">
+        <div class="rstars">★★★★★</div>
+        <p>«Долго искала, где делают нормальный wok с доставкой. У „Сакуры“ удон с курицей — идеальный: лапша не слипается, соуса в меру. Плюс подарили ролл за опоздание на 5 минут!»</p>
+        <div class="rperson">
+          <div class="ravatar">МГ</div>
+          <div><div class="rname">Марина Гущина</div><div class="rmeta">оценка 5.0</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section" id="faq" style="background:var(--black-2)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Вопросы и ответы</span>
+      <h2>Частые вопросы</h2>
+      <p>Не нашли ответ? Позвоните нам — подскажем по любому заказу.</p>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Сколько времени занимает доставка?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><p>В среднем заказ приезжает за 47 минут. Мы гарантируем доставку в течение 60 минут по городу — если опоздаем, добавим фирменный ролл в подарок. В часы пик время может немного увеличиваться, о чём оператор предупредит заранее.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Какая минимальная сумма заказа?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><p>Минимальная сумма — 600 ₽. Доставка бесплатная при заказе от 1 200 ₽, при меньшей сумме стоимость доставки составит 150 ₽ в пределах города.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Как можно оплатить заказ?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><p>Принимаем оплату онлайн картой на сайте, наличными или картой курьеру при получении. Также можно оплатить через СБП по QR-коду — быстро и без комиссии.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Насколько свежая у вас рыба?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><p>Лосось и тунец поступают на нашу кухню ежедневно от проверенных поставщиков. Мы не используем размороженную «впрок» рыбу. Все продукты проходят контроль качества, а сборка заказа начинается только после его оформления.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Можно ли заказать на определённое время?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><p>Да, при оформлении укажите удобное время — мы доставим заказ ко времени, к началу встречи или праздника. Предзаказ можно сделать на любой день, в том числе на корпоратив или день рождения.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Есть ли в меню блюда без рыбы?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a"><p>Конечно. У нас есть вегетарианский сет «Сакура грин», овощные роллы, wok с курицей и креветкой, а также супы. В составе каждого блюда честно указаны все ингредиенты и аллергены.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA / ORDER FORM ============ -->
+<section class="section" id="order">
+  <div class="container">
+    <div class="cta-wrap reveal">
+      <div class="cta-left">
+        <span class="eyebrow">Оформить заказ</span>
+        <h2>Закажите со скидкой <span class="gold">−20%</span> на первый заказ</h2>
+        <p>Оставьте контакты — перезвоним за 5 минут, поможем собрать заказ и подтвердим время доставки.</p>
+        <ul class="cta-perks">
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+            Доставим за 60 минут или ролл в подарок
+          </li>
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+            Свежая рыба ежедневно и честный вес
+          </li>
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+            Бесплатная доставка от 1 200 ₽
+          </li>
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+            Оплата онлайн, картой или наличными
+          </li>
+        </ul>
+      </div>
+      <div class="cta-form">
+        <form id="orderForm" novalidate>
+          <h3>Заказать обратный звонок</h3>
+          <p class="fsub">Заполните форму — и ужин уже в пути.</p>
+          <div class="field" id="f-name">
+            <label for="name">Ваше имя</label>
+            <input type="text" id="name" name="name" placeholder="Как к вам обращаться" autocomplete="name">
+            <span class="err">Пожалуйста, введите имя</span>
+          </div>
+          <div class="field" id="f-phone">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+            <span class="err">Введите корректный номер телефона</span>
+          </div>
+          <div class="field" id="f-address">
+            <label for="address">Адрес доставки</label>
+            <input type="text" id="address" name="address" placeholder="Улица, дом, квартира" autocomplete="street-address">
+            <span class="err">Укажите адрес доставки</span>
+          </div>
+          <label class="consent" id="f-consent">
+            <input type="checkbox" id="consent" name="consent">
+            <span>Я согласен(а) на обработку <a href="#privacy">персональных данных</a> и принимаю условия политики конфиденциальности.</span>
+          </label>
+          <button type="submit" class="btn btn-primary">
+            Оформить заказ
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="ok">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+          </div>
+          <h3>Заказ принят!</h3>
+          <p>Спасибо! Мы перезвоним вам в течение 5 минут, чтобы подтвердить детали и время доставки.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#top" class="logo"><span class="petal">🌸</span>Саку<span>ра</span></a>
+        <p>Доставка свежих суши и роллов с 2019 года. Готовим из охлаждённой рыбы каждый день и привозим заказ за 60 минут.</p>
+        <div class="socials">
+          <a href="#" aria-label="Telegram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.2 1.1-.9 1.4-1.9.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.5l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5l19.1-7.4c.9-.3 1.7.2 1.4 1.7z"/></svg></a>
+          <a href="#" aria-label="ВКонтакте"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 16.5c-5.4 0-8.7-3.8-8.8-10h2.7c.1 4.6 2.2 6.5 3.8 6.9V6.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.5c-.4 2.4-2.1 4.1-3.3 4.8 1.2.6 3.1 2.1 3.8 4.7h-2.8c-.5-1.7-2-3-4.1-3.2v3.2h-.2z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.7.8c.2.1.4.2.5.3.1.3.1.6-.1 1.1z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Меню</h4>
+        <ul>
+          <li><a href="#menu">Сеты</a></li>
+          <li><a href="#menu">Роллы</a></li>
+          <li><a href="#menu">Суши</a></li>
+          <li><a href="#menu">Горячее и wok</a></li>
+          <li><a href="#promos">Акции</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Доставка</h4>
+        <ul>
+          <li><p>Зона: в пределах города и ближние районы</p></li>
+          <li><p>Время работы: ежедневно 10:00–23:00</p></li>
+          <li><p>Бесплатно от 1 200 ₽</p></li>
+          <li><p>Среднее время — 47 минут</p></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Контакты</h4>
+        <div class="ci">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.18a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+78005551050">+7 800 555-10-50</a>
+        </div>
+        <div class="ci">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+          <a href="mailto:zakaz@sakura-sushi.ru">zakaz@sakura-sushi.ru</a>
+        </div>
+        <div class="ci">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>ул. Приморская, 14, кухня-цех</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2019–2026 «Сакура». Все права защищены.</span>
+      <span><a href="#privacy" id="privacy">Политика конфиденциальности</a> · <a href="#">Пользовательское соглашение</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ TO TOP ============ -->
+<button class="to-top" id="toTop" aria-label="Наверх">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- Burger menu ---- */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function closeMenu(){ menu.classList.remove('open'); burger.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+  burger.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+  /* ---- Header shadow on scroll + to-top ---- */
+  var header = document.querySelector('.header');
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    var y = window.scrollY;
+    header.classList.toggle('scrolled', y > 10);
+    toTop.classList.toggle('show', y > 600);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  /* ---- Menu tabs filter ---- */
+  var tabs = document.getElementById('tabs');
+  var dishes = Array.prototype.slice.call(document.querySelectorAll('#dishes .dish'));
+  tabs.addEventListener('click', function(e){
+    var btn = e.target.closest('.tab');
+    if(!btn) return;
+    tabs.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    btn.classList.add('active');
+    var cat = btn.getAttribute('data-cat');
+    dishes.forEach(function(d){
+      var show = (cat === 'all' || d.getAttribute('data-cat') === cat);
+      d.style.display = show ? '' : 'none';
+    });
+  });
+
+  /* ---- Add to order buttons ---- */
+  document.querySelectorAll('.add-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(b.classList.contains('added')) return;
+      b.classList.add('added');
+      var prev = b.textContent;
+      b.textContent = '✓ Добавлено';
+      setTimeout(function(){ b.classList.remove('added'); b.textContent = prev; }, 1600);
+    });
+  });
+
+  /* ---- FAQ accordion ---- */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o){
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+        o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  /* ---- Form validation ---- */
+  var form = document.getElementById('orderForm');
+  var success = document.getElementById('formSuccess');
+  function setErr(id, on){ document.getElementById(id).classList.toggle('show-err', on); }
+  function field(id){ return document.getElementById(id); }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = true;
+    var name = field('name'), phone = field('phone'), address = field('address'), consent = field('consent');
+
+    var nameOk = name.value.trim().length >= 2;
+    setErr('f-name', !nameOk); name.classList.toggle('invalid', !nameOk); ok = ok && nameOk;
+
+    var digits = phone.value.replace(/\D/g,'');
+    var phoneOk = digits.length >= 11;
+    setErr('f-phone', !phoneOk); phone.classList.toggle('invalid', !phoneOk); ok = ok && phoneOk;
+
+    var addrOk = address.value.trim().length >= 5;
+    setErr('f-address', !addrOk); address.classList.toggle('invalid', !addrOk); ok = ok && addrOk;
+
+    var consentOk = consent.checked;
+    document.getElementById('f-consent').style.color = consentOk ? '' : '#f43f5e';
+    ok = ok && consentOk;
+
+    if(ok){
+      form.style.display = 'none';
+      success.classList.add('show');
+    }
+  });
+
+  /* clear error on input */
+  ['name','phone','address'].forEach(function(id){
+    var f = field(id);
+    f.addEventListener('input', function(){
+      f.classList.remove('invalid');
+      setErr('f-'+id, false);
+    });
+  });
+  field('consent').addEventListener('change', function(){
+    document.getElementById('f-consent').style.color = '';
+  });
+
+  /* phone soft mask */
+  field('phone').addEventListener('input', function(e){
+    var d = e.target.value.replace(/\D/g,'').slice(0,11);
+    if(d.length === 0){ e.target.value=''; return; }
+    if(d[0]==='8') d = '7'+d.slice(1);
+    if(d[0]!=='7') d = '7'+d;
+    var out = '+7';
+    if(d.length>1) out += ' ('+d.slice(1,4);
+    if(d.length>=5) out += ') '+d.slice(4,7);
+    if(d.length>=8) out += '-'+d.slice(7,9);
+    if(d.length>=10) out += '-'+d.slice(9,11);
+    e.target.value = out;
+  });
+
+  /* ---- Reveal on scroll ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>

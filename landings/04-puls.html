@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пульс — фитнес и EMS-студия | Первая тренировка бесплатно</title>
+<meta name="description" content="Студия «Пульс»: персональный тренинг, групповые занятия и EMS-тренировки 20 минут. Первая тренировка бесплатно — результат уже через 8 недель. 1500+ клиентов, 20 тренеров, студия 600 м².">
+<meta name="theme-color" content="#0B0B0F">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Пульс — фитнес и EMS-студия | Первая тренировка бесплатно">
+<meta property="og:description" content="Персональный тренинг, групповые занятия и EMS-тренировки 20 минут. Первая тренировка бесплатно — результат через 8 недель.">
+<meta property="og:image" content="https://picsum.photos/seed/puls-og/1200/630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Пульс">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0B0B0F;
+    --bg-2:#121218;
+    --bg-3:#16161F;
+    --card:#15151D;
+    --line:rgba(255,255,255,.08);
+    --line-2:rgba(255,255,255,.14);
+    --text:#F4F4F6;
+    --muted:#A1A1AC;
+    --lime:#A3E635;
+    --lime-d:#84cc16;
+    --orange:#FB923C;
+    --orange-d:#f97316;
+    --radius:20px;
+    --radius-sm:14px;
+    --container:1200px;
+    --shadow:0 20px 60px rgba(0,0,0,.45);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;line-height:1.1;letter-spacing:-.02em}
+
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  ul{list-style:none}
+
+  .container{
+    width:100%;
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  section{padding:96px 0;position:relative}
+
+  .accent{color:var(--lime)}
+  .accent-o{color:var(--orange)}
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--lime);
+    padding:8px 16px;
+    border:1px solid rgba(163,230,53,.3);
+    border-radius:999px;
+    background:rgba(163,230,53,.06);
+    margin-bottom:24px;
+  }
+
+  .eyebrow::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:var(--lime);
+    box-shadow:0 0 10px var(--lime);
+  }
+
+  .section-head{max-width:680px;margin-bottom:56px}
+  .section-head h2{font-size:clamp(30px,4.6vw,52px);font-weight:800;margin-bottom:16px}
+  .section-head p{color:var(--muted);font-size:18px}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    padding:16px 32px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--lime),var(--lime-d));
+    color:#0B0B0F;
+    box-shadow:0 8px 30px rgba(163,230,53,.28);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(163,230,53,.45)}
+  .btn-ghost{
+    background:transparent;
+    color:var(--text);
+    border:1px solid var(--line-2);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.06);transform:translateY(-3px)}
+  .btn-orange{
+    background:linear-gradient(135deg,var(--orange),var(--orange-d));
+    color:#0B0B0F;
+    box-shadow:0 8px 30px rgba(251,146,60,.28);
+  }
+  .btn-orange:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(251,146,60,.45)}
+
+  /* Header */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(11,11,15,.72);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  header.scrolled{border-bottom-color:var(--line);background:rgba(11,11,15,.9)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:22px}
+  .logo-mark{
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg,var(--lime),var(--orange));
+    display:grid;place-items:center;
+    box-shadow:0 0 22px rgba(163,230,53,.4);
+  }
+  .logo-mark svg{width:22px;height:22px}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{font-size:15px;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-actions{display:flex;align-items:center;gap:20px}
+  .nav-phone{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;transition:color .2s}
+  .nav-phone:hover{color:var(--lime)}
+  .burger{
+    display:none;
+    width:46px;height:46px;
+    border:1px solid var(--line-2);
+    background:transparent;
+    border-radius:12px;
+    cursor:pointer;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    padding:0;
+  }
+  .burger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+  .burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.active span:nth-child(2){opacity:0}
+  .burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* Hero */
+  .hero{padding-top:72px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(38px,6vw,72px);font-weight:900;margin-bottom:24px}
+  .hero h1 .grad{
+    background:linear-gradient(120deg,var(--lime),var(--orange));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-sub{font-size:19px;color:var(--muted);max-width:520px;margin-bottom:36px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px}
+  .hero-markers{display:flex;gap:14px;flex-wrap:wrap}
+  .marker{
+    display:flex;align-items:center;gap:10px;
+    font-size:14px;font-weight:600;color:var(--text);
+    padding:10px 18px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:var(--bg-2);
+  }
+  .marker svg{width:18px;height:18px;color:var(--lime);flex-shrink:0}
+
+  .hero-visual{position:relative}
+  .hero-img{
+    border-radius:var(--radius);
+    overflow:hidden;
+    aspect-ratio:4/5;
+    background:linear-gradient(135deg,#1c2b10,#3a1d08);
+    box-shadow:var(--shadow);
+    position:relative;
+    border:1px solid var(--line);
+  }
+  .hero-img img{width:100%;height:100%;object-fit:cover}
+  .hero-img::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 40%,rgba(11,11,15,.55));
+  }
+  .hero-badge{
+    position:absolute;
+    left:-18px;bottom:42px;
+    background:var(--card);
+    border:1px solid var(--line-2);
+    border-radius:18px;
+    padding:18px 22px;
+    box-shadow:var(--shadow);
+    z-index:3;
+    backdrop-filter:blur(8px);
+  }
+  .hero-badge .num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:30px;color:var(--lime);line-height:1}
+  .hero-badge .lbl{font-size:13px;color:var(--muted);margin-top:6px}
+  .hero-badge-2{
+    position:absolute;top:30px;right:-14px;
+    background:var(--card);border:1px solid var(--line-2);
+    border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:12px;
+    box-shadow:var(--shadow);z-index:3;
+  }
+  .hero-badge-2 .dot{width:10px;height:10px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange)}
+  .hero-badge-2 .t{font-size:14px;font-weight:600}
+
+  /* glow blobs */
+  .glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.5;z-index:-1;pointer-events:none}
+  .glow-lime{width:480px;height:480px;background:rgba(163,230,53,.22);top:-120px;left:-120px}
+  .glow-orange{width:420px;height:420px;background:rgba(251,146,60,.18);bottom:-160px;right:-100px}
+
+  /* Features */
+  .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .feature{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+    transition:transform .3s ease,border-color .3s ease,background .3s ease;
+  }
+  .feature:hover{transform:translateY(-6px);border-color:rgba(163,230,53,.4);background:var(--bg-3)}
+  .feature-ico{
+    width:56px;height:56px;border-radius:16px;
+    display:grid;place-items:center;
+    background:rgba(163,230,53,.1);
+    border:1px solid rgba(163,230,53,.25);
+    margin-bottom:22px;
+  }
+  .feature-ico svg{width:28px;height:28px;color:var(--lime)}
+  .feature h3{font-size:20px;font-weight:700;margin-bottom:10px}
+  .feature p{font-size:15px;color:var(--muted)}
+
+  /* Services */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .service{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--card);
+    transition:transform .3s ease,border-color .3s ease;
+    display:flex;flex-direction:column;
+  }
+  .service:hover{transform:translateY(-6px);border-color:var(--line-2)}
+  .service-img{aspect-ratio:16/11;position:relative;overflow:hidden;background:linear-gradient(135deg,#1f2a12,#2a1a0a)}
+  .service-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .service:hover .service-img img{transform:scale(1.06)}
+  .service-tag{
+    position:absolute;top:16px;left:16px;
+    font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:6px 14px;border-radius:999px;
+    background:rgba(11,11,15,.7);backdrop-filter:blur(6px);
+    color:var(--lime);border:1px solid rgba(163,230,53,.3);
+  }
+  .service-tag.orange{color:var(--orange);border-color:rgba(251,146,60,.35)}
+  .service-body{padding:28px;display:flex;flex-direction:column;flex:1}
+  .service-body h3{font-size:23px;font-weight:700;margin-bottom:12px}
+  .service-body p{font-size:15px;color:var(--muted);margin-bottom:20px}
+  .service-feats{margin-bottom:24px;flex:1}
+  .service-feats li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text);margin-bottom:10px}
+  .service-feats svg{width:18px;height:18px;color:var(--lime);flex-shrink:0;margin-top:2px}
+  .service-price{font-family:'Montserrat',sans-serif;font-weight:800;font-size:18px;margin-bottom:18px}
+  .service-price span{color:var(--muted);font-size:14px;font-weight:500}
+
+  /* Steps */
+  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .step{position:relative;padding:32px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);transition:.3s}
+  .step:hover{border-color:rgba(251,146,60,.4)}
+  .step-num{
+    font-family:'Montserrat',sans-serif;font-weight:900;font-size:48px;
+    background:linear-gradient(135deg,var(--lime),var(--orange));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    line-height:1;margin-bottom:18px;
+  }
+  .step h3{font-size:19px;font-weight:700;margin-bottom:10px}
+  .step p{font-size:15px;color:var(--muted)}
+
+  /* Stats */
+  .stats{background:linear-gradient(135deg,rgba(163,230,53,.06),rgba(251,146,60,.05));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  .stat .num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(40px,5vw,60px);background:linear-gradient(120deg,var(--lime),var(--orange));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+  .stat .lbl{font-size:15px;color:var(--muted);margin-top:10px}
+
+  /* Reviews */
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px;transition:.3s}
+  .review:hover{transform:translateY(-6px);border-color:var(--line-2)}
+  .review-stars{display:flex;gap:3px;margin-bottom:18px}
+  .review-stars svg{width:18px;height:18px;color:var(--orange)}
+  .review p{font-size:16px;color:var(--text);margin-bottom:24px}
+  .review-author{display:flex;align-items:center;gap:14px}
+  .review-ava{width:48px;height:48px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--lime),var(--orange));flex-shrink:0}
+  .review-ava img{width:100%;height:100%;object-fit:cover}
+  .review-name{font-weight:700;font-size:15px}
+  .review-role{font-size:13px;color:var(--muted)}
+
+  /* Pricing */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .plan{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:40px 32px;
+    display:flex;flex-direction:column;
+    transition:transform .3s ease,border-color .3s ease;
+  }
+  .plan:hover{transform:translateY(-6px)}
+  .plan.featured{
+    border-color:rgba(163,230,53,.5);
+    background:linear-gradient(180deg,rgba(163,230,53,.07),var(--card));
+    box-shadow:0 20px 60px rgba(163,230,53,.12);
+  }
+  .plan-badge{
+    position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+    font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:6px 18px;border-radius:999px;
+    background:linear-gradient(135deg,var(--lime),var(--lime-d));color:#0B0B0F;
+  }
+  .plan h3{font-size:22px;font-weight:700;margin-bottom:6px}
+  .plan-desc{font-size:14px;color:var(--muted);margin-bottom:24px;min-height:42px}
+  .plan-price{display:flex;align-items:baseline;gap:6px;margin-bottom:28px}
+  .plan-price .val{font-family:'Montserrat',sans-serif;font-weight:900;font-size:44px}
+  .plan-price .per{font-size:15px;color:var(--muted)}
+  .plan ul{margin-bottom:32px;flex:1}
+  .plan ul li{display:flex;align-items:flex-start;gap:12px;font-size:15px;margin-bottom:14px;color:var(--text)}
+  .plan ul li svg{width:20px;height:20px;color:var(--lime);flex-shrink:0;margin-top:1px}
+  .plan ul li.off{color:var(--muted)}
+  .plan ul li.off svg{color:var(--muted)}
+  .plan .btn{width:100%}
+
+  /* FAQ */
+  .faq-wrap{max-width:820px;margin:0 auto}
+  .faq-item{border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:16px;background:var(--card);overflow:hidden;transition:border-color .3s}
+  .faq-item.open{border-color:rgba(163,230,53,.4)}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;color:var(--text);
+    font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;
+    padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  }
+  .faq-q .ico{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    border:1px solid var(--line-2);display:grid;place-items:center;transition:.3s;
+  }
+  .faq-item.open .faq-q .ico{background:var(--lime);border-color:var(--lime);transform:rotate(45deg)}
+  .faq-q .ico svg{width:16px;height:16px;transition:.3s}
+  .faq-item.open .faq-q .ico svg{color:#0B0B0F}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .faq-a-inner{padding:0 28px 24px;color:var(--muted);font-size:16px}
+
+  /* CTA form */
+  .cta-section{padding-bottom:120px}
+  .cta-box{
+    position:relative;
+    border-radius:28px;
+    overflow:hidden;
+    border:1px solid var(--line-2);
+    background:linear-gradient(135deg,rgba(163,230,53,.1),rgba(251,146,60,.08)),var(--bg-2);
+    padding:64px;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
+  }
+  .cta-box h2{font-size:clamp(28px,4vw,44px);font-weight:800;margin-bottom:18px}
+  .cta-box .lead{font-size:18px;color:var(--muted);margin-bottom:28px}
+  .cta-perks li{display:flex;align-items:center;gap:12px;font-size:16px;margin-bottom:14px;font-weight:500}
+  .cta-perks svg{width:22px;height:22px;color:var(--lime);flex-shrink:0}
+
+  .form{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px}
+  .form h3{font-size:22px;font-weight:700;margin-bottom:8px}
+  .form .form-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px}
+  .field input{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--line-2);
+    border-radius:12px;
+    padding:15px 18px;
+    color:var(--text);
+    font-family:inherit;font-size:16px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .field input::placeholder{color:#5a5a66}
+  .field input:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 3px rgba(163,230,53,.15)}
+  .field input.invalid{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.12)}
+  .field .err{display:none;color:#f87171;font-size:13px;margin-top:7px}
+  .field.invalid .err{display:block}
+  .consent{display:flex;align-items:flex-start;gap:12px;margin-bottom:22px;font-size:13px;color:var(--muted)}
+  .consent input{
+    width:20px;height:20px;flex-shrink:0;margin-top:2px;accent-color:var(--lime);cursor:pointer;
+  }
+  .consent a{color:var(--lime);text-decoration:underline}
+  .consent.invalid{color:#f87171}
+  .form .btn{width:100%}
+  .form-success{
+    display:none;
+    text-align:center;padding:24px 0;
+  }
+  .form-success.show{display:block}
+  .form-success .ok-ico{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 18px;
+    background:rgba(163,230,53,.12);border:1px solid rgba(163,230,53,.4);
+    display:grid;place-items:center;
+  }
+  .form-success .ok-ico svg{width:32px;height:32px;color:var(--lime)}
+  .form-success h3{font-size:22px;margin-bottom:8px}
+  .form-success p{color:var(--muted);font-size:15px}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);background:var(--bg-2);padding:72px 0 32px}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:48px}
+  .footer-col h4{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;margin-bottom:20px}
+  .footer-col p,.footer-col a{font-size:15px;color:var(--muted);display:block;margin-bottom:12px;transition:color .2s}
+  .footer-col a:hover{color:var(--lime)}
+  .footer-about .logo{margin-bottom:18px}
+  .footer-about p{max-width:280px}
+  .socials{display:flex;gap:12px;margin-top:8px}
+  .socials a{
+    width:42px;height:42px;border-radius:12px;border:1px solid var(--line-2);
+    display:grid;place-items:center;margin:0;transition:.25s;
+  }
+  .socials a:hover{background:var(--lime);border-color:var(--lime)}
+  .socials a:hover svg{color:#0B0B0F}
+  .socials svg{width:20px;height:20px;color:var(--muted);transition:color .25s}
+  .footer-bottom{
+    border-top:1px solid var(--line);padding-top:28px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    font-size:14px;color:var(--muted);
+  }
+  .footer-bottom a{color:var(--muted);transition:color .2s}
+  .footer-bottom a:hover{color:var(--lime)}
+
+  /* Back to top */
+  .to-top{
+    position:fixed;right:24px;bottom:24px;z-index:90;
+    width:52px;height:52px;border-radius:14px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--lime),var(--lime-d));
+    color:#0B0B0F;display:grid;place-items:center;
+    box-shadow:0 10px 30px rgba(163,230,53,.35);
+    opacity:0;visibility:hidden;transform:translateY(16px);
+    transition:.3s;
+  }
+  .to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+  .to-top:hover{transform:translateY(-3px)}
+  .to-top svg{width:22px;height:22px}
+
+  /* Mobile nav panel */
+  .mobile-nav{
+    position:fixed;top:76px;left:0;right:0;z-index:99;
+    background:var(--bg-2);border-bottom:1px solid var(--line);
+    padding:24px;display:none;flex-direction:column;gap:6px;
+    transform:translateY(-12px);opacity:0;pointer-events:none;transition:.3s;
+  }
+  .mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  .mobile-nav a{padding:14px 12px;font-size:17px;font-weight:600;border-radius:10px}
+  .mobile-nav a:hover{background:var(--bg-3)}
+  .mobile-nav .mn-cta{margin-top:10px}
+  .mobile-nav .mn-cta .btn{width:100%}
+
+  /* Responsive */
+  @media (max-width:1024px){
+    section{padding:80px 0}
+    .features-grid,.steps-grid,.stats-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-grid{gap:40px}
+    .cta-box{padding:48px}
+  }
+  @media (max-width:768px){
+    .nav-links,.nav-phone{display:none}
+    .burger{display:flex}
+    .mobile-nav{display:flex}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-visual{max-width:440px;margin:0 auto;width:100%}
+    .services-grid,.reviews-grid,.pricing-grid{grid-template-columns:1fr}
+    .cta-box{grid-template-columns:1fr;padding:40px 28px}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .plan.featured{transform:none}
+  }
+  @media (max-width:480px){
+    section{padding:64px 0}
+    .container{padding:0 18px}
+    .features-grid,.steps-grid,.stats-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .hero-cta{flex-direction:column}
+    .hero-cta .btn{width:100%}
+    .hero-badge{left:8px}
+    .cta-box{padding:32px 20px}
+    .form{padding:24px 20px}
+    .nav-actions .btn{padding:12px 20px;font-size:14px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="#hero" class="logo" aria-label="Пульс — на главную">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2-6 4 12 2-6h6" stroke="#0B0B0F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Пульс
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Преимущества</a></li>
+        <li><a href="#services">Направления</a></li>
+        <li><a href="#steps">Как начать</a></li>
+        <li><a href="#pricing">Абонементы</a></li>
+        <li><a href="#faq">Вопросы</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="tel:+74951234567" class="nav-phone">+7 (495) 123-45-67</a>
+        <a href="#cta" class="btn btn-primary">Бесплатная тренировка</a>
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Мобильное меню">
+    <a href="#features">Преимущества</a>
+    <a href="#services">Направления</a>
+    <a href="#steps">Как начать</a>
+    <a href="#pricing">Абонементы</a>
+    <a href="#faq">Вопросы</a>
+    <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+    <div class="mn-cta"><a href="#cta" class="btn btn-primary">Бесплатная тренировка</a></div>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <span class="glow glow-lime" aria-hidden="true"></span>
+  <span class="glow glow-orange" aria-hidden="true"></span>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">EMS · Персональный тренинг · Групповые</span>
+        <h1>Первая тренировка <span class="grad">бесплатно</span> — результат уже через 8 недель</h1>
+        <p class="hero-sub">Студия «Пульс» — это умные тренировки, личное сопровождение тренера и сильное комьюнити. Приходите на бесплатное занятие и почувствуйте разницу с первого дня.</p>
+        <div class="hero-cta">
+          <a href="#cta" class="btn btn-primary">Записаться бесплатно</a>
+          <a href="#services" class="btn btn-ghost">Смотреть направления</a>
+        </div>
+        <div class="hero-markers">
+          <span class="marker"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>1500+ клиентов</span>
+          <span class="marker"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>−8 кг в среднем за курс</span>
+          <span class="marker"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Студия 600 м²</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img">
+          <img src="https://picsum.photos/seed/puls-hero/720/900" width="720" height="900" alt="Девушка выполняет упражнение с гантелями в студии «Пульс»" loading="eager">
+        </div>
+        <div class="hero-badge">
+          <div class="num">20 мин</div>
+          <div class="lbl">одна EMS-тренировка</div>
+        </div>
+        <div class="hero-badge-2">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="t">20 тренеров онлайн</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Почему «Пульс»</span>
+      <h2>Тренируем умно, а не до изнеможения</h2>
+      <p>Мы не гоняем по программе из интернета. Каждая тренировка строится под вашу цель, уровень и темп жизни.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature">
+        <div class="feature-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>EMS за 20 минут</h3>
+        <p>Одна EMS-тренировка по нагрузке равна 3–4 часам в обычном зале. Идеально, когда времени мало, а результат нужен.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.4-9.3-9C1.2 9 2.6 5.4 6 5c2.1-.2 3.6 1 4.8 2.6h2.4C14.4 6 15.9 4.8 18 5c3.4.4 4.8 4 3.3 7-2.3 4.6-9.3 9-9.3 9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Личный подход</h3>
+        <p>Перед стартом — диагностика тела и составов. Тренер ведёт вас и корректирует программу каждую неделю.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Сильное комьюнити</h3>
+        <p>Групповые занятия с заряженными тренерами и чат поддержки. Здесь хочется возвращаться и не бросать.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Реальный результат</h3>
+        <p>Замеры каждые 2 недели и понятный прогресс. В среднем клиенты теряют −8 кг и набирают тонус за один курс.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Направления</span>
+      <h2>Выберите формат под свою цель</h2>
+      <p>Похудение, рельеф, восстановление или энергия — для каждой задачи у нас есть свой формат тренировок.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service">
+        <div class="service-img">
+          <img src="https://picsum.photos/seed/puls-pt/640/440" width="640" height="440" alt="Тренер занимается с клиентом на персональной тренировке" loading="lazy">
+          <span class="service-tag">1 на 1</span>
+        </div>
+        <div class="service-body">
+          <h3>Персональный тренинг</h3>
+          <p>Полное внимание тренера и программа, которая подстраивается под вас. Максимально быстрый и безопасный прогресс.</p>
+          <ul class="service-feats">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Диагностика и план на 8 недель</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Контроль техники и питания</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Гибкий график занятий</li>
+          </ul>
+          <div class="service-price">от 2 200 ₽ <span>/ тренировка</span></div>
+          <a href="#cta" class="btn btn-ghost">Записаться</a>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-img">
+          <img src="https://picsum.photos/seed/puls-group/640/440" width="640" height="440" alt="Групповая тренировка в студии Пульс" loading="lazy">
+          <span class="service-tag orange">До 8 человек</span>
+        </div>
+        <div class="service-body">
+          <h3>Групповые тренировки</h3>
+          <p>Драйв, музыка и поддержка группы. Функционал, силовые и кардио-форматы для любого уровня подготовки.</p>
+          <ul class="service-feats">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Более 30 занятий в неделю</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Малые группы — внимание каждому</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Удобное расписание утром и вечером</li>
+          </ul>
+          <div class="service-price">от 690 ₽ <span>/ занятие</span></div>
+          <a href="#cta" class="btn btn-ghost">Записаться</a>
+        </div>
+      </article>
+
+      <article class="service">
+        <div class="service-img">
+          <img src="https://picsum.photos/seed/puls-ems/640/440" width="640" height="440" alt="Тренировка в EMS-костюме под контролем тренера" loading="lazy">
+          <span class="service-tag">EMS · 20 минут</span>
+        </div>
+        <div class="service-body">
+          <h3>EMS-тренировки</h3>
+          <p>Электромиостимуляция активирует до 90% мышц одновременно. 20 минут — и эффект полноценной силовой тренировки.</p>
+          <ul class="service-feats">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Бережно для суставов и спины</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Всего 1–2 занятия в неделю</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Персональный тренер на каждом занятии</li>
+          </ul>
+          <div class="service-price">от 1 900 ₽ <span>/ сессия</span></div>
+          <a href="#cta" class="btn btn-ghost">Записаться</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Как начать</span>
+      <h2>Всего 4 шага до первой тренировки</h2>
+      <p>Записаться проще, чем кажется. Мы всё подскажем и подберём формат под вас.</p>
+    </div>
+    <div class="steps-grid">
+      <article class="step">
+        <div class="step-num">01</div>
+        <h3>Оставьте заявку</h3>
+        <p>Заполните короткую форму — имя и телефон. Перезвоним в течение 15 минут в рабочее время.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">02</div>
+        <h3>Бесплатная диагностика</h3>
+        <p>Замеряем состав тела, обсуждаем цель и уровень. Подбираем оптимальный формат тренировок.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">03</div>
+        <h3>Пробная тренировка</h3>
+        <p>Первое занятие бесплатно. Знакомитесь с тренером, студией и форматом — без обязательств.</p>
+      </article>
+      <article class="step">
+        <div class="step-num">04</div>
+        <h3>Стартуете курс</h3>
+        <p>Выбираете удобный абонемент и начинаете путь к результату с личным сопровождением тренера.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">1500+</div><div class="lbl">довольных клиентов</div></div>
+      <div class="stat"><div class="num">−8 кг</div><div class="lbl">в среднем за курс</div></div>
+      <div class="stat"><div class="num">20</div><div class="lbl">сертифицированных тренеров</div></div>
+      <div class="stat"><div class="num">600 м²</div><div class="lbl">площадь студии</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Отзывы</span>
+      <h2>Что говорят о «Пульсе»</h2>
+      <p>Реальные истории клиентов, которые изменили тело и привычки вместе с нами.</p>
+    </div>
+    <div class="reviews-grid">
+      <article class="review">
+        <div class="review-stars" aria-label="Оценка 5 из 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+        </div>
+        <p>«За 2 месяца EMS-тренировок ушло 9 кг, а спина перестала болеть. Занимаюсь два раза в неделю по 20 минут — и это реально работает.»</p>
+        <div class="review-author">
+          <span class="review-ava"><img src="https://picsum.photos/seed/puls-anna/96/96" width="96" height="96" alt="Фото Анны" loading="lazy"></span>
+          <div><div class="review-name">Анна Кравцова</div><div class="review-role">клиент EMS, 7 месяцев</div></div>
+        </div>
+      </article>
+
+      <article class="review">
+        <div class="review-stars" aria-label="Оценка 5 из 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+        </div>
+        <p>«Пришёл с нулём опыта. Тренер составил программу под мой график и контролировал технику. За курс набрал форму и +6 кг мышц.»</p>
+        <div class="review-author">
+          <span class="review-ava"><img src="https://picsum.photos/seed/puls-dmitry/96/96" width="96" height="96" alt="Фото Дмитрия" loading="lazy"></span>
+          <div><div class="review-name">Дмитрий Соколов</div><div class="review-role">персональный тренинг</div></div>
+        </div>
+      </article>
+
+      <article class="review">
+        <div class="review-stars" aria-label="Оценка 5 из 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.9 21l1.2-6.9-5-4.9 6.9-1L12 2Z"/></svg>
+        </div>
+        <p>«Хожу на групповые уже полгода. Атмосфера огонь, тренеры заряжают, бросать не хочется. Энергии стало в разы больше.»</p>
+        <div class="review-author">
+          <span class="review-ava"><img src="https://picsum.photos/seed/puls-marina/96/96" width="96" height="96" alt="Фото Марины" loading="lazy"></span>
+          <div><div class="review-name">Марина Лебедева</div><div class="review-role">групповые тренировки</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Абонементы</span>
+      <h2>Выберите свой темп</h2>
+      <p>Гибкие тарифы для любой цели. Первая тренировка — бесплатно, без обязательств покупать абонемент.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="plan">
+        <h3>Старт</h3>
+        <p class="plan-desc">Чтобы попробовать формат и втянуться в ритм без переплат.</p>
+        <div class="plan-price"><span class="val">4 900</span><span class="per">₽ / 8 занятий</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>8 групповых тренировок</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Вводная диагностика тела</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Срок действия 30 дней</li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>EMS-тренировки</li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Личный тренер</li>
+        </ul>
+        <a href="#cta" class="btn btn-ghost">Выбрать «Старт»</a>
+      </article>
+
+      <article class="plan featured">
+        <span class="plan-badge">Хит продаж</span>
+        <h3>Прогресс</h3>
+        <p class="plan-desc">Оптимальный баланс групповых и EMS для уверенного результата.</p>
+        <div class="plan-price"><span class="val">9 900</span><span class="per">₽ / месяц</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Безлимит групповых тренировок</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>4 EMS-сессии в месяц</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Контроль прогресса каждые 2 недели</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Гайд по питанию в подарок</li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Персональные тренировки</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Выбрать «Прогресс»</a>
+      </article>
+
+      <article class="plan">
+        <h3>Максимум</h3>
+        <p class="plan-desc">Полное сопровождение и личный тренер для быстрого результата.</p>
+        <div class="plan-price"><span class="val">18 900</span><span class="per">₽ / месяц</span></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Всё из тарифа «Прогресс»</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>8 персональных тренировок</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Безлимит EMS-сессий</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Индивидуальный план питания</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Поддержка тренера в чате 24/7</li>
+        </ul>
+        <a href="#cta" class="btn btn-orange">Выбрать «Максимум»</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow">Вопросы и ответы</span>
+      <h2>Частые вопросы</h2>
+      <p>Собрали то, что чаще всего спрашивают перед первой тренировкой.</p>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Что такое EMS-тренировка и кому она подходит?
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">EMS — это тренировка в специальном костюме с электромиостимуляцией. Лёгкие импульсы заставляют мышцы сокращаться интенсивнее, чем при обычной нагрузке. Формат подходит почти всем: от новичков до опытных спортсменов, а также тем, кто восстанавливается после долгого перерыва. Перед стартом тренер проводит диагностику и учитывает противопоказания.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Первая тренировка действительно бесплатная?
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Да. Первое занятие и диагностика тела — полностью бесплатно и без обязательств покупать абонемент. Это знакомство со студией, тренером и форматом, чтобы вы могли спокойно принять решение.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          За какое время будет виден результат?
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Первые изменения в самочувствии и тонусе клиенты замечают уже через 2–3 недели. Заметный визуальный результат — в среднем через 8 недель регулярных тренировок. Многое зависит от цели, питания и регулярности, поэтому мы делаем замеры каждые 2 недели и корректируем программу.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Нужна ли специальная подготовка или своя форма?
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Подготовка не нужна — мы работаем с любым уровнем. Возьмите удобную спортивную одежду и сменную обувь. Для EMS-тренировок выдаём специальный костюм, полотенце и воду уже на месте. Душевые и шкафчики — в студии.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Можно ли заморозить абонемент?
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Да. Абонементы «Прогресс» и «Максимум» можно заморозить на срок до 14 дней в месяц — например, во время отпуска или болезни. Достаточно предупредить администратора студии за день.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Где находится студия и как удобно добраться?
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Мы находимся по адресу: г. Москва, ул. Энергетиков, 14, 2 этаж — 5 минут пешком от метро. Рядом есть бесплатная парковка. Студия работает ежедневно с 7:00 до 23:00, поэтому легко вписать тренировку до работы или после.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA + FORM -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="cta-box">
+      <div class="cta-content">
+        <h2>Запишитесь на первую <span class="accent">бесплатную</span> тренировку</h2>
+        <p class="lead">Оставьте заявку — перезвоним в течение 15 минут, подберём формат и удобное время. Никакого спама и навязывания.</p>
+        <ul class="cta-perks">
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Бесплатная диагностика состава тела</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Подбор формата под вашу цель</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Первое занятие без обязательств</li>
+        </ul>
+      </div>
+
+      <form class="form" id="leadForm" novalidate>
+        <div id="formFields">
+          <h3>Бесплатная тренировка</h3>
+          <p class="form-sub">Заполните форму — и мы свяжемся с вами.</p>
+          <div class="field" id="fieldName">
+            <label for="name">Ваше имя</label>
+            <input type="text" id="name" name="name" placeholder="Например, Алексей" autocomplete="name">
+            <span class="err">Пожалуйста, укажите имя (минимум 2 буквы)</span>
+          </div>
+          <div class="field" id="fieldPhone">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+            <span class="err">Введите корректный номер телефона</span>
+          </div>
+          <label class="consent" id="consent">
+            <input type="checkbox" id="agree" name="agree">
+            <span>Я согласен(на) на обработку <a href="#privacy">персональных данных</a> и принимаю условия политики конфиденциальности.</span>
+          </label>
+          <button type="submit" class="btn btn-primary">Записаться бесплатно</button>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <div class="ok-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Заявка отправлена!</h3>
+          <p>Спасибо! Мы перезвоним вам в течение 15 минут в рабочее время и подберём удобное время тренировки.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-about">
+        <a href="#hero" class="logo">
+          <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2-6 4 12 2-6h6" stroke="#0B0B0F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          Пульс
+        </a>
+        <p>Фитнес и EMS-студия в центре Москвы. Умные тренировки, личное сопровождение и результат, который видно.</p>
+        <div class="socials">
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L5.1 13l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5L20.6 2.9c.9-.3 1.7.2 1.3 1.4Z"/></svg></a>
+          <a href="#" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 16.5c-5 0-8.2-3.5-8.3-9.3h2.5c.1 4.3 2 6.1 3.5 6.5V7.2h2.4v3.6c1.5-.2 3-1.8 3.6-3.6h2.4c-.4 2.2-2 3.8-3.1 4.5 1.1.5 2.9 1.9 3.6 4.8h-2.6c-.5-1.7-1.9-3-3.9-3.2v3.2h-.1Z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C16.7 4 12 4 12 4s-4.7 0-7.8.2c-.5.1-1.4.1-2.3 1C1.2 5.9 1 7.5 1 7.5S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.6 1 1.9.2 7.5.2 7.5.2s4.7 0 7.8-.2c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8ZM9.8 15.1V8.9l6 3.1-6 3.1Z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-1.4-.4-3.4-1.5-4.9-3.6-.6-.8-1.1-1.7-1.3-2.6-.1-.5 0-1 .3-1.4.2-.3.5-.5.8-.5h.5c.2 0 .3.1.5.4l.7 1.6c.1.2.1.4 0 .5l-.4.7c-.1.1-.1.3 0 .4.4.7 1 1.3 1.7 1.7.1.1.3.1.4 0l.7-.6c.2-.1.4-.1.5-.1l1.6.7c.3.1.4.3.4.5 0 .3 0 .6-.1.9Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="#features">Преимущества</a>
+        <a href="#services">Направления</a>
+        <a href="#steps">Как начать</a>
+        <a href="#pricing">Абонементы</a>
+        <a href="#faq">Вопросы</a>
+      </div>
+      <div class="footer-col">
+        <h4>Направления</h4>
+        <a href="#services">Персональный тренинг</a>
+        <a href="#services">Групповые тренировки</a>
+        <a href="#services">EMS-тренировки</a>
+        <a href="#cta">Бесплатное занятие</a>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <a href="mailto:hello@puls-studio.ru">hello@puls-studio.ru</a>
+        <p>г. Москва, ул. Энергетиков, 14, 2 этаж</p>
+        <p>Ежедневно 7:00–23:00</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Студия «Пульс». Все права защищены.</span>
+      <span><a href="#privacy">Политика конфиденциальности</a> · <a href="#offer">Публичная оферта</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button class="to-top" id="toTop" aria-label="Наверх">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ---- Header scroll state + back-to-top ---- */
+  var header = document.getElementById('header');
+  var toTop = document.getElementById('toTop');
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset;
+    header.classList.toggle('scrolled', y > 10);
+    toTop.classList.toggle('show', y > 600);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  /* ---- Burger / mobile nav ---- */
+  var burger = document.getElementById('burger');
+  var mobileNav = document.getElementById('mobileNav');
+  function closeMenu(){
+    burger.classList.remove('active');
+    mobileNav.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+  }
+  burger.addEventListener('click', function(){
+    var open = burger.classList.toggle('active');
+    mobileNav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* ---- FAQ accordion ---- */
+  var faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    var panel = item.querySelector('.faq-a');
+    btn.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      faqItems.forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+        other.querySelector('.faq-q').setAttribute('aria-expanded','false');
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  /* ---- Phone mask (light) ---- */
+  var phone = document.getElementById('phone');
+  phone.addEventListener('input', function(){
+    var d = phone.value.replace(/\D/g,'');
+    if(d.startsWith('8')) d = '7' + d.slice(1);
+    if(d.startsWith('9') && d.length <= 10) d = '7' + d;
+    d = d.slice(0,11);
+    var out = '';
+    if(d.length > 0) out = '+7';
+    if(d.length > 1) out += ' (' + d.slice(1,4);
+    if(d.length >= 4) out += ') ' + d.slice(4,7);
+    if(d.length >= 7) out += '-' + d.slice(7,9);
+    if(d.length >= 9) out += '-' + d.slice(9,11);
+    phone.value = out;
+  });
+
+  /* ---- Form validation ---- */
+  var form = document.getElementById('leadForm');
+  var name = document.getElementById('name');
+  var agree = document.getElementById('agree');
+  var fieldName = document.getElementById('fieldName');
+  var fieldPhone = document.getElementById('fieldPhone');
+  var consent = document.getElementById('consent');
+  var formFields = document.getElementById('formFields');
+  var formSuccess = document.getElementById('formSuccess');
+
+  function validName(){ return name.value.trim().length >= 2; }
+  function validPhone(){ return phone.value.replace(/\D/g,'').length === 11; }
+
+  function setState(field, input, ok){
+    field.classList.toggle('invalid', !ok);
+    if(input) input.classList.toggle('invalid', !ok);
+  }
+
+  [name, phone].forEach(function(inp){
+    inp.addEventListener('input', function(){
+      if(inp === name && validName()) setState(fieldName, name, true);
+      if(inp === phone && validPhone()) setState(fieldPhone, phone, true);
+    });
+  });
+  agree.addEventListener('change', function(){
+    if(agree.checked) consent.classList.remove('invalid');
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var okName = validName();
+    var okPhone = validPhone();
+    var okAgree = agree.checked;
+
+    setState(fieldName, name, okName);
+    setState(fieldPhone, phone, okPhone);
+    consent.classList.toggle('invalid', !okAgree);
+
+    if(!okName){ name.focus(); return; }
+    if(!okPhone){ phone.focus(); return; }
+    if(!okAgree){ return; }
+
+    formFields.style.display = 'none';
+    formSuccess.classList.add('show');
+  });
+
+  /* ---- Smooth scroll for in-page anchors (offset for sticky header) ---- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id = link.getAttribute('href');
+      if(id.length < 2) return;
+      var target = document.querySelector(id);
+      if(!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+      window.scrollTo({top:top, behavior:'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>РОБОТРЕК — школа робототехники и программирования для детей 7–14 лет</title>
+<meta name="description" content="РОБОТРЕК — школа робототехники для детей 7–14 лет. Scratch, Python, Arduino. Преподаватели-инженеры, мини-группы до 8 человек. Бесплатное пробное занятие — ребёнок соберёт первого робота уже сегодня!">
+<meta property="og:title" content="РОБОТРЕК — школа робототехники для детей 7–14 лет">
+<meta property="og:description" content="Бесплатное пробное занятие — ребёнок соберёт первого робота уже сегодня. Программы по возрастам: Scratch, Python, Arduino. Преподаватели-инженеры.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A4%96%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#4F46E5;
+    --indigo-dark:#3730A3;
+    --indigo-light:#EEF0FF;
+    --orange:#F59E0B;
+    --orange-dark:#D97706;
+    --ink:#1A1A2E;
+    --muted:#5B5B73;
+    --bg:#FAFAFC;
+    --white:#FFFFFF;
+    --line:#E7E7F0;
+    --radius:20px;
+    --radius-sm:14px;
+    --shadow:0 10px 30px rgba(79,70,229,.10);
+    --shadow-lg:0 24px 60px rgba(79,70,229,.18);
+    --shadow-soft:0 4px 16px rgba(26,26,46,.06);
+    --maxw:1200px;
+    --t:.3s cubic-bezier(.4,0,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    font-size:17px;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;line-height:1.15;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  ul{list-style:none}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .section{padding:96px 0}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--indigo);background:var(--indigo-light);
+    padding:8px 16px;border-radius:999px;margin-bottom:20px;
+  }
+  .section-head{max-width:720px;margin:0 auto 56px;text-align:center}
+  .section-head h2{font-size:clamp(28px,4vw,44px);font-weight:800;margin-bottom:16px}
+  .section-head p{color:var(--muted);font-size:18px}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;
+    padding:15px 28px;border-radius:999px;border:none;cursor:pointer;
+    transition:var(--t);white-space:nowrap;
+  }
+  .btn-primary{background:var(--orange);color:#fff;box-shadow:0 8px 24px rgba(245,158,11,.35)}
+  .btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(245,158,11,.45)}
+  .btn-indigo{background:var(--indigo);color:#fff;box-shadow:0 8px 24px rgba(79,70,229,.3)}
+  .btn-indigo:hover{background:var(--indigo-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,70,229,.4)}
+  .btn-ghost{background:#fff;color:var(--indigo);border:2px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--indigo);transform:translateY(-2px)}
+  .btn-block{width:100%}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,250,252,.85);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px}
+  .logo .mark{
+    width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--indigo),var(--indigo-dark));color:#fff;flex:none;
+  }
+  .logo .mark svg{width:24px;height:24px}
+  .logo b{color:var(--indigo)}
+  .nav-menu{display:flex;align-items:center;gap:28px}
+  .nav-menu a{font-weight:600;font-size:15px;color:var(--ink);transition:var(--t)}
+  .nav-menu a:hover{color:var(--indigo)}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .nav-phone{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px}
+  .nav-phone svg{width:18px;height:18px;color:var(--indigo)}
+  .burger{display:none;width:44px;height:44px;border:none;background:var(--indigo-light);border-radius:12px;cursor:pointer;position:relative}
+  .burger span{position:absolute;left:12px;width:20px;height:2px;background:var(--indigo);border-radius:2px;transition:var(--t)}
+  .burger span:nth-child(1){top:15px}
+  .burger span:nth-child(2){top:21px}
+  .burger span:nth-child(3){top:27px}
+  .burger.open span:nth-child(1){top:21px;transform:rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){top:21px;transform:rotate(-45deg)}
+
+  /* Hero */
+  .hero{padding:80px 0 72px;position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,70,229,.12),transparent 70%);z-index:0;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:1}
+  .hero h1{font-size:clamp(34px,5.2vw,58px);font-weight:900;margin-bottom:22px}
+  .hero h1 .hl{color:var(--indigo);position:relative;white-space:nowrap}
+  .hero h1 .hl-orange{color:var(--orange)}
+  .hero-sub{font-size:19px;color:var(--muted);margin-bottom:32px;max-width:540px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px}
+  .trust{display:flex;gap:36px;flex-wrap:wrap}
+  .trust-item .num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:34px;color:var(--indigo);line-height:1}
+  .trust-item .lbl{font-size:14px;color:var(--muted);margin-top:6px}
+  .hero-visual{position:relative}
+  .hero-img{
+    border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);
+    background:linear-gradient(135deg,#4F46E5,#7C3AED 55%,#F59E0B);
+    aspect-ratio:4/5;
+  }
+  .hero-img img{width:100%;height:100%;object-fit:cover}
+  .hero-badge{
+    position:absolute;left:-20px;bottom:32px;background:#fff;border-radius:18px;
+    padding:16px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:14px;
+  }
+  .hero-badge .ic{width:48px;height:48px;border-radius:12px;background:var(--orange);display:grid;place-items:center;color:#fff;flex:none}
+  .hero-badge .ic svg{width:26px;height:26px}
+  .hero-badge .t1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px}
+  .hero-badge .t2{font-size:13px;color:var(--muted)}
+  .hero-chip{
+    position:absolute;right:-12px;top:28px;background:#fff;border-radius:14px;padding:12px 18px;
+    box-shadow:var(--shadow);font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .hero-chip .dot{width:10px;height:10px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 4px rgba(34,197,94,.2)}
+
+  /* Cards generic */
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);transition:var(--t)}
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+
+  /* Advantages */
+  .adv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .adv-card{padding:32px 28px}
+  .adv-ic{width:60px;height:60px;border-radius:16px;background:var(--indigo-light);display:grid;place-items:center;color:var(--indigo);margin-bottom:22px}
+  .adv-ic svg{width:30px;height:30px}
+  .adv-card h3{font-size:20px;font-weight:700;margin-bottom:10px}
+  .adv-card p{color:var(--muted);font-size:15.5px}
+
+  /* Programs */
+  .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .prog-card{overflow:hidden;display:flex;flex-direction:column}
+  .prog-media{aspect-ratio:16/10;position:relative;overflow:hidden}
+  .prog-media img{width:100%;height:100%;object-fit:cover;transition:var(--t)}
+  .prog-card:hover .prog-media img{transform:scale(1.06)}
+  .prog-age{position:absolute;top:16px;left:16px;background:#fff;color:var(--indigo);font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;padding:7px 14px;border-radius:999px;box-shadow:var(--shadow-soft)}
+  .prog-body{padding:26px 26px 30px;flex:1;display:flex;flex-direction:column}
+  .prog-body h3{font-size:22px;font-weight:800;margin-bottom:8px}
+  .prog-body .lead{color:var(--muted);margin-bottom:18px}
+  .prog-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .tag{font-size:13px;font-weight:600;color:var(--indigo);background:var(--indigo-light);padding:6px 12px;border-radius:8px}
+  .prog-list{margin-bottom:24px;margin-top:auto}
+  .prog-list li{display:flex;gap:10px;font-size:15px;color:var(--ink);padding:5px 0}
+  .prog-list li svg{width:20px;height:20px;color:var(--orange);flex:none;margin-top:2px}
+
+  /* Steps */
+  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .step{padding:32px 26px;position:relative}
+  .step-num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:46px;color:var(--indigo-light);line-height:1;margin-bottom:8px}
+  .step.card:hover .step-num{color:var(--orange);transition:var(--t)}
+  .step h3{font-size:19px;font-weight:700;margin-bottom:10px}
+  .step p{color:var(--muted);font-size:15px}
+
+  /* Stats + reviews */
+  .stats-band{background:linear-gradient(135deg,var(--indigo),var(--indigo-dark));border-radius:28px;padding:56px 40px;color:#fff;margin-bottom:64px}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  .stat .num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:46px;line-height:1}
+  .stat .num .acc{color:var(--orange)}
+  .stat .lbl{font-size:15px;opacity:.85;margin-top:8px}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .rev-card{padding:30px 28px;display:flex;flex-direction:column}
+  .stars{display:flex;gap:3px;margin-bottom:16px;color:var(--orange)}
+  .stars svg{width:20px;height:20px}
+  .rev-text{font-size:16px;margin-bottom:22px;flex:1}
+  .rev-author{display:flex;align-items:center;gap:14px}
+  .rev-ava{width:52px;height:52px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,var(--indigo),var(--orange));flex:none}
+  .rev-author .name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px}
+  .rev-author .role{font-size:13.5px;color:var(--muted)}
+
+  /* Pricing */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .price-card{padding:36px 32px;display:flex;flex-direction:column;position:relative}
+  .price-card.featured{border:2px solid var(--indigo);box-shadow:var(--shadow-lg)}
+  .price-card.featured::after{content:"Хит продаж";position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;padding:6px 18px;border-radius:999px;white-space:nowrap}
+  .price-card h3{font-size:22px;font-weight:800;margin-bottom:6px}
+  .price-card .desc{color:var(--muted);font-size:15px;margin-bottom:24px;min-height:44px}
+  .price-val{font-family:'Montserrat',sans-serif;font-weight:900;font-size:42px;color:var(--indigo);line-height:1}
+  .price-val span{font-size:17px;font-weight:600;color:var(--muted)}
+  .price-old{font-size:16px;color:var(--muted);text-decoration:line-through;margin-top:4px}
+  .price-feats{margin:26px 0;display:flex;flex-direction:column;gap:13px}
+  .price-feats li{display:flex;gap:11px;font-size:15.5px}
+  .price-feats li svg{width:21px;height:21px;color:#22C55E;flex:none;margin-top:1px}
+  .price-card .btn{margin-top:auto}
+
+  /* FAQ */
+  .faq{max-width:840px;margin:0 auto}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:14px;overflow:hidden;transition:var(--t)}
+  .faq-item.open{border-color:var(--indigo);box-shadow:var(--shadow)}
+  .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:24px 26px;display:flex;justify-content:space-between;align-items:center;gap:18px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:var(--ink)}
+  .faq-icon{width:28px;height:28px;border-radius:50%;background:var(--indigo-light);display:grid;place-items:center;flex:none;transition:var(--t)}
+  .faq-icon svg{width:16px;height:16px;color:var(--indigo);transition:var(--t)}
+  .faq-item.open .faq-icon{background:var(--indigo)}
+  .faq-item.open .faq-icon svg{color:#fff;transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .faq-a-inner{padding:0 26px 24px;color:var(--muted);font-size:16px}
+
+  /* CTA + form */
+  .cta-wrap{background:linear-gradient(135deg,#3730A3,#4F46E5 60%,#6D28D9);border-radius:32px;padding:64px;color:#fff;position:relative;overflow:hidden}
+  .cta-wrap::before{content:"";position:absolute;top:-120px;right:-80px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.35),transparent 70%)}
+  .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+  .cta-grid h2{font-size:clamp(28px,3.6vw,40px);font-weight:900;margin-bottom:18px}
+  .cta-grid .lead{font-size:18px;opacity:.92;margin-bottom:26px}
+  .cta-bul{display:flex;flex-direction:column;gap:14px}
+  .cta-bul li{display:flex;gap:12px;font-size:16.5px;align-items:flex-start}
+  .cta-bul li svg{width:24px;height:24px;color:var(--orange);flex:none;margin-top:1px}
+  .form-card{background:#fff;border-radius:24px;padding:38px 34px;color:var(--ink);box-shadow:var(--shadow-lg)}
+  .form-card h3{font-size:24px;font-weight:800;margin-bottom:6px}
+  .form-card .fsub{color:var(--muted);font-size:15px;margin-bottom:24px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+  .field input[type=text],.field input[type=tel]{
+    width:100%;padding:15px 18px;border:2px solid var(--line);border-radius:14px;
+    font-family:inherit;font-size:16px;transition:var(--t);background:var(--bg);
+  }
+  .field input:focus{outline:none;border-color:var(--indigo);background:#fff}
+  .field input.invalid{border-color:#EF4444;background:#FEF2F2}
+  .err{color:#EF4444;font-size:13px;margin-top:6px;display:none}
+  .field.show-err .err{display:block}
+  .consent{display:flex;gap:11px;align-items:flex-start;margin-bottom:22px;font-size:13.5px;color:var(--muted)}
+  .consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--indigo);flex:none;cursor:pointer}
+  .consent a{color:var(--indigo);text-decoration:underline}
+  .form-success{display:none;text-align:center;padding:20px 0}
+  .form-success.show{display:block}
+  .form-success .ic{width:72px;height:72px;border-radius:50%;background:#DCFCE7;display:grid;place-items:center;margin:0 auto 18px;color:#16A34A}
+  .form-success .ic svg{width:40px;height:40px}
+  .form-success h3{font-size:23px;font-weight:800;margin-bottom:8px}
+  .form-success p{color:var(--muted)}
+
+  /* Footer */
+  footer{background:var(--ink);color:#fff;padding:64px 0 32px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:48px}
+  .foot-logo{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;margin-bottom:16px}
+  .foot-logo .mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--indigo),var(--orange));flex:none}
+  .foot-logo .mark svg{width:24px;height:24px}
+  .foot-about p{color:rgba(255,255,255,.65);font-size:15px;max-width:300px}
+  .foot-col h4{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;margin-bottom:18px}
+  .foot-col a,.foot-col p{display:block;color:rgba(255,255,255,.65);font-size:15px;margin-bottom:11px;transition:var(--t)}
+  .foot-col a:hover{color:var(--orange)}
+  .socials{display:flex;gap:12px;margin-top:18px}
+  .socials a{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.08);display:grid;place-items:center;transition:var(--t)}
+  .socials a:hover{background:var(--indigo);transform:translateY(-3px)}
+  .socials svg{width:20px;height:20px;color:#fff}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:rgba(255,255,255,.5);font-size:14px}
+  .foot-bottom a{color:rgba(255,255,255,.7);text-decoration:underline}
+
+  /* To top */
+  .totop{position:fixed;right:24px;bottom:24px;width:52px;height:52px;border-radius:14px;background:var(--indigo);color:#fff;border:none;cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transform:translateY(12px);transition:var(--t);z-index:90}
+  .totop.show{opacity:1;visibility:visible;transform:translateY(0)}
+  .totop:hover{background:var(--indigo-dark)}
+  .totop svg{width:24px;height:24px}
+
+  /* Reveal animation */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Responsive */
+  @media(max-width:1024px){
+    .section{padding:80px 0}
+    .adv-grid{grid-template-columns:repeat(2,1fr)}
+    .steps-grid{grid-template-columns:repeat(2,1fr)}
+    .hero-grid{gap:36px}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+    .cta-wrap{padding:48px}
+  }
+  @media(max-width:768px){
+    body{font-size:16px}
+    .section{padding:64px 0}
+    .nav-menu{
+      position:fixed;top:76px;left:0;right:0;background:#fff;flex-direction:column;
+      align-items:stretch;gap:0;padding:12px 24px 24px;border-bottom:1px solid var(--line);
+      box-shadow:var(--shadow-lg);transform:translateY(-130%);transition:transform .35s ease;
+      max-height:calc(100vh - 76px);overflow-y:auto;
+    }
+    .nav-menu.open{transform:translateY(0)}
+    .nav-menu a{padding:14px 0;border-bottom:1px solid var(--line);font-size:17px}
+    .nav-menu .nav-phone{padding:14px 0}
+    .nav-menu .btn{margin-top:14px}
+    .burger{display:block}
+    .nav-right .nav-phone,.nav-right .btn{display:none}
+    .nav-menu .nav-phone-m,.nav-menu .btn-m{display:flex}
+    .hero{padding:56px 0 56px}
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .hero-visual{max-width:420px;margin:0 auto;width:100%}
+    .prog-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+    .price-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+    .price-card.featured{margin-top:14px}
+    .rev-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+    .cta-grid{grid-template-columns:1fr;gap:36px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .cta-wrap{padding:40px 28px}
+    .trust{gap:24px}
+  }
+  @media(max-width:480px){
+    .container{padding:0 18px}
+    .section{padding:52px 0}
+    .adv-grid{grid-template-columns:1fr}
+    .steps-grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr 1fr;gap:28px}
+    .stat .num{font-size:38px}
+    .hero-cta{flex-direction:column}
+    .hero-cta .btn{width:100%}
+    .hero-badge{left:0;padding:12px 14px}
+    .hero-badge .t1{font-size:14px}
+    .trust-item .num{font-size:28px}
+    .foot-grid{grid-template-columns:1fr;gap:28px}
+    .form-card{padding:28px 22px}
+    .cta-wrap{padding:32px 20px;border-radius:24px}
+    .stats-band{padding:40px 24px}
+    .section-head{margin-bottom:40px}
+  }
+  .nav-menu .nav-phone-m,.nav-menu .btn-m{display:none}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container">
+    <nav class="nav">
+      <a href="#hero" class="logo" aria-label="РОБОТРЕК — на главную">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="11" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 4v4M9 13h.01M15 13h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="3" r="1.4" fill="currentColor"/></svg>
+        </span>
+        РОБО<b>ТРЕК</b>
+      </a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#advantages">Преимущества</a></li>
+        <li><a href="#programs">Программы</a></li>
+        <li><a href="#how">Как мы учим</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+        <li><a href="#pricing">Цены</a></li>
+        <li><a href="#faq">Вопросы</a></li>
+        <li class="nav-phone nav-phone-m"><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+        <li><a href="#signup" class="btn btn-primary btn-m">Записаться</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="tel:+74951234567" class="nav-phone">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 005 5l1.5-2 4 1.5v3a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          +7 (495) 123-45-67
+        </a>
+        <a href="#signup" class="btn btn-primary">Записаться</a>
+        <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">🤖 Школа робототехники для детей 7–14 лет</span>
+        <h1>Бесплатное пробное занятие — ребёнок соберёт <span class="hl-orange">первого робота</span> уже сегодня</h1>
+        <p class="hero-sub">Учим детей создавать, программировать и думать как инженеры: от блоков Scratch до Python и плат Arduino. Преподаватели — практикующие инженеры, мини-группы до 8 человек.</p>
+        <div class="hero-cta">
+          <a href="#signup" class="btn btn-primary">
+            Записаться на пробное
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#programs" class="btn btn-ghost">Программы по возрастам</a>
+        </div>
+        <div class="trust">
+          <div class="trust-item"><div class="num">5 лет</div><div class="lbl">на рынке</div></div>
+          <div class="trust-item"><div class="num">1200+</div><div class="lbl">выпускников</div></div>
+          <div class="trust-item"><div class="num">3</div><div class="lbl">филиала в городе</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img">
+          <img src="https://picsum.photos/seed/robotrek-hero/640/800" alt="Дети собирают робота на занятии в школе РОБОТРЕК" loading="eager">
+        </div>
+        <div class="hero-chip"><span class="dot"></span>Идёт набор групп</div>
+        <div class="hero-badge">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z" fill="currentColor"/></svg></span>
+          <div><div class="t1">Мини-группы</div><div class="t2">до 8 человек</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="section" id="advantages">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Почему РОБОТРЕК</span>
+      <h2>Технологии, которые увлекают — и результат, который виден</h2>
+      <p>Мы не просто проводим уроки. Мы выращиваем будущих инженеров через проекты, которые ребёнок с гордостью покажет родителям.</p>
+    </div>
+    <div class="adv-grid">
+      <div class="card adv-card reveal">
+        <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Преподаватели-инженеры</h3>
+        <p>Уроки ведут практикующие инженеры и разработчики, а не «вожатые». Ребёнок учится у тех, кто реально создаёт технику.</p>
+      </div>
+      <div class="card adv-card reveal">
+        <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="2"/><path d="M3 20a6 6 0 0112 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 6a3 3 0 010 6M19 20a6 6 0 00-3-5.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>Мини-группы до 8 детей</h3>
+        <p>Преподаватель успевает подойти к каждому. Ребёнок не теряется в толпе и не остаётся с непонятой темой один на один.</p>
+      </div>
+      <div class="card adv-card reveal">
+        <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="2"/></svg></div>
+        <h3>Учим думать, а не зубрить</h3>
+        <p>Каждое занятие — это инженерная задача. Ребёнок учится разбивать проблему на шаги, тестировать и доводить проект до результата.</p>
+      </div>
+      <div class="card adv-card reveal">
+        <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M9 9l-2 2.5L9 14M15 9l2 2.5L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Реальное «железо» и код</h3>
+        <p>Scratch, Python и платы Arduino — всё оборудование уже в классе. Ничего покупать не нужно: приходите и собирайте.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="section" id="programs" style="background:#fff">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Программы по возрастам</span>
+      <h2>Свой маршрут для каждого возраста</h2>
+      <p>Группы формируются по возрасту и уровню — от первых блоков до настоящих устройств на микроконтроллерах.</p>
+    </div>
+    <div class="prog-grid">
+      <article class="card prog-card reveal">
+        <div class="prog-media" style="background:linear-gradient(135deg,#4F46E5,#818CF8)">
+          <span class="prog-age">7–9 лет</span>
+          <img src="https://picsum.photos/seed/robotrek-junior/600/375" alt="Младшая группа собирает робота из конструктора" loading="lazy">
+        </div>
+        <div class="prog-body">
+          <h3>Юный конструктор</h3>
+          <p class="lead">Первое знакомство с роботами и алгоритмами в игровом формате — без сложных терминов.</p>
+          <div class="prog-tags"><span class="tag">Scratch</span><span class="tag">Конструкторы</span><span class="tag">Логика</span></div>
+          <ul class="prog-list">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Собирают первых моторизованных роботов</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Программируют движение в Scratch</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Учатся работать в команде</li>
+          </ul>
+          <a href="#signup" class="btn btn-indigo btn-block">Записать ребёнка</a>
+        </div>
+      </article>
+      <article class="card prog-card reveal">
+        <div class="prog-media" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
+          <span class="prog-age">10–12 лет</span>
+          <img src="https://picsum.photos/seed/robotrek-middle/600/375" alt="Средняя группа пишет код на занятии по программированию" loading="lazy">
+        </div>
+        <div class="prog-body">
+          <h3>Юный программист</h3>
+          <p class="lead">Переход от блоков к настоящему коду и первым проектам на микроконтроллерах.</p>
+          <div class="prog-tags"><span class="tag">Python</span><span class="tag">Scratch+</span><span class="tag">Алгоритмы</span></div>
+          <ul class="prog-list">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Пишут первые программы на Python</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Создают игры и собственные проекты</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Управляют датчиками и моторами</li>
+          </ul>
+          <a href="#signup" class="btn btn-indigo btn-block">Записать ребёнка</a>
+        </div>
+      </article>
+      <article class="card prog-card reveal">
+        <div class="prog-media" style="background:linear-gradient(135deg,#4F46E5,#F59E0B)">
+          <span class="prog-age">13–14 лет</span>
+          <img src="https://picsum.photos/seed/robotrek-senior/600/375" alt="Старшая группа собирает устройство на плате Arduino" loading="lazy">
+        </div>
+        <div class="prog-body">
+          <h3>Инженер Arduino</h3>
+          <p class="lead">Настоящая электроника и схемотехника: от идеи до работающего устройства своими руками.</p>
+          <div class="prog-tags"><span class="tag">Arduino</span><span class="tag">Python</span><span class="tag">Электроника</span></div>
+          <ul class="prog-list">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Собирают схемы на платах Arduino</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Программируют умные устройства</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Защищают финальный инженерный проект</li>
+          </ul>
+          <a href="#signup" class="btn btn-indigo btn-block">Записать ребёнка</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Как мы работаем</span>
+      <h2>Четыре шага до первого робота</h2>
+      <p>Начать проще, чем кажется. Уже на первом, бесплатном занятии ребёнок соберёт работающее устройство.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="card step reveal">
+        <div class="step-num">01</div>
+        <h3>Заявка за минуту</h3>
+        <p>Оставляете имя и телефон. Перезваниваем, подбираем удобное время и группу по возрасту.</p>
+      </div>
+      <div class="card step reveal">
+        <div class="step-num">02</div>
+        <h3>Бесплатное пробное</h3>
+        <p>Ребёнок приходит на занятие, знакомится с преподавателем и собирает своего первого робота.</p>
+      </div>
+      <div class="card step reveal">
+        <div class="step-num">03</div>
+        <h3>Свой маршрут обучения</h3>
+        <p>Вместе определяем уровень и подбираем программу — от Scratch до Arduino, без перегруза.</p>
+      </div>
+      <div class="card step reveal">
+        <div class="step-num">04</div>
+        <h3>Проекты и результат</h3>
+        <p>Каждый модуль — готовый проект в портфолио ребёнка. Родители видят прогресс на отчётных встречах.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="section" id="reviews" style="background:#fff">
+  <div class="container">
+    <div class="stats-band reveal">
+      <div class="stats-grid">
+        <div class="stat"><div class="num">5<span class="acc"> лет</span></div><div class="lbl">учим детей робототехнике</div></div>
+        <div class="stat"><div class="num">1200<span class="acc">+</span></div><div class="lbl">выпускников за всё время</div></div>
+        <div class="stat"><div class="num">3</div><div class="lbl">филиала в шаговой доступности</div></div>
+        <div class="stat"><div class="num">94<span class="acc">%</span></div><div class="lbl">продолжают после пробного</div></div>
+      </div>
+    </div>
+    <div class="section-head reveal">
+      <span class="eyebrow">Отзывы родителей</span>
+      <h2>Нам доверяют сотни семей</h2>
+      <p>Честные отзывы родителей, чьи дети уже занимаются в РОБОТРЕК.</p>
+    </div>
+    <div class="rev-grid">
+      <article class="card rev-card reveal">
+        <div class="stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+        </div>
+        <p class="rev-text">«Сын ходит второй год. Был стеснительным, а теперь сам собирает роботов дома и объясняет нам, как работает датчик. Преподаватели реально вовлекают.»</p>
+        <div class="rev-author">
+          <img class="rev-ava" src="https://picsum.photos/seed/robotrek-anna/104/104" alt="Фото Анны Лебедевой" loading="lazy">
+          <div><div class="name">Анна Лебедева</div><div class="role">мама Миши, 9 лет</div></div>
+        </div>
+      </article>
+      <article class="card rev-card reveal">
+        <div class="stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+        </div>
+        <p class="rev-text">«Дочка перешла на Python — пишет свои мини-игры. Радует, что группы маленькие: преподаватель всегда видит, где у ребёнка затык, и помогает.»</p>
+        <div class="rev-author">
+          <img class="rev-ava" src="https://picsum.photos/seed/robotrek-dmitry/104/104" alt="Фото Дмитрия Соколова" loading="lazy">
+          <div><div class="name">Дмитрий Соколов</div><div class="role">папа Кати, 11 лет</div></div>
+        </div>
+      </article>
+      <article class="card rev-card reveal">
+        <div class="stars" aria-label="5 из 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
+        </div>
+        <p class="rev-text">«Пришли на бесплатное пробное “просто посмотреть” — ушли с собранным роботом и горящими глазами. На Arduino сын собрал метеостанцию для школьного проекта.»</p>
+        <div class="rev-author">
+          <img class="rev-ava" src="https://picsum.photos/seed/robotrek-olga/104/104" alt="Фото Ольги Морозовой" loading="lazy">
+          <div><div class="name">Ольга Морозова</div><div class="role">мама Артёма, 13 лет</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Цены и тарифы</span>
+      <h2>Прозрачные тарифы без скрытых доплат</h2>
+      <p>Оборудование, материалы и доступ к проектам уже включены. Первое пробное занятие — бесплатно.</p>
+    </div>
+    <div class="price-grid">
+      <div class="card price-card reveal">
+        <h3>Разовое занятие</h3>
+        <p class="desc">Чтобы попробовать формат после бесплатного пробного или прийти на отдельный модуль.</p>
+        <div class="price-val">900 ₽<span> / занятие</span></div>
+        <ul class="price-feats">
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Занятие 90 минут</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Всё оборудование включено</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Мини-группа до 8 человек</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Без обязательств и абонемента</li>
+        </ul>
+        <a href="#signup" class="btn btn-ghost btn-block">Выбрать</a>
+      </div>
+      <div class="card price-card featured reveal">
+        <h3>Абонемент на 4 занятия</h3>
+        <p class="desc">Оптимальный старт: месяц обучения, один проект и понятный прогресс ребёнка.</p>
+        <div class="price-val">3 200 ₽<span> / 4 занятия</span></div>
+        <div class="price-old">3 600 ₽</div>
+        <ul class="price-feats">
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>4 занятия по 90 минут</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Завершённый проект в портфолио</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Гибкий перенос пропусков</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Отчёт о прогрессе родителям</li>
+        </ul>
+        <a href="#signup" class="btn btn-primary btn-block">Выбрать тариф</a>
+      </div>
+      <div class="card price-card reveal">
+        <h3>Абонемент на 8 занятий</h3>
+        <p class="desc">Максимальная выгода для тех, кто настроен серьёзно: два месяца и большой проект.</p>
+        <div class="price-val">5 900 ₽<span> / 8 занятий</span></div>
+        <div class="price-old">7 200 ₽</div>
+        <ul class="price-feats">
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>8 занятий по 90 минут</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Лучшая цена за занятие</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Большой инженерный проект</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Личный наставник на курсе</li>
+        </ul>
+        <a href="#signup" class="btn btn-ghost btn-block">Выбрать</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:#fff">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Частые вопросы</span>
+      <h2>Отвечаем на главное</h2>
+      <p>Если не нашли ответ — оставьте заявку, и мы перезвоним и подробно всё расскажем.</p>
+    </div>
+    <div class="faq">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Нужны ли ребёнку базовые знания, чтобы начать?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Нет. Мы начинаем с нуля и подбираем программу под возраст и уровень. На первом, бесплатном занятии ребёнок собирает робота независимо от подготовки — а мы видим, в какую группу его лучше определить.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Сколько детей в группе и почему это важно?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">В группе не больше 8 детей. Это принципиальная позиция: преподаватель успевает подойти к каждому, разобрать ошибку и не дать ребёнку «застрять». В больших группах робототехника превращается в наблюдение, а не в практику.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Что именно изучает ребёнок: Scratch, Python, Arduino?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Маршрут зависит от возраста. 7–9 лет — визуальное программирование в Scratch и сборка роботов. 10–12 лет — переход к Python и первым устройствам. 13–14 лет — электроника и платы Arduino с защитой финального проекта.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Нужно ли покупать конструктор или оборудование?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Ничего покупать не нужно. Все конструкторы, платы, датчики и компьютеры уже есть в классе и включены в стоимость. Ребёнок приходит с хорошим настроением — остальное наша забота.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Кто преподаёт на занятиях?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Уроки ведут практикующие инженеры и разработчики с опытом работы с детьми. Они не просто знают предмет — они умеют объяснить сложное простым языком и заразить ребёнка интересом к технике.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false">Что будет на бесплатном пробном занятии?<span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Ребёнок познакомится с преподавателем и группой, попробует формат и соберёт своего первого работающего робота — уже в этот день. По итогам мы расскажем родителям, какая программа подойдёт, без всякого давления.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA + FORM -->
+<section class="section" id="signup">
+  <div class="container">
+    <div class="cta-wrap reveal">
+      <div class="cta-grid">
+        <div class="cta-info">
+          <h2>Запишите ребёнка на бесплатное пробное занятие</h2>
+          <p class="lead">Оставьте заявку — перезвоним в течение 15 минут, подберём удобное время и группу по возрасту. Уже на первом занятии ребёнок соберёт своего робота.</p>
+          <ul class="cta-bul">
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Первое занятие — бесплатно, без обязательств</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Подберём программу под возраст и интересы</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 филиала — выберете ближайший к дому</li>
+          </ul>
+        </div>
+        <div class="form-card">
+          <form id="signupForm" novalidate>
+            <h3>Заявка на пробное занятие</h3>
+            <p class="fsub">Заполните форму — и мы свяжемся с вами для записи.</p>
+            <div class="field" id="fieldName">
+              <label for="name">Имя ребёнка или родителя</label>
+              <input type="text" id="name" name="name" placeholder="Например, Анна" autocomplete="name">
+              <div class="err">Пожалуйста, укажите имя</div>
+            </div>
+            <div class="field" id="fieldPhone">
+              <label for="phone">Телефон для связи</label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel">
+              <div class="err">Введите корректный номер телефона</div>
+            </div>
+            <label class="consent">
+              <input type="checkbox" id="consent" name="consent">
+              <span>Я согласен(а) на обработку персональных данных в соответствии с <a href="#privacy">политикой конфиденциальности</a></span>
+            </label>
+            <div class="field" id="fieldConsent" style="margin-top:-10px">
+              <div class="err">Необходимо согласие на обработку данных</div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Записаться на бесплатное занятие</button>
+          </form>
+          <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+            <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4 10-11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Заявка принята!</h3>
+            <p>Спасибо! Мы перезвоним в течение 15 минут, чтобы подобрать удобное время для пробного занятия.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <div class="foot-logo">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="11" rx="3" stroke="#fff" stroke-width="2"/><path d="M12 4v4M9 13h.01M15 13h.01" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="3" r="1.4" fill="#fff"/></svg></span>
+          РОБОТРЕК
+        </div>
+        <p>Школа робототехники и программирования для детей 7–14 лет. Scratch, Python, Arduino. Растим инженеров будущего с заботой и интересом.</p>
+        <div class="socials">
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.1 14.9c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.3 13 1.5 11.5c-1-.3-1.1-1 .2-1.5l19-7.3c.9-.3 1.6.2 1.2 1.6z"/></svg></a>
+          <a href="#" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 17c-5.5 0-8.9-3.8-9-10h2.8c.1 4.6 2.2 6.5 3.8 6.9V7h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.6c-.5 2.3-2.2 4.1-3.4 4.8 1.2.6 3.2 2.2 3.9 4.2h-2.9c-.6-1.7-2.1-3.1-4.1-3.3V17h-.2z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-5.6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1-1.4-.7-2.3-1.2-3.2-2.7-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4 0-.1-.5-1.3-.7-1.7-.2-.4-.4-.4-.5-.4h-.5c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.5 1.4.6 2 .6 2.7.5.4-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 00-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 001 7.5 31 31 0 001 12a31 31 0 00.1 4.5 3 3 0 002.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 002.1-2.1A31 31 0 0023 12a31 31 0 00-.1-4.5zM10 15V9l5 3-5 3z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Навигация</h4>
+        <a href="#advantages">Преимущества</a>
+        <a href="#programs">Программы</a>
+        <a href="#how">Как мы учим</a>
+        <a href="#pricing">Цены</a>
+        <a href="#faq">Вопросы</a>
+      </div>
+      <div class="foot-col">
+        <h4>Программы</h4>
+        <a href="#programs">Юный конструктор · 7–9</a>
+        <a href="#programs">Юный программист · 10–12</a>
+        <a href="#programs">Инженер Arduino · 13–14</a>
+        <a href="#signup">Бесплатное пробное</a>
+      </div>
+      <div class="foot-col">
+        <h4>Контакты</h4>
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <a href="mailto:hello@robotrek.ru">hello@robotrek.ru</a>
+        <p>г. Москва, ул. Инженерная, 12<br>(и ещё 2 филиала в городе)</p>
+        <p>Ежедневно 10:00 – 20:00</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2020–2026 РОБОТРЕК. Все права защищены.</span>
+      <span><a href="#privacy">Политика конфиденциальности</a> · <a href="#privacy">Согласие на обработку данных</a></span>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Наверх">
+  <svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+(function(){
+  "use strict";
+
+  // Burger menu
+  var burger = document.getElementById('burger');
+  var navMenu = document.getElementById('navMenu');
+  function closeMenu(){
+    navMenu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+  }
+  burger.addEventListener('click', function(){
+    var open = navMenu.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var btn = item.querySelector('.faq-q');
+    var ans = item.querySelector('.faq-a');
+    btn.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(o){
+        if(o !== item){
+          o.classList.remove('open');
+          o.querySelector('.faq-a').style.maxHeight = null;
+          o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        ans.style.maxHeight = null;
+        btn.setAttribute('aria-expanded','false');
+      } else {
+        item.classList.add('open');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+
+  // Phone formatting + validation
+  var phone = document.getElementById('phone');
+  phone.addEventListener('input', function(){
+    var d = phone.value.replace(/\D/g,'');
+    if(d.startsWith('8')) d = '7' + d.slice(1);
+    if(d.startsWith('9') && d.length <= 10) d = '7' + d;
+    d = d.slice(0,11);
+    var out = '';
+    if(d.length > 0) out = '+7';
+    if(d.length > 1) out += ' (' + d.slice(1,4);
+    if(d.length >= 4) out += ') ' + d.slice(4,7);
+    if(d.length >= 7) out += '-' + d.slice(7,9);
+    if(d.length >= 9) out += '-' + d.slice(9,11);
+    phone.value = out;
+  });
+  function validPhone(v){
+    return v.replace(/\D/g,'').length === 11;
+  }
+
+  // Form submit
+  var form = document.getElementById('signupForm');
+  var success = document.getElementById('formSuccess');
+  var nameInput = document.getElementById('name');
+  var consent = document.getElementById('consent');
+  var fName = document.getElementById('fieldName');
+  var fPhone = document.getElementById('fieldPhone');
+  var fConsent = document.getElementById('fieldConsent');
+
+  function setErr(field, input, on){
+    field.classList.toggle('show-err', on);
+    if(input) input.classList.toggle('invalid', on);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = true;
+    if(nameInput.value.trim().length < 2){ setErr(fName, nameInput, true); ok = false; } else setErr(fName, nameInput, false);
+    if(!validPhone(phone.value)){ setErr(fPhone, phone, true); ok = false; } else setErr(fPhone, phone, false);
+    if(!consent.checked){ setErr(fConsent, null, true); ok = false; } else setErr(fConsent, null, false);
+    if(!ok) return;
+    form.style.display = 'none';
+    success.classList.add('show');
+  });
+  // Clear errors on input
+  nameInput.addEventListener('input', function(){ if(nameInput.value.trim().length >= 2) setErr(fName, nameInput, false); });
+  phone.addEventListener('input', function(){ if(validPhone(phone.value)) setErr(fPhone, phone, false); });
+  consent.addEventListener('change', function(){ if(consent.checked) setErr(fConsent, null, false); });
+
+  // To-top button
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    toTop.classList.toggle('show', window.scrollY > 600);
+  }, {passive:true});
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // Reveal on scroll
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
