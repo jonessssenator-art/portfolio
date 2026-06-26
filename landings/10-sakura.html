@@ -4,16 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Сакура — доставка суши и роллов за 60 минут | Свежая рыба ежедневно</title>
-<meta name="description" content="Доставка суши и роллов «Сакура»: доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4.8, более 200 000 заказов. Закажите онлайн прямо сейчас.">
+<meta name="description" content="Доставка суши и роллов «Сакура»: доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4,8, более 200 000 заказов. Закажите онлайн прямо сейчас.">
 <meta name="theme-color" content="#111111">
+<link rel="canonical" href="https://jonessssenator-art.github.io/portfolio/landings/10-sakura.html">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://jonessssenator-art.github.io/portfolio/landings/10-sakura.html">
 <meta property="og:title" content="Сакура — доставка суши и роллов за 60 минут">
-<meta property="og:description" content="Доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4.8, более 200 000 заказов.">
-<meta property="og:image" content="https://picsum.photos/seed/sakuraog/1200/630">
+<meta property="og:description" content="Доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4,8, более 200 000 заказов.">
+<meta property="og:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/10-sakura-cover.png">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Сакура">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Сакура — доставка суши и роллов за 60 минут">
+<meta name="twitter:description" content="Доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4,8, более 200 000 заказов.">
+<meta name="twitter:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/10-sakura-cover.png">
 
 <!-- Favicon: emoji SVG data-URI -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%A3%3C/text%3E%3C/svg%3E">
@@ -45,7 +53,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:88px}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{
   font-family:'Inter',system-ui,sans-serif;
   background:var(--black);
@@ -245,6 +253,8 @@ ul{list-style:none}
 .consent{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);margin-bottom:22px;cursor:pointer}
 .consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--gold);flex-shrink:0;cursor:pointer}
 .consent a{color:var(--gold-soft);text-decoration:underline}
+.consent-err{display:none;color:var(--red-soft);font-size:13px;margin:-12px 0 22px}
+.consent-err.show{display:block}
 .cta-form .btn{width:100%}
 .form-success{display:none;text-align:center;padding:20px 0}
 .form-success.show{display:block}
@@ -341,23 +351,25 @@ ul{list-style:none}
   <div class="container">
     <nav class="nav">
       <a href="#top" class="logo" aria-label="Сакура — на главную">
-        <span class="petal">🌸</span>Саку<span>ра</span>
+        <span class="petal" aria-hidden="true">🌸</span>Саку<span>ра</span>
       </a>
       <ul class="menu" id="menu">
+        <li><a href="#why">Почему</a></li>
         <li><a href="#menu">Меню</a></li>
         <li><a href="#promos">Акции</a></li>
         <li><a href="#delivery">Доставка</a></li>
         <li><a href="#reviews">Отзывы</a></li>
+        <li><a href="#faq">Вопросы</a></li>
       </ul>
       <div class="nav-actions">
         <a href="tel:+78005551050" class="phone" aria-label="Позвонить">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.18a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg>
-          +7 800 555-10-50
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.18a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg>
+          +7&nbsp;800&nbsp;555-10-50
         </a>
-        <a href="#order" class="btn btn-primary"><span class="lbl">Заказать</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <a href="#order" class="btn btn-primary" aria-label="Заказать"><span class="lbl">Заказать</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -370,48 +382,48 @@ ul{list-style:none}
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text reveal">
-        <span class="hero-badge">🔥 Бесплатная доставка при заказе от 1 200 ₽</span>
+        <span class="hero-badge"><span aria-hidden="true">🔥</span> Бесплатная доставка при заказе от 1&nbsp;200&nbsp;₽</span>
         <h1>Доставим за <span class="accent">60 минут</span><br>или ролл <span class="gold">в подарок</span></h1>
         <p class="lead">Готовим суши и роллы из свежей рыбы каждый день. Острый нож, идеальный рис и щедрая начинка — собираем заказ при вас и привозим тёплыми.</p>
         <div class="hero-cta">
           <a href="#menu" class="btn btn-gold">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
             Смотреть меню
           </a>
           <a href="#order" class="btn btn-ghost">Заказать со скидкой</a>
         </div>
         <div class="hero-markers">
           <div class="marker">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            Доставка <b>60 мин</b>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Доставка <b>60&nbsp;мин</b>
           </div>
           <div class="marker">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
-            Рейтинг <b>4.8</b>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
+            Рейтинг <b>4,8</b>
           </div>
           <div class="marker">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
-            <b>200 000+</b> заказов
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7L9 18l-5-5"/></svg>
+            <b>200&nbsp;000+</b> заказов
           </div>
           <div class="marker">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12c2-4 6.5-7 11.5-7-1 4.5-4 8.5-8.5 10"/><path d="M5.5 12c-1 2 0 4 0 4s2 1 4 0"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 12c2-4 6.5-7 11.5-7-1 4.5-4 8.5-8.5 10"/><path d="M5.5 12c-1 2 0 4 0 4s2 1 4 0"/></svg>
             Свежая рыба <b>ежедневно</b>
           </div>
         </div>
       </div>
       <div class="hero-visual reveal">
         <div class="hero-photo">
-          <img src="https://picsum.photos/seed/sakurahero/640/800" alt="Большой сет роллов «Сакура» на тёмной тарелке с имбирём и васаби" loading="eager">
+          <img src="https://loremflickr.com/640/800/sushi,rolls,japanese-food?lock=101" alt="Большой сет роллов «Сакура» на тёмной тарелке с имбирём и васаби" loading="eager" onerror="this.remove()">
         </div>
         <div class="hero-float top">
-          <div class="ic">
+          <div class="ic" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5-5 18-4-7-9-6z"/></svg>
           </div>
-          <div><div class="t">Среднее время</div><div class="v">47 минут</div></div>
+          <div><div class="t">Среднее время</div><div class="v">47&nbsp;минут</div></div>
         </div>
         <div class="hero-float bottom">
-          <div class="ic">⭐</div>
-          <div><div class="t">Оценок 12 480</div><div class="v stars">4.8 / 5.0</div></div>
+          <div class="ic" aria-hidden="true">⭐</div>
+          <div><div class="t">Оценок 12&nbsp;480</div><div class="v stars">4,8&nbsp;/&nbsp;5,0</div></div>
         </div>
       </div>
     </div>
@@ -428,32 +440,32 @@ ul{list-style:none}
     </div>
     <div class="features-grid">
       <div class="feature reveal">
-        <div class="fi">
+        <div class="fi" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
         </div>
         <h3>60 минут или подарок</h3>
         <p>Не успели за час — добавим фирменный ролл к заказу бесплатно. Следим за временем каждой доставки.</p>
       </div>
       <div class="feature reveal">
-        <div class="fi">
+        <div class="fi" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12c2-4 6.5-7 11.5-7-1 4.5-4 8.5-8.5 10"/><path d="M5.5 12c-1 2 0 4 0 4s2 1 4 0"/><path d="M16 5c1 1.5 1.5 3.5 1.5 6"/></svg>
         </div>
         <h3>Свежая рыба каждый день</h3>
         <p>Лосось и тунец поступают на кухню ежедневно. Никакой заморозки «впрок» — только охлаждённое филе.</p>
       </div>
       <div class="feature reveal">
-        <div class="fi">
+        <div class="fi" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
         </div>
         <h3>Честный вес и состав</h3>
         <p>Граммовку указываем без округлений. Начинки кладём щедро — проверьте на любом ролле из меню.</p>
       </div>
       <div class="feature reveal">
-        <div class="fi">
+        <div class="fi" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="15" height="13" rx="2"/><path d="M16 9h4l3 3v4a2 2 0 0 1-2 2h-1"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
         </div>
         <h3>Бесплатная доставка</h3>
-        <p>Привозим бесплатно от 1 200 ₽ по всему городу. Курьер с термосумкой — еда приезжает тёплой.</p>
+        <p>Привозим бесплатно от 1&nbsp;200&nbsp;₽ по всему городу. Курьер с термосумкой — еда приезжает тёплой.</p>
       </div>
     </div>
   </div>
@@ -482,14 +494,14 @@ ul{list-style:none}
       <article class="dish reveal" data-cat="sets">
         <div class="dish-img">
           <span class="dish-tag hit">Хит</span>
-          <img src="https://picsum.photos/seed/setfilad/480/330" alt="Сет «Филадельфия микс» из четырёх видов роллов с лососем" loading="lazy">
+          <img src="https://loremflickr.com/480/330/sushi,rolls,japanese-food?lock=102" alt="Сет «Филадельфия микс» из четырёх видов роллов с лососем" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Сет «Филадельфия микс»</h3>
-          <p class="compo">Филадельфия, Филадельфия с угрём, Калифорния, запечённый ролл с лососем — 32 шт.</p>
-          <div class="dish-meta"><span>🍣 32 шт</span><span>⚖ 1 180 г</span><span>👥 на 3–4</span></div>
+          <p class="compo">Филадельфия, Филадельфия с угрём, Калифорния, запечённый ролл с лососем — 32&nbsp;шт.</p>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 32&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 1&nbsp;180&nbsp;г</span><span><span aria-hidden="true">👥</span> на&nbsp;3–4</span></div>
           <div class="dish-foot">
-            <div class="dish-price"><s>2 290 ₽</s>1 690 ₽</div>
+            <div class="dish-price"><s>2&nbsp;290&nbsp;₽</s>1&nbsp;690&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -498,14 +510,14 @@ ul{list-style:none}
       <article class="dish reveal" data-cat="sets">
         <div class="dish-img">
           <span class="dish-tag">Выгодно</span>
-          <img src="https://picsum.photos/seed/setdrakon/480/330" alt="Сет «Дракон» из запечённых и классических роллов с тунцом" loading="lazy">
+          <img src="https://loremflickr.com/480/330/sushi,rolls,sashimi?lock=103" alt="Сет «Дракон» из запечённых и классических роллов с тунцом" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Сет «Дракон»</h3>
-          <p class="compo">Запечённый с тунцом, Дракон с угрём, темпура с креветкой, Спайси лосось — 40 шт.</p>
-          <div class="dish-meta"><span>🍣 40 шт</span><span>⚖ 1 460 г</span><span>👥 на 4–5</span></div>
+          <p class="compo">Запечённый с тунцом, Дракон с угрём, темпура с креветкой, Спайси лосось — 40&nbsp;шт.</p>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 40&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 1&nbsp;460&nbsp;г</span><span><span aria-hidden="true">👥</span> на&nbsp;4–5</span></div>
           <div class="dish-foot">
-            <div class="dish-price"><s>2 790 ₽</s>2 090 ₽</div>
+            <div class="dish-price"><s>2&nbsp;790&nbsp;₽</s>2&nbsp;090&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -513,14 +525,14 @@ ul{list-style:none}
 
       <article class="dish reveal" data-cat="sets">
         <div class="dish-img">
-          <img src="https://picsum.photos/seed/setvegan/480/330" alt="Овощной сет «Сакура грин» с роллами из авокадо и огурца" loading="lazy">
+          <img src="https://loremflickr.com/480/330/sushi,rolls,japanese-food?lock=104" alt="Овощной сет «Сакура грин» с роллами из авокадо и огурца" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Сет «Сакура грин»</h3>
-          <p class="compo">Овощной, с авокадо, с огурцом и кунжутом, спайси-тофу — лёгкий вегетарианский набор, 24 шт.</p>
-          <div class="dish-meta"><span>🍣 24 шт</span><span>⚖ 820 г</span><span>👥 на 2–3</span></div>
+          <p class="compo">Овощной, с авокадо, с огурцом и кунжутом, спайси-тофу — лёгкий вегетарианский набор, 24&nbsp;шт.</p>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 24&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 820&nbsp;г</span><span><span aria-hidden="true">👥</span> на&nbsp;2–3</span></div>
           <div class="dish-foot">
-            <div class="dish-price">1 190 ₽</div>
+            <div class="dish-price">1&nbsp;190&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -530,14 +542,14 @@ ul{list-style:none}
       <article class="dish reveal" data-cat="rolls">
         <div class="dish-img">
           <span class="dish-tag hit">Хит</span>
-          <img src="https://picsum.photos/seed/philarol/480/330" alt="Ролл Филадельфия с лососем и сливочным сыром" loading="lazy">
+          <img src="https://loremflickr.com/480/330/rolls,sushi,salmon?lock=105" alt="Ролл Филадельфия с лососем и сливочным сыром" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Филадельфия классик</h3>
           <p class="compo">Лосось, сливочный сыр, огурец, рис, нори. Тот самый вкус, с которого всё начинается.</p>
-          <div class="dish-meta"><span>🍣 8 шт</span><span>⚖ 240 г</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 8&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 240&nbsp;г</span></div>
           <div class="dish-foot">
-            <div class="dish-price">419 ₽</div>
+            <div class="dish-price">419&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -545,14 +557,14 @@ ul{list-style:none}
 
       <article class="dish reveal" data-cat="rolls">
         <div class="dish-img">
-          <img src="https://picsum.photos/seed/califrol/480/330" alt="Ролл Калифорния с крабом, авокадо и икрой тобико" loading="lazy">
+          <img src="https://loremflickr.com/480/330/rolls,sushi,japanese-food?lock=106" alt="Ролл Калифорния с крабом, авокадо и икрой тобико" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Калифорния с тобико</h3>
           <p class="compo">Снежный краб, авокадо, огурец, икра тобико, японский майонез. Сочно и нежно.</p>
-          <div class="dish-meta"><span>🍣 8 шт</span><span>⚖ 230 г</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 8&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 230&nbsp;г</span></div>
           <div class="dish-foot">
-            <div class="dish-price">389 ₽</div>
+            <div class="dish-price">389&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -561,14 +573,14 @@ ul{list-style:none}
       <article class="dish reveal" data-cat="rolls">
         <div class="dish-img">
           <span class="dish-tag">Острый</span>
-          <img src="https://picsum.photos/seed/spicyrol/480/330" alt="Запечённый спайси-ролл с лососем и острым соусом" loading="lazy">
+          <img src="https://loremflickr.com/480/330/rolls,sushi,salmon?lock=107" alt="Запечённый спайси-ролл с лососем и острым соусом" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Спайси запечённый</h3>
           <p class="compo">Лосось, спайси-соус, сыр, унаги, кунжут. Запекаем до золотистой корочки — подаём горячим.</p>
-          <div class="dish-meta"><span>🍣 8 шт</span><span>⚖ 250 г</span><span>🌶 остро</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 8&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 250&nbsp;г</span><span><span aria-hidden="true">🌶</span> остро</span></div>
           <div class="dish-foot">
-            <div class="dish-price">449 ₽</div>
+            <div class="dish-price">449&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -577,14 +589,14 @@ ul{list-style:none}
       <!-- SUSHI -->
       <article class="dish reveal" data-cat="sushi">
         <div class="dish-img">
-          <img src="https://picsum.photos/seed/nigirisalmon/480/330" alt="Нигири с лососем — два кусочка на рисе" loading="lazy">
+          <img src="https://loremflickr.com/480/330/nigiri,sushi,salmon?lock=108" alt="Нигири с лососем — два кусочка на рисе" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Нигири лосось</h3>
           <p class="compo">Толстый ломтик охлаждённого лосося на прессованном рисе. Минимум — и идеально.</p>
-          <div class="dish-meta"><span>🍣 2 шт</span><span>⚖ 70 г</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 2&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 70&nbsp;г</span></div>
           <div class="dish-foot">
-            <div class="dish-price">149 ₽</div>
+            <div class="dish-price">149&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -593,14 +605,14 @@ ul{list-style:none}
       <article class="dish reveal" data-cat="sushi">
         <div class="dish-img">
           <span class="dish-tag">Премиум</span>
-          <img src="https://picsum.photos/seed/nigirieel/480/330" alt="Нигири с угрём унаги под соусом терияки" loading="lazy">
+          <img src="https://loremflickr.com/480/330/nigiri,sushi,japanese-food?lock=109" alt="Нигири с угрём унаги под соусом терияки" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Нигири угорь унаги</h3>
           <p class="compo">Копчёный угорь под соусом унаги и кунжутом. Насыщенный карамельный вкус.</p>
-          <div class="dish-meta"><span>🍣 2 шт</span><span>⚖ 75 г</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 2&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 75&nbsp;г</span></div>
           <div class="dish-foot">
-            <div class="dish-price">199 ₽</div>
+            <div class="dish-price">199&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -608,14 +620,14 @@ ul{list-style:none}
 
       <article class="dish reveal" data-cat="sushi">
         <div class="dish-img">
-          <img src="https://picsum.photos/seed/gunkanmix/480/330" alt="Гункан-микс с икрой, тунцом и спайси-лососем" loading="lazy">
+          <img src="https://loremflickr.com/480/330/nigiri,sushi,sashimi?lock=110" alt="Гункан-микс с икрой, тунцом и спайси-лососем" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Гункан-микс</h3>
           <p class="compo">Три гункана: спайси-лосось, тунец, икра тобико. Ассорти для знатоков вкуса.</p>
-          <div class="dish-meta"><span>🍣 3 шт</span><span>⚖ 120 г</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍣</span> 3&nbsp;шт</span><span><span aria-hidden="true">⚖</span> 120&nbsp;г</span></div>
           <div class="dish-foot">
-            <div class="dish-price">279 ₽</div>
+            <div class="dish-price">279&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -625,14 +637,14 @@ ul{list-style:none}
       <article class="dish reveal" data-cat="wok">
         <div class="dish-img">
           <span class="dish-tag hit">Хит</span>
-          <img src="https://picsum.photos/seed/wokchicken/480/330" alt="Удон вок с курицей и овощами в соусе терияки" loading="lazy">
+          <img src="https://loremflickr.com/480/330/japanese-food,udon,noodles?lock=111" alt="Удон вок с курицей и овощами в соусе терияки" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Удон с курицей терияки</h3>
           <p class="compo">Пшеничная лапша удон, куриное филе, болгарский перец, лук, соус терияки, кунжут.</p>
-          <div class="dish-meta"><span>🍜 1 порция</span><span>⚖ 380 г</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍜</span> 1&nbsp;порция</span><span><span aria-hidden="true">⚖</span> 380&nbsp;г</span></div>
           <div class="dish-foot">
-            <div class="dish-price">359 ₽</div>
+            <div class="dish-price">359&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -641,14 +653,14 @@ ul{list-style:none}
       <article class="dish reveal" data-cat="wok">
         <div class="dish-img">
           <span class="dish-tag">Острый</span>
-          <img src="https://picsum.photos/seed/wokshrimp/480/330" alt="Рисовая лапша вок с тигровыми креветками" loading="lazy">
+          <img src="https://loremflickr.com/480/330/japanese-food,noodles,shrimp?lock=112" alt="Рисовая лапша вок с тигровыми креветками" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Рисовый вок с креветкой</h3>
           <p class="compo">Рисовая лапша, тигровые креветки, овощи, чили-соус, арахис. Огненно и ароматно.</p>
-          <div class="dish-meta"><span>🍜 1 порция</span><span>⚖ 400 г</span><span>🌶 остро</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🍜</span> 1&nbsp;порция</span><span><span aria-hidden="true">⚖</span> 400&nbsp;г</span><span><span aria-hidden="true">🌶</span> остро</span></div>
           <div class="dish-foot">
-            <div class="dish-price">449 ₽</div>
+            <div class="dish-price">449&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -656,14 +668,14 @@ ul{list-style:none}
 
       <article class="dish reveal" data-cat="wok">
         <div class="dish-img">
-          <img src="https://picsum.photos/seed/misosoup/480/330" alt="Японский суп мисо с тофу и водорослями" loading="lazy">
+          <img src="https://loremflickr.com/480/330/japanese-food,miso,soup?lock=113" alt="Японский суп мисо с тофу и водорослями" loading="lazy" onerror="this.remove()">
         </div>
         <div class="dish-body">
           <h3>Суп мисо с тофу</h3>
           <p class="compo">Бульон даси, паста мисо, тофу, водоросли вакамэ, зелёный лук. Тёплое начало ужина.</p>
-          <div class="dish-meta"><span>🥣 1 порция</span><span>⚖ 300 г</span></div>
+          <div class="dish-meta"><span><span aria-hidden="true">🥣</span> 1&nbsp;порция</span><span><span aria-hidden="true">⚖</span> 300&nbsp;г</span></div>
           <div class="dish-foot">
-            <div class="dish-price">219 ₽</div>
+            <div class="dish-price">219&nbsp;₽</div>
             <button class="add-btn">В заказ</button>
           </div>
         </div>
@@ -683,20 +695,20 @@ ul{list-style:none}
     </div>
     <div class="promos-grid">
       <div class="promo p1 reveal">
-        <span class="pchip">🎁 Каждому первому заказу</span>
+        <span class="pchip"><span aria-hidden="true">🎁</span> Каждому первому заказу</span>
         <div class="pbig">−20%</div>
         <h3>Скидка на первый заказ</h3>
         <p>Знакомимся вкусно: минус 20% на весь чек для новых гостей. Действует на меню без ограничений.</p>
         <span class="pcode">ПЕРВЫЙ20</span>
       </div>
       <div class="promo p2 reveal">
-        <span class="pchip">🍣 Сет дня</span>
+        <span class="pchip"><span aria-hidden="true">🍣</span> Сет дня</span>
         <h3>Ролл в подарок</h3>
-        <p>При заказе любого сета от 1 600 ₽ добавим Калифорнию бесплатно. Каждый день недели.</p>
+        <p>При заказе любого сета от 1&nbsp;600&nbsp;₽ добавим Калифорнию бесплатно. Каждый день недели.</p>
         <span class="pcode">ПОДАРОК</span>
       </div>
       <div class="promo p3 reveal">
-        <span class="pchip">📅 Будни 12:00–16:00</span>
+        <span class="pchip"><span aria-hidden="true">📅</span> Будни 12:00–16:00</span>
         <h3>Ланч −30%</h3>
         <p>Дневное предложение на горячее и wok. Идеально для обеда в офисе или дома.</p>
         <span class="pcode">ЛАНЧ30</span>
@@ -716,7 +728,7 @@ ul{list-style:none}
     <div class="steps-grid">
       <div class="step reveal">
         <div class="num">01</div>
-        <div class="si">
+        <div class="si" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
         </div>
         <h3>Выберите блюда</h3>
@@ -724,7 +736,7 @@ ul{list-style:none}
       </div>
       <div class="step reveal">
         <div class="num">02</div>
-        <div class="si">
+        <div class="si" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/></svg>
         </div>
         <h3>Оформите за минуту</h3>
@@ -732,7 +744,7 @@ ul{list-style:none}
       </div>
       <div class="step reveal">
         <div class="num">03</div>
-        <div class="si">
+        <div class="si" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h7l2-3 3 6 2-3h6"/></svg>
         </div>
         <h3>Готовим и везём</h3>
@@ -740,7 +752,7 @@ ul{list-style:none}
       </div>
       <div class="step reveal">
         <div class="num">04</div>
-        <div class="si">
+        <div class="si" aria-hidden="true">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
         </div>
         <h3>Приятного аппетита</h3>
@@ -761,34 +773,34 @@ ul{list-style:none}
 
     <div class="stats-row">
       <div class="stat reveal"><div class="sv">200 000+</div><div class="sl">довольных заказов</div></div>
-      <div class="stat reveal"><div class="sv">4.8</div><div class="sl">средняя оценка</div></div>
+      <div class="stat reveal"><div class="sv">4,8</div><div class="sl">средняя оценка</div></div>
       <div class="stat reveal"><div class="sv">47 мин</div><div class="sl">среднее время доставки</div></div>
       <div class="stat reveal"><div class="sv">7 лет</div><div class="sl">готовим для города</div></div>
     </div>
 
     <div class="reviews-grid">
       <div class="review reveal">
-        <div class="rstars">★★★★★</div>
-        <p>«Заказываем каждую пятницу всей семьёй. Филадельфия — огонь, рис не разваливается, рыбы много. Приехали за 40 минут, всё ещё прохладное и свежее.»</p>
+        <div class="rstars" aria-hidden="true">★★★★★</div>
+        <p>«Заказываем каждую пятницу всей семьёй. Филадельфия — огонь, рис не разваливается, рыбы много. Приехали за 40&nbsp;минут, всё ещё прохладное и свежее.»</p>
         <div class="rperson">
-          <div class="ravatar">АК</div>
+          <div class="ravatar" aria-hidden="true">АК</div>
           <div><div class="rname">Анна Ковалёва</div><div class="rmeta">постоянный гость · 38 заказов</div></div>
         </div>
       </div>
       <div class="review reveal">
-        <div class="rstars">★★★★★</div>
+        <div class="rstars" aria-hidden="true">★★★★★</div>
         <p>«Сет „Дракон“ взяли на компанию — хватило на всех с запасом. Курьер вежливый, привёз раньше срока. Спайси запечённый теперь мой фаворит.»</p>
         <div class="rperson">
-          <div class="ravatar">ДС</div>
+          <div class="ravatar" aria-hidden="true">ДС</div>
           <div><div class="rname">Дмитрий Соколов</div><div class="rmeta">заказывал в офис</div></div>
         </div>
       </div>
       <div class="review reveal">
-        <div class="rstars">★★★★★</div>
-        <p>«Долго искала, где делают нормальный wok с доставкой. У „Сакуры“ удон с курицей — идеальный: лапша не слипается, соуса в меру. Плюс подарили ролл за опоздание на 5 минут!»</p>
+        <div class="rstars" aria-hidden="true">★★★★★</div>
+        <p>«Долго искала, где делают нормальный wok с доставкой. У „Сакуры“ удон с курицей — идеальный: лапша не слипается, соуса в меру. Плюс подарили ролл за опоздание на 5&nbsp;минут!»</p>
         <div class="rperson">
-          <div class="ravatar">МГ</div>
-          <div><div class="rname">Марина Гущина</div><div class="rmeta">оценка 5.0</div></div>
+          <div class="ravatar" aria-hidden="true">МГ</div>
+          <div><div class="rname">Марина Гущина</div><div class="rmeta">оценка 5,0</div></div>
         </div>
       </div>
     </div>
@@ -805,40 +817,40 @@ ul{list-style:none}
     </div>
     <div class="faq-wrap">
       <div class="faq-item reveal">
-        <button class="faq-q" aria-expanded="false">Сколько времени занимает доставка?
-          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <button class="faq-q" aria-expanded="false" aria-controls="faqA1">Сколько времени занимает доставка?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <div class="faq-a"><p>В среднем заказ приезжает за 47 минут. Мы гарантируем доставку в течение 60 минут по городу — если опоздаем, добавим фирменный ролл в подарок. В часы пик время может немного увеличиваться, о чём оператор предупредит заранее.</p></div>
+        <div class="faq-a" id="faqA1"><p>В среднем заказ приезжает за 47&nbsp;минут. Мы гарантируем доставку в течение 60&nbsp;минут по городу — если опоздаем, добавим фирменный ролл в подарок. В часы пик время может немного увеличиваться, о чём оператор предупредит заранее.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" aria-expanded="false">Какая минимальная сумма заказа?
-          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <button class="faq-q" aria-expanded="false" aria-controls="faqA2">Какая минимальная сумма заказа?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <div class="faq-a"><p>Минимальная сумма — 600 ₽. Доставка бесплатная при заказе от 1 200 ₽, при меньшей сумме стоимость доставки составит 150 ₽ в пределах города.</p></div>
+        <div class="faq-a" id="faqA2"><p>Минимальная сумма — 600&nbsp;₽. Доставка бесплатная при заказе от 1&nbsp;200&nbsp;₽, при меньшей сумме стоимость доставки составит 150&nbsp;₽ в пределах города.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" aria-expanded="false">Как можно оплатить заказ?
-          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <button class="faq-q" aria-expanded="false" aria-controls="faqA3">Как можно оплатить заказ?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <div class="faq-a"><p>Принимаем оплату онлайн картой на сайте, наличными или картой курьеру при получении. Также можно оплатить через СБП по QR-коду — быстро и без комиссии.</p></div>
+        <div class="faq-a" id="faqA3"><p>Принимаем оплату онлайн картой на сайте, наличными или картой курьеру при получении. Также можно оплатить через СБП по QR-коду — быстро и без комиссии.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" aria-expanded="false">Насколько свежая у вас рыба?
-          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <button class="faq-q" aria-expanded="false" aria-controls="faqA4">Насколько свежая у вас рыба?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <div class="faq-a"><p>Лосось и тунец поступают на нашу кухню ежедневно от проверенных поставщиков. Мы не используем размороженную «впрок» рыбу. Все продукты проходят контроль качества, а сборка заказа начинается только после его оформления.</p></div>
+        <div class="faq-a" id="faqA4"><p>Лосось и тунец поступают на нашу кухню ежедневно от проверенных поставщиков. Мы не используем размороженную «впрок» рыбу. Все продукты проходят контроль качества, а сборка заказа начинается только после его оформления.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" aria-expanded="false">Можно ли заказать на определённое время?
-          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <button class="faq-q" aria-expanded="false" aria-controls="faqA5">Можно ли заказать на определённое время?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <div class="faq-a"><p>Да, при оформлении укажите удобное время — мы доставим заказ ко времени, к началу встречи или праздника. Предзаказ можно сделать на любой день, в том числе на корпоратив или день рождения.</p></div>
+        <div class="faq-a" id="faqA5"><p>Да, при оформлении укажите удобное время — мы доставим заказ ко времени, к началу встречи или праздника. Предзаказ можно сделать на любой день, в том числе на корпоратив или день рождения.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" aria-expanded="false">Есть ли в меню блюда без рыбы?
-          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        <button class="faq-q" aria-expanded="false" aria-controls="faqA6">Есть ли в меню блюда без рыбы?
+          <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
-        <div class="faq-a"><p>Конечно. У нас есть вегетарианский сет «Сакура грин», овощные роллы, wok с курицей и креветкой, а также супы. В составе каждого блюда честно указаны все ингредиенты и аллергены.</p></div>
+        <div class="faq-a" id="faqA6"><p>Конечно. У нас есть вегетарианский сет «Сакура грин», овощные роллы, wok с курицей и креветкой, а также супы. В составе каждого блюда честно указаны все ингредиенты и аллергены.</p></div>
       </div>
     </div>
   </div>
@@ -854,19 +866,19 @@ ul{list-style:none}
         <p>Оставьте контакты — перезвоним за 5 минут, поможем собрать заказ и подтвердим время доставки.</p>
         <ul class="cta-perks">
           <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
-            Доставим за 60 минут или ролл в подарок
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7L9 18l-5-5"/></svg>
+            Доставим за 60&nbsp;минут или ролл в подарок
           </li>
           <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7L9 18l-5-5"/></svg>
             Свежая рыба ежедневно и честный вес
           </li>
           <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
-            Бесплатная доставка от 1 200 ₽
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7L9 18l-5-5"/></svg>
+            Бесплатная доставка от 1&nbsp;200&nbsp;₽
           </li>
           <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7L9 18l-5-5"/></svg>
             Оплата онлайн, картой или наличными
           </li>
         </ul>
@@ -882,7 +894,7 @@ ul{list-style:none}
           </div>
           <div class="field" id="f-phone">
             <label for="phone">Телефон</label>
-            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+            <input type="tel" id="phone" name="phone" inputmode="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel">
             <span class="err">Введите корректный номер телефона</span>
           </div>
           <div class="field" id="f-address">
@@ -891,16 +903,17 @@ ul{list-style:none}
             <span class="err">Укажите адрес доставки</span>
           </div>
           <label class="consent" id="f-consent">
-            <input type="checkbox" id="consent" name="consent">
-            <span>Я согласен(а) на обработку <a href="#privacy">персональных данных</a> и принимаю условия политики конфиденциальности.</span>
+            <input type="checkbox" id="consent" name="consent" aria-describedby="consent-err">
+            <span>Я даю согласие на обработку <a href="#privacy">персональных данных</a> и принимаю условия политики конфиденциальности.</span>
           </label>
+          <p class="consent-err" id="consent-err" aria-live="polite"></p>
           <button type="submit" class="btn btn-primary">
             Оформить заказ
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
         </form>
-        <div class="form-success" id="formSuccess">
-          <div class="ok">
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
+          <div class="ok" aria-hidden="true">
             <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7L9 18l-5-5"/></svg>
           </div>
           <h3>Заказ принят!</h3>
@@ -916,12 +929,12 @@ ul{list-style:none}
   <div class="container">
     <div class="footer-grid">
       <div class="footer-about">
-        <a href="#top" class="logo"><span class="petal">🌸</span>Саку<span>ра</span></a>
+        <a href="#top" class="logo"><span class="petal" aria-hidden="true">🌸</span>Саку<span>ра</span></a>
         <p>Доставка свежих суши и роллов с 2019 года. Готовим из охлаждённой рыбы каждый день и привозим заказ за 60 минут.</p>
         <div class="socials">
-          <a href="#" aria-label="Telegram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.3 15.6c-.2 1.1-.9 1.4-1.9.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.5l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5l19.1-7.4c.9-.3 1.7.2 1.4 1.7z"/></svg></a>
-          <a href="#" aria-label="ВКонтакте"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 16.5c-5.4 0-8.7-3.8-8.8-10h2.7c.1 4.6 2.2 6.5 3.8 6.9V6.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.5c-.4 2.4-2.1 4.1-3.3 4.8 1.2.6 3.1 2.1 3.8 4.7h-2.8c-.5-1.7-2-3-4.1-3.2v3.2h-.2z"/></svg></a>
-          <a href="#" aria-label="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.7.8c.2.1.4.2.5.3.1.3.1.6-.1 1.1z"/></svg></a>
+          <a href="#" aria-label="Telegram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3.3 15.6c-.2 1.1-.9 1.4-1.9.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.5l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5l19.1-7.4c.9-.3 1.7.2 1.4 1.7z"/></svg></a>
+          <a href="#" aria-label="ВКонтакте"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 16.5c-5.4 0-8.7-3.8-8.8-10h2.7c.1 4.6 2.2 6.5 3.8 6.9V6.5h2.6v3.9c1.6-.2 3.3-2 3.9-3.9h2.5c-.4 2.4-2.1 4.1-3.3 4.8 1.2.6 3.1 2.1 3.8 4.7h-2.8c-.5-1.7-2-3-4.1-3.2v3.2h-.2z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2zm5.3 14c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.7.8c.2.1.4.2.5.3.1.3.1.6-.1 1.1z"/></svg></a>
         </div>
       </div>
       <div class="footer-col">
@@ -939,22 +952,22 @@ ul{list-style:none}
         <ul>
           <li><p>Зона: в пределах города и ближние районы</p></li>
           <li><p>Время работы: ежедневно 10:00–23:00</p></li>
-          <li><p>Бесплатно от 1 200 ₽</p></li>
-          <li><p>Среднее время — 47 минут</p></li>
+          <li><p>Бесплатно от 1&nbsp;200&nbsp;₽</p></li>
+          <li><p>Среднее время — 47&nbsp;минут</p></li>
         </ul>
       </div>
       <div class="footer-col footer-contact">
         <h4>Контакты</h4>
         <div class="ci">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.18a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg>
-          <a href="tel:+78005551050">+7 800 555-10-50</a>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.18a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+78005551050">+7&nbsp;800&nbsp;555-10-50</a>
         </div>
         <div class="ci">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
           <a href="mailto:zakaz@sakura-sushi.ru">zakaz@sakura-sushi.ru</a>
         </div>
         <div class="ci">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <span>ул. Приморская, 14, кухня-цех</span>
         </div>
       </div>
@@ -968,7 +981,7 @@ ul{list-style:none}
 
 <!-- ============ TO TOP ============ -->
 <button class="to-top" id="toTop" aria-label="Наверх">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
 <script>
@@ -1058,7 +1071,7 @@ ul{list-style:none}
     setErr('f-name', !nameOk); name.classList.toggle('invalid', !nameOk); ok = ok && nameOk;
 
     var digits = phone.value.replace(/\D/g,'');
-    var phoneOk = digits.length >= 11;
+    var phoneOk = digits.length === 11;
     setErr('f-phone', !phoneOk); phone.classList.toggle('invalid', !phoneOk); ok = ok && phoneOk;
 
     var addrOk = address.value.trim().length >= 5;
@@ -1066,11 +1079,15 @@ ul{list-style:none}
 
     var consentOk = consent.checked;
     document.getElementById('f-consent').style.color = consentOk ? '' : '#f43f5e';
+    var consentErr = document.getElementById('consent-err');
+    consentErr.textContent = consentOk ? '' : 'Необходимо согласие на обработку данных';
+    consentErr.classList.toggle('show', !consentOk);
     ok = ok && consentOk;
 
     if(ok){
       form.style.display = 'none';
       success.classList.add('show');
+      success.focus();
     }
   });
 
@@ -1084,6 +1101,9 @@ ul{list-style:none}
   });
   field('consent').addEventListener('change', function(){
     document.getElementById('f-consent').style.color = '';
+    var consentErr = document.getElementById('consent-err');
+    consentErr.textContent = '';
+    consentErr.classList.remove('show');
   });
 
   /* phone soft mask */

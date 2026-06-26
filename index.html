@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Портфолио — Веб-дизайн и вёрстка лендингов</title>
 <meta name="description" content="Портфолио лендингов: клининг, кофейня, фитнес, стоматология, SaaS, барбершоп, доставка цветов, детейлинг, суши, школа робототехники.">
+<link rel="canonical" href="https://jonessssenator-art.github.io/portfolio/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Портфолио — Веб-дизайн и вёрстка лендингов">
+<meta property="og:description" content="10 живых лендингов под разные ниши: клининг, кофейня, фитнес, стоматология, SaaS, барбершоп, доставка цветов, детейлинг, суши, школа робототехники.">
+<meta property="og:url" content="https://jonessssenator-art.github.io/portfolio/index.html">
+<meta property="og:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/01-robotrek-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Портфолио — Веб-дизайн и вёрстка лендингов">
+<meta name="twitter:description" content="10 живых лендингов под разные ниши — от кофейни до SaaS.">
+<meta name="twitter:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/01-robotrek-cover.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +31,10 @@
   .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
   h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.15}
   a{color:inherit;text-decoration:none}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .nojs-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:30px 0 80px}
+  .nojs-grid a{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-weight:600}
+  .nojs-note{text-align:center;color:var(--muted);padding-top:30px}
 
   /* header */
   header{position:sticky;top:0;z-index:50;background:rgba(13,13,18,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -82,7 +96,23 @@
 </section>
 
 <section class="wrap">
+  <h2 class="visually-hidden">Работы</h2>
   <div class="grid" id="grid"></div>
+  <noscript>
+    <p class="nojs-note">Для интерактивной галереи включите JavaScript. Прямые ссылки на работы:</p>
+    <ul class="nojs-grid">
+      <li><a href="landings/01-robotrek.html">🤖 РОБОТРЕК — школа робототехники</a></li>
+      <li><a href="landings/02-chistodom.html">🧽 ЧистоДом — клининг</a></li>
+      <li><a href="landings/03-zerno.html">☕ Зерно — кофейня-пекарня</a></li>
+      <li><a href="landings/04-puls.html">💪 Пульс — фитнес и EMS-студия</a></li>
+      <li><a href="landings/05-dental.html">🦷 Дентал Студия — стоматология</a></li>
+      <li><a href="landings/06-flowtask.html">🚀 Flowtask — SaaS таск-менеджер</a></li>
+      <li><a href="landings/07-britva.html">💈 Бритва — барбершоп</a></li>
+      <li><a href="landings/08-buketnaya.html">💐 Букетная — доставка цветов</a></li>
+      <li><a href="landings/09-glyanec.html">🚗 Глянец — детейлинг авто</a></li>
+      <li><a href="landings/10-sakura.html">🍣 Сакура — доставка суши</a></li>
+    </ul>
+  </noscript>
 </section>
 
 <footer>
