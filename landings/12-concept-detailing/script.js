@@ -293,4 +293,42 @@
   } else {
     revealAll();
   }
+
+  /* ---------- Эффекты: Magnetic CTA + 3D Tilt карточек ---------- */
+  /* только для устройств с точным курсором (не трогаем тач) и без reduce-motion */
+  var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (finePointer && !reduceMotion) {
+
+    /* Magnetic — красные CTA тянутся к курсору + блик следит за мышью */
+    $$('.btn--primary').forEach(function (b) {
+      if (b.classList.contains('btn--block')) return;   /* full-width кнопки не двигаем */
+      if (b.closest('.call-bar')) return;               /* мобильную панель пропускаем */
+      b.classList.add('is-magnetic');
+      b.addEventListener('pointermove', function (e) {
+        var r = b.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width / 2;
+        var y = e.clientY - r.top  - r.height / 2;
+        b.style.transform = 'translate(' + (x * 0.25) + 'px,' + (y * 0.35) + 'px)';
+        b.style.setProperty('--gx', (e.clientX - r.left) + 'px');
+      });
+      b.addEventListener('pointerleave', function () { b.style.transform = ''; });
+    });
+
+    /* 3D Tilt — карточки наклоняются за курсором + красный блик */
+    $$('.adv').forEach(function (c) {
+      c.classList.add('is-tilt');
+      var glare = document.createElement('span');
+      glare.className = 'card-glare';
+      c.appendChild(glare);
+      c.addEventListener('pointermove', function (e) {
+        var r = c.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top)  / r.height;
+        c.style.transform = 'perspective(900px) rotateY(' + ((px - 0.5) * 13) + 'deg) rotateX(' + ((0.5 - py) * 13) + 'deg) translateZ(6px)';
+        glare.style.setProperty('--gx', (px * 100) + '%');
+        glare.style.setProperty('--gy', (py * 100) + '%');
+      });
+      c.addEventListener('pointerleave', function () { c.style.transform = ''; });
+    });
+  }
 })();

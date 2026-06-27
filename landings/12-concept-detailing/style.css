@@ -647,6 +647,54 @@ html:not(.js) .faq__a{max-height:none}
   .brand{font-size:18px}
 }
 
+/* =========================================================================
+   Интерактивные эффекты: Magnetic CTA · 3D Tilt карточек · Marquee
+   ========================================================================= */
+
+/* ---- Magnetic: красная кнопка тянется к курсору + блик ---- */
+.btn.is-magnetic{will-change:transform}
+.btn.is-magnetic::before{
+  content:"";position:absolute;top:-60%;left:var(--gx,50%);width:130px;height:220%;
+  transform:translateX(-50%);pointer-events:none;opacity:0;transition:opacity .3s;z-index:0;
+  background:radial-gradient(closest-side,rgba(255,255,255,.42),transparent);
+}
+.btn.is-magnetic:hover::before{opacity:1}
+.btn.is-magnetic > *{position:relative;z-index:1}
+
+/* ---- 3D Tilt: карточки наклоняются за курсором + красный блик ---- */
+.adv.is-tilt{transition:transform .18s ease-out, box-shadow .4s, border-color .4s}
+.adv.is-tilt:hover{transform:none}
+.card-glare{
+  position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
+  opacity:0;transition:opacity .3s;
+  background:radial-gradient(190px 190px at var(--gx,50%) var(--gy,50%),rgba(242,67,75,.26),transparent 60%);
+}
+.adv.is-tilt:hover .card-glare{opacity:1}
+
+/* ---- Marquee: бегущая лента услуг (разделитель секций) ---- */
+.marquee-band{
+  background:var(--bg-deep);border-block:1px solid var(--line);
+  padding:clamp(20px,3vw,32px) 0;display:flex;flex-direction:column;gap:clamp(8px,1.4vw,14px);
+  overflow:hidden;position:relative;
+}
+.marq{
+  display:flex;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+}
+.marq__track{display:flex;align-items:center;gap:clamp(16px,2.4vw,30px);padding-right:clamp(16px,2.4vw,30px);white-space:nowrap;animation:marq 30s linear infinite;will-change:transform}
+.marquee-band:hover .marq__track{animation-play-state:paused}
+.marq--rev .marq__track{animation-direction:reverse;animation-duration:38s}
+.marq__item{
+  font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(20px,3.4vw,38px);color:#3a3b43;
+}
+.marq__item.on{color:transparent;background:var(--red-grad);-webkit-background-clip:text;background-clip:text}
+.marq__sep{font-size:clamp(16px,2.2vw,26px);color:#26272d;line-height:1}
+.marq__sep.on{color:var(--red)}
+@keyframes marq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marq__track{animation:none;transform:none}}
+
 /* ---------- Защита от горизонтального переполнения ---------- */
 html,body{max-width:100%}
 img,svg,video,table{max-width:100%}
