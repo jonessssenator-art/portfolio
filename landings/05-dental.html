@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Дентал Студия — стоматология в центре города | Консультация и снимок бесплатно</title>
@@ -404,9 +405,79 @@ input{font-family:inherit}
   .steps-wrap{padding:36px 22px}
   .to-top{right:16px;bottom:16px}
 }
+/* ===== Premium animations layer (wow) ===== */
+
+/* Reading progress bar */
+.read-progress{
+  position:fixed;top:0;left:0;height:3px;width:100%;z-index:200;
+  transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--blue),var(--teal));
+  box-shadow:0 1px 8px rgba(20,184,166,.4);
+  will-change:transform;pointer-events:none;
+}
+
+/* Button sheen + press */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{
+  content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);
+  transform:translateX(-130%);transition:transform .6s var(--ease);
+}
+.btn:hover::after{transform:translateX(130%)}
+.btn--ghost::after{background:linear-gradient(110deg,transparent 30%,rgba(37,99,235,.16) 50%,transparent 70%)}
+.btn:active{transform:translateY(-1px) scale(.97)}
+
+/* Hero entrance cascade — only when JS active */
+.js .hero-anim{opacity:0;transform:translateY(26px);will-change:transform,opacity}
+.hero-loaded .hero-anim{
+  opacity:1;transform:none;
+  transition:opacity .8s var(--ease),transform .8s var(--ease);
+  transition-delay:var(--d,0s);
+}
+.js .hero-visual.hero-anim{transform:translateY(34px) scale(.98)}
+.hero-loaded .hero-visual.hero-anim{transform:none}
+
+/* Hero breathing glow */
+.hero::before{animation:heroGlow 9s ease-in-out infinite}
+.hero::after{animation:heroGlow 11s ease-in-out infinite 1.5s}
+@keyframes heroGlow{
+  0%,100%{transform:scale(1);opacity:.85}
+  50%{transform:scale(1.18);opacity:1}
+}
+
+/* Hero parallax target */
+.hero-visual{will-change:transform}
+
+/* Reveal stagger inside grids */
+.js .reveal.stagger{transition-delay:var(--d,0s)}
+
+/* Count-up tabular figures */
+.trust-item .num,.count{font-variant-numeric:tabular-nums}
+
+/* Service card 3D tilt (desktop pointer only) */
+.service-card{transform-style:preserve-3d}
+.service-card .service-media,.service-card .service-body{transform:translateZ(0)}
+@media(hover:hover) and (pointer:fine){
+  .service-card.tilt{
+    transition:transform .12s ease-out,box-shadow .3s var(--ease);
+    transform:perspective(900px) rotateX(var(--rx,0)) rotateY(var(--ry,0)) translateY(-6px);
+    box-shadow:var(--shadow-lg);
+  }
+  .service-card.tilt .service-media img{transform:scale(1.06)}
+}
+
+/* Feature icon micro-lift on card hover */
+.feature-card .fi{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.feature-card:hover .fi{transform:translateY(-3px) scale(1.05)}
+
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
+  .reveal{opacity:1!important;transform:none!important}
+  .js .hero-anim,.hero-loaded .hero-anim{opacity:1!important;transform:none!important;transition:none!important}
+  .read-progress{display:none!important}
+  .btn::after{display:none!important}
+  .service-card.tilt{transform:translateY(-6px)!important}
+  .hero::before,.hero::after{animation:none!important}
 }
 </style>
 
@@ -428,6 +499,8 @@ input{font-family:inherit}
 </style>
 </head>
 <body>
+
+<div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
 <!-- ============ HEADER ============ -->
 <header class="header" id="top">
@@ -480,14 +553,14 @@ input{font-family:inherit}
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text">
-        <span class="eyebrow">Стоматология премиум-класса · 15 лет в центре города</span>
-        <h1>Здоровая улыбка без боли и&nbsp;лишних&nbsp;<em>визитов</em></h1>
-        <p class="hero-sub">Лечим бережно, под микроскопом и с цифровой диагностикой. Составляем понятный план лечения и стоимости заранее — без скрытых доплат.</p>
-        <div class="hero-cta">
+        <span class="eyebrow hero-anim" style="--d:.05s">Стоматология премиум-класса · 15 лет в центре города</span>
+        <h1 class="hero-anim" style="--d:.15s">Здоровая улыбка без боли и&nbsp;лишних&nbsp;<em>визитов</em></h1>
+        <p class="hero-sub hero-anim" style="--d:.28s">Лечим бережно, под микроскопом и с цифровой диагностикой. Составляем понятный план лечения и стоимости заранее — без скрытых доплат.</p>
+        <div class="hero-cta hero-anim" style="--d:.4s">
           <a href="#booking" class="btn btn--primary btn--lg">Записаться на приём</a>
           <a href="#services" class="btn btn--ghost btn--lg">Наши услуги</a>
         </div>
-        <ul class="hero-markers">
+        <ul class="hero-markers hero-anim" style="--d:.52s">
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             15 лет опыта
@@ -505,14 +578,14 @@ input{font-family:inherit}
             Безболезненно
           </li>
         </ul>
-        <div class="hero-offer">
+        <div class="hero-offer hero-anim" style="--d:.62s">
           <span class="gift" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Zm0 0h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
           <span><b>Первичная консультация и панорамный снимок — бесплатно.</b> Запишитесь до конца недели.</span>
         </div>
       </div>
-      <div class="hero-visual">
+      <div class="hero-visual hero-anim" style="--d:.35s">
         <div class="hero-img">
           <img src="https://images.unsplash.com/photo-1588776814546-daab30f310ce?w=720&h=900&fit=crop&crop=entropy&q=80&auto=format" width="720" height="900" alt="Врач-стоматолог Дентал Студии на консультации с пациентом в современном кабинете" loading="eager" onerror="this.remove()">
         </div>
@@ -537,10 +610,10 @@ input{font-family:inherit}
 <section class="trust">
   <div class="container">
     <div class="trust-grid">
-      <div class="trust-item reveal"><div class="num">15</div><div class="lbl">лет принимаем пациентов</div></div>
-      <div class="trust-item reveal"><div class="num teal">30&nbsp;000+</div><div class="lbl">довольных пациентов</div></div>
-      <div class="trust-item reveal"><div class="num">12</div><div class="lbl">врачей с профильной аккредитацией</div></div>
-      <div class="trust-item reveal"><div class="num teal">4,9</div><div class="lbl">средняя оценка на картах и порталах</div></div>
+      <div class="trust-item reveal stagger"><div class="num count" data-count="15">15</div><div class="lbl">лет принимаем пациентов</div></div>
+      <div class="trust-item reveal stagger"><div class="num teal count" data-count="30000" data-sep="&nbsp;" data-suffix="+">30&nbsp;000+</div><div class="lbl">довольных пациентов</div></div>
+      <div class="trust-item reveal stagger"><div class="num count" data-count="12">12</div><div class="lbl">врачей с профильной аккредитацией</div></div>
+      <div class="trust-item reveal stagger"><div class="num teal count" data-count="4.9" data-decimals="1" data-dec=",">4,9</div><div class="lbl">средняя оценка на картах и порталах</div></div>
     </div>
   </div>
 </section>
@@ -554,28 +627,28 @@ input{font-family:inherit}
       <p>Мы заботимся не только о зубах, но и о вашем комфорте на каждом этапе — от первого звонка до контрольного осмотра.</p>
     </div>
     <div class="feature-grid">
-      <article class="feature-card reveal">
+      <article class="feature-card reveal stagger">
         <div class="fi fi-1" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 5 3.4 7.7 8 9 4.6-1.3 8-4 8-9V6l-8-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Гарантия на работы</h3>
         <p>Даём официальную гарантию до 3 лет на лечение и до 10 лет на имплантацию. Все условия прописываем в договоре.</p>
       </article>
-      <article class="feature-card reveal">
+      <article class="feature-card reveal stagger">
         <div class="fi fi-2" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="18" cy="15" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M21 18l2 2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
         </div>
         <h3>Цифровая диагностика</h3>
         <p>3D-томограф, интраоральный сканер и лечение под микроскопом. Видим то, что не покажет обычный осмотр.</p>
       </article>
-      <article class="feature-card reveal">
+      <article class="feature-card reveal stagger">
         <div class="fi fi-3" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 21s-6.7-4.3-9-9c-1.5-3 .3-7 4-7 2 0 3.4 1.2 5 3 1.6-1.8 3-3 5-3 3.7 0 5.5 4 4 7-2.3 4.7-9 9-9 9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
         </div>
         <h3>Лечение без боли</h3>
         <p>Современная анестезия и компьютерная подача препарата. Работаем с дентофобией — мягко и без спешки.</p>
       </article>
-      <article class="feature-card reveal">
+      <article class="feature-card reveal stagger">
         <div class="fi fi-4" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M9 4h6l1 2.5M8 6.5 5 8v3l2 5h10l2-5V8l-3-1.5M12 11v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 17h6l-.5 3h-5L9 17Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
         </div>
@@ -595,7 +668,7 @@ input{font-family:inherit}
       <p>Полный спектр стоматологической помощи для взрослых и детей в одном месте — под ключ, с единым планом лечения.</p>
     </div>
     <div class="services-grid">
-      <article class="service-card reveal">
+      <article class="service-card reveal stagger">
         <div class="service-media"><img src="https://images.unsplash.com/photo-1606811842243-af7e16970c1f?w=600&h=380&fit=crop&crop=entropy&q=80&auto=format" width="600" height="380" alt="Терапевтическое лечение зуба под микроскопом" loading="lazy" onerror="this.remove()"><span class="service-tag">Терапия</span></div>
         <div class="service-body">
           <h3>Лечение зубов</h3>
@@ -606,7 +679,7 @@ input{font-family:inherit}
           </div>
         </div>
       </article>
-      <article class="service-card reveal">
+      <article class="service-card reveal stagger">
         <div class="service-media"><img src="https://images.unsplash.com/photo-1593022356769-11f762e25ed9?w=600&h=380&fit=crop&crop=entropy&q=80&auto=format" width="600" height="380" alt="Имплантация зубов — модель импланта" loading="lazy" onerror="this.remove()"><span class="service-tag">Хирургия</span></div>
         <div class="service-body">
           <h3>Имплантация</h3>
@@ -617,7 +690,7 @@ input{font-family:inherit}
           </div>
         </div>
       </article>
-      <article class="service-card reveal">
+      <article class="service-card reveal stagger">
         <div class="service-media"><img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=600&h=380&fit=crop&crop=entropy&q=80&auto=format" width="600" height="380" alt="Отбеливание зубов — результат до и после" loading="lazy" onerror="this.remove()"><span class="service-tag">Эстетика</span></div>
         <div class="service-body">
           <h3>Отбеливание</h3>
@@ -628,7 +701,7 @@ input{font-family:inherit}
           </div>
         </div>
       </article>
-      <article class="service-card reveal">
+      <article class="service-card reveal stagger">
         <div class="service-media"><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&h=380&fit=crop&crop=entropy&q=80&auto=format" width="600" height="380" alt="Брекеты и прозрачные элайнеры для исправления прикуса" loading="lazy" onerror="this.remove()"><span class="service-tag">Ортодонтия</span></div>
         <div class="service-body">
           <h3>Брекеты и элайнеры</h3>
@@ -639,7 +712,7 @@ input{font-family:inherit}
           </div>
         </div>
       </article>
-      <article class="service-card reveal">
+      <article class="service-card reveal stagger">
         <div class="service-media"><img src="https://images.unsplash.com/photo-1670250721717-889b17349fc4?w=600&h=380&fit=crop&crop=entropy&q=80&auto=format" width="600" height="380" alt="Профессиональная гигиена полости рта" loading="lazy" onerror="this.remove()"><span class="service-tag">Профилактика</span></div>
         <div class="service-body">
           <h3>Профгигиена</h3>
@@ -650,7 +723,7 @@ input{font-family:inherit}
           </div>
         </div>
       </article>
-      <article class="service-card reveal">
+      <article class="service-card reveal stagger">
         <div class="service-media"><img src="https://images.unsplash.com/photo-1565090568947-7293970ba471?w=600&h=380&fit=crop&crop=entropy&q=80&auto=format" width="600" height="380" alt="Детский приём у стоматолога в игровой атмосфере" loading="lazy" onerror="this.remove()"><span class="service-tag">Детям</span></div>
         <div class="service-body">
           <h3>Детская стоматология</h3>
@@ -709,7 +782,7 @@ input{font-family:inherit}
       <p>Более 2&nbsp;800 отзывов на картах и медицинских порталах со средней оценкой 4,9. Вот лишь несколько из них.</p>
     </div>
     <div class="reviews-grid">
-      <article class="review-card reveal">
+      <article class="review-card reveal stagger">
         <div class="stars" aria-label="Оценка 5 из 5">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.3 6.2 20.7l1.5-6.6L2.6 9.6l6.7-.6L12 2.7l2.7 6.3 6.7.6-5.1 4.5 1.5 6.6z"/></svg>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.3 6.2 20.7l1.5-6.6L2.6 9.6l6.7-.6L12 2.7l2.7 6.3 6.7.6-5.1 4.5 1.5 6.6z"/></svg>
@@ -723,7 +796,7 @@ input{font-family:inherit}
           <div><div class="review-name">Анна Соколова</div><div class="review-meta">Лечение кариеса · март 2026</div></div>
         </div>
       </article>
-      <article class="review-card reveal">
+      <article class="review-card reveal stagger">
         <div class="stars" aria-label="Оценка 5 из 5">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.3 6.2 20.7l1.5-6.6L2.6 9.6l6.7-.6L12 2.7l2.7 6.3 6.7.6-5.1 4.5 1.5 6.6z"/></svg>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.3 6.2 20.7l1.5-6.6L2.6 9.6l6.7-.6L12 2.7l2.7 6.3 6.7.6-5.1 4.5 1.5 6.6z"/></svg>
@@ -737,7 +810,7 @@ input{font-family:inherit}
           <div><div class="review-name">Дмитрий Орлов</div><div class="review-meta">Имплантация · февраль 2026</div></div>
         </div>
       </article>
-      <article class="review-card reveal">
+      <article class="review-card reveal stagger">
         <div class="stars" aria-label="Оценка 5 из 5">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.3 6.2 20.7l1.5-6.6L2.6 9.6l6.7-.6L12 2.7l2.7 6.3 6.7.6-5.1 4.5 1.5 6.6z"/></svg>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 17.3 6.2 20.7l1.5-6.6L2.6 9.6l6.7-.6L12 2.7l2.7 6.3 6.7.6-5.1 4.5 1.5 6.6z"/></svg>
@@ -764,7 +837,7 @@ input{font-family:inherit}
       <p>Указаны цены «от» по основным направлениям. Точную стоимость рассчитываем после бесплатной диагностики.</p>
     </div>
     <div class="pricing-grid">
-      <article class="price-card reveal">
+      <article class="price-card reveal stagger">
         <h3>Терапия и гигиена</h3>
         <p class="desc">Лечение, профилактика и поддержание здоровья зубов.</p>
         <span class="price-from">от</span>
@@ -777,7 +850,7 @@ input{font-family:inherit}
         </ul>
         <a href="#booking" class="btn btn--ghost btn--block">Записаться</a>
       </article>
-      <article class="price-card featured reveal">
+      <article class="price-card featured reveal stagger">
         <span class="price-badge">Чаще выбирают</span>
         <h3>Имплантация</h3>
         <p class="desc">Восстановление зубов с гарантией до 10 лет.</p>
@@ -791,7 +864,7 @@ input{font-family:inherit}
         </ul>
         <a href="#booking" class="btn btn--primary btn--block">Записаться</a>
       </article>
-      <article class="price-card reveal">
+      <article class="price-card reveal stagger">
         <h3>Эстетика и прикус</h3>
         <p class="desc">Красивая улыбка и ровные зубы без компромиссов.</p>
         <span class="price-from">от</span>
@@ -818,42 +891,42 @@ input{font-family:inherit}
       <p>Собрали вопросы, которые пациенты задают чаще всего. Не нашли ответ — позвоните нам, с радостью подскажем.</p>
     </div>
     <div class="faq-wrap">
-      <div class="faq-item reveal">
+      <div class="faq-item reveal stagger">
         <button class="faq-q" aria-expanded="false" aria-controls="faqA1">
           Правда ли, что консультация и снимок бесплатны?
           <span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
         </button>
         <div class="faq-a" id="faqA1"><div class="faq-a-inner">Да. Первичная консультация врача и панорамный снимок проводятся бесплатно — без обязательств начинать лечение. Вы получаете осмотр, заключение и план с точной стоимостью, а решение принимаете спокойно дома.</div></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal stagger">
         <button class="faq-q" aria-expanded="false" aria-controls="faqA2">
           Лечение действительно проходит без боли?
           <span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
         </button>
         <div class="faq-a" id="faqA2"><div class="faq-a-inner">Мы используем современную анестезию и компьютерную систему подачи препарата, поэтому даже укол практически не ощущается. Отдельно работаем с пациентами, которые боятся стоматологов: никакой спешки, всё в комфортном для вас темпе.</div></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal stagger">
         <button class="faq-q" aria-expanded="false" aria-controls="faqA3">
           Какая гарантия на лечение и импланты?
           <span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
         </button>
         <div class="faq-a" id="faqA3"><div class="faq-a-inner">На терапевтическое лечение мы даём гарантию до 3 лет, на имплантацию — до 10 лет. Все условия фиксируются в договоре. Контрольные осмотры в период гарантии проводятся бесплатно.</div></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal stagger">
         <button class="faq-q" aria-expanded="false" aria-controls="faqA4">
           Можно ли оплатить лечение в рассрочку?
           <span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
         </button>
         <div class="faq-a" id="faqA4"><div class="faq-a-inner">Да, доступна беспроцентная рассрочка до 12 месяцев от банков-партнёров, а также налоговый вычет 13% за лечение. Администратор поможет оформить документы и подобрать удобный график платежей.</div></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal stagger">
         <button class="faq-q" aria-expanded="false" aria-controls="faqA5">
           Как часто нужно делать профессиональную чистку?
           <span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
         </button>
         <div class="faq-a" id="faqA5"><div class="faq-a-inner">Профессиональную гигиену рекомендуем проходить раз в полгода. Регулярная чистка убирает налёт и камень, которые не снимаются дома, и помогает на годы отложить серьёзное лечение.</div></div>
       </div>
-      <div class="faq-item reveal">
+      <div class="faq-item reveal stagger">
         <button class="faq-q" aria-expanded="false" aria-controls="faqA6">
           Принимаете ли вы детей?
           <span class="faq-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span>
@@ -1092,17 +1165,67 @@ input{font-family:inherit}
     success.focus();
   });
 
-  /* ----- Reveal on scroll ----- */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ----- Count-up animation ----- */
+  function animateCount(el){
+    if(el.dataset.counted) return;
+    el.dataset.counted = '1';
+    var target = parseFloat(el.dataset.count);
+    if(isNaN(target)) return;
+    if(reduceMotion){ return; }
+    var decimals = parseInt(el.dataset.decimals || '0', 10);
+    var sep = el.dataset.sep || '';
+    var dec = el.dataset.dec || '.';
+    var suffix = el.dataset.suffix || '';
+    var dur = 1500, startTs = null;
+    function fmt(v){
+      var s = v.toFixed(decimals);
+      if(decimals > 0){ s = s.replace('.', dec); }
+      if(sep){
+        var parts = s.split(dec);
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+        s = parts.join(dec);
+      }
+      return s + suffix;
+    }
+    function tick(ts){
+      if(startTs === null) startTs = ts;
+      var p = Math.min((ts - startTs) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * eased);
+      if(p < 1){ requestAnimationFrame(tick); } else { el.textContent = fmt(target); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ----- Reveal on scroll (stagger + count-up) ----- */
   var reveals = document.querySelectorAll('.reveal');
+
+  function revealEl(el){
+    el.classList.add('in');
+    el.querySelectorAll('.count').forEach(animateCount);
+  }
+
+  /* assign stagger delay by index within visual group */
+  if(!reduceMotion){
+    document.querySelectorAll('.stagger').forEach(function(el){
+      var sibs = Array.prototype.filter.call(el.parentNode.children, function(n){
+        return n.classList && n.classList.contains('stagger');
+      });
+      el.style.setProperty('--d', (sibs.indexOf(el) * 0.09) + 's');
+    });
+  }
+
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        if(en.isIntersecting){ revealEl(en.target); io.unobserve(en.target); }
       });
     }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
     reveals.forEach(function(el){ io.observe(el); });
   } else {
-    reveals.forEach(function(el){ el.classList.add('in'); });
+    reveals.forEach(function(el){ revealEl(el); });
   }
 
   /* ----- Smooth anchor offset for sticky header ----- */
@@ -1117,6 +1240,121 @@ input{font-family:inherit}
       window.scrollTo({top: top, behavior:'smooth'});
     });
   });
+
+  /* ----- Reading progress bar ----- */
+  var progress = document.getElementById('readProgress');
+  if(progress && !reduceMotion){
+    var rafProg = false;
+    function updateProgress(){
+      rafProg = false;
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - doc.clientHeight) || 1;
+      var p = Math.min(Math.max(window.scrollY / max, 0), 1);
+      progress.style.transform = 'scaleX(' + p + ')';
+    }
+    window.addEventListener('scroll', function(){
+      if(!rafProg){ rafProg = true; requestAnimationFrame(updateProgress); }
+    }, {passive:true});
+    updateProgress();
+  }
+
+  /* ----- Hero entrance cascade ----- */
+  var hero = document.querySelector('.hero');
+  if(hero){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ hero.classList.add('hero-loaded'); });
+    });
+  }
+
+  /* ----- Hero visual parallax (desktop pointer only) ----- */
+  var heroVisual = document.querySelector('.hero-visual');
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(heroVisual && hero && fine && !reduceMotion){
+    var rafPar = false, parY = 0;
+    function applyParallax(){
+      rafPar = false;
+      var rect = hero.getBoundingClientRect();
+      if(rect.bottom < 0 || rect.top > window.innerHeight){ return; }
+      parY = window.scrollY * 0.05;
+      heroVisual.style.transform = 'translateY(' + (-parY) + 'px)';
+    }
+    window.addEventListener('scroll', function(){
+      if(!rafPar){ rafPar = true; requestAnimationFrame(applyParallax); }
+    }, {passive:true});
+  }
+
+  /* ----- Service cards 3D tilt (desktop pointer only) ----- */
+  if(fine && !reduceMotion){
+    document.querySelectorAll('.service-card').forEach(function(card){
+      var rafTilt = false, lastX = 0, lastY = 0;
+      function render(){
+        rafTilt = false;
+        var r = card.getBoundingClientRect();
+        var px = (lastX - r.left) / r.width - 0.5;
+        var py = (lastY - r.top) / r.height - 0.5;
+        var max = 5;
+        card.style.setProperty('--ry', (px * max) + 'deg');
+        card.style.setProperty('--rx', (-py * max) + 'deg');
+      }
+      card.addEventListener('pointermove', function(e){
+        if(e.pointerType && e.pointerType !== 'mouse') return;
+        lastX = e.clientX; lastY = e.clientY;
+        card.classList.add('tilt');
+        if(!rafTilt){ rafTilt = true; requestAnimationFrame(render); }
+      });
+      card.addEventListener('pointerleave', function(){
+        card.classList.remove('tilt');
+        card.style.removeProperty('--rx');
+        card.style.removeProperty('--ry');
+      });
+    });
+  }
+})();
+</script>
+
+<style id="reveal-fix">
+/* Надёжный показ reveal-элементов: специфичность бьёт конфликтующие правила, opacity гарантирован */
+html.js .reveal.in, html.js [data-reveal].in, html.js [data-stagger].in{opacity:1!important;transform:none;}
+</style>
+<script id="reveal-fix-js">
+(function(){
+  var SEL='.reveal,[data-reveal],[data-stagger]';
+  function show(el){
+    if(el.__shown)return; el.__shown=1;
+    el.classList.add('in');
+    setTimeout(function(){
+      if(parseFloat(getComputedStyle(el).opacity)<0.5){
+        el.style.setProperty('opacity','1','important');
+        el.style.setProperty('transform','none','important');
+        el.style.setProperty('animation','none','important');
+      }
+    },1200);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var apply=function(){[].forEach.call(document.querySelectorAll(SEL),show);};
+    apply(); var k=0,t=setInterval(function(){apply();if(++k>20)clearInterval(t);},300); return;
+  }
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px 300px 0px',threshold:0}):null;
+  function arm(el){if(el.__armed)return;el.__armed=1;if(io)io.observe(el);}
+  function scan(){[].forEach.call(document.querySelectorAll(SEL),arm);}
+  function sweep(){
+    var vh=window.innerHeight, doc=document.documentElement, atBottom=(window.scrollY+vh)>=(doc.scrollHeight-2);
+    [].forEach.call(document.querySelectorAll(SEL),function(el){
+      if(el.classList.contains('in'))return;
+      var r=el.getBoundingClientRect();
+      if(atBottom||(r.top<vh+300&&r.bottom>-300))show(el);
+    });
+  }
+  scan(); sweep();
+  window.addEventListener('scroll',function(){scan();sweep();},{passive:true});
+  window.addEventListener('resize',sweep);
+  window.addEventListener('load',function(){scan();sweep();});
+  if('MutationObserver' in window){new MutationObserver(function(){scan();}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});}
+  function allShown(){return [].every.call(document.querySelectorAll(SEL),function(el){return el.classList.contains('in');});}
+  var n=0,iv=setInterval(function(){scan();sweep();if(allShown()||++n>120)clearInterval(iv);},350);
+  function failsafe(){var vh=window.innerHeight;[].forEach.call(document.querySelectorAll(SEL),function(el){var r=el.getBoundingClientRect();if(r.top<vh-20&&r.bottom>20&&parseFloat(getComputedStyle(el).opacity)<0.1){el.style.setProperty('opacity','1','important');el.style.setProperty('transform','none','important');el.style.setProperty('animation','none','important');}});}
+  window.addEventListener('scroll',failsafe,{passive:true});
+  var fn=0,fiv=setInterval(function(){failsafe();if(++fn>120)clearInterval(fiv);},500);
 })();
 </script>
 </body>

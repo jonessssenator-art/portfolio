@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>document.documentElement.classList.add('js')</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Портфолио — Веб-дизайн и вёрстка лендингов</title>
@@ -27,7 +28,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
   h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.15}
   a{color:inherit;text-decoration:none}
@@ -36,16 +37,27 @@
   .nojs-grid a{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-weight:600}
   .nojs-note{text-align:center;color:var(--muted);padding-top:30px}
 
+  /* прогресс-бар чтения */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 12px rgba(99,102,241,.7)}
+
   /* header */
-  header{position:sticky;top:0;z-index:50;background:rgba(13,13,18,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  header{position:sticky;top:0;z-index:50;background:rgba(13,13,18,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:background .3s,box-shadow .3s}
+  header.scrolled{background:rgba(13,13,18,.93);box-shadow:0 10px 34px -14px rgba(0,0,0,.7)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;transition:height .3s}
+  header.scrolled .nav{height:60px}
   .logo{font-family:'Space Grotesk';font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px}
   .logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .badge{font-size:13px;color:var(--muted);border:1px solid var(--line);padding:6px 14px;border-radius:999px}
 
   /* hero */
   .hero{padding:90px 0 60px;text-align:center;position:relative;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -10%,rgba(99,102,241,.25),transparent 70%);pointer-events:none}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -10%,rgba(99,102,241,.25),transparent 70%);pointer-events:none;animation:heroGlow 8s ease-in-out infinite alternate}
+  .hero::after{content:"";position:absolute;width:460px;height:460px;left:50%;top:-150px;transform:translateX(-50%);
+    background:radial-gradient(circle,rgba(168,85,247,.18),transparent 62%);filter:blur(18px);pointer-events:none;animation:heroFloat 11s ease-in-out infinite alternate}
+  @keyframes heroGlow{from{opacity:.65}to{opacity:1}}
+  @keyframes heroFloat{from{transform:translateX(-54%) translateY(0)}to{transform:translateX(-46%) translateY(26px)}}
+  .hero .wrap{position:relative;z-index:1}
   .hero h1{font-size:clamp(34px,6vw,60px);font-weight:700;letter-spacing:-1px}
   .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero p{max-width:620px;margin:20px auto 0;color:var(--muted);font-size:18px}
@@ -53,14 +65,30 @@
   .stats b{font-family:'Space Grotesk';font-size:32px;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .stats small{color:var(--muted);font-size:14px}
 
+  /* hero: каскадный вход (только при JS) */
+  .js .hero h1,.js .hero p,.js .stats>div{opacity:0;transform:translateY(20px);animation:rise .85s cubic-bezier(.2,.7,.2,1) forwards}
+  .js .hero h1{animation-delay:.05s}
+  .js .hero p{animation-delay:.2s}
+  .js .stats>div:nth-child(1){animation-delay:.34s}
+  .js .stats>div:nth-child(2){animation-delay:.44s}
+  .js .stats>div:nth-child(3){animation-delay:.54s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
   /* grid */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:50px 0 90px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
-  .card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 20px 50px -20px rgba(99,102,241,.5)}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column;will-change:transform}
+  .card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 24px 56px -22px rgba(99,102,241,.6)}
+  /* reveal карточек (только при JS) */
+  .js .card{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1),border-color .25s,box-shadow .25s}
+  .js .card.in{opacity:1;transform:none}
   .thumb{height:190px;display:flex;align-items:flex-end;padding:18px;position:relative;color:#fff;overflow:hidden}
-  .thumb .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:0}
+  .thumb .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:0;transition:transform .55s ease}
+  .card:hover .thumb .shot{transform:scale(1.07)}
   .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 55%);z-index:1}
-  .thumb .emoji{position:absolute;top:16px;right:18px;font-size:30px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45));z-index:2}
+  .thumb .shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.28) 50%,transparent 68%);transform:translateX(-130%);transition:transform .75s ease}
+  .card:hover .thumb .shine{transform:translateX(130%)}
+  .thumb .emoji{position:absolute;top:16px;right:18px;font-size:30px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45));z-index:2;transition:transform .3s}
+  .card:hover .thumb .emoji{transform:scale(1.15) rotate(-6deg)}
   .thumb .tag{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:999px;backdrop-filter:blur(4px);position:relative;z-index:2}
   .card .body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column}
   .card h3{font-size:21px;font-weight:700}
@@ -73,9 +101,17 @@
 
   @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.grid{grid-template-columns:1fr}.badge{display:none}.stats{gap:26px}}
+
+  /* доступность: уважаем «уменьшить анимацию» */
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+    .js .hero h1,.js .hero p,.js .stats>div,.js .card{opacity:1!important;transform:none!important}
+  }
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 <header>
   <div class="wrap nav">
     <div class="logo">💼 <span>Веб&nbsp;Портфолио</span></div>
@@ -88,8 +124,8 @@
     <h1>Делаю <em>лендинги</em>,<br>которые продают</h1>
     <p>Современная адаптивная вёрстка под ключ. Ниже — 10 работ под разные ниши: от кофейни до SaaS. Откройте любую — это живая страница.</p>
     <div class="stats">
-      <div><b>10</b><small>проектов</small></div>
-      <div><b>100%</b><small>адаптив</small></div>
+      <div><b data-count="10">10</b><small>проектов</small></div>
+      <div><b data-count="100" data-suffix="%">100%</b><small>адаптив</small></div>
       <div><b>HTML/CSS/JS</b><small>чистый код</small></div>
     </div>
   </div>
@@ -132,10 +168,12 @@ const works = [
   {f:'landings/09-glyanec.html', img:'screenshots/09-glyanec-cover.png', n:'Глянец', t:'Авто', d:'Детейлинг-центр: керамика, полировка, химчистка.', e:'🚗', g:'linear-gradient(135deg,#0A0A0A,#DC2626)'},
   {f:'landings/10-sakura.html', img:'screenshots/10-sakura-cover.png', n:'Сакура', t:'Доставка еды', d:'Доставка суши и роллов за 60 минут.', e:'🍣', g:'linear-gradient(135deg,#111111,#E11D48)'},
 ];
-document.getElementById('grid').innerHTML = works.map(w=>`
+const grid = document.getElementById('grid');
+grid.innerHTML = works.map(w=>`
   <a class="card" href="${w.f}">
     <div class="thumb" style="background:${w.g}">
       <img class="shot" src="${w.img}" alt="Превью лендинга ${w.n}" loading="lazy" onerror="this.remove()">
+      <span class="shine"></span>
       <span class="emoji">${w.e}</span>
       <span class="tag">${w.t}</span>
     </div>
@@ -147,6 +185,62 @@ document.getElementById('grid').innerHTML = works.map(w=>`
       </span>
     </div>
   </a>`).join('');
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cards = [...grid.querySelectorAll('.card')];
+
+// reveal карточек со стаггером
+if ('IntersectionObserver' in window && !reduce){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  cards.forEach((c,i)=>{ c.style.transitionDelay = (i%3)*80 + 'ms'; io.observe(c); });
+} else {
+  cards.forEach(c=>c.classList.add('in'));
+}
+
+// 3D-наклон при наведении (только десктоп с мышью)
+if (matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce){
+  cards.forEach(card=>{
+    card.addEventListener('pointermove', e=>{
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width - .5;
+      const py = (e.clientY - r.top)/r.height - .5;
+      card.style.transition = 'transform .08s';
+      card.style.transform = `perspective(820px) rotateX(${(-py*5).toFixed(2)}deg) rotateY(${(px*6).toFixed(2)}deg) translateY(-6px)`;
+    });
+    card.addEventListener('pointerleave', ()=>{ card.style.transition=''; card.style.transform=''; });
+  });
+}
+
+// прогресс-бар чтения + «сжатие» шапки
+const prog = document.getElementById('progress'), hdr = document.querySelector('header');
+function onScroll(){
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  prog.style.width = (max>0 ? h.scrollTop/max*100 : 0) + '%';
+  hdr.classList.toggle('scrolled', h.scrollTop > 10);
+}
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+// анимированные счётчики
+function countUp(el){
+  const target = +el.dataset.count, suf = el.dataset.suffix || '';
+  if (reduce){ el.textContent = target + suf; return; }
+  const dur = 1100, t0 = performance.now();
+  el.textContent = '0' + suf;
+  (function step(t){
+    const k = Math.min(1, (t - t0)/dur);
+    el.textContent = Math.round(target*(1 - Math.pow(1-k,3))) + suf;
+    if (k < 1) requestAnimationFrame(step);
+  })(t0);
+}
+document.querySelectorAll('[data-count]').forEach(el=>{
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((es,o)=>{ es.forEach(e=>{ if(e.isIntersecting){ countUp(e.target); o.unobserve(e.target); } }); }, {threshold:.5});
+    io.observe(el);
+  } else countUp(el);
+});
 </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Букетная — доставка свежих букетов за 2 часа с фото перед отправкой</title>
@@ -85,18 +86,35 @@
 
   /* Buttons */
   .btn{
+    position:relative;overflow:hidden;
     display:inline-flex;align-items:center;justify-content:center;gap:10px;
     font-family:'Inter';font-weight:600;font-size:16px;
     padding:15px 30px;border-radius:100px;border:none;cursor:pointer;
     transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s;
     white-space:nowrap;
   }
+  /* нежный диагональный блик при наведении */
+  .btn::after{
+    content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+    transform:skewX(-18deg);pointer-events:none;transition:none;
+  }
+  .btn:hover::after{animation:btn-sheen .85s var(--ease)}
+  @keyframes btn-sheen{from{left:-130%}to{left:140%}}
+  .btn:active{transform:translateY(-1px) scale(.97)}
   .btn-primary{background:var(--bordo);color:#fff;box-shadow:0 10px 26px rgba(122,42,59,.30)}
   .btn-primary:hover{background:var(--bordo-deep);transform:translateY(-3px);box-shadow:0 16px 36px rgba(122,42,59,.38)}
   .btn-ghost{background:#fff;color:var(--bordo);box-shadow:var(--shadow-sm);border:1px solid var(--line)}
+  .btn-ghost::after{background:linear-gradient(100deg,transparent,rgba(232,160,191,.30),transparent)}
   .btn-ghost:hover{transform:translateY(-3px);box-shadow:var(--shadow);background:var(--cream-2)}
   .btn-light{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.45)}
   .btn-light:hover{background:rgba(255,255,255,.30);transform:translateY(-3px)}
+
+  /* Прогресс-бар чтения */
+  .read-progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:90;
+    transform:scaleX(0);transform-origin:0 50%;will-change:transform;
+    background:linear-gradient(90deg,var(--rose),var(--sage),var(--bordo));
+    transition:transform .12s linear}
 
   /* Header */
   .header{
@@ -104,9 +122,13 @@
     background:rgba(251,247,242,.82);backdrop-filter:blur(14px);
     border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s,background .3s;
   }
-  .header.scrolled{border-color:var(--line);box-shadow:0 8px 30px rgba(122,42,59,.06)}
-  .nav{display:flex;align-items:center;gap:32px;height:78px}
-  .logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond';font-size:28px;font-weight:700;color:var(--bordo)}
+  .header.scrolled{border-color:var(--line);box-shadow:0 8px 30px rgba(122,42,59,.06);background:rgba(251,247,242,.92)}
+  .nav{display:flex;align-items:center;gap:32px;height:78px;transition:height .35s var(--ease)}
+  .header.scrolled .nav{height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond';font-size:28px;font-weight:700;color:var(--bordo);transition:font-size .35s var(--ease)}
+  .header.scrolled .logo{font-size:25px}
+  .logo svg{transition:transform .35s var(--ease)}
+  .header.scrolled .logo svg{transform:scale(.9)}
   .logo svg{flex:none}
   .nav-menu{display:flex;gap:30px;margin-left:14px}
   .nav-menu a{font-size:15px;font-weight:500;color:var(--ink);position:relative;padding:4px 0;transition:color .25s}
@@ -125,9 +147,12 @@
   /* Hero */
   .hero{position:relative;padding:72px 0 90px;overflow:hidden}
   .hero::before{content:"";position:absolute;top:-160px;right:-140px;width:560px;height:560px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%,rgba(232,160,191,.55),rgba(232,160,191,0) 70%);z-index:0}
+    background:radial-gradient(circle at 30% 30%,rgba(232,160,191,.55),rgba(232,160,191,0) 70%);z-index:0;
+    animation:breathe 11s ease-in-out infinite;will-change:transform,opacity}
   .hero::after{content:"";position:absolute;bottom:-180px;left:-120px;width:480px;height:480px;border-radius:50%;
-    background:radial-gradient(circle at 50% 50%,rgba(163,177,138,.45),rgba(163,177,138,0) 70%);z-index:0}
+    background:radial-gradient(circle at 50% 50%,rgba(163,177,138,.45),rgba(163,177,138,0) 70%);z-index:0;
+    animation:breathe 13s ease-in-out infinite reverse;will-change:transform,opacity}
+  @keyframes breathe{0%,100%{transform:scale(1) translateY(0);opacity:.85}50%{transform:scale(1.12) translateY(14px);opacity:1}}
   .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
   .hero h1{font-size:clamp(40px,6.4vw,68px);margin:22px 0 20px}
   .hero h1 em{font-style:italic;color:var(--rose-deep)}
@@ -301,9 +326,25 @@
   .to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
   .to-top:hover{background:var(--bordo-deep)}
 
-  /* Reveal animation */
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
+  /* Reveal animation — скрытое состояние только при включённом JS */
+  .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);will-change:opacity,transform}
+  .js .reveal.in{opacity:1;transform:none}
+
+  /* Каскадный вход hero — только при JS, запускается после загрузки */
+  .js .hero-copy [data-cascade],
+  .js .hero-visual.cascade{opacity:0;transform:translateY(26px);
+    transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .js .hero.lit .hero-copy [data-cascade],
+  .js .hero.lit .hero-visual.cascade{opacity:1;transform:none}
+  .js .hero.lit .hero-copy [data-cascade]{transition-delay:var(--d,0s)}
+  .js .hero.lit .hero-visual.cascade{transition-delay:.42s}
+
+  /* Параллакс визуала hero (десктоп) */
+  .hero-visual{transition:transform .25s ease-out}
+
+  /* 3D-наклон карточек по мыши (десктоп) */
+  .card{transform-style:preserve-3d}
+  .card.tilt{transition:transform .18s ease-out,box-shadow .4s var(--ease)}
 
   /* Responsive */
   @media(max-width:1024px){
@@ -344,8 +385,14 @@
     .to-top{right:16px;bottom:16px}
   }
   @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;scroll-behavior:auto}
-    .reveal{opacity:1;transform:none}
+    *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    html{scroll-behavior:auto}
+    .js .reveal,.js .reveal.in{opacity:1!important;transform:none!important}
+    .js .hero-copy [data-cascade],
+    .js .hero-visual.cascade{opacity:1!important;transform:none!important}
+    .read-progress{display:none}
+    .btn::after{display:none}
+    .card,.hero-visual{transform:none!important}
   }
 </style>
 
@@ -360,6 +407,8 @@
 </style>
 </head>
 <body>
+
+<div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
 <!-- ============ HEADER ============ -->
 <header class="header" id="top">
@@ -402,15 +451,15 @@
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
-      <div class="hero-copy reveal">
-        <span class="eyebrow">Доставка свежих цветов 24/7</span>
-        <h1>Доставка букета за <em>2 часа</em>. Пришлём фото перед отправкой</h1>
-        <p class="hero-sub">Собираем букеты из свежих цветов вручную и привозим в день заказа. Покажем готовый букет на фото — вы согласуете каждую деталь до того, как курьер выедет.</p>
-        <div class="hero-cta">
+      <div class="hero-copy">
+        <span class="eyebrow" data-cascade style="--d:0s">Доставка свежих цветов 24/7</span>
+        <h1 data-cascade style="--d:.08s">Доставка букета за <em>2 часа</em>. Пришлём фото перед отправкой</h1>
+        <p class="hero-sub" data-cascade style="--d:.18s">Собираем букеты из свежих цветов вручную и привозим в день заказа. Покажем готовый букет на фото — вы согласуете каждую деталь до того, как курьер выедет.</p>
+        <div class="hero-cta" data-cascade style="--d:.28s">
           <a href="#catalog" class="btn btn-primary">Смотреть каталог</a>
           <a href="#order" class="btn btn-ghost">Заказать с фотосогласованием</a>
         </div>
-        <ul class="hero-markers">
+        <ul class="hero-markers" data-cascade style="--d:.36s">
           <li class="marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Доставка за 2 часа</li>
           <li class="marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3s7 4 7 10a7 7 0 1 1-14 0c0-6 7-10 7-10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Свежесть до 7&nbsp;дней</li>
           <li class="marker"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>Фото перед отправкой</li>
@@ -418,7 +467,7 @@
         </ul>
       </div>
 
-      <div class="hero-visual reveal">
+      <div class="hero-visual cascade">
         <div class="hero-photo">
           <img src="https://images.unsplash.com/photo-1741439432848-ae1301dca116?w=720&h=900&fit=crop&crop=entropy&q=80&auto=format" width="720" height="900" alt="Нежный авторский букет из пионовидных роз и эвкалипта" loading="eager" onerror="this.remove()">
         </div>
@@ -444,7 +493,7 @@
       <h2>Забота о каждом букете</h2>
       <p>Мы отвечаем за свежесть, скорость и за то, чтобы букет понравился ещё до доставки.</p>
     </div>
-    <div class="features">
+    <div class="features" data-stagger>
       <article class="feature reveal">
         <span class="ico"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>Доставка за 2 часа</h3>
@@ -477,7 +526,7 @@
       <h2>Выберите свой букет</h2>
       <p>Монобукеты, авторские композиции, розы и цветы в шляпных коробках — на любой вкус и повод.</p>
     </div>
-    <div class="catalog">
+    <div class="catalog" data-stagger>
       <article class="card reveal">
         <div class="card-img"><span class="card-tag">Хит</span><img src="https://images.unsplash.com/photo-1714385272470-f70c12dd5dcd?w=600&h=450&fit=crop&crop=entropy&q=80&auto=format" width="600" height="450" alt="Монобукет из тюльпанов нежно-розового оттенка" loading="lazy" onerror="this.remove()"></div>
         <div class="card-body">
@@ -556,7 +605,7 @@
       <h2>Цветы к любому событию</h2>
       <p>Подберём букет под повод и настроение — от большого праздника до маленького «просто так».</p>
     </div>
-    <div class="occasions">
+    <div class="occasions" data-stagger>
       <a href="#order" class="occasion reveal">
         <img src="https://images.unsplash.com/photo-1558021843-f9ab317ed0eb?w=440&h=600&fit=crop&crop=entropy&q=80&auto=format" width="440" height="600" alt="Весенний букет к 8 Марта из тюльпанов и мимозы" loading="lazy" onerror="this.remove()">
         <div class="occasion-cap"><h3>8 Марта</h3><span>Весенние букеты с мимозой</span></div>
@@ -585,7 +634,7 @@
       <h2>Четыре простых шага</h2>
       <p>От выбора букета до доставки — всё прозрачно и с фотосогласованием на третьем шаге.</p>
     </div>
-    <div class="steps">
+    <div class="steps" data-stagger>
       <article class="step reveal">
         <div class="step-num"></div>
         <h3>Выбираете букет</h3>
@@ -613,11 +662,11 @@
 <!-- ============ SOCIAL PROOF ============ -->
 <section class="section" id="reviews">
   <div class="container">
-    <div class="stats reveal">
-      <div class="stat"><b>4 800+</b><span>букетов доставили за год</span></div>
-      <div class="stat"><b>2 ч</b><span>среднее время доставки</span></div>
-      <div class="stat"><b>4.9</b><span>средняя оценка клиентов</span></div>
-      <div class="stat"><b>98%</b><span>заказов с фотосогласованием</span></div>
+    <div class="stats reveal" data-stagger>
+      <div class="stat"><b data-count="4800" data-suffix="+" data-sep="1">4 800+</b><span>букетов доставили за год</span></div>
+      <div class="stat"><b data-count="2" data-suffix="&nbsp;ч">2&nbsp;ч</b><span>среднее время доставки</span></div>
+      <div class="stat"><b data-count="4.9" data-decimals="1">4.9</b><span>средняя оценка клиентов</span></div>
+      <div class="stat"><b data-count="98" data-suffix="%">98%</b><span>заказов с фотосогласованием</span></div>
     </div>
 
     <div class="section-head reveal">
@@ -626,7 +675,7 @@
       <p>Настоящие отзывы клиентов, которые доверяют нам свои тёплые поводы.</p>
     </div>
 
-    <div class="reviews">
+    <div class="reviews" data-stagger>
       <article class="review reveal">
         <div class="stars" aria-label="5 из 5">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21l1.4-7L2 9.3l7-.8L12 2z"/></svg>
@@ -672,7 +721,7 @@
       <h2>Часто спрашивают</h2>
       <p>Собрали ответы на популярные вопросы о доставке, оплате и свежести букетов.</p>
     </div>
-    <div class="faq">
+    <div class="faq" data-stagger>
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false" aria-controls="faqA1">
           Как быстро вы доставляете букет?
@@ -960,24 +1009,173 @@
     }
   });
 
-  /* ---- Reveal on scroll ---- */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isDesktop = window.matchMedia('(min-width:1025px) and (hover:hover)').matches;
+
+  /* ---- Hero entrance cascade ---- */
+  var hero = document.querySelector('.hero');
+  if(hero){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ hero.classList.add('lit'); });
+    });
+  }
+
+  /* ---- Reading progress bar ---- */
+  var bar = document.getElementById('readProgress');
+  if(bar && !prefersReduced){
+    var ticking = false;
+    function updateBar(){
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - doc.clientHeight) || 1;
+      var p = Math.min(1, Math.max(0, (window.pageYOffset || doc.scrollTop) / max));
+      bar.style.transform = 'scaleX(' + p + ')';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(updateBar); }
+    }, {passive:true});
+    updateBar();
+  } else if(bar){ bar.style.display = 'none'; }
+
+  /* ---- Count-up ---- */
+  function runCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    var sep = el.getAttribute('data-sep') === '1';
+    function fmt(v){
+      var s = v.toFixed(decimals);
+      if(sep){
+        var parts = s.split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        s = parts.join('.');
+      }
+      return s;
+    }
+    if(prefersReduced){ el.innerHTML = fmt(target) + suffix; return; }
+    var dur = 1500, start = null;
+    function tick(ts){
+      if(start === null) start = ts;
+      var t = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - t, 3); /* easeOutCubic */
+      el.innerHTML = fmt(target * eased) + suffix;
+      if(t < 1) requestAnimationFrame(tick);
+      else el.innerHTML = fmt(target) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ---- Reveal on scroll (group stagger) ---- */
   var reveals = document.querySelectorAll('.reveal');
+  function staggerIndex(el){
+    var group = el.closest('[data-stagger]');
+    if(!group) return 0;
+    var sibs = group.querySelectorAll('.reveal');
+    return Math.min(Array.prototype.indexOf.call(sibs, el), 6);
+  }
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if(en.isIntersecting){
           en.target.classList.add('in');
+          var counters = en.target.querySelectorAll('[data-count]');
+          if(en.target.hasAttribute('data-count')) runCount(en.target);
+          counters.forEach(runCount);
           io.unobserve(en.target);
         }
       });
     }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-    reveals.forEach(function(el, i){
-      el.style.transitionDelay = (Math.min(i,3)*0.06) + 's';
+    reveals.forEach(function(el){
+      el.style.transitionDelay = (staggerIndex(el) * 0.08) + 's';
       io.observe(el);
     });
   }else{
     reveals.forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(runCount);
   }
+
+  /* ---- Hero visual parallax (desktop) ---- */
+  var heroVisual = document.querySelector('.hero-visual');
+  if(heroVisual && isDesktop && !prefersReduced){
+    var pTicking = false;
+    window.addEventListener('scroll', function(){
+      if(!pTicking){
+        pTicking = true;
+        requestAnimationFrame(function(){
+          var rect = hero.getBoundingClientRect();
+          if(rect.bottom > 0 && rect.top < window.innerHeight){
+            var shift = (window.pageYOffset || 0) * 0.05;
+            heroVisual.style.transform = 'translateY(' + Math.min(shift, 60) + 'px)';
+          }
+          pTicking = false;
+        });
+      }
+    }, {passive:true});
+  }
+
+  /* ---- Card 3D tilt (desktop, pointer) ---- */
+  if(isDesktop && !prefersReduced){
+    document.querySelectorAll('.card').forEach(function(card){
+      card.addEventListener('pointerenter', function(){ card.classList.add('tilt'); });
+      card.addEventListener('pointermove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'perspective(900px) translateY(-8px) rotateX(' +
+          (py * -5).toFixed(2) + 'deg) rotateY(' + (px * 6).toFixed(2) + 'deg)';
+      });
+      card.addEventListener('pointerleave', function(){
+        card.classList.remove('tilt');
+        card.style.transform = '';
+      });
+    });
+  }
+})();
+</script>
+
+<style id="reveal-fix">
+/* Надёжный показ reveal-элементов: специфичность бьёт конфликтующие правила, opacity гарантирован */
+html.js .reveal.in, html.js [data-reveal].in, html.js [data-stagger].in{opacity:1!important;transform:none;}
+</style>
+<script id="reveal-fix-js">
+(function(){
+  var SEL='.reveal,[data-reveal],[data-stagger]';
+  function show(el){
+    if(el.__shown)return; el.__shown=1;
+    el.classList.add('in');
+    setTimeout(function(){
+      if(parseFloat(getComputedStyle(el).opacity)<0.5){
+        el.style.setProperty('opacity','1','important');
+        el.style.setProperty('transform','none','important');
+        el.style.setProperty('animation','none','important');
+      }
+    },1200);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var apply=function(){[].forEach.call(document.querySelectorAll(SEL),show);};
+    apply(); var k=0,t=setInterval(function(){apply();if(++k>20)clearInterval(t);},300); return;
+  }
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px 300px 0px',threshold:0}):null;
+  function arm(el){if(el.__armed)return;el.__armed=1;if(io)io.observe(el);}
+  function scan(){[].forEach.call(document.querySelectorAll(SEL),arm);}
+  function sweep(){
+    var vh=window.innerHeight, doc=document.documentElement, atBottom=(window.scrollY+vh)>=(doc.scrollHeight-2);
+    [].forEach.call(document.querySelectorAll(SEL),function(el){
+      if(el.classList.contains('in'))return;
+      var r=el.getBoundingClientRect();
+      if(atBottom||(r.top<vh+300&&r.bottom>-300))show(el);
+    });
+  }
+  scan(); sweep();
+  window.addEventListener('scroll',function(){scan();sweep();},{passive:true});
+  window.addEventListener('resize',sweep);
+  window.addEventListener('load',function(){scan();sweep();});
+  if('MutationObserver' in window){new MutationObserver(function(){scan();}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});}
+  function allShown(){return [].every.call(document.querySelectorAll(SEL),function(el){return el.classList.contains('in');});}
+  var n=0,iv=setInterval(function(){scan();sweep();if(allShown()||++n>120)clearInterval(iv);},350);
+  function failsafe(){var vh=window.innerHeight;[].forEach.call(document.querySelectorAll(SEL),function(el){var r=el.getBoundingClientRect();if(r.top<vh-20&&r.bottom>20&&parseFloat(getComputedStyle(el).opacity)<0.1){el.style.setProperty('opacity','1','important');el.style.setProperty('transform','none','important');el.style.setProperty('animation','none','important');}});}
+  window.addEventListener('scroll',failsafe,{passive:true});
+  var fn=0,fiv=setInterval(function(){failsafe();if(++fn>120)clearInterval(fiv);},500);
 })();
 </script>
 </body>

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.className+=' js';</script>
 <title>Сакура — доставка суши и роллов за 60 минут | Свежая рыба ежедневно</title>
 <meta name="description" content="Доставка суши и роллов «Сакура»: доставим за 60 минут или ролл в подарок. Свежая рыба ежедневно, рейтинг 4,8, более 200 000 заказов. Закажите онлайн прямо сейчас.">
 <meta name="theme-color" content="#111111">
@@ -286,8 +287,78 @@ ul{list-style:none}
 .to-top:hover{transform:translateY(-4px)}
 
 /* ---------- REVEAL ---------- */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.reveal.in{opacity:1;transform:none}
+/* Скрытое начальное состояние — ТОЛЬКО при включённом JS (класс .js на <html>).
+   Без JS / без observer контент сразу виден (фолбэк). */
+html.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms);will-change:opacity,transform}
+html.js .reveal.in{opacity:1;transform:none}
+html.js .reveal.in.done{will-change:auto}
+
+/* ---------- READING PROGRESS BAR ---------- */
+.progress-bar{position:fixed;top:0;left:0;height:3px;width:100%;transform:scaleX(0);transform-origin:0 50%;z-index:200;background:linear-gradient(90deg,var(--red),var(--gold-soft),var(--gold));box-shadow:0 0 12px rgba(212,175,55,.5);pointer-events:none;transition:opacity .3s ease}
+
+/* ---------- HEADER SHRINK ---------- */
+.header .nav{transition:height .3s var(--ease)}
+.header.scrolled{background:rgba(17,17,17,.86);box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.header.scrolled .nav{height:62px}
+
+/* ---------- HERO ENTRANCE CASCADE (JS only) ---------- */
+html.js .hero-anim{opacity:0;transform:translateY(26px);animation:heroIn .8s var(--ease) forwards;animation-delay:var(--hd,0ms)}
+html.js .hero-visual.hero-anim{transform:translateY(26px) scale(.97)}
+@keyframes heroIn{to{opacity:1;transform:none}}
+
+/* Hero «дышащее» свечение */
+.hero::before{animation:breathe 9s ease-in-out infinite}
+.hero::after{animation:breathe 11s ease-in-out infinite reverse}
+@keyframes breathe{0%,100%{opacity:.65;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+/* Параллакс визуала (десктоп) — через CSS var, задаётся из JS */
+.hero-visual{transform:translateY(var(--par,0))}
+.hero-float.top{animation:floatY 5.5s ease-in-out infinite}
+.hero-float.bottom{animation:floatY 6.5s ease-in-out infinite .5s}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* ---------- COUNT-UP ---------- */
+.count{font-variant-numeric:tabular-nums}
+
+/* ---------- ANIMATED FILTER TAB ---------- */
+.tab{position:relative;overflow:hidden}
+.tab.active{transform:translateY(-1px)}
+.menu-tabs{transition:none}
+/* плавная смена блюд */
+.menu-grid{transition:opacity .28s var(--ease)}
+.menu-grid.filtering{opacity:.0}
+html.js .dish.filter-enter{opacity:0;transform:translateY(14px) scale(.96)}
+html.js .dish.filter-enter-active{opacity:1;transform:none;transition:opacity .42s var(--ease),transform .42s var(--ease);transition-delay:var(--fd,0ms)}
+
+/* ---------- DISH CARD: 3D tilt + shine ---------- */
+.dish{transform-style:preserve-3d;will-change:auto}
+.dish.tilt{transition:transform .12s var(--ease),box-shadow .3s,border-color .3s;box-shadow:var(--shadow);border-color:rgba(212,175,55,.45)}
+.dish-img::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.18) 50%,transparent 60%);transform:translateX(-120%);transition:transform .7s var(--ease);opacity:0}
+.dish:hover .dish-img::after{transform:translateX(120%);opacity:1}
+
+/* ---------- ADD-BTN: shine + press + pop ---------- */
+.add-btn{position:relative;overflow:hidden;transition:transform .2s var(--ease),background .25s var(--ease),color .25s,border-color .25s,box-shadow .25s}
+.add-btn::before{content:"";position:absolute;top:0;left:-80%;width:60%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-18deg);transition:left .55s var(--ease);pointer-events:none}
+.add-btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 8px 20px rgba(212,175,55,.35)}
+.add-btn:hover::before{left:140%}
+.add-btn:active{transform:translateY(0) scale(.94)}
+.add-btn.added{animation:pop .4s var(--ease)}
+@keyframes pop{0%{transform:scale(.9)}45%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+/* ---------- BTN shine (primary/gold/ghost) ---------- */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-90%;width:55%;height:100%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-18deg);transition:left .6s var(--ease);pointer-events:none}
+.btn:hover::after{left:150%}
+.btn:active{transform:translateY(-1px) scale(.97)}
+
+/* ---------- REDUCED MOTION: всё выключаем, контент сразу виден ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  html.js .reveal,html.js .hero-anim,html.js .dish.filter-enter{opacity:1!important;transform:none!important}
+  .hero::before,.hero::after,.hero-float.top,.hero-float.bottom{animation:none!important}
+  .hero-visual{transform:none!important}
+  .progress-bar{display:none}
+  .menu-grid.filtering{opacity:1!important}
+}
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:1024px){
@@ -346,6 +417,8 @@ ul{list-style:none}
 </head>
 <body>
 
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
 <!-- ============ HEADER ============ -->
 <header class="header" id="top">
   <div class="container">
@@ -381,18 +454,18 @@ ul{list-style:none}
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
-      <div class="hero-text reveal">
-        <span class="hero-badge"><span aria-hidden="true">🔥</span> Бесплатная доставка при заказе от 1&nbsp;200&nbsp;₽</span>
-        <h1>Доставим за <span class="accent">60 минут</span><br>или ролл <span class="gold">в подарок</span></h1>
-        <p class="lead">Готовим суши и роллы из свежей рыбы каждый день. Острый нож, идеальный рис и щедрая начинка — собираем заказ при вас и привозим тёплыми.</p>
-        <div class="hero-cta">
+      <div class="hero-text">
+        <span class="hero-badge hero-anim" style="--hd:60ms"><span aria-hidden="true">🔥</span> Бесплатная доставка при заказе от 1&nbsp;200&nbsp;₽</span>
+        <h1 class="hero-anim" style="--hd:160ms">Доставим за <span class="accent">60 минут</span><br>или ролл <span class="gold">в подарок</span></h1>
+        <p class="lead hero-anim" style="--hd:280ms">Готовим суши и роллы из свежей рыбы каждый день. Острый нож, идеальный рис и щедрая начинка — собираем заказ при вас и привозим тёплыми.</p>
+        <div class="hero-cta hero-anim" style="--hd:380ms">
           <a href="#menu" class="btn btn-gold">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h12"/></svg>
             Смотреть меню
           </a>
           <a href="#order" class="btn btn-ghost">Заказать со скидкой</a>
         </div>
-        <div class="hero-markers">
+        <div class="hero-markers hero-anim" style="--hd:480ms">
           <div class="marker">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
             Доставка <b>60&nbsp;мин</b>
@@ -411,7 +484,7 @@ ul{list-style:none}
           </div>
         </div>
       </div>
-      <div class="hero-visual reveal">
+      <div class="hero-visual hero-anim" style="--hd:340ms">
         <div class="hero-photo">
           <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?w=640&h=800&fit=crop&crop=entropy&q=80&auto=format" alt="Большой сет роллов «Сакура» на тёмной тарелке с имбирём и васаби" loading="eager" onerror="this.remove()">
         </div>
@@ -772,10 +845,10 @@ ul{list-style:none}
     </div>
 
     <div class="stats-row">
-      <div class="stat reveal"><div class="sv">200 000+</div><div class="sl">довольных заказов</div></div>
-      <div class="stat reveal"><div class="sv">4,8</div><div class="sl">средняя оценка</div></div>
-      <div class="stat reveal"><div class="sv">47 мин</div><div class="sl">среднее время доставки</div></div>
-      <div class="stat reveal"><div class="sv">7 лет</div><div class="sl">готовим для города</div></div>
+      <div class="stat reveal"><div class="sv count" data-count="200000" data-sep=" " data-suffix="+">200 000+</div><div class="sl">довольных заказов</div></div>
+      <div class="stat reveal"><div class="sv count" data-count="4.8" data-decimals="1" data-dec="," data-prefix="" data-suffix="">4,8</div><div class="sl">средняя оценка</div></div>
+      <div class="stat reveal"><div class="sv count" data-count="47" data-suffix="&nbsp;мин">47 мин</div><div class="sl">среднее время доставки</div></div>
+      <div class="stat reveal"><div class="sv count" data-count="7" data-suffix="&nbsp;лет">7 лет</div><div class="sl">готовим для города</div></div>
     </div>
 
     <div class="reviews-grid">
@@ -1011,19 +1084,48 @@ ul{list-style:none}
   onScroll();
   toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-  /* ---- Menu tabs filter ---- */
+  /* ---- Menu tabs filter (с плавной сменой блюд) ---- */
   var tabs = document.getElementById('tabs');
+  var dishesGrid = document.getElementById('dishes');
   var dishes = Array.prototype.slice.call(document.querySelectorAll('#dishes .dish'));
-  tabs.addEventListener('click', function(e){
-    var btn = e.target.closest('.tab');
-    if(!btn) return;
-    tabs.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-    btn.classList.add('active');
-    var cat = btn.getAttribute('data-cat');
+  var rmFilter = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function applyFilter(cat){
     dishes.forEach(function(d){
       var show = (cat === 'all' || d.getAttribute('data-cat') === cat);
       d.style.display = show ? '' : 'none';
     });
+  }
+  tabs.addEventListener('click', function(e){
+    var btn = e.target.closest('.tab');
+    if(!btn || btn.classList.contains('active')) return;
+    tabs.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+    btn.classList.add('active');
+    var cat = btn.getAttribute('data-cat');
+
+    if(rmFilter || !('animate' in document.body)){
+      applyFilter(cat);
+      return;
+    }
+    // fade out, переключаем, fade in со стаггером
+    dishesGrid.classList.add('filtering');
+    setTimeout(function(){
+      applyFilter(cat);
+      var visible = dishes.filter(function(d){ return d.style.display !== 'none'; });
+      visible.forEach(function(d, i){
+        d.classList.add('filter-enter');
+        d.style.setProperty('--fd', (i * 55) + 'ms');
+      });
+      dishesGrid.classList.remove('filtering');
+      // форсируем reflow и запускаем переход
+      void dishesGrid.offsetWidth;
+      visible.forEach(function(d){ d.classList.add('filter-enter-active'); });
+      visible.forEach(function(d){
+        d.addEventListener('transitionend', function(){
+          d.classList.remove('filter-enter','filter-enter-active');
+          d.style.removeProperty('--fd');
+        }, {once:true});
+      });
+    }, 240);
   });
 
   /* ---- Add to order buttons ---- */
@@ -1120,18 +1222,162 @@ ul{list-style:none}
     e.target.value = out;
   });
 
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Stagger: задаём задержку соседним .reveal внутри общего родителя ---- */
+  function applyStagger(){
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var sibs = Array.prototype.filter.call(el.parentNode.children, function(c){ return c.classList && c.classList.contains('reveal'); });
+      if(sibs.length > 1){
+        var idx = sibs.indexOf(el);
+        el.style.setProperty('--d', (idx * 85) + 'ms');
+      }
+    });
+  }
+  if(!reduceMotion) applyStagger();
+
   /* ---- Reveal on scroll ---- */
   var reveals = document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+        if(en.isIntersecting){
+          var t = en.target;
+          t.classList.add('in');
+          io.unobserve(t);
+          t.addEventListener('transitionend', function(){ t.classList.add('done'); }, {once:true});
+        }
       });
     }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
     reveals.forEach(function(el){ io.observe(el); });
   } else {
     reveals.forEach(function(el){ el.classList.add('in'); });
   }
+
+  /* ---- Count-up счётчики ---- */
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var sep = el.getAttribute('data-sep') || '';
+    var decMark = el.getAttribute('data-dec') || ',';
+    var suffix = el.getAttribute('data-suffix') || '';
+    var prefix = el.getAttribute('data-prefix') || '';
+    var finalText = el.textContent;
+    if(reduceMotion){ return; }
+    var dur = 1400, start = null;
+    function fmt(v){
+      var s = v.toFixed(decimals);
+      if(decimals > 0){ s = s.replace('.', decMark); }
+      if(sep){
+        var parts = s.split(decMark);
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+        s = parts.join(decMark);
+      }
+      return s;
+    }
+    function step(ts){
+      if(start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      el.innerHTML = prefix + fmt(target * eased) + suffix;
+      if(p < 1){ requestAnimationFrame(step); }
+      else { el.innerHTML = finalText; } // восстанавливаем точный исходный текст
+    }
+    requestAnimationFrame(step);
+  }
+  var counters = document.querySelectorAll('.count[data-count]');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ animateCount(en.target); cio.unobserve(en.target); }
+      });
+    }, {threshold:0.5});
+    counters.forEach(function(el){ cio.observe(el); });
+  }
+
+  /* ---- Reading progress bar ---- */
+  var progress = document.getElementById('progressBar');
+  function onProgress(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? (window.scrollY / max) : 0;
+    progress.style.transform = 'scaleX(' + p + ')';
+  }
+  window.addEventListener('scroll', onProgress, {passive:true});
+  onProgress();
+
+  /* ---- Hero parallax (десктоп, мышь) ---- */
+  var heroVisual = document.querySelector('.hero-visual');
+  var finePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+  if(heroVisual && finePointer && !reduceMotion){
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      if(y < 900){ heroVisual.style.setProperty('--par', (y * -0.06) + 'px'); }
+    }, {passive:true});
+  }
+
+  /* ---- 3D наклон карточек блюд (десктоп, мышь) ---- */
+  if(finePointer && !reduceMotion){
+    document.querySelectorAll('.dish').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.classList.add('tilt');
+        card.style.transform = 'translateY(-8px) perspective(900px) rotateX(' + (py * -5) + 'deg) rotateY(' + (px * 6) + 'deg)';
+      });
+      card.addEventListener('mouseleave', function(){
+        card.classList.remove('tilt');
+        card.style.transform = '';
+      });
+    });
+  }
+})();
+</script>
+
+<style id="reveal-fix">
+/* Надёжный показ reveal-элементов: специфичность бьёт конфликтующие правила, opacity гарантирован */
+html.js .reveal.in, html.js [data-reveal].in, html.js [data-stagger].in{opacity:1!important;transform:none;}
+</style>
+<script id="reveal-fix-js">
+(function(){
+  var SEL='.reveal,[data-reveal],[data-stagger]';
+  function show(el){
+    if(el.__shown)return; el.__shown=1;
+    el.classList.add('in');
+    setTimeout(function(){
+      if(parseFloat(getComputedStyle(el).opacity)<0.5){
+        el.style.setProperty('opacity','1','important');
+        el.style.setProperty('transform','none','important');
+        el.style.setProperty('animation','none','important');
+      }
+    },1200);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var apply=function(){[].forEach.call(document.querySelectorAll(SEL),show);};
+    apply(); var k=0,t=setInterval(function(){apply();if(++k>20)clearInterval(t);},300); return;
+  }
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px 300px 0px',threshold:0}):null;
+  function arm(el){if(el.__armed)return;el.__armed=1;if(io)io.observe(el);}
+  function scan(){[].forEach.call(document.querySelectorAll(SEL),arm);}
+  function sweep(){
+    var vh=window.innerHeight, doc=document.documentElement, atBottom=(window.scrollY+vh)>=(doc.scrollHeight-2);
+    [].forEach.call(document.querySelectorAll(SEL),function(el){
+      if(el.classList.contains('in'))return;
+      var r=el.getBoundingClientRect();
+      if(atBottom||(r.top<vh+300&&r.bottom>-300))show(el);
+    });
+  }
+  scan(); sweep();
+  window.addEventListener('scroll',function(){scan();sweep();},{passive:true});
+  window.addEventListener('resize',sweep);
+  window.addEventListener('load',function(){scan();sweep();});
+  if('MutationObserver' in window){new MutationObserver(function(){scan();}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});}
+  function allShown(){return [].every.call(document.querySelectorAll(SEL),function(el){return el.classList.contains('in');});}
+  var n=0,iv=setInterval(function(){scan();sweep();if(allShown()||++n>120)clearInterval(iv);},350);
+  function failsafe(){var vh=window.innerHeight;[].forEach.call(document.querySelectorAll(SEL),function(el){var r=el.getBoundingClientRect();if(r.top<vh-20&&r.bottom>20&&parseFloat(getComputedStyle(el).opacity)<0.1){el.style.setProperty('opacity','1','important');el.style.setProperty('transform','none','important');el.style.setProperty('animation','none','important');}});}
+  window.addEventListener('scroll',failsafe,{passive:true});
+  var fn=0,fiv=setInterval(function(){failsafe();if(++fn>120)clearInterval(fiv);},500);
 })();
 </script>
 </body>

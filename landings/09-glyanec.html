@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>document.documentElement.className+=' js';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Глянец — детейлинг-центр премиум-класса | Химчистка, керамика, полировка</title>
@@ -215,15 +216,8 @@
 
   /* Before / After */
   .ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .ba-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface)}
-  .ba-pair{display:grid;grid-template-columns:1fr 1fr}
-  .ba-half{position:relative;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(135deg,#1a1a1d,#0c0c0e)}
-  .ba-half img{width:100%;height:100%;object-fit:cover}
-  .ba-half.before img{filter:grayscale(.55) brightness(.78) contrast(.92)}
-  .ba-label{position:absolute;bottom:12px;left:12px;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-  .ba-label.b{background:rgba(10,10,10,.82);border:1px solid var(--line);color:var(--silver)}
-  .ba-label.a{background:var(--red);color:#fff}
-  .ba-half.after{border-left:2px solid var(--red)}
+  .ba-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface);transition:var(--t)}
+  .ba-card:hover{border-color:rgba(220,38,38,.4);box-shadow:var(--shadow)}
   .ba-cap{padding:20px 22px}
   .ba-cap h3{font-size:18px;margin-bottom:6px}
   .ba-cap p{color:var(--muted);font-size:14px}
@@ -349,9 +343,96 @@
   .to-top:hover{background:var(--red-dark);transform:translateY(-3px)}
   .to-top svg{width:22px;height:22px;color:#fff}
 
-  /* Reveal on scroll */
-  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
-  .reveal.in{opacity:1;transform:none}
+  /* Reveal on scroll — hidden state only when JS active (no blind content) */
+  html.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1);transition-delay:var(--rd,0ms)}
+  html.js .reveal.in{opacity:1;transform:none}
+
+  /* ===== Reading progress bar ===== */
+  .progress-bar{
+    position:fixed;top:0;left:0;height:3px;width:100%;z-index:200;
+    transform:scaleX(0);transform-origin:0 50%;
+    background:linear-gradient(90deg,var(--red),#f87171);
+    box-shadow:0 0 12px var(--red-glow);
+    will-change:transform;pointer-events:none;
+  }
+
+  /* ===== Header compress on scroll ===== */
+  html.js .nav{transition:height var(--t)}
+  .header.scrolled .nav{height:64px}
+  .header.scrolled{box-shadow:0 10px 34px -18px rgba(0,0,0,.8)}
+
+  /* ===== Hero entrance cascade ===== */
+  html.js .hero-anim{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.22,.61,.36,1);transition-delay:var(--d,0ms)}
+  html.js .hero-loaded .hero-anim{opacity:1;transform:none}
+  html.js .hero-visual.hero-anim{transform:translateY(34px) scale(.98)}
+  html.js .hero-loaded .hero-visual.hero-anim{transform:none}
+
+  /* ===== Hero breathing glow ===== */
+  .hero::after{
+    content:"";position:absolute;z-index:-1;
+    width:min(640px,80vw);height:min(640px,80vw);
+    top:-18%;right:-6%;border-radius:50%;
+    background:radial-gradient(circle,rgba(220,38,38,.22),transparent 62%);
+    filter:blur(8px);pointer-events:none;
+    animation:breathe 7s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{transform:scale(1);opacity:.75}
+    50%{transform:scale(1.12);opacity:1}
+  }
+  /* Parallax target (desktop) */
+  .hero-visual{will-change:transform}
+
+  /* ===== Button shine + press ===== */
+  .btn{position:relative;overflow:hidden;will-change:transform}
+  .btn::after{
+    content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.32),transparent);
+    transform:skewX(-18deg);transition:left .6s ease;pointer-events:none;
+  }
+  .btn:hover::after{left:130%}
+  .btn:active{transform:translateY(0) scale(.96)}
+  .btn-primary:active,.btn-ghost:active{transform:scale(.96)}
+
+  /* ===== Service / card 3D tilt + red glow ===== */
+  html.js .service,html.js .card{transform-style:preserve-3d;will-change:transform}
+  .service:hover{box-shadow:var(--shadow),0 0 0 1px rgba(220,38,38,.35),0 26px 60px -22px var(--red-glow)}
+  .card:hover{border-color:rgba(220,38,38,.4);box-shadow:var(--shadow),0 18px 50px -22px var(--red-glow)}
+  .tilt{transition:transform .12s ease,box-shadow var(--t),border-color var(--t)}
+
+  /* ===== Count-up: avoid layout jump ===== */
+  .stat .big[data-count]{font-variant-numeric:tabular-nums}
+
+  /* ===== Before/After draggable slider ===== */
+  .ba-slider{position:relative;aspect-ratio:1/1;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:pan-y;background:linear-gradient(135deg,#1a1a1d,#0c0c0e)}
+  .ba-slider .ba-layer{position:absolute;inset:0}
+  .ba-slider .ba-layer img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .ba-slider .ba-after{clip-path:inset(0 0 0 var(--pos,50%))}
+  .ba-slider .ba-before img{filter:grayscale(.55) brightness(.78) contrast(.92)}
+  .ba-handle{
+    position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:var(--red);
+    transform:translateX(-1px);z-index:3;box-shadow:0 0 14px var(--red-glow);
+  }
+  .ba-handle::before{
+    content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:40px;height:40px;border-radius:50%;background:var(--red);
+    box-shadow:var(--shadow-red);display:block;
+    background-image:linear-gradient(90deg,transparent 45%,#fff 45%,#fff 47%,transparent 47%,transparent 53%,#fff 53%,#fff 55%,transparent 55%);
+  }
+  .ba-slider .ba-label{position:absolute;bottom:12px;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;z-index:4;pointer-events:none}
+  .ba-slider .ba-label.b{left:12px;background:rgba(10,10,10,.82);border:1px solid var(--line);color:var(--silver)}
+  .ba-slider .ba-label.a{right:12px;background:var(--red);color:#fff}
+
+  /* ===== Reduced motion: kill everything, show all ===== */
+  @media (prefers-reduced-motion: reduce){
+    html.js .reveal,html.js .hero-anim,html.js .hero-visual.hero-anim{opacity:1!important;transform:none!important;transition:none!important}
+    .progress-bar{display:none}
+    .hero::after{animation:none}
+    .btn::after{display:none}
+    .header.scrolled .nav{height:80px}
+    *{scroll-behavior:auto!important}
+    .ba-slider{cursor:default}
+  }
 
   /* Responsive */
   @media(max-width:1024px){
@@ -411,6 +492,8 @@
 </head>
 <body>
 
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
 <!-- ===== HEADER ===== -->
 <header class="header" id="header">
   <div class="container">
@@ -451,22 +534,22 @@
 <section class="hero" id="hero">
   <div class="container">
     <div class="hero-grid">
-      <div class="hero-content reveal">
-        <span class="eyebrow">Премиальный детейлинг с 2014 года</span>
-        <h1>Ваш автомобиль будет выглядеть <span class="accent">лучше, чем из салона</span></h1>
-        <p class="hero-sub">Химчистка, керамика, полировка и бронирование плёнкой в боксе с профессиональной подсветкой. Работаем по технологии, даём гарантию на покрытие и возвращаем блеск даже сложным кузовам.</p>
-        <div class="hero-cta">
+      <div class="hero-content">
+        <span class="eyebrow hero-anim" style="--d:60ms">Премиальный детейлинг с 2014 года</span>
+        <h1 class="hero-anim" style="--d:150ms">Ваш автомобиль будет выглядеть <span class="accent">лучше, чем из салона</span></h1>
+        <p class="hero-sub hero-anim" style="--d:260ms">Химчистка, керамика, полировка и бронирование плёнкой в боксе с профессиональной подсветкой. Работаем по технологии, даём гарантию на покрытие и возвращаем блеск даже сложным кузовам.</p>
+        <div class="hero-cta hero-anim" style="--d:370ms">
           <a href="#booking" class="btn btn-primary">Записаться на детейлинг</a>
           <a href="#services" class="btn btn-ghost">Смотреть услуги</a>
         </div>
-        <ul class="hero-markers">
+        <ul class="hero-markers hero-anim" style="--d:470ms">
           <li class="marker"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>5000+&nbsp;авто в год</li>
           <li class="marker"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg>Гарантия на покрытие</li>
           <li class="marker"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Сертифицированные материалы</li>
         </ul>
       </div>
 
-      <div class="hero-visual reveal">
+      <div class="hero-visual hero-anim" style="--d:340ms">
         <div class="hero-img">
           <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=720&h=900&fit=crop&crop=entropy&q=80&auto=format" alt="Чёрный спортивный автомобиль после полировки и керамического покрытия в детейлинг-боксе с подсветкой" loading="eager" onerror="this.remove()">
         </div>
@@ -623,25 +706,31 @@
     </div>
     <div class="ba-grid">
       <article class="ba-card reveal">
-        <div class="ba-pair">
-          <div class="ba-half before"><img src="https://images.unsplash.com/photo-1530675706010-bc677ce30ab6?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Кузов автомобиля с рисками и матовостью до полировки" onerror="this.remove()"><span class="ba-label b">До</span></div>
-          <div class="ba-half after"><img src="https://images.unsplash.com/photo-1606590526453-9b8ee4569a70?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Кузов автомобиля с глубоким блеском после полировки" onerror="this.remove()"><span class="ba-label a">После</span></div>
+        <div class="ba-slider" role="slider" tabindex="0" aria-label="Сравнение до и после: полировка + керамика" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <div class="ba-layer ba-before"><img src="https://images.unsplash.com/photo-1530675706010-bc677ce30ab6?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Кузов автомобиля с рисками и матовостью до полировки" onerror="this.remove()"></div>
+          <div class="ba-layer ba-after"><img src="https://images.unsplash.com/photo-1606590526453-9b8ee4569a70?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Кузов автомобиля с глубоким блеском после полировки" onerror="this.remove()"></div>
+          <span class="ba-label b">До</span><span class="ba-label a">После</span>
+          <span class="ba-handle" aria-hidden="true"></span>
         </div>
         <div class="ba-cap"><h3>Полировка + керамика</h3><p>Mercedes E-class — убрали голограммы и вернули глубину чёрного цвета.</p></div>
       </article>
 
       <article class="ba-card reveal">
-        <div class="ba-pair">
-          <div class="ba-half before"><img src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Загрязнённый кожаный салон до химчистки" onerror="this.remove()"><span class="ba-label b">До</span></div>
-          <div class="ba-half after"><img src="https://images.unsplash.com/photo-1606224103857-e4c74b0139df?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Чистый кожаный салон после химчистки" onerror="this.remove()"><span class="ba-label a">После</span></div>
+        <div class="ba-slider" role="slider" tabindex="0" aria-label="Сравнение до и после: химчистка салона" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <div class="ba-layer ba-before"><img src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Загрязнённый кожаный салон до химчистки" onerror="this.remove()"></div>
+          <div class="ba-layer ba-after"><img src="https://images.unsplash.com/photo-1606224103857-e4c74b0139df?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Чистый кожаный салон после химчистки" onerror="this.remove()"></div>
+          <span class="ba-label b">До</span><span class="ba-label a">После</span>
+          <span class="ba-handle" aria-hidden="true"></span>
         </div>
         <div class="ba-cap"><h3>Химчистка салона</h3><p>BMW X5 — вывели въевшиеся пятна и устранили запах за один заезд.</p></div>
       </article>
 
       <article class="ba-card reveal">
-        <div class="ba-pair">
-          <div class="ba-half before"><img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Фары автомобиля с помутнением до восстановления" onerror="this.remove()"><span class="ba-label b">До</span></div>
-          <div class="ba-half after"><img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Прозрачные фары автомобиля после восстановления" onerror="this.remove()"><span class="ba-label a">После</span></div>
+        <div class="ba-slider" role="slider" tabindex="0" aria-label="Сравнение до и после: восстановление фар" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <div class="ba-layer ba-before"><img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Фары автомобиля с помутнением до восстановления" onerror="this.remove()"></div>
+          <div class="ba-layer ba-after"><img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?w=400&h=400&fit=crop&crop=entropy&q=80&auto=format" alt="Прозрачные фары автомобиля после восстановления" onerror="this.remove()"></div>
+          <span class="ba-label b">До</span><span class="ba-label a">После</span>
+          <span class="ba-handle" aria-hidden="true"></span>
         </div>
         <div class="ba-cap"><h3>Восстановление фар</h3><p>Audi A6 — вернули прозрачность оптике и нанесли защитный лак.</p></div>
       </article>
@@ -686,10 +775,10 @@
 <section class="section" id="reviews">
   <div class="container">
     <div class="stats reveal">
-      <div class="stat"><div class="big">5000<span>+</span></div><p>авто прошли обработку</p></div>
-      <div class="stat"><div class="big">11<span> лет</span></div><p>на рынке детейлинга</p></div>
-      <div class="stat"><div class="big">9.8<span>/10</span></div><p>средняя оценка клиентов</p></div>
-      <div class="stat"><div class="big">5<span> лет</span></div><p>гарантия на покрытие</p></div>
+      <div class="stat"><div class="big"><span class="cv" data-count="5000" data-dur="1600">5000</span><span>+</span></div><p>авто прошли обработку</p></div>
+      <div class="stat"><div class="big"><span class="cv" data-count="11" data-dur="1200">11</span><span> лет</span></div><p>на рынке детейлинга</p></div>
+      <div class="stat"><div class="big"><span class="cv" data-count="9.8" data-dec="1" data-dur="1400">9.8</span><span>/10</span></div><p>средняя оценка клиентов</p></div>
+      <div class="stat"><div class="big"><span class="cv" data-count="5" data-dur="1000">5</span><span> лет</span></div><p>гарантия на покрытие</p></div>
     </div>
 
     <div class="center" style="margin-top:80px">
@@ -1067,9 +1156,32 @@
     document.getElementById('f-consent').style.color = this.checked ? '' : '#f87171';
   });
 
-  // ----- Reveal on scroll -----
+  // ----- Motion preference -----
+  var reduceMQ = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : {matches:false};
+  var reduce = reduceMQ.matches;
+  var isDesktop = window.matchMedia ? window.matchMedia('(min-width:769px) and (hover:hover)').matches : false;
+
+  // ----- Hero entrance cascade -----
+  function fireHero(){ document.querySelector('.hero').classList.add('hero-loaded'); }
+  if(reduce){ fireHero(); }
+  else { requestAnimationFrame(function(){ requestAnimationFrame(fireHero); }); }
+
+  // ----- Reveal on scroll (with stagger inside each group) -----
   var revs = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
+  // assign stagger delays to siblings sharing the same parent
+  (function staggerGroups(){
+    var seen = new Map();
+    revs.forEach(function(el){
+      var p = el.parentNode;
+      var i = seen.get(p) || 0;
+      el.style.setProperty('--rd', Math.min(i,6) * 90 + 'ms');
+      seen.set(p, i + 1);
+    });
+  })();
+
+  if(reduce){
+    revs.forEach(function(el){ el.classList.add('in'); });
+  } else if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if(en.isIntersecting){
@@ -1082,6 +1194,173 @@
   } else {
     revs.forEach(function(el){ el.classList.add('in'); });
   }
+
+  // ----- Reading progress bar (rAF-throttled) -----
+  var bar = document.getElementById('progressBar');
+  var barTick = false;
+  function updateBar(){
+    barTick = false;
+    var h = document.documentElement;
+    var max = (h.scrollHeight - h.clientHeight) || 1;
+    var p = Math.min(1, Math.max(0, (window.scrollY || window.pageYOffset) / max));
+    bar.style.transform = 'scaleX(' + p + ')';
+  }
+  if(!reduce){
+    window.addEventListener('scroll', function(){
+      if(!barTick){ barTick = true; requestAnimationFrame(updateBar); }
+    }, {passive:true});
+    window.addEventListener('resize', updateBar, {passive:true});
+    updateBar();
+  }
+
+  // ----- Count-up -----
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    var dur = parseInt(el.getAttribute('data-dur') || '1400', 10);
+    if(reduce){ el.textContent = target.toFixed(dec); return; }
+    var start = null;
+    function fmt(v){ return dec > 0 ? v.toFixed(dec) : String(Math.round(v)); }
+    function frame(ts){
+      if(start === null) start = ts;
+      var t = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      el.textContent = fmt(target * eased);
+      if(t < 1) requestAnimationFrame(frame);
+      else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(frame);
+  }
+  var counters = document.querySelectorAll('.cv[data-count]');
+  if(counters.length){
+    if('IntersectionObserver' in window && !reduce){
+      var cio = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ animateCount(en.target); cio.unobserve(en.target); }
+        });
+      }, {threshold:0.6});
+      counters.forEach(function(c){ cio.observe(c); });
+    } else {
+      counters.forEach(animateCount);
+    }
+  }
+
+  // ----- Desktop 3D tilt on cards/services -----
+  if(isDesktop && !reduce){
+    document.querySelectorAll('.service, .card').forEach(function(card){
+      card.classList.add('tilt');
+      var rect;
+      card.addEventListener('pointerenter', function(){ rect = card.getBoundingClientRect(); });
+      card.addEventListener('pointermove', function(e){
+        if(!rect) rect = card.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width - 0.5;
+        var py = (e.clientY - rect.top) / rect.height - 0.5;
+        var max = 5; // gentle
+        card.style.transform = 'translateY(-6px) perspective(900px) rotateY(' + (px*max) + 'deg) rotateX(' + (-py*max) + 'deg)';
+      });
+      card.addEventListener('pointerleave', function(){
+        card.style.transform = '';
+        rect = null;
+      });
+    });
+  }
+
+  // ----- Hero visual parallax (desktop) -----
+  if(isDesktop && !reduce){
+    var heroVisual = document.querySelector('.hero-visual');
+    var heroSec = document.querySelector('.hero');
+    var pTick = false;
+    function parallax(){
+      pTick = false;
+      var y = window.scrollY || window.pageYOffset;
+      if(y < window.innerHeight){
+        heroVisual.style.transform = 'translateY(' + (y * 0.06) + 'px)';
+      }
+    }
+    if(heroVisual && heroSec){
+      window.addEventListener('scroll', function(){
+        if(!pTick){ pTick = true; requestAnimationFrame(parallax); }
+      }, {passive:true});
+    }
+  }
+
+  // ----- Before/After comparison sliders (drag + keyboard) -----
+  document.querySelectorAll('.ba-slider').forEach(function(slider){
+    var pos = 50;
+    function setPos(p){
+      pos = Math.max(0, Math.min(100, p));
+      slider.style.setProperty('--pos', pos + '%');
+      slider.setAttribute('aria-valuenow', Math.round(pos));
+    }
+    setPos(50);
+    if(reduce) return; // keep static 50/50 split, no interaction
+    var dragging = false;
+    function fromEvent(e){
+      var rect = slider.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+      setPos(x / rect.width * 100);
+    }
+    slider.addEventListener('pointerdown', function(e){
+      dragging = true;
+      slider.setPointerCapture && slider.setPointerCapture(e.pointerId);
+      fromEvent(e);
+    });
+    slider.addEventListener('pointermove', function(e){ if(dragging){ e.preventDefault(); fromEvent(e); } });
+    slider.addEventListener('pointerup', function(){ dragging = false; });
+    slider.addEventListener('pointercancel', function(){ dragging = false; });
+    slider.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowLeft'){ setPos(pos - 4); e.preventDefault(); }
+      else if(e.key === 'ArrowRight'){ setPos(pos + 4); e.preventDefault(); }
+      else if(e.key === 'Home'){ setPos(0); e.preventDefault(); }
+      else if(e.key === 'End'){ setPos(100); e.preventDefault(); }
+    });
+  });
+})();
+</script>
+
+<style id="reveal-fix">
+/* Надёжный показ reveal-элементов: специфичность бьёт конфликтующие правила, opacity гарантирован */
+html.js .reveal.in, html.js [data-reveal].in, html.js [data-stagger].in{opacity:1!important;transform:none;}
+</style>
+<script id="reveal-fix-js">
+(function(){
+  var SEL='.reveal,[data-reveal],[data-stagger]';
+  function show(el){
+    if(el.__shown)return; el.__shown=1;
+    el.classList.add('in');
+    setTimeout(function(){
+      if(parseFloat(getComputedStyle(el).opacity)<0.5){
+        el.style.setProperty('opacity','1','important');
+        el.style.setProperty('transform','none','important');
+        el.style.setProperty('animation','none','important');
+      }
+    },1200);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var apply=function(){[].forEach.call(document.querySelectorAll(SEL),show);};
+    apply(); var k=0,t=setInterval(function(){apply();if(++k>20)clearInterval(t);},300); return;
+  }
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px 300px 0px',threshold:0}):null;
+  function arm(el){if(el.__armed)return;el.__armed=1;if(io)io.observe(el);}
+  function scan(){[].forEach.call(document.querySelectorAll(SEL),arm);}
+  function sweep(){
+    var vh=window.innerHeight, doc=document.documentElement, atBottom=(window.scrollY+vh)>=(doc.scrollHeight-2);
+    [].forEach.call(document.querySelectorAll(SEL),function(el){
+      if(el.classList.contains('in'))return;
+      var r=el.getBoundingClientRect();
+      if(atBottom||(r.top<vh+300&&r.bottom>-300))show(el);
+    });
+  }
+  scan(); sweep();
+  window.addEventListener('scroll',function(){scan();sweep();},{passive:true});
+  window.addEventListener('resize',sweep);
+  window.addEventListener('load',function(){scan();sweep();});
+  if('MutationObserver' in window){new MutationObserver(function(){scan();}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});}
+  function allShown(){return [].every.call(document.querySelectorAll(SEL),function(el){return el.classList.contains('in');});}
+  var n=0,iv=setInterval(function(){scan();sweep();if(allShown()||++n>120)clearInterval(iv);},350);
+  function failsafe(){var vh=window.innerHeight;[].forEach.call(document.querySelectorAll(SEL),function(el){var r=el.getBoundingClientRect();if(r.top<vh-20&&r.bottom>20&&parseFloat(getComputedStyle(el).opacity)<0.1){el.style.setProperty('opacity','1','important');el.style.setProperty('transform','none','important');el.style.setProperty('animation','none','important');}});}
+  window.addEventListener('scroll',failsafe,{passive:true});
+  var fn=0,fiv=setInterval(function(){failsafe();if(++fn>120)clearInterval(fiv);},500);
 })();
 </script>
 </body>

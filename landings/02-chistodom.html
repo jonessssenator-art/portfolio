@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js');</script>
 <title>ЧистоДом — уборка квартир и офисов за 2 часа | Чисто или вернём деньги</title>
 <meta name="description" content="Клининговая компания ЧистоДом: генеральная и поддерживающая уборка, уборка после ремонта, мытьё окон, химчистка мебели. Выезд за 60 минут, эко-средства, рейтинг 4.9. Уберём за 2 часа — чисто или вернём деньги.">
 
@@ -379,8 +380,9 @@
   .totop svg{width:22px;height:22px}
 
   /* ===== Reveal animation ===== */
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-  .reveal.in{opacity:1;transform:none}
+  /* Скрытое состояние только при включённом JS — без JS контент сразу виден (фолбэк) */
+  html.js .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--rd,0ms)}
+  html.js .reveal.in{opacity:1;transform:none}
 
   /* ===== Responsive ===== */
   @media(max-width:1024px){
@@ -423,6 +425,105 @@
     .foot-bottom{flex-direction:column;text-align:center}
     .nav .btn{display:none}
   }
+
+  /* =========================================================
+     ===== PREMIUM ANIMATIONS & MICRO-INTERACTIONS (add-on) =====
+     Только transform/opacity. Скрытые состояния — под html.js.
+     ========================================================= */
+
+  /* --- Reading progress bar (fixed, gradient) --- */
+  .read-progress{
+    position:fixed;top:0;left:0;height:3px;width:100%;z-index:200;
+    transform:scaleX(0);transform-origin:0 50%;
+    background:linear-gradient(90deg,#06B6D4,#0EA5E9 55%,#22C55E);
+    box-shadow:0 1px 8px rgba(6,182,212,.35);
+    will-change:transform;pointer-events:none;
+  }
+
+  /* --- Header compress on scroll (расширяем существующий .scrolled) --- */
+  header{transition:border-color .3s,box-shadow .3s,background .3s,backdrop-filter .3s}
+  .nav{transition:height .35s var(--ease)}
+  .logo-mark{transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+  header.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  header.scrolled .nav{height:64px}
+  header.scrolled .logo-mark{transform:scale(.9)}
+
+  /* --- Nav animated underline --- */
+  .nav-menu a.nav-link{position:relative}
+  .nav-menu a.nav-link::after{
+    content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;border-radius:2px;
+    background:var(--grad);transform:scaleX(0);transform-origin:0 50%;
+    transition:transform .35s var(--ease);
+  }
+  .nav-menu a.nav-link:hover::after{transform:scaleX(1)}
+
+  /* --- Buttons: sheen on hover + press --- */
+  .btn{position:relative;overflow:hidden;isolation:isolate}
+  .btn::after{
+    content:'';position:absolute;top:0;left:-130%;width:60%;height:100%;z-index:1;
+    background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.5) 50%,transparent 100%);
+    transform:skewX(-18deg);transition:left .6s var(--ease);pointer-events:none;
+  }
+  .btn:hover::after{left:140%}
+  .btn-ghost::after{background:linear-gradient(100deg,transparent 0%,rgba(6,182,212,.22) 50%,transparent 100%)}
+  .btn:active{transform:translateY(0) scale(.97)}
+  .btn span,.btn svg{position:relative;z-index:2}
+
+  /* --- Cards: 3D tilt hook (desktop, pointer) --- */
+  .feat-card,.serv-card,.step,.rev-card,.price-card{
+    transform-style:preserve-3d;
+  }
+  .tilt{
+    transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-8px);
+    transition:transform .12s ease-out,box-shadow .4s var(--ease);
+    box-shadow:var(--shadow);
+  }
+  .price-card.featured.tilt{
+    transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1.02) translateY(-8px);
+  }
+
+  /* --- Hero: cascade entrance (под html.js) --- */
+  html.js .hero-content > *{opacity:0;transform:translateY(24px)}
+  html.js .hero .hero-visual{opacity:0;transform:translateY(36px)}
+  html.js .hero.enter .hero-content > *{
+    animation:heroUp .85s var(--ease) forwards;animation-delay:var(--hd,0ms);
+  }
+  html.js .hero.enter .hero-visual{
+    animation:heroUp .95s var(--ease) forwards;animation-delay:.32s;
+  }
+  @keyframes heroUp{to{opacity:1;transform:none}}
+
+  /* --- Hero: breathing glow + visual parallax --- */
+  .hero::before{animation:breathe 9s ease-in-out infinite}
+  .hero::after{animation:breathe 11s ease-in-out infinite reverse}
+  @keyframes breathe{
+    0%,100%{opacity:.85;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.12)}
+  }
+  .hero-visual{will-change:transform}
+  .hero-img-wrap{will-change:transform}
+
+  /* --- Count-up: фиксируем минимальную ширину, чтобы число не "прыгало" --- */
+  .stat .num{font-variant-numeric:tabular-nums}
+
+  /* =========================================================
+     ===== prefers-reduced-motion: всё мгновенно, контент виден
+     ========================================================= */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;
+      scroll-behavior:auto !important;
+    }
+    html.js .reveal,
+    html.js .hero-content > *,
+    html.js .hero .hero-visual{opacity:1 !important;transform:none !important}
+    .read-progress{display:none}
+    .hero-badge.b1,.hero-badge.b2{animation:none}
+    .hero::before,.hero::after{animation:none}
+    .tilt{transform:translateY(-6px)}
+  }
 </style>
 
 <style id="mobile-safety">
@@ -436,6 +537,9 @@
 </style>
 </head>
 <body>
+
+<!-- ===== READING PROGRESS BAR ===== -->
+<div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
 <!-- ===== HEADER ===== -->
 <header id="top">
@@ -671,10 +775,10 @@
 <section class="section" id="reviews">
   <div class="container">
     <div class="stats-grid reveal">
-      <div class="stat"><div class="num">8000+</div><div class="lbl">выполненных уборок</div></div>
-      <div class="stat"><div class="num">4.9</div><div class="lbl">средний рейтинг клиентов</div></div>
-      <div class="stat"><div class="num">60&nbsp;мин</div><div class="lbl">среднее время выезда</div></div>
-      <div class="stat"><div class="num">96%</div><div class="lbl">клиентов возвращаются</div></div>
+      <div class="stat"><div class="num" data-count="8000" data-suffix="+">8000+</div><div class="lbl">выполненных уборок</div></div>
+      <div class="stat"><div class="num" data-count="4.9" data-decimals="1">4.9</div><div class="lbl">средний рейтинг клиентов</div></div>
+      <div class="stat"><div class="num" data-count="60" data-suffix="&nbsp;мин">60&nbsp;мин</div><div class="lbl">среднее время выезда</div></div>
+      <div class="stat"><div class="num" data-count="96" data-suffix="%">96%</div><div class="lbl">клиентов возвращаются</div></div>
     </div>
 
     <div class="section-head reveal">
@@ -920,16 +1024,36 @@
 (function(){
   'use strict';
 
-  // ---- Sticky header shadow ----
+  // ---- Reduced-motion preference ----
+  var reduceMQ = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : {matches:false};
+  var reduce = reduceMQ.matches;
+
+  // ---- Reading progress bar ----
+  var progress = document.getElementById('readProgress');
+
+  // ---- Sticky header shadow + reading progress + back-to-top ----
   var header = document.getElementById('top');
   var toTop = document.getElementById('toTop');
+  var rpTick = false;
+  function updateProgress(){
+    rpTick = false;
+    if(!progress) return;
+    var doc = document.documentElement;
+    var max = (doc.scrollHeight - window.innerHeight);
+    var y = window.scrollY || window.pageYOffset;
+    var p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
+    progress.style.transform = 'scaleX(' + p + ')';
+  }
   function onScroll(){
     var y = window.scrollY || window.pageYOffset;
     header.classList.toggle('scrolled', y > 10);
     toTop.classList.toggle('show', y > 600);
+    if(!rpTick){ rpTick = true; requestAnimationFrame(updateProgress); }
   }
   window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', updateProgress, {passive:true});
   onScroll();
+  updateProgress();
 
   // ---- Burger menu ----
   var burger = document.getElementById('burger');
@@ -972,17 +1096,121 @@
     });
   });
 
-  // ---- Reveal on scroll ----
+  // ---- Stagger: задаём задержку reveal-карточкам внутри их сетки ----
+  // translateY-only (без translateX) — не ломает мобильный горизонтальный скролл.
+  if(!reduce){
+    var staggerSelectors = '.feat-grid,.serv-grid,.steps-grid,.rev-grid,.price-grid,.faq-wrap';
+    document.querySelectorAll(staggerSelectors).forEach(function(grid){
+      var i = 0;
+      Array.prototype.forEach.call(grid.children, function(child){
+        if(child.classList && child.classList.contains('reveal')){
+          child.style.setProperty('--rd', (Math.min(i,7) * 90) + 'ms');
+          i++;
+        }
+      });
+    });
+  }
+
+  // ---- Count-up для числовых маркеров ----
+  function runCount(el){
+    if(el.dataset.counted) return;
+    el.dataset.counted = '1';
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(isNaN(target)){ return; }
+    if(reduce){ el.innerHTML = target.toFixed(decimals) + suffix; return; }
+    var dur = 1500, start = null;
+    function fmt(v){
+      var s = v.toFixed(decimals);
+      if(decimals === 0){ s = String(Math.round(v)); }
+      return s + suffix;
+    }
+    function tick(ts){
+      if(start === null) start = ts;
+      var t = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+      el.innerHTML = fmt(target * eased);
+      if(t < 1){ requestAnimationFrame(tick); }
+      else { el.innerHTML = fmt(target); }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // ---- Reveal on scroll (+ stagger + count-up trigger) ----
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          e.target.querySelectorAll('[data-count]').forEach(runCount);
+          io.unobserve(e.target);
+        }
       });
     }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(runCount);
   }
+
+  // ---- Hero: каскадный вход ----
+  (function(){
+    var hero = document.querySelector('.hero');
+    if(!hero) return;
+    if(reduce){ hero.classList.add('enter'); return; }
+    var content = hero.querySelectorAll('.hero-content > *');
+    content.forEach(function(node, i){ node.style.setProperty('--hd', (i * 110) + 'ms'); });
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ hero.classList.add('enter'); });
+    });
+  })();
+
+  // ---- Hero: лёгкий параллакс визуала (десктоп, по скроллу) ----
+  (function(){
+    var visual = document.querySelector('.hero-visual');
+    if(!visual || reduce) return;
+    var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    if(!canHover) return;
+    var pTick = false;
+    function applyParallax(){
+      pTick = false;
+      var y = window.scrollY || window.pageYOffset;
+      if(y > window.innerHeight){ return; }
+      visual.style.transform = 'translateY(' + (y * -0.05) + 'px)';
+    }
+    window.addEventListener('scroll', function(){
+      if(!pTick){ pTick = true; requestAnimationFrame(applyParallax); }
+    }, {passive:true});
+  })();
+
+  // ---- Cards: деликатный 3D-наклон по мыши (десктоп) ----
+  (function(){
+    var canHover = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    if(!canHover || reduce) return;
+    var MAX = 6; // градусы
+    document.querySelectorAll('.feat-card,.serv-card,.step,.rev-card,.price-card').forEach(function(card){
+      var raf = null;
+      function onMove(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        if(raf) return;
+        raf = requestAnimationFrame(function(){
+          raf = null;
+          card.style.setProperty('--ry', (px * MAX).toFixed(2) + 'deg');
+          card.style.setProperty('--rx', (-py * MAX).toFixed(2) + 'deg');
+        });
+      }
+      card.addEventListener('mouseenter', function(){ card.classList.add('tilt'); });
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', function(){
+        card.classList.remove('tilt');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    });
+  })();
 
   // ---- Phone mask ----
   var phone = document.getElementById('phone');
@@ -1041,6 +1269,52 @@
     success.classList.add('show');
     success.focus();
   });
+})();
+</script>
+
+<style id="reveal-fix">
+/* Надёжный показ reveal-элементов: специфичность бьёт конфликтующие правила, opacity гарантирован */
+html.js .reveal.in, html.js [data-reveal].in, html.js [data-stagger].in{opacity:1!important;transform:none;}
+</style>
+<script id="reveal-fix-js">
+(function(){
+  var SEL='.reveal,[data-reveal],[data-stagger]';
+  function show(el){
+    if(el.__shown)return; el.__shown=1;
+    el.classList.add('in');
+    setTimeout(function(){
+      if(parseFloat(getComputedStyle(el).opacity)<0.5){
+        el.style.setProperty('opacity','1','important');
+        el.style.setProperty('transform','none','important');
+        el.style.setProperty('animation','none','important');
+      }
+    },1200);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var apply=function(){[].forEach.call(document.querySelectorAll(SEL),show);};
+    apply(); var k=0,t=setInterval(function(){apply();if(++k>20)clearInterval(t);},300); return;
+  }
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px 300px 0px',threshold:0}):null;
+  function arm(el){if(el.__armed)return;el.__armed=1;if(io)io.observe(el);}
+  function scan(){[].forEach.call(document.querySelectorAll(SEL),arm);}
+  function sweep(){
+    var vh=window.innerHeight, doc=document.documentElement, atBottom=(window.scrollY+vh)>=(doc.scrollHeight-2);
+    [].forEach.call(document.querySelectorAll(SEL),function(el){
+      if(el.classList.contains('in'))return;
+      var r=el.getBoundingClientRect();
+      if(atBottom||(r.top<vh+300&&r.bottom>-300))show(el);
+    });
+  }
+  scan(); sweep();
+  window.addEventListener('scroll',function(){scan();sweep();},{passive:true});
+  window.addEventListener('resize',sweep);
+  window.addEventListener('load',function(){scan();sweep();});
+  if('MutationObserver' in window){new MutationObserver(function(){scan();}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});}
+  function allShown(){return [].every.call(document.querySelectorAll(SEL),function(el){return el.classList.contains('in');});}
+  var n=0,iv=setInterval(function(){scan();sweep();if(allShown()||++n>120)clearInterval(iv);},350);
+  function failsafe(){var vh=window.innerHeight;[].forEach.call(document.querySelectorAll(SEL),function(el){var r=el.getBoundingClientRect();if(r.top<vh-20&&r.bottom>20&&parseFloat(getComputedStyle(el).opacity)<0.1){el.style.setProperty('opacity','1','important');el.style.setProperty('transform','none','important');el.style.setProperty('animation','none','important');}});}
+  window.addEventListener('scroll',failsafe,{passive:true});
+  var fn=0,fiv=setInterval(function(){failsafe();if(++fn>120)clearInterval(fiv);},500);
 })();
 </script>
 </body>

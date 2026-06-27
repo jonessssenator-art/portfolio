@@ -26,6 +26,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<script>
+  /* Помечаем документ как JS-enabled ДО рендера, чтобы избежать «слепого» контента.
+     Скрытые начальные состояния reveal/hero применяются только при наличии класса .js. */
+  document.documentElement.className += ' js';
+</script>
+
 <style>
   :root{
     --graphite:#1A1A1A;
@@ -43,6 +49,7 @@
     --radius:18px;
     --radius-sm:12px;
     --container:1200px;
+    --ease:cubic-bezier(.16,.84,.44,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -68,31 +75,55 @@
     letter-spacing:3px;font-size:13px;font-weight:600;color:var(--gold);
     margin-bottom:18px;
   }
-  .eyebrow::before{content:"";width:34px;height:2px;background:var(--gold)}
+  .eyebrow::before{content:"";width:34px;height:2px;background:var(--gold);transform-origin:left center}
   .sec-title{font-size:clamp(34px,5vw,58px);text-transform:uppercase;margin-bottom:16px}
   .sec-sub{color:var(--muted);max-width:620px;font-size:17px;margin-bottom:48px}
+
+  /* READING PROGRESS BAR */
+  .progress-bar{
+    position:fixed;top:0;left:0;height:3px;width:100%;z-index:200;
+    transform:scaleX(0);transform-origin:0 50%;
+    background:linear-gradient(90deg,var(--gold),var(--gold-soft),var(--beige));
+    box-shadow:0 1px 8px rgba(201,162,39,.5);
+    will-change:transform;pointer-events:none;
+  }
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:10px;
     font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1.5px;
-    font-weight:600;font-size:15px;cursor:pointer;border:none;
-    padding:16px 32px;border-radius:var(--radius-sm);transition:.28s ease;
+    font-weight:600;font-size:15px;cursor:pointer;border:none;position:relative;overflow:hidden;
+    padding:16px 32px;border-radius:var(--radius-sm);
+    transition:transform .28s var(--ease), box-shadow .28s var(--ease), background .28s ease, border-color .28s ease, color .28s ease;
   }
+  .btn>*{position:relative;z-index:1}
+  /* Золотой блик (sheen) — пробегает по кнопке при наведении */
+  .btn::after{
+    content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;z-index:0;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-18deg);transition:none;pointer-events:none;
+  }
+  .btn:hover::after{animation:sheen .8s var(--ease)}
+  @keyframes sheen{0%{left:-130%}100%{left:160%}}
   .btn-gold{background:var(--gold);color:#161616;box-shadow:0 10px 30px rgba(201,162,39,.28)}
   .btn-gold:hover{background:var(--gold-soft);transform:translateY(-3px);box-shadow:0 16px 40px rgba(201,162,39,.4)}
+  .btn-gold:active{transform:translateY(-1px) scale(.97);box-shadow:0 8px 22px rgba(201,162,39,.34)}
   .btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+  .btn-ghost:active{transform:translateY(-1px) scale(.97)}
 
   /* HEADER */
   header{
     position:sticky;top:0;z-index:100;
     background:rgba(20,20,20,.82);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);transition:.3s;
+    border-bottom:1px solid var(--line);
+    transition:background .35s ease, box-shadow .35s ease, backdrop-filter .35s ease;
   }
-  header.scrolled{background:rgba(16,16,16,.96);box-shadow:0 8px 30px rgba(0,0,0,.5)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:84px;gap:24px}
+  header.scrolled{background:rgba(16,16,16,.96);box-shadow:0 8px 30px rgba(0,0,0,.5);backdrop-filter:blur(20px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:84px;gap:24px;transition:height .35s var(--ease)}
+  header.scrolled .nav{height:68px}
   .logo{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px}
-  .logo svg{width:34px;height:34px}
+  .logo svg{width:34px;height:34px;transition:transform .5s var(--ease)}
+  .logo:hover svg{transform:rotate(-12deg)}
   .logo b{color:var(--gold)}
   .nav-menu{display:flex;gap:34px}
   .nav-menu a{
@@ -120,6 +151,17 @@
       radial-gradient(700px 500px at 10% 90%, rgba(201,162,39,.07), transparent 60%),
       var(--graphite);
   }
+  /* «Дышащее» тёплое свечение поверх hero-фона */
+  .hero::after{
+    content:"";position:absolute;z-index:-1;top:-12%;right:-6%;width:60vw;max-width:760px;height:60vw;max-height:760px;
+    background:radial-gradient(circle, rgba(201,162,39,.16), rgba(201,162,39,.05) 45%, transparent 70%);
+    filter:blur(8px);pointer-events:none;
+    animation:breathe 9s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{transform:scale(1);opacity:.85}
+    50%{transform:scale(1.14);opacity:1}
+  }
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
   .hero h1{font-size:clamp(46px,7vw,86px);text-transform:uppercase;margin-bottom:24px}
   .hero h1 span{color:var(--gold)}
@@ -129,7 +171,9 @@
   .hero-marks li{
     display:flex;align-items:center;gap:10px;font-size:14px;color:var(--beige);
     background:var(--card);border:1px solid var(--line);border-radius:50px;padding:10px 18px;
+    transition:transform .28s var(--ease), border-color .28s ease;
   }
+  .hero-marks li:hover{transform:translateY(-3px);border-color:var(--gold)}
   .hero-marks svg{width:18px;height:18px;color:var(--gold);flex-shrink:0}
   .hero-visual{position:relative}
   .hero-img{
@@ -150,14 +194,14 @@
   .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
   .feature{
     background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:34px 28px;transition:.3s;
+    padding:34px 28px;transition:transform .3s var(--ease), border-color .3s ease, box-shadow .3s ease;
   }
   .feature:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow-soft)}
   .feature-ico{
     width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;
     background:linear-gradient(150deg,rgba(201,162,39,.18),rgba(201,162,39,.04));
-    border:1px solid rgba(201,162,39,.35);margin-bottom:22px;
-  }
+    border:1px solid rgba(201,162,39,.35);margin-bottom:22px;transition:transform .4s var(--ease)}
+  .feature:hover .feature-ico{transform:translateY(-2px) rotate(-6deg) scale(1.05)}
   .feature-ico svg{width:30px;height:30px;color:var(--gold)}
   .feature h3{font-size:22px;text-transform:uppercase;margin-bottom:10px}
   .feature p{color:var(--muted);font-size:15px}
@@ -167,16 +211,26 @@
   .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .service{
     background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:30px;display:flex;flex-direction:column;transition:.3s;position:relative;overflow:hidden;
+    padding:30px;display:flex;flex-direction:column;position:relative;overflow:hidden;
+    transition:transform .3s var(--ease), box-shadow .3s ease, border-color .3s ease;
   }
+  /* Деликатная золотая «вспышка» по карточке услуги при наведении */
+  .service::before{
+    content:"";position:absolute;inset:0;z-index:0;opacity:0;pointer-events:none;
+    background:radial-gradient(420px 280px at var(--mx,50%) var(--my,0%), rgba(201,162,39,.12), transparent 60%);
+    transition:opacity .35s ease;
+  }
+  .service:hover::before{opacity:1}
+  .service>*{position:relative;z-index:1}
   .service.featured{border-color:var(--gold);background:linear-gradient(160deg,#262119,#1d1d1d)}
-  .service:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft)}
+  .service:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(0,0,0,.45),0 0 0 1px rgba(201,162,39,.35);border-color:var(--gold)}
   .service-tag{
     position:absolute;top:18px;right:18px;font-family:'Oswald',sans-serif;
     text-transform:uppercase;letter-spacing:1px;font-size:11px;font-weight:600;
-    background:var(--gold);color:#161616;padding:5px 12px;border-radius:50px;
+    background:var(--gold);color:#161616;padding:5px 12px;border-radius:50px;z-index:2;
   }
-  .service-ico{width:48px;height:48px;color:var(--gold);margin-bottom:20px}
+  .service-ico{width:48px;height:48px;color:var(--gold);margin-bottom:20px;transition:transform .4s var(--ease)}
+  .service:hover .service-ico{transform:scale(1.08) rotate(-4deg)}
   .service h3{font-size:24px;text-transform:uppercase;margin-bottom:10px;padding-right:20px}
   .service p{color:var(--muted);font-size:15px;margin-bottom:22px;flex-grow:1}
   .service-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:20px}
@@ -187,16 +241,17 @@
 
   /* STEPS */
   .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-  .step{position:relative;padding:34px 26px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);transition:.3s}
+  .step{position:relative;padding:34px 26px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);transition:transform .3s var(--ease), border-color .3s ease}
   .step:hover{border-color:var(--gold);transform:translateY(-6px)}
-  .step-num{font-family:'Bebas Neue',sans-serif;font-size:58px;color:var(--gold);line-height:.8;opacity:.85;margin-bottom:16px}
+  .step-num{font-family:'Bebas Neue',sans-serif;font-size:58px;color:var(--gold);line-height:.8;opacity:.85;margin-bottom:16px;transition:transform .4s var(--ease)}
+  .step:hover .step-num{transform:translateY(-3px) scale(1.04)}
   .step h3{font-size:20px;text-transform:uppercase;margin-bottom:8px}
   .step p{color:var(--muted);font-size:15px}
 
   /* BARBERS */
   .barbers{background:var(--graphite-2)}
   .barbers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-  .barber{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.3s}
+  .barber{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .3s var(--ease), border-color .3s ease, box-shadow .3s ease}
   .barber:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow-soft)}
   .barber-photo{aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,#2a2a2a,#161616);position:relative}
   .barber-photo img{width:100%;height:100%;object-fit:cover;transition:.5s}
@@ -208,11 +263,12 @@
 
   /* STATS + REVIEWS */
   .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:64px}
-  .stat{text-align:center;padding:36px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+  .stat{text-align:center;padding:36px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);transition:transform .3s var(--ease), border-color .3s ease}
+  .stat:hover{transform:translateY(-5px);border-color:var(--gold)}
   .stat b{font-family:'Bebas Neue',sans-serif;font-size:60px;color:var(--gold);line-height:.9;display:block;letter-spacing:2px}
   .stat span{color:var(--muted);font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:14px}
   .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .review{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:.3s}
+  .review{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .3s var(--ease), border-color .3s ease}
   .review:hover{border-color:var(--gold);transform:translateY(-4px)}
   .review-stars{color:var(--gold);margin-bottom:16px;display:flex;gap:3px}
   .review-stars svg{width:18px;height:18px}
@@ -226,8 +282,8 @@
   /* FAQ */
   .faq{background:var(--graphite-2)}
   .faq-wrap{max-width:860px;margin:0 auto}
-  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:14px;overflow:hidden;transition:.3s}
-  .faq-item.active{border-color:var(--gold)}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:14px;overflow:hidden;transition:border-color .3s ease, box-shadow .3s ease}
+  .faq-item.active{border-color:var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.3)}
   .faq-q{
     width:100%;text-align:left;background:transparent;border:none;cursor:pointer;color:var(--text);
     font-family:'Oswald',sans-serif;font-size:18px;font-weight:500;padding:24px 28px;
@@ -239,7 +295,7 @@
   .faq-icon::before{top:11px;left:3px;width:18px;height:2px}
   .faq-icon::after{top:3px;left:11px;width:2px;height:18px;transition:.3s}
   .faq-item.active .faq-icon::after{transform:rotate(90deg);opacity:0}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
   .faq-a-inner{padding:0 28px 26px;color:var(--muted);font-size:15px}
 
   /* CTA FORM */
@@ -310,11 +366,22 @@
   }
   .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
   .to-top:hover{background:var(--gold-soft);transform:translateY(-3px)}
+  .to-top:active{transform:translateY(-1px) scale(.95)}
   .to-top svg{width:24px;height:24px}
 
-  /* REVEAL */
-  .reveal{opacity:0;transform:translateY(28px);transition:.7s cubic-bezier(.16,.84,.44,1)}
+  /* REVEAL (только при включённом JS — иначе контент виден сразу) */
+  .js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease), transform .7s var(--ease);transition-delay:var(--rd,0ms);will-change:transform,opacity}
   .reveal.in{opacity:1;transform:none}
+
+  /* HERO ENTRANCE (каскад) — только при JS */
+  .js .hero-anim{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease), transform .8s var(--ease);transition-delay:var(--hd,0ms);will-change:transform,opacity}
+  .js .hero-anim.hv{transform:none}
+  .js .hero-anim.in{opacity:1;transform:none}
+  .js .hero-visual.hero-anim{transform:translateY(26px) scale(.97)}
+  .js .hero-visual.hero-anim.in{transform:none}
+
+  /* Параллакс-обёртка визуала (десктоп, по скроллу) */
+  .hero-parallax{will-change:transform}
 
   /* RESPONSIVE */
   @media(max-width:1024px){
@@ -348,6 +415,22 @@
     .form-card{padding:26px 20px}
     .stat b{font-size:50px}
   }
+
+  /* ДОСТУПНОСТЬ: полное отключение анимаций — контент сразу виден и статичен */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;
+      scroll-behavior:auto !important;
+    }
+    html{scroll-behavior:auto}
+    .js .reveal,.js .hero-anim{opacity:1 !important;transform:none !important}
+    .progress-bar{display:none}
+    .hero::after{animation:none;opacity:.9}
+    .hero-parallax{transform:none !important}
+    .btn::after{display:none}
+  }
 </style>
 
 <style id="mobile-safety">
@@ -361,6 +444,8 @@
 </style>
 </head>
 <body>
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
 <header id="header">
   <div class="container">
@@ -381,7 +466,7 @@
       </ul>
       <div class="nav-right">
         <a href="tel:+74951234567" class="nav-phone">+7&nbsp;(495)&nbsp;123-45-67</a>
-        <a href="#book" class="btn btn-gold">Записаться</a>
+        <a href="#book" class="btn btn-gold"><span>Записаться</span></a>
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navMenu">
           <span></span><span></span><span></span>
         </button>
@@ -396,26 +481,28 @@
     <div class="container">
       <div class="hero-grid">
         <div class="hero-text">
-          <span class="eyebrow">Барбершоп с характером</span>
-          <h1>Стрижка как <span>ритуал</span>. Стиль как статус.</h1>
-          <p class="lead">«Бритва» — место, куда мужчины возвращаются. Опытные мастера, опасная бритва, премиальная косметика и крепкий кофе. Здесь вас понимают без лишних слов.</p>
-          <div class="hero-cta">
-            <a href="#book" class="btn btn-gold">Записаться онлайн</a>
-            <a href="#services" class="btn btn-ghost">Услуги и цены</a>
+          <span class="eyebrow hero-anim hv" style="--hd:60ms">Барбершоп с характером</span>
+          <h1 class="hero-anim hv" style="--hd:160ms">Стрижка как <span>ритуал</span>. Стиль как статус.</h1>
+          <p class="lead hero-anim hv" style="--hd:280ms">«Бритва» — место, куда мужчины возвращаются. Опытные мастера, опасная бритва, премиальная косметика и крепкий кофе. Здесь вас понимают без лишних слов.</p>
+          <div class="hero-cta hero-anim hv" style="--hd:400ms">
+            <a href="#book" class="btn btn-gold"><span>Записаться онлайн</span></a>
+            <a href="#services" class="btn btn-ghost"><span>Услуги и цены</span></a>
           </div>
-          <ul class="hero-marks">
+          <ul class="hero-marks hero-anim hv" style="--hd:520ms">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>6 мастеров</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>10&nbsp;000+ клиентов</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>8 лет на одном месте</li>
           </ul>
         </div>
-        <div class="hero-visual">
-          <div class="hero-img">
-            <img src="https://images.unsplash.com/photo-1759134248487-e8baaf31e33e?w=720&h=900&fit=crop&crop=entropy&q=80&auto=format" width="720" height="900" alt="Мастер барбершопа «Бритва» делает мужскую стрижку" loading="eager" onerror="this.remove()">
-          </div>
-          <div class="hero-badge">
-            <b>4,9</b>
-            <span>средний рейтинг<br>по 2&nbsp;300 отзывам</span>
+        <div class="hero-visual hero-anim" style="--hd:340ms">
+          <div class="hero-parallax" id="heroParallax">
+            <div class="hero-img">
+              <img src="https://images.unsplash.com/photo-1759134248487-e8baaf31e33e?w=720&h=900&fit=crop&crop=entropy&q=80&auto=format" width="720" height="900" alt="Мастер барбершопа «Бритва» делает мужскую стрижку" loading="eager" onerror="this.remove()">
+            </div>
+            <div class="hero-badge">
+              <b>4,9</b>
+              <span>средний рейтинг<br>по 2&nbsp;300 отзывам</span>
+            </div>
           </div>
         </div>
       </div>
@@ -428,7 +515,7 @@
       <span class="eyebrow reveal">Почему «Бритва»</span>
       <h2 class="sec-title reveal">Не просто стрижка —<br>мужской ритуал</h2>
       <p class="sec-sub reveal">Мы собрали всё, ради чего сюда стоит приходить снова: руки мастеров, атмосферу и внимание к деталям.</p>
-      <div class="features-grid">
+      <div class="features-grid" data-stagger>
         <article class="feature reveal">
           <div class="feature-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 9a6 6 0 0112 0v3l2 4H4l2-4V9z"/><path d="M9 19a3 3 0 006 0"/></svg></div>
           <h3>Мастера с опытом</h3>
@@ -459,8 +546,8 @@
       <span class="eyebrow reveal">Услуги и цены</span>
       <h2 class="sec-title reveal">Прайс без сюрпризов</h2>
       <p class="sec-sub reveal">Честные цены за честную работу. Финальную стоимость мастер назовёт ещё до того, как возьмёт ножницы.</p>
-      <div class="services-grid">
-        <article class="service reveal">
+      <div class="services-grid" data-stagger data-tilt-group>
+        <article class="service reveal" data-tilt>
           <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.5 8L20 18M8.5 16L20 6"/></svg>
           <h3>Мужская стрижка</h3>
           <p>Подбираем форму под тип волос и образ жизни. Машинка, ножницы, укладка и горячее полотенце.</p>
@@ -470,7 +557,7 @@
           </div>
         </article>
 
-        <article class="service reveal">
+        <article class="service reveal" data-tilt>
           <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3c-3 4-6 5-6 9a6 6 0 0012 0c0-4-3-5-6-9z"/></svg>
           <h3>Моделирование бороды</h3>
           <p>Чёткий контур, окантовка опасной бритвой, уход маслом. Борода, которая держит форму.</p>
@@ -480,7 +567,7 @@
           </div>
         </article>
 
-        <article class="service featured reveal">
+        <article class="service featured reveal" data-tilt>
           <span class="service-tag">Хит</span>
           <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 21l9-9M14 10l7-7M9 3l3 3M21 15l-3 3"/><circle cx="6" cy="6" r="2.5"/></svg>
           <h3>Комплекс «Бритва»</h3>
@@ -491,7 +578,7 @@
           </div>
         </article>
 
-        <article class="service reveal">
+        <article class="service reveal" data-tilt>
           <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 13c4-5 8-7 16-9-1 7-4 11-9 15l-7-6z"/><path d="M4 13l4 3"/></svg>
           <h3>Королевское бритьё</h3>
           <p>Опасная бритва, горячее полотенце, массаж лица и уход. Классика, которую невозможно повторить дома.</p>
@@ -501,7 +588,7 @@
           </div>
         </article>
 
-        <article class="service reveal">
+        <article class="service reveal" data-tilt>
           <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v18M5 8c2-2 4-2 7 0s5 2 7 0M5 16c2-2 4-2 7 0s5 2 7 0"/></svg>
           <h3>Камуфляж седины</h3>
           <p>Деликатное тонирование волос и бороды. Естественный цвет без эффекта «закрашенности».</p>
@@ -511,7 +598,7 @@
           </div>
         </article>
 
-        <article class="service reveal">
+        <article class="service reveal" data-tilt>
           <svg class="service-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 13v6M16 13v6M4 9h16l-1.5 4h-13L4 9z"/><path d="M9 9V6a3 3 0 016 0v3"/></svg>
           <h3>Стрижка отца и сына</h3>
           <p>Двойной визит для папы и ребёнка до 12 лет. Первый поход к барберу — спокойно и без слёз.</p>
@@ -530,7 +617,7 @@
       <span class="eyebrow reveal">Как записаться</span>
       <h2 class="sec-title reveal">Четыре шага до кресла</h2>
       <p class="sec-sub reveal">Запись занимает меньше минуты. Дальше всё сделаем мы.</p>
-      <div class="steps-grid">
+      <div class="steps-grid" data-stagger>
         <article class="step reveal">
           <div class="step-num">01</div>
           <h3>Оставьте заявку</h3>
@@ -561,8 +648,8 @@
       <span class="eyebrow reveal">Наша команда</span>
       <h2 class="sec-title reveal">Мастера, которым доверяют</h2>
       <p class="sec-sub reveal">Каждый барбер «Бритвы» — со своим почерком. Выбирайте мастера или доверьтесь нашему совету.</p>
-      <div class="barbers-grid">
-        <article class="barber reveal">
+      <div class="barbers-grid" data-stagger data-tilt-group>
+        <article class="barber reveal" data-tilt>
           <div class="barber-photo"><img src="https://images.unsplash.com/photo-1647140655214-e4a2d914971f?w=480&h=640&fit=crop&crop=entropy&q=80&auto=format" width="480" height="640" alt="Барбер Артём — топ-мастер барбершопа «Бритва»" loading="lazy" onerror="this.remove()"></div>
           <div class="barber-body">
             <h3>Артём Волков</h3>
@@ -570,7 +657,7 @@
             <p>12 лет в профессии. Фейды, классика и сложные текстуры. Финалист чемпионата барберов.</p>
           </div>
         </article>
-        <article class="barber reveal">
+        <article class="barber reveal" data-tilt>
           <div class="barber-photo"><img src="https://images.unsplash.com/photo-1475669913832-fd187510b578?w=480&h=640&fit=crop&crop=entropy&q=80&auto=format" width="480" height="640" alt="Барбер Денис — мастер по бороде барбершопа «Бритва»" loading="lazy" onerror="this.remove()"></div>
           <div class="barber-body">
             <h3>Денис Громов</h3>
@@ -578,7 +665,7 @@
             <p>9 лет опыта. Король опасной бритвы и идеального контура. Любит сложные формы бороды.</p>
           </div>
         </article>
-        <article class="barber reveal">
+        <article class="barber reveal" data-tilt>
           <div class="barber-photo"><img src="https://images.unsplash.com/photo-1593702275687-f8b402bf1fb5?w=480&h=640&fit=crop&crop=entropy&q=80&auto=format" width="480" height="640" alt="Барбер Илья — барбер-стилист барбершопа «Бритва»" loading="lazy" onerror="this.remove()"></div>
           <div class="barber-body">
             <h3>Илья Северов</h3>
@@ -586,7 +673,7 @@
             <p>7 лет практики. Современные стрижки и работа с седыми волосами. Внимателен к деталям.</p>
           </div>
         </article>
-        <article class="barber reveal">
+        <article class="barber reveal" data-tilt>
           <div class="barber-photo"><img src="https://images.unsplash.com/photo-1754473397061-e18dc1091855?w=480&h=640&fit=crop&crop=entropy&q=80&auto=format" width="480" height="640" alt="Барбер Максим — барбер барбершопа «Бритва»" loading="lazy" onerror="this.remove()"></div>
           <div class="barber-body">
             <h3>Максим Орлов</h3>
@@ -604,13 +691,13 @@
       <span class="eyebrow reveal">Нам доверяют</span>
       <h2 class="sec-title reveal">Цифры и люди</h2>
       <p class="sec-sub reveal">За восемь лет через наши кресла прошли тысячи мужчин. Вот что осталось в сухом остатке.</p>
-      <div class="stats-grid">
-        <div class="stat reveal"><b>8</b><span>лет работы</span></div>
-        <div class="stat reveal"><b>10&nbsp;000+</b><span>довольных клиентов</span></div>
-        <div class="stat reveal"><b>6</b><span>мастеров в команде</span></div>
-        <div class="stat reveal"><b>4,9</b><span>рейтинг на картах</span></div>
+      <div class="stats-grid" data-stagger>
+        <div class="stat reveal"><b data-count="8">8</b><span>лет работы</span></div>
+        <div class="stat reveal"><b data-count="10000" data-suffix="+" data-sep="нбсп">10&nbsp;000+</b><span>довольных клиентов</span></div>
+        <div class="stat reveal"><b data-count="6">6</b><span>мастеров в команде</span></div>
+        <div class="stat reveal"><b data-count="4.9" data-decimals="1" data-comma="1">4,9</b><span>рейтинг на картах</span></div>
       </div>
-      <div class="reviews-grid">
+      <div class="reviews-grid" data-stagger>
         <article class="review reveal">
           <div class="review-stars">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1L2 9.4h7.6L12 2z"/></svg>
@@ -662,7 +749,7 @@
     <div class="container">
       <span class="eyebrow reveal">Вопросы и ответы</span>
       <h2 class="sec-title reveal">Частые вопросы</h2>
-      <div class="faq-wrap">
+      <div class="faq-wrap" data-stagger>
         <div class="faq-item reveal">
           <button class="faq-q" aria-expanded="false" aria-controls="faqA1">Нужно ли записываться заранее?<span class="faq-icon" aria-hidden="true"></span></button>
           <div class="faq-a" id="faqA1"><div class="faq-a-inner">Да, рекомендуем. У популярных мастеров расписание заполнено на несколько дней вперёд. Запись гарантирует, что вас примут точно вовремя, без ожидания.</div></div>
@@ -705,7 +792,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Никаких очередей и ожидания</li>
           </ul>
         </div>
-        <div class="form-card reveal">
+        <div class="form-card reveal" style="--rd:120ms">
           <h3>Записаться в «Бритву»</h3>
           <form id="bookForm" novalidate>
             <div class="field" id="fName">
@@ -723,7 +810,7 @@
               <span>Согласен на обработку <a href="#privacy">персональных данных</a> и принимаю политику конфиденциальности.</span>
             </label>
             <div class="err-msg" id="agreeErr" style="margin:-18px 0 18px;display:none">Нужно согласиться на обработку данных.</div>
-            <button type="submit" class="btn btn-gold">Записаться</button>
+            <button type="submit" class="btn btn-gold"><span>Записаться</span></button>
           </form>
           <div class="form-success" id="formSuccess" role="status" tabindex="-1">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l2.5 2.5L16 9"/></svg>
@@ -797,16 +884,32 @@
 (function(){
   'use strict';
 
-  // Sticky header shadow
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isDesktop = window.matchMedia && window.matchMedia('(min-width:1025px) and (pointer:fine)').matches;
+
+  // Sticky header shadow + back-to-top + reading progress
   var header = document.getElementById('header');
   var toTop = document.getElementById('toTop');
-  function onScroll(){
+  var progress = document.getElementById('progressBar');
+  var rafScroll = false;
+  function applyScroll(){
+    rafScroll = false;
     var y = window.pageYOffset;
     header.classList.toggle('scrolled', y > 20);
     toTop.classList.toggle('show', y > 600);
+    if(progress){
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - doc.clientHeight) || 1;
+      var p = Math.min(1, Math.max(0, y / max));
+      progress.style.transform = 'scaleX(' + p + ')';
+    }
+  }
+  function onScroll(){
+    if(!rafScroll){ rafScroll = true; requestAnimationFrame(applyScroll); }
   }
   window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
+  window.addEventListener('resize', onScroll, {passive:true});
+  applyScroll();
 
   // Burger menu
   var burger = document.getElementById('burger');
@@ -829,10 +932,10 @@
 
   // Back to top
   toTop.addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
   });
 
-  // FAQ accordion
+  // FAQ accordion (плавное раскрытие по высоте)
   document.querySelectorAll('.faq-item').forEach(function(item){
     var btn = item.querySelector('.faq-q');
     var ans = item.querySelector('.faq-a');
@@ -850,14 +953,122 @@
       }
     });
   });
+  // Пересчёт высоты раскрытого FAQ при ресайзе (например, перенос строк)
+  window.addEventListener('resize', function(){
+    var open = document.querySelector('.faq-item.active .faq-a');
+    if(open) open.style.maxHeight = open.scrollHeight + 'px';
+  }, {passive:true});
 
-  // Reveal on scroll
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  // Назначаем stagger-задержки внутри групп
+  document.querySelectorAll('[data-stagger]').forEach(function(group){
+    var kids = group.querySelectorAll(':scope > .reveal');
+    kids.forEach(function(el, i){
+      el.style.setProperty('--rd', (i * 90) + 'ms');
     });
-  }, {threshold:0.12});
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  });
+
+  // Count-up счётчики
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+  function runCounter(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    var useComma = el.getAttribute('data-comma') === '1';
+    var groupSep = el.getAttribute('data-sep') === 'нбсп';
+    var finalText = el.textContent; // запоминаем исходный текст как эталон финала
+    var dur = 1500, start = null;
+    function fmt(val){
+      var s = val.toFixed(decimals);
+      if(groupSep && decimals === 0){
+        // целочисленная группировка тысяч неразрывным пробелом
+        s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      }
+      if(useComma) s = s.replace('.', ',');
+      return s + suffix;
+    }
+    function tick(ts){
+      if(start === null) start = ts;
+      var t = Math.min(1, (ts - start) / dur);
+      var val = target * easeOutCubic(t);
+      el.textContent = fmt(val);
+      if(t < 1){ requestAnimationFrame(tick); }
+      else { el.textContent = finalText; } // гарантируем точный исходный формат
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Reveal on scroll + триггер счётчиков
+  var supportsIO = 'IntersectionObserver' in window;
+  if(reduceMotion || !supportsIO){
+    // Фолбэк: показываем всё сразу, без анимаций
+    document.querySelectorAll('.reveal, .hero-anim').forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('[data-count]').forEach(function(el){ /* оставляем исходный текст */ });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+    var countIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ runCounter(e.target); countIO.unobserve(e.target); }
+      });
+    }, {threshold:0.6});
+    document.querySelectorAll('[data-count]').forEach(function(el){ countIO.observe(el); });
+
+    // Hero entrance — каскад после загрузки
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        document.querySelectorAll('.hero-anim').forEach(function(el){ el.classList.add('in'); });
+      });
+    });
+  }
+
+  // Деликатный 3D-наклон карточек (десктоп, по мыши) + позиция золотой вспышки
+  if(isDesktop && !reduceMotion){
+    document.querySelectorAll('[data-tilt]').forEach(function(card){
+      var raf = null, rx = 0, ry = 0, tx = 0, ty = 0;
+      card.style.transformStyle = 'preserve-3d';
+      function apply(){
+        raf = null;
+        card.style.transform = 'translateY(-6px) perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+      }
+      card.addEventListener('mousemove', function(ev){
+        var r = card.getBoundingClientRect();
+        var px = (ev.clientX - r.left) / r.width;
+        var py = (ev.clientY - r.top) / r.height;
+        ry = (px - 0.5) * 6;   // влево/вправо
+        rx = (0.5 - py) * 6;   // вверх/вниз
+        card.style.setProperty('--mx', (px * 100) + '%');
+        card.style.setProperty('--my', (py * 100) + '%');
+        if(!raf) raf = requestAnimationFrame(apply);
+      });
+      card.addEventListener('mouseleave', function(){
+        if(raf){ cancelAnimationFrame(raf); raf = null; }
+        card.style.transform = '';
+      });
+    });
+
+    // Лёгкий параллакс визуала героя по скроллу
+    var heroParallax = document.getElementById('heroParallax');
+    var hero = document.getElementById('hero');
+    if(heroParallax && hero){
+      var prafPending = false;
+      function parallax(){
+        prafPending = false;
+        var rect = hero.getBoundingClientRect();
+        if(rect.bottom < 0 || rect.top > window.innerHeight) return;
+        var offset = (window.innerHeight - rect.top) * 0.04 - 14;
+        heroParallax.style.transform = 'translateY(' + offset.toFixed(1) + 'px)';
+      }
+      window.addEventListener('scroll', function(){
+        if(!prafPending){ prafPending = true; requestAnimationFrame(parallax); }
+      }, {passive:true});
+      parallax();
+    }
+  }
 
   // Phone mask
   var phone = document.getElementById('phone');
@@ -905,9 +1116,55 @@
     if(!ok) return;
     form.style.display = 'none';
     success.classList.add('show');
-    success.scrollIntoView({behavior:'smooth', block:'center'});
+    success.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'center'});
     success.focus();
   });
+})();
+</script>
+
+<style id="reveal-fix">
+/* Надёжный показ reveal-элементов: специфичность бьёт конфликтующие правила, opacity гарантирован */
+html.js .reveal.in, html.js [data-reveal].in, html.js [data-stagger].in{opacity:1!important;transform:none;}
+</style>
+<script id="reveal-fix-js">
+(function(){
+  var SEL='.reveal,[data-reveal],[data-stagger]';
+  function show(el){
+    if(el.__shown)return; el.__shown=1;
+    el.classList.add('in');
+    setTimeout(function(){
+      if(parseFloat(getComputedStyle(el).opacity)<0.5){
+        el.style.setProperty('opacity','1','important');
+        el.style.setProperty('transform','none','important');
+        el.style.setProperty('animation','none','important');
+      }
+    },1200);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var apply=function(){[].forEach.call(document.querySelectorAll(SEL),show);};
+    apply(); var k=0,t=setInterval(function(){apply();if(++k>20)clearInterval(t);},300); return;
+  }
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px 300px 0px',threshold:0}):null;
+  function arm(el){if(el.__armed)return;el.__armed=1;if(io)io.observe(el);}
+  function scan(){[].forEach.call(document.querySelectorAll(SEL),arm);}
+  function sweep(){
+    var vh=window.innerHeight, doc=document.documentElement, atBottom=(window.scrollY+vh)>=(doc.scrollHeight-2);
+    [].forEach.call(document.querySelectorAll(SEL),function(el){
+      if(el.classList.contains('in'))return;
+      var r=el.getBoundingClientRect();
+      if(atBottom||(r.top<vh+300&&r.bottom>-300))show(el);
+    });
+  }
+  scan(); sweep();
+  window.addEventListener('scroll',function(){scan();sweep();},{passive:true});
+  window.addEventListener('resize',sweep);
+  window.addEventListener('load',function(){scan();sweep();});
+  if('MutationObserver' in window){new MutationObserver(function(){scan();}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});}
+  function allShown(){return [].every.call(document.querySelectorAll(SEL),function(el){return el.classList.contains('in');});}
+  var n=0,iv=setInterval(function(){scan();sweep();if(allShown()||++n>120)clearInterval(iv);},350);
+  function failsafe(){var vh=window.innerHeight;[].forEach.call(document.querySelectorAll(SEL),function(el){var r=el.getBoundingClientRect();if(r.top<vh-20&&r.bottom>20&&parseFloat(getComputedStyle(el).opacity)<0.1){el.style.setProperty('opacity','1','important');el.style.setProperty('transform','none','important');el.style.setProperty('animation','none','important');}});}
+  window.addEventListener('scroll',failsafe,{passive:true});
+  var fn=0,fiv=setInterval(function(){failsafe();if(++fn>120)clearInterval(fiv);},500);
 })();
 </script>
 </body>

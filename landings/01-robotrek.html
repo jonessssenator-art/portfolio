@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>РОБОТРЕК — школа робототехники и программирования для детей 7–14 лет</title>
@@ -70,14 +71,28 @@
     display:inline-flex;align-items:center;justify-content:center;gap:10px;
     font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;
     padding:15px 28px;border-radius:999px;border:none;cursor:pointer;
-    transition:var(--t);white-space:nowrap;
+    transition:transform var(--t),box-shadow var(--t),background var(--t),border-color var(--t);
+    white-space:nowrap;position:relative;overflow:hidden;isolation:isolate;
   }
+  .btn>*{position:relative;z-index:1}
+  /* Sheen — мягкий блик, пробегающий по кнопке при наведении */
+  .btn::after{
+    content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;z-index:0;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+    transform:skewX(-18deg);transition:none;pointer-events:none;
+  }
+  .btn:hover::after{animation:btn-sheen .7s ease forwards}
+  @keyframes btn-sheen{from{left:-130%}to{left:160%}}
+  .btn:active{transform:translateY(0) scale(.97)}
   .btn-primary{background:var(--orange);color:#fff;box-shadow:0 8px 24px rgba(245,158,11,.35)}
-  .btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(245,158,11,.45)}
+  .btn-primary:hover{background:var(--orange-dark);transform:translateY(-3px);box-shadow:0 14px 32px rgba(245,158,11,.45)}
+  .btn-primary:active{transform:translateY(-1px) scale(.97)}
   .btn-indigo{background:var(--indigo);color:#fff;box-shadow:0 8px 24px rgba(79,70,229,.3)}
-  .btn-indigo:hover{background:var(--indigo-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,70,229,.4)}
+  .btn-indigo:hover{background:var(--indigo-dark);transform:translateY(-3px);box-shadow:0 14px 32px rgba(79,70,229,.4)}
+  .btn-indigo:active{transform:translateY(-1px) scale(.97)}
   .btn-ghost{background:#fff;color:var(--indigo);border:2px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--indigo);transform:translateY(-2px)}
+  .btn-ghost:hover{border-color:var(--indigo);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .btn-ghost:active{transform:translateY(-1px) scale(.97)}
   .btn-block{width:100%}
 
   /* Header */
@@ -85,8 +100,14 @@
     position:sticky;top:0;z-index:100;
     background:rgba(250,250,252,.85);backdrop-filter:blur(14px);
     border-bottom:1px solid var(--line);
+    transition:background var(--t),box-shadow var(--t),border-color var(--t),backdrop-filter var(--t);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+  header.scrolled{
+    background:rgba(250,250,252,.92);backdrop-filter:blur(20px) saturate(1.4);
+    box-shadow:0 8px 30px rgba(26,26,46,.08);border-bottom-color:transparent;
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px;transition:height var(--t)}
+  header.scrolled .nav{height:64px}
   .logo{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px}
   .logo .mark{
     width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
@@ -95,8 +116,15 @@
   .logo .mark svg{width:24px;height:24px}
   .logo b{color:var(--indigo)}
   .nav-menu{display:flex;align-items:center;gap:28px}
-  .nav-menu a{font-weight:600;font-size:15px;color:var(--ink);transition:var(--t)}
-  .nav-menu a:hover{color:var(--indigo)}
+  .nav-menu>li>a{font-weight:600;font-size:15px;color:var(--ink);transition:var(--t);position:relative}
+  .nav-menu>li>a:hover{color:var(--indigo)}
+  /* Анимированное подчёркивание навигации */
+  .nav-menu>li>a:not(.btn)::after{
+    content:"";position:absolute;left:0;bottom:-4px;height:2px;width:100%;
+    background:linear-gradient(90deg,var(--indigo),var(--orange));border-radius:2px;
+    transform:scaleX(0);transform-origin:left;transition:transform var(--t);
+  }
+  .nav-menu>li>a:not(.btn):hover::after{transform:scaleX(1)}
   .nav-right{display:flex;align-items:center;gap:18px}
   .nav-phone{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px}
   .nav-phone svg{width:18px;height:18px;color:var(--indigo)}
@@ -114,6 +142,17 @@
   .hero::before{
     content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;
     background:radial-gradient(circle,rgba(79,70,229,.12),transparent 70%);z-index:0;
+    animation:hero-breathe 9s ease-in-out infinite;will-change:transform,opacity;
+  }
+  /* Второе «дышащее» свечение в тёплом акценте */
+  .hero::after{
+    content:"";position:absolute;bottom:-220px;left:-160px;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(245,158,11,.10),transparent 70%);z-index:0;
+    animation:hero-breathe 11s ease-in-out infinite reverse;will-change:transform,opacity;
+  }
+  @keyframes hero-breathe{
+    0%,100%{transform:scale(1) translate(0,0);opacity:.85}
+    50%{transform:scale(1.12) translate(-18px,14px);opacity:1}
   }
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:1}
   .hero h1{font-size:clamp(34px,5.2vw,58px);font-weight:900;margin-bottom:22px}
@@ -279,9 +318,35 @@
   .totop:hover{background:var(--indigo-dark)}
   .totop svg{width:24px;height:24px}
 
-  /* Reveal animation */
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  /* Reveal animation — скрытое состояние только при включённом JS */
+  .reveal{transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+  html.js .reveal{opacity:0;transform:translateY(34px);will-change:opacity,transform}
   .reveal.in{opacity:1;transform:none}
+  /* Стаггер внутри групп карточек: задержка по data-индексу */
+  html.js .reveal[data-rd]{transition-delay:calc(var(--rd,0) * 90ms)}
+
+  /* Reading progress bar — тонкая градиентная полоса сверху */
+  .read-progress{
+    position:fixed;top:0;left:0;height:3px;width:100%;z-index:200;
+    transform:scaleX(0);transform-origin:left;
+    background:linear-gradient(90deg,var(--indigo),var(--orange));
+    box-shadow:0 1px 6px rgba(79,70,229,.4);pointer-events:none;
+  }
+
+  /* Hero entrance — каскадное появление при загрузке */
+  html.js .hero-anim{opacity:0;transform:translateY(26px);will-change:opacity,transform}
+  .hero.loaded .hero-anim{
+    opacity:1;transform:none;
+    transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);
+    transition-delay:calc(var(--he,0) * 120ms);
+  }
+  html.js .hero-visual.hero-anim{transform:translateY(26px) scale(.97)}
+
+  /* Card tilt — деликатный 3D-наклон по движению мыши (десктоп) */
+  .tilt{transition:transform .18s cubic-bezier(.4,0,.2,1),box-shadow var(--t),border-color var(--t)}
+
+  /* Count-up: чтобы цифры не «прыгали» по ширине при накрутке */
+  .count{font-variant-numeric:tabular-nums}
 
   /* Responsive */
   @media(max-width:1024px){
@@ -350,8 +415,27 @@
   table{max-width:100%;}
 }
 </style>
+
+<style id="a11y-motion">
+/* Доступность: при reduce-motion полностью отключаем анимации и показываем контент сразу */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;scroll-behavior:auto !important;
+  }
+  html.js .reveal,
+  html.js .hero-anim,
+  html.js .hero-visual.hero-anim{opacity:1 !important;transform:none !important}
+  .hero::before,.hero::after{animation:none !important}
+  .read-progress{display:none !important}
+  .tilt{transform:none !important}
+  .btn::after{display:none !important}
+}
+</style>
 </head>
 <body>
+
+<div class="read-progress" id="readProgress" aria-hidden="true"></div>
 
 <!-- HEADER -->
 <header>
@@ -390,23 +474,23 @@
   <div class="container">
     <div class="hero-grid">
       <div class="hero-text">
-        <span class="eyebrow">🤖 Школа робототехники для детей 7–14&nbsp;лет</span>
-        <h1>Бесплатное пробное занятие — ребёнок соберёт <span class="hl-orange">первого робота</span> уже сегодня</h1>
-        <p class="hero-sub">Учим детей создавать, программировать и думать как инженеры: от блоков Scratch до Python и плат Arduino. Преподаватели — практикующие инженеры, мини-группы до 8&nbsp;человек.</p>
-        <div class="hero-cta">
+        <span class="eyebrow hero-anim" style="--he:0">🤖 Школа робототехники для детей 7–14&nbsp;лет</span>
+        <h1 class="hero-anim" style="--he:1">Бесплатное пробное занятие — ребёнок соберёт <span class="hl-orange">первого робота</span> уже сегодня</h1>
+        <p class="hero-sub hero-anim" style="--he:2">Учим детей создавать, программировать и думать как инженеры: от блоков Scratch до Python и плат Arduino. Преподаватели — практикующие инженеры, мини-группы до 8&nbsp;человек.</p>
+        <div class="hero-cta hero-anim" style="--he:3">
           <a href="#signup" class="btn btn-primary">
             Записаться на пробное
             <svg viewBox="0 0 24 24" fill="none" width="20" height="20" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#programs" class="btn btn-ghost">Программы по возрастам</a>
         </div>
-        <div class="trust">
-          <div class="trust-item"><div class="num">5 лет</div><div class="lbl">на рынке</div></div>
-          <div class="trust-item"><div class="num">1200+</div><div class="lbl">выпускников</div></div>
-          <div class="trust-item"><div class="num">3</div><div class="lbl">филиала в городе</div></div>
+        <div class="trust hero-anim" style="--he:4">
+          <div class="trust-item"><div class="num count" data-count="5" data-suffix=" лет">5 лет</div><div class="lbl">на рынке</div></div>
+          <div class="trust-item"><div class="num count" data-count="1200" data-suffix="+">1200+</div><div class="lbl">выпускников</div></div>
+          <div class="trust-item"><div class="num count" data-count="3">3</div><div class="lbl">филиала в городе</div></div>
         </div>
       </div>
-      <div class="hero-visual">
+      <div class="hero-visual hero-anim" style="--he:3">
         <div class="hero-img">
           <img src="https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?w=640&h=800&fit=crop&crop=entropy&q=80&auto=format" alt="Дети собирают робота на занятии в школе РОБОТРЕК" loading="eager" onerror="this.remove()">
         </div>
@@ -429,22 +513,22 @@
       <p>Мы не просто проводим уроки. Мы выращиваем будущих инженеров через проекты, которые ребёнок с гордостью покажет родителям.</p>
     </div>
     <div class="adv-grid">
-      <div class="card adv-card reveal">
+      <div class="card adv-card reveal tilt">
         <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Преподаватели-инженеры</h3>
         <p>Уроки ведут практикующие инженеры и разработчики, а не «вожатые». Ребёнок учится у тех, кто реально создаёт технику.</p>
       </div>
-      <div class="card adv-card reveal">
+      <div class="card adv-card reveal tilt">
         <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="2"/><path d="M3 20a6 6 0 0112 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 6a3 3 0 010 6M19 20a6 6 0 00-3-5.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
         <h3>Мини-группы до 8&nbsp;детей</h3>
         <p>Преподаватель успевает подойти к каждому. Ребёнок не теряется в толпе и не остаётся с непонятой темой один на один.</p>
       </div>
-      <div class="card adv-card reveal">
+      <div class="card adv-card reveal tilt">
         <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="2"/></svg></div>
         <h3>Учим думать, а не зубрить</h3>
         <p>Каждое занятие — это инженерная задача. Ребёнок учится разбивать проблему на шаги, тестировать и доводить проект до результата.</p>
       </div>
-      <div class="card adv-card reveal">
+      <div class="card adv-card reveal tilt">
         <div class="adv-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M9 9l-2 2.5L9 14M15 9l2 2.5L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Реальное «железо» и код</h3>
         <p>Scratch, Python и платы Arduino — всё оборудование уже в классе. Ничего покупать не нужно: приходите и собирайте.</p>
@@ -462,7 +546,7 @@
       <p>Группы формируются по возрасту и уровню — от первых блоков до настоящих устройств на микроконтроллерах.</p>
     </div>
     <div class="prog-grid">
-      <article class="card prog-card reveal">
+      <article class="card prog-card reveal tilt">
         <div class="prog-media" style="background:linear-gradient(135deg,#4F46E5,#818CF8)">
           <span class="prog-age">7–9&nbsp;лет</span>
           <img src="https://images.unsplash.com/photo-1589254065909-b7086229d08c?w=600&h=375&fit=crop&crop=entropy&q=80&auto=format" alt="Младшая группа собирает робота из конструктора" loading="lazy" onerror="this.remove()">
@@ -479,7 +563,7 @@
           <a href="#signup" class="btn btn-indigo btn-block">Записать ребёнка</a>
         </div>
       </article>
-      <article class="card prog-card reveal">
+      <article class="card prog-card reveal tilt">
         <div class="prog-media" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">
           <span class="prog-age">10–12&nbsp;лет</span>
           <img src="https://images.unsplash.com/photo-1536148935331-408321065b18?w=600&h=375&fit=crop&crop=entropy&q=80&auto=format" alt="Средняя группа пишет код на занятии по программированию" loading="lazy" onerror="this.remove()">
@@ -496,7 +580,7 @@
           <a href="#signup" class="btn btn-indigo btn-block">Записать ребёнка</a>
         </div>
       </article>
-      <article class="card prog-card reveal">
+      <article class="card prog-card reveal tilt">
         <div class="prog-media" style="background:linear-gradient(135deg,#4F46E5,#F59E0B)">
           <span class="prog-age">13–14&nbsp;лет</span>
           <img src="https://images.unsplash.com/photo-1631378297854-185cff6b0986?w=600&h=375&fit=crop&crop=entropy&q=80&auto=format" alt="Старшая группа собирает устройство на плате Arduino" loading="lazy" onerror="this.remove()">
@@ -526,22 +610,22 @@
       <p>Начать проще, чем кажется. Уже на первом, бесплатном занятии ребёнок соберёт работающее устройство.</p>
     </div>
     <div class="steps-grid">
-      <div class="card step reveal">
+      <div class="card step reveal tilt">
         <div class="step-num">01</div>
         <h3>Заявка за минуту</h3>
         <p>Оставляете имя и телефон. Перезваниваем, подбираем удобное время и группу по возрасту.</p>
       </div>
-      <div class="card step reveal">
+      <div class="card step reveal tilt">
         <div class="step-num">02</div>
         <h3>Бесплатное пробное</h3>
         <p>Ребёнок приходит на занятие, знакомится с преподавателем и собирает своего первого робота.</p>
       </div>
-      <div class="card step reveal">
+      <div class="card step reveal tilt">
         <div class="step-num">03</div>
         <h3>Свой маршрут обучения</h3>
         <p>Вместе определяем уровень и подбираем программу — от Scratch до Arduino, без перегруза.</p>
       </div>
-      <div class="card step reveal">
+      <div class="card step reveal tilt">
         <div class="step-num">04</div>
         <h3>Проекты и результат</h3>
         <p>Каждый модуль — готовый проект в портфолио ребёнка. Родители видят прогресс на отчётных встречах.</p>
@@ -555,10 +639,10 @@
   <div class="container">
     <div class="stats-band reveal">
       <div class="stats-grid">
-        <div class="stat"><div class="num">5<span class="acc"> лет</span></div><div class="lbl">учим детей робототехнике</div></div>
-        <div class="stat"><div class="num">1200<span class="acc">+</span></div><div class="lbl">выпускников за всё время</div></div>
-        <div class="stat"><div class="num">3</div><div class="lbl">филиала в шаговой доступности</div></div>
-        <div class="stat"><div class="num">94<span class="acc">%</span></div><div class="lbl">продолжают после пробного</div></div>
+        <div class="stat"><div class="num"><span class="count" data-count="5">5</span><span class="acc"> лет</span></div><div class="lbl">учим детей робототехнике</div></div>
+        <div class="stat"><div class="num"><span class="count" data-count="1200">1200</span><span class="acc">+</span></div><div class="lbl">выпускников за всё время</div></div>
+        <div class="stat"><div class="num"><span class="count" data-count="3">3</span></div><div class="lbl">филиала в шаговой доступности</div></div>
+        <div class="stat"><div class="num"><span class="count" data-count="94">94</span><span class="acc">%</span></div><div class="lbl">продолжают после пробного</div></div>
       </div>
     </div>
     <div class="section-head reveal">
@@ -567,7 +651,7 @@
       <p>Честные отзывы родителей, чьи дети уже занимаются в РОБОТРЕК.</p>
     </div>
     <div class="rev-grid">
-      <article class="card rev-card reveal">
+      <article class="card rev-card reveal tilt">
         <div class="stars" aria-label="5 из 5">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
@@ -581,7 +665,7 @@
           <div><div class="name">Анна Лебедева</div><div class="role">мама Миши, 9&nbsp;лет</div></div>
         </div>
       </article>
-      <article class="card rev-card reveal">
+      <article class="card rev-card reveal tilt">
         <div class="stars" aria-label="5 из 5">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
@@ -595,7 +679,7 @@
           <div><div class="name">Дмитрий Соколов</div><div class="role">папа Кати, 11&nbsp;лет</div></div>
         </div>
       </article>
-      <article class="card rev-card reveal">
+      <article class="card rev-card reveal tilt">
         <div class="stars" aria-label="5 из 5">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 6.9L12 17.5 5.7 20.8 7 13.9 2 9.2l7.1-.9z"/></svg>
@@ -622,7 +706,7 @@
       <p>Оборудование, материалы и доступ к проектам уже включены. Первое пробное занятие — бесплатно.</p>
     </div>
     <div class="price-grid">
-      <div class="card price-card reveal">
+      <div class="card price-card reveal tilt">
         <h3>Разовое занятие</h3>
         <p class="desc">Чтобы попробовать формат после бесплатного пробного или прийти на отдельный модуль.</p>
         <div class="price-val">900&nbsp;₽<span> / занятие</span></div>
@@ -634,7 +718,7 @@
         </ul>
         <a href="#signup" class="btn btn-ghost btn-block">Выбрать</a>
       </div>
-      <div class="card price-card featured reveal">
+      <div class="card price-card featured reveal tilt">
         <h3>Абонемент на 4 занятия</h3>
         <p class="desc">Оптимальный старт: месяц обучения, один проект и понятный прогресс ребёнка.</p>
         <div class="price-val">3 200&nbsp;₽<span> / 4 занятия</span></div>
@@ -647,7 +731,7 @@
         </ul>
         <a href="#signup" class="btn btn-primary btn-block">Выбрать тариф</a>
       </div>
-      <div class="card price-card reveal">
+      <div class="card price-card reveal tilt">
         <h3>Абонемент на 8 занятий</h3>
         <p class="desc">Максимальная выгода для тех, кто настроен серьёзно: два месяца и большой проект.</p>
         <div class="price-val">5 900&nbsp;₽<span> / 8 занятий</span></div>
@@ -895,16 +979,75 @@
   phone.addEventListener('input', function(){ if(validPhone(phone.value)) setErr(fPhone, phone, false); });
   consent.addEventListener('change', function(){ if(consent.checked) setErr(fConsent, null, false); });
 
-  // To-top button
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia &&
+    window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  // Hero entrance — запуск каскада после загрузки
+  var hero = document.getElementById('hero');
+  function startHero(){ if(hero) hero.classList.add('loaded'); }
+  if(document.readyState === 'complete'){ startHero(); }
+  else { window.addEventListener('load', startHero); requestAnimationFrame(function(){ requestAnimationFrame(startHero); }); }
+
+  // Reveal stagger — нумеруем reveal-элементы внутри общего родителя,
+  // чтобы карточки в одной сетке появлялись каскадом
+  (function(){
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var p = el.parentNode;
+      if(typeof p.__rd !== 'number') p.__rd = 0;
+      el.style.setProperty('--rd', p.__rd);
+      el.setAttribute('data-rd','');
+      p.__rd = p.__rd >= 5 ? 0 : p.__rd + 1; // ограничиваем накопленную задержку
+    });
+  })();
+
+  // Count-up — анимированная накрутка чисел
+  function animateCount(el){
+    if(el.__counted) return; el.__counted = true;
+    var target = parseFloat(el.getAttribute('data-count')) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(reduceMotion){ el.textContent = target + suffix; return; }
+    var dur = 1400, start = null;
+    function tick(ts){
+      if(start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      var val = Math.round(target * eased);
+      el.textContent = val + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // To-top button + header shrink + reading progress (один scroll-обработчик)
   var toTop = document.getElementById('toTop');
+  var header = document.querySelector('header');
+  var progress = document.getElementById('readProgress');
+  var ticking = false;
+  function onScroll(){
+    var y = window.scrollY || window.pageYOffset || 0;
+    if(toTop) toTop.classList.toggle('show', y > 600);
+    if(header) header.classList.toggle('scrolled', y > 12);
+    if(progress){
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - doc.clientHeight) || 1;
+      var ratio = Math.min(Math.max(y / max, 0), 1);
+      progress.style.transform = 'scaleX(' + ratio + ')';
+    }
+    ticking = false;
+  }
   window.addEventListener('scroll', function(){
-    toTop.classList.toggle('show', window.scrollY > 600);
+    if(!ticking){ ticking = true; requestAnimationFrame(onScroll); }
   }, {passive:true});
+  onScroll();
   toTop.addEventListener('click', function(){
     window.scrollTo({top:0, behavior:'smooth'});
   });
 
-  // Reveal on scroll
+  // Reveal on scroll + count-up trigger (фолбэк — всё видимо)
+  var counters = document.querySelectorAll('.count');
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
@@ -915,9 +1058,110 @@
       });
     }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ animateCount(en.target); cio.unobserve(en.target); }
+      });
+    }, {threshold:0.6});
+    counters.forEach(function(el){ cio.observe(el); });
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    counters.forEach(function(el){
+      el.textContent = (parseFloat(el.getAttribute('data-count')) || 0) +
+        (el.getAttribute('data-suffix') || '');
+    });
   }
+
+  // Card tilt — деликатный 3D-наклон по движению мыши (только десктоп)
+  if(canHover && !reduceMotion){
+    var MAX = 5; // максимальный наклон в градусах
+    document.querySelectorAll('.tilt').forEach(function(card){
+      var raf = null, rx = 0, ry = 0;
+      function apply(){
+        card.style.transform =
+          'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-6px)';
+        raf = null;
+      }
+      card.addEventListener('mousemove', function(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        ry = px * MAX * 2;
+        rx = -py * MAX * 2;
+        if(!raf) raf = requestAnimationFrame(apply);
+      });
+      card.addEventListener('mouseleave', function(){
+        if(raf){ cancelAnimationFrame(raf); raf = null; }
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // Лёгкий параллакс hero-визуала по скроллу (только десктоп, после входной анимации)
+  if(canHover && !reduceMotion){
+    var visual = document.querySelector('.hero-visual');
+    if(visual){
+      var pActive = false, pTick = false;
+      // включаем параллакс только когда входная анимация завершилась,
+      // чтобы не перебивать transform каскадного появления
+      setTimeout(function(){ pActive = true; visual.style.willChange = 'transform'; }, 1400);
+      window.addEventListener('scroll', function(){
+        if(!pActive || pTick) return; pTick = true;
+        requestAnimationFrame(function(){
+          var y = window.scrollY || 0;
+          if(y < 900) visual.style.transform = 'translateY(' + (y * -0.05) + 'px)';
+          pTick = false;
+        });
+      }, {passive:true});
+    }
+  }
+})();
+</script>
+
+<style id="reveal-fix">
+/* Надёжный показ reveal-элементов: специфичность бьёт конфликтующие правила, opacity гарантирован */
+html.js .reveal.in, html.js [data-reveal].in, html.js [data-stagger].in{opacity:1!important;transform:none;}
+</style>
+<script id="reveal-fix-js">
+(function(){
+  var SEL='.reveal,[data-reveal],[data-stagger]';
+  function show(el){
+    if(el.__shown)return; el.__shown=1;
+    el.classList.add('in');
+    setTimeout(function(){
+      if(parseFloat(getComputedStyle(el).opacity)<0.5){
+        el.style.setProperty('opacity','1','important');
+        el.style.setProperty('transform','none','important');
+        el.style.setProperty('animation','none','important');
+      }
+    },1200);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var apply=function(){[].forEach.call(document.querySelectorAll(SEL),show);};
+    apply(); var k=0,t=setInterval(function(){apply();if(++k>20)clearInterval(t);},300); return;
+  }
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){show(e.target);io.unobserve(e.target);}});},{rootMargin:'300px 0px 300px 0px',threshold:0}):null;
+  function arm(el){if(el.__armed)return;el.__armed=1;if(io)io.observe(el);}
+  function scan(){[].forEach.call(document.querySelectorAll(SEL),arm);}
+  function sweep(){
+    var vh=window.innerHeight, doc=document.documentElement, atBottom=(window.scrollY+vh)>=(doc.scrollHeight-2);
+    [].forEach.call(document.querySelectorAll(SEL),function(el){
+      if(el.classList.contains('in'))return;
+      var r=el.getBoundingClientRect();
+      if(atBottom||(r.top<vh+300&&r.bottom>-300))show(el);
+    });
+  }
+  scan(); sweep();
+  window.addEventListener('scroll',function(){scan();sweep();},{passive:true});
+  window.addEventListener('resize',sweep);
+  window.addEventListener('load',function(){scan();sweep();});
+  if('MutationObserver' in window){new MutationObserver(function(){scan();}).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});}
+  function allShown(){return [].every.call(document.querySelectorAll(SEL),function(el){return el.classList.contains('in');});}
+  var n=0,iv=setInterval(function(){scan();sweep();if(allShown()||++n>120)clearInterval(iv);},350);
+  function failsafe(){var vh=window.innerHeight;[].forEach.call(document.querySelectorAll(SEL),function(el){var r=el.getBoundingClientRect();if(r.top<vh-20&&r.bottom>20&&parseFloat(getComputedStyle(el).opacity)<0.1){el.style.setProperty('opacity','1','important');el.style.setProperty('transform','none','important');el.style.setProperty('animation','none','important');}});}
+  window.addEventListener('scroll',failsafe,{passive:true});
+  var fn=0,fiv=setInterval(function(){failsafe();if(++fn>120)clearInterval(fiv);},500);
 })();
 </script>
 </body>
