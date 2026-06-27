@@ -216,7 +216,17 @@
         if (firstBad) firstBad.focus();
         return;
       }
-      // демо-отправка: показываем успех (реальная интеграция подключается на стороне клиента)
+      // отправка заявки в WhatsApp менеджеру (Мухтар) — статичный сайт, без сервера
+      var WA_NUMBER = '79996466779';
+      var svcEl = $('#fService'), comEl = $('#fComment');
+      var parts = ['Здравствуйте! Заявка с сайта Concept Detailing:'];
+      parts.push('Имя: ' + name.value.trim());
+      parts.push('Телефон: ' + ph.value.trim());
+      if (svcEl && svcEl.value) parts.push('Услуга: ' + svcEl.value);
+      if (comEl && comEl.value.trim()) parts.push('Комментарий: ' + comEl.value.trim());
+      var waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(parts.join('\n'));
+      window.open(waUrl, '_blank', 'noopener');
+      // показываем подтверждение
       form.style.display = 'none';
       if (success) { success.classList.add('show'); success.focus(); }
     });
