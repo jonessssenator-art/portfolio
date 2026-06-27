@@ -824,7 +824,7 @@
         <div class="stat" data-reveal><div class="num count" data-count="7">7</div><div class="lbl">лет варим кофе</div></div>
         <div class="stat" data-reveal><div class="num count" data-count="12">12</div><div class="lbl">сортов в меню</div></div>
         <div class="stat" data-reveal><div class="num count" data-count="4.9" data-decimals="1">4,9</div><div class="lbl">рейтинг гостей</div></div>
-        <div class="stat" data-reveal><div class="num count" data-count="120" data-suffix="k+">120k+</div><div class="lbl">чашек в год</div></div>
+        <div class="stat" data-reveal><div class="num count" data-count="120000" data-suffix="+">120&nbsp;000+</div><div class="lbl">чашек в год</div></div>
       </div>
     </div>
   </section>
@@ -1222,6 +1222,7 @@
     function fmt(v) {
       var s = v.toFixed(decimals);
       if (decimals > 0) { s = s.replace('.', ','); } // ru decimal comma
+      s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // разряды через неразрывный пробел
       return s + suffix;
     }
     function frame(ts) {
