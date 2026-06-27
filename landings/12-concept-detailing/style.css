@@ -224,7 +224,6 @@ input,textarea,select{font-family:inherit;font-size:inherit;color:inherit}
 .hero h1 .line2{
   display:block;background:var(--red-grad);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 6px 26px rgba(216,31,39,.22));
 }
 .hero__tagline{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.42em;font-size:clamp(11px,1.6vw,15px);color:var(--red);margin:0 0 26px;font-weight:400;padding-left:.42em}
 .hero__sub{font-size:clamp(16px,1.9vw,21px);color:var(--ink-2);max-width:50ch;margin-bottom:34px;line-height:1.55}
@@ -375,22 +374,23 @@ html.js .hero__scroll{opacity:0;animation:heroIn .85s ease 1.1s forwards}
 .calc-side__item p{font-size:13.5px;color:var(--muted);line-height:1.5}
 
 /* ---------- Преимущества ---------- */
-.adv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.adv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .adv{
-  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 26px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px 26px;
   transition:var(--t);position:relative;overflow:hidden;
+  display:grid;grid-template-columns:auto 1fr;column-gap:18px;row-gap:6px;align-items:start;
 }
 .adv:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--line-red)}
 .adv::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
   background:linear-gradient(135deg,var(--red),transparent 55%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:var(--t)}
 .adv:hover::after{opacity:.8}
-.adv__ic{width:54px;height:54px;border-radius:14px;background:var(--red-soft);border:1px solid var(--line-red);display:grid;place-items:center;margin-bottom:18px;transition:var(--t)}
+.adv__ic{width:52px;height:52px;border-radius:14px;background:var(--red-soft);border:1px solid var(--line-red);display:grid;place-items:center;transition:var(--t);grid-row:1 / span 2;align-self:start}
 .adv:hover .adv__ic{background:var(--red-grad);border-color:transparent;box-shadow:var(--sh-red)}
-.adv__ic svg{width:27px;height:27px;color:var(--red);transition:var(--t)}
+.adv__ic svg{width:26px;height:26px;color:var(--red);transition:var(--t)}
 .adv:hover .adv__ic svg{color:#ffffff}
-.adv h3{font-family:'Oswald',sans-serif;font-size:18px;text-transform:uppercase;margin-bottom:8px;letter-spacing:.02em;color:var(--ink);font-weight:500}
-.adv p{font-size:14px;color:var(--muted);line-height:1.55}
+.adv h3{grid-column:2;min-width:0;overflow-wrap:break-word;font-family:'Oswald',sans-serif;font-size:18px;text-transform:uppercase;margin-bottom:2px;letter-spacing:.02em;color:var(--ink);font-weight:500;align-self:center}
+.adv p{grid-column:2;min-width:0;font-size:14px;color:var(--muted);line-height:1.55}
 
 /* ---------- Галерея До/После ---------- */
 .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
@@ -404,7 +404,9 @@ html.js .hero__scroll{opacity:0;animation:heroIn .85s ease 1.1s forwards}
 .ba__img img{width:100%;height:100%;object-fit:cover;pointer-events:none}
 .ba__after{z-index:1}
 .ba__before{z-index:2;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
-.ba__before img{filter:grayscale(.82) brightness(.6) contrast(.96)}
+.ba__before img{filter:grayscale(.5) brightness(.64) contrast(.88) saturate(.55) blur(.4px)}
+.ba__before::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(46,40,32,.22),rgba(8,8,11,.34));mix-blend-mode:multiply}
 .ba__label{position:absolute;top:14px;z-index:3;padding:6px 14px;border-radius:var(--r-pill);font-family:'Manrope',sans-serif;
   font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .ba__label--before{left:14px;background:rgba(8,8,10,.7);color:var(--ink-2);border:1px solid var(--line-2)}
@@ -439,7 +441,7 @@ html.js .hero__scroll{opacity:0;animation:heroIn .85s ease 1.1s forwards}
 .member__ava .ring{position:absolute;inset:-4px;border-radius:50%;border:1px solid transparent;
   background:var(--red-grad) border-box;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.5;transition:var(--t)}
 .member:hover .member__ava .ring{opacity:1}
-.member__badge{position:absolute;right:2px;bottom:2px;width:30px;height:30px;border-radius:50%;background:var(--red-grad);display:grid;place-items:center;border:3px solid var(--surface-2);box-shadow:var(--sh-red)}
+.member__badge{display:none}
 .member__badge svg{width:15px;height:15px;color:#ffffff}
 .member__name{font-family:'Oswald',sans-serif;font-size:22px;text-transform:uppercase;color:var(--ink);letter-spacing:.03em;font-weight:500}
 .member__role{display:inline-block;font-size:12.5px;font-weight:700;color:var(--red);margin:6px 0 0;background:var(--red-soft);border:1px solid var(--line-red);padding:5px 14px;border-radius:var(--r-pill);letter-spacing:.04em;text-transform:uppercase}
@@ -475,7 +477,7 @@ html.js .hero__scroll{opacity:0;animation:heroIn .85s ease 1.1s forwards}
 .faq__a-inner{padding:0 24px 22px;color:var(--muted);font-size:14.5px;line-height:1.65}
 
 /* ---------- Контакты ---------- */
-.contacts__grid{display:grid;grid-template-columns:.94fr 1.06fr;gap:clamp(28px,4vw,54px);align-items:start}
+.contacts__grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,54px);align-items:start}
 .contact-info{color:var(--ink)}
 .managers{display:grid;gap:14px;margin:24px 0 26px}
 .mgr{display:flex;align-items:center;gap:16px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;transition:var(--t)}
@@ -634,7 +636,8 @@ html:not(.js) .faq__a{max-height:none}
 @media (max-width:560px){
   .adv-grid{grid-template-columns:1fr}
   .field--row{grid-template-columns:1fr}
-  .hero__actions .btn{flex:1;min-width:140px}
+  .hero__actions{flex-direction:column;align-items:stretch}
+  .hero__actions .btn{width:100%}
   .svc-cta{flex-direction:column;align-items:stretch}
   .svc-cta .btn{width:100%}
   .chan{flex:1;justify-content:center}
