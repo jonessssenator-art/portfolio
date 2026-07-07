@@ -110,8 +110,8 @@ h1,h2,h3{font-weight:400;margin:0}
 .btn-ghost:hover{background:var(--ink);color:var(--ivory)}
 .btn-gold{background:var(--grad-gold);color:#3a2e14;box-shadow:0 6px 22px -12px rgba(169,134,63,.8)}
 .btn-gold:hover{transform:translateY(-2px);filter:brightness(1.04)}
-.btn-wa{background:#25D366;color:#0b3d1e}
-.btn-wa:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.btn-wa{background:var(--ink);color:var(--ivory)}
+.btn-wa:hover{transform:translateY(-2px);background:#000}
 .btn-sm{height:44px;padding:0 22px;font-size:13px}
 .btn-block{width:100%}
 
@@ -313,34 +313,34 @@ h1,h2,h3{font-weight:400;margin:0}
 .contact-social{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
 .contact-social a{flex:1 1 120px;display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;border-radius:var(--r-pill);border:1px solid var(--line);font-size:13.5px;font-weight:600;transition:.3s}
 .contact-social a:hover{transform:translateY(-2px)}
-.contact-social .wa{background:#25D366;color:#0b3d1e;border-color:transparent}
+.contact-social .wa{background:var(--ink);color:var(--ivory);border-color:transparent}
 .contact-social svg{width:18px;height:18px}
 
 /* booking */
 .booking{background:var(--white);border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:clamp(20px,2.6vw,30px);position:relative}
 .booking h3{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
-.booking .b-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
-.cal{border:1px solid var(--line-soft);border-radius:14px;padding:14px 14px 16px;background:var(--white)}
-.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.cal-head .m{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:-.01em;text-transform:capitalize}
+.booking .b-sub{font-size:13.5px;color:var(--muted);margin-bottom:18px}
+.cal{border:1px solid var(--line-soft);border-radius:13px;padding:11px 11px 13px;background:var(--white)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.cal-head .m{font-family:var(--sans);font-weight:600;font-size:14px;letter-spacing:-.01em;text-transform:capitalize}
 .cal-nav{display:flex;gap:8px}
-.cal-nav button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-items:center;transition:.25s}
+.cal-nav button{width:27px;height:27px;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-items:center;transition:.25s}
 .cal-nav button:hover:not(:disabled){background:var(--ink);color:var(--ivory);border-color:var(--ink)}
 .cal-nav button:disabled{opacity:.32;cursor:not-allowed}
 .cal-nav svg{width:14px;height:14px}
 .cal-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px}
 .cal-dow span{text-align:center;font-size:9.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;padding:2px 0}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-grid button{height:33px;border:none;background:transparent;border-radius:9px;font-size:13px;font-weight:500;color:var(--ink);transition:.18s;display:grid;place-items:center}
+.cal-grid button{height:29px;border:none;background:transparent;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--ink);transition:.18s;display:grid;place-items:center}
 .cal-grid button:hover:not(:disabled){background:var(--sand);color:var(--ink)}
 .cal-grid button:disabled{color:var(--line);cursor:not-allowed}
 .cal-grid button.today{color:var(--gold-deep);font-weight:700;box-shadow:inset 0 0 0 1px var(--champagne)}
 .cal-grid button.sel{background:var(--ink);color:var(--ivory);font-weight:600;box-shadow:0 6px 14px -6px rgba(43,38,32,.55)}
 .cal-grid .empty{visibility:hidden}
-.slots{margin-top:16px}
+.slots{margin-top:12px}
 .slots .lbl,.b-field .lbl{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:600}
-.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px}
-.slot{height:38px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--white);font-size:13px;font-weight:500;transition:.22s}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:5px}
+.slot{height:34px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--white);font-size:12.5px;font-weight:500;transition:.22s}
 .slot:hover{border-color:var(--ink)}
 .slot.sel{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
 .b-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
@@ -379,13 +379,17 @@ footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,72px) 0 40px;back
 .socials a:hover{background:var(--ink);color:var(--ivory)}
 .socials svg{width:18px;height:18px}
 
-/* floating WhatsApp */
-.wa-float{position:fixed;bottom:24px;right:24px;z-index:90;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(37,211,102,.7);transition:transform .3s}
-.wa-float:hover{transform:scale(1.07)}
-.wa-float svg{width:30px;height:30px}
-.wa-float::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:pulse 2.4s var(--ease-out) infinite}
-@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
-@media (prefers-reduced-motion:reduce){.wa-float::before{display:none}}
+/* floating social (в стиле сайта) */
+.fab{position:fixed;bottom:22px;right:22px;z-index:90;display:flex;flex-direction:column;gap:12px}
+.fab a{position:relative;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;transition:transform .3s var(--ease),background .3s,color .3s;box-shadow:0 14px 30px -12px rgba(43,38,32,.45)}
+.fab a:hover{transform:scale(1.08)}
+.fab a svg{width:25px;height:25px}
+.fab-wa{background:var(--grad-gold);color:#3a2e14}
+.fab-ig{background:var(--ivory);color:var(--ink);border:1px solid var(--line)}
+.fab-ig:hover{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.fab-wa::before{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--gold);animation:pulse 2.6s var(--ease-out) infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.fab-wa::before{display:none}}
 
 /* toast */
 .toast{position:fixed;left:50%;bottom:30px;z-index:210;background:var(--ink);color:var(--ivory);padding:14px 22px;border-radius:var(--r-pill);font-size:14px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translate(-50%,20px);transition:.35s var(--ease-out);max-width:92vw;text-align:center}
@@ -418,7 +422,7 @@ footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,72px) 0 40px;back
   .about-list,.b-fields{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
   .hero-badge{left:0}
-  .wa-float{width:54px;height:54px;bottom:18px;right:18px}
+  .fab{bottom:16px;right:16px}.fab a{width:50px;height:50px}
 }
 </style>
 </head>
@@ -781,9 +785,14 @@ footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,72px) 0 40px;back
 </footer>
 
 <!-- floating whatsapp -->
-<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.1-4.6-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l.8-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.4.1.1.1.7-.1 1.2z"/></svg>
-</a>
+<div class="fab">
+  <a class="fab-ig" id="igFloat" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+  </a>
+  <a class="fab-wa" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.1-4.6-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l.8-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.4.1.1.1.7-.1 1.2z"/></svg>
+  </a>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -922,7 +931,7 @@ window.SURANOVA_CONTENT = {
   var greet = 'Здравствуйте, Мария! Пишу с сайта. Хочу записаться / задать вопрос.';
   [['heroWa',waLink(greet)],['cWa',waLink(greet)],['fWa',waLink(greet)],['sWa',waLink(greet)],['waFloat',waLink(greet)]]
     .forEach(function(p){ var el=$(p[0]); if(el) el.href=p[1]; });
-  [['heroIg',C.instagram],['cIg',C.instagram],['cIgBtn',C.instagram],['fIg',C.instagram],['sIg',C.instagram]]
+  [['heroIg',C.instagram],['cIg',C.instagram],['cIgBtn',C.instagram],['fIg',C.instagram],['sIg',C.instagram],['igFloat',C.instagram]]
     .forEach(function(p){ var el=$(p[0]); if(el&&p[1]) el.href=p[1]; });
   // Telegram — показываем только если задан в content.js
   if(C.telegram){
