@@ -1,6 +1,6 @@
 # 💼 Портфолио — лендинги (веб-дизайн и вёрстка)
 
-12 одностраничных сайтов под разные ниши. Чистый HTML/CSS/JS, без фреймворков, полностью адаптивные.
+14 одностраничных сайтов под разные ниши. Чистый HTML/CSS/JS, без фреймворков, полностью адаптивные.
 
 👉 **Главная страница-галерея:** [`index.html`](index.html)
 
@@ -22,6 +22,8 @@
 | ![](screenshots/10-sakura-cover.png) | **Сакура** — [открыть](landings/10-sakura.html) | Доставка суши |
 | ![](screenshots/11-logistic-cover.png) | **ГрузПоРоссии** — [открыть](landings/11-logistic/) | Грузоперевозки по России |
 | ![](screenshots/12-concept-detailing-cover.png) | **Concept Detailing** — [открыть](landings/12-concept-detailing/) | Премиальный детейлинг-центр (Астрахань) |
+| ![](screenshots/13-time-brand-cover.png) | **TIME BRAND** — [открыть](landings/13-time-brand/) | Магазин часов (Астрахань) · Casio · Seiko · Tissot |
+| ![](screenshots/14-suranova-pm-cover.png) | **Мария Суранова** — [открыть](landings/14-suranova-pm/) | Перманентный макияж и обучение (Вологда) |
 
 ---
 
@@ -30,7 +32,7 @@
 ```
 фриланс/
 ├── index.html              ← галерея портфолио
-├── landings/               ← 12 лендингов (10 одиночных HTML + 11-logistic/ и 12-concept-detailing/ — отдельные проекты)
+├── landings/               ← 14 лендингов (10 одиночных HTML + 11–14 — отдельные проекты в папках)
 ├── screenshots/            ← скриншоты: *-cover / *-desktop / *-mobile
 ├── ТЗ — лендинг РОБОТРЕК.md ← пример технического задания
 └── Тексты для откликов и профиля.md ← заготовки для бирж
