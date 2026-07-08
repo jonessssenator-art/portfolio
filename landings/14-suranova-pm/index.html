@@ -228,9 +228,9 @@ h1,h2,h3{font-weight:400;margin:0}
 .ba-hint{text-align:center;font-size:13px;color:var(--muted)}
 
 /* gallery */
-.gallery{columns:3;column-gap:clamp(14px,1.6vw,20px)}
-.g-item{width:100%;margin:0 0 clamp(14px,1.6vw,20px);break-inside:avoid;border:none;padding:0;background:none;display:block;border-radius:var(--r-card);overflow:hidden;position:relative;cursor:zoom-in}
-.g-item img{width:100%;height:auto;transition:transform .7s var(--ease-out)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px)}
+.g-item{width:100%;margin:0;border:none;padding:0;background:var(--paper);display:block;border-radius:var(--r-card);overflow:hidden;position:relative;cursor:zoom-in;aspect-ratio:3/4}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out)}
 .g-item:hover img{transform:scale(1.05)}
 .g-item .cap{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 16px;background:linear-gradient(to top,rgba(43,38,32,.62),transparent);color:var(--ivory);opacity:0;transition:opacity .4s;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
 .g-item:hover .cap,.g-item:focus-visible .cap{opacity:1}
@@ -414,7 +414,7 @@ footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,72px) 0 40px;back
   .hero-figure{order:-1;max-width:440px}
   .why{grid-template-columns:1fr 1fr}
   .services{grid-template-columns:1fr}
-  .gallery{columns:2}
+  .gallery{grid-template-columns:repeat(2,1fr)}
   .training-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
   .training-figure,.about-figure{max-width:480px}
   .foot-grid{grid-template-columns:1fr 1fr}
@@ -422,7 +422,7 @@ footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,72px) 0 40px;back
 @media (max-width:560px){
   .hero-actions{width:100%}.hero-actions .btn{flex:1 1 160px}
   .why{grid-template-columns:1fr}
-  .gallery{columns:1}
+  .gallery{grid-template-columns:repeat(2,1fr)}.g-item{aspect-ratio:1/1}
   .training-cols{grid-template-columns:1fr}
   .about-list,.b-fields{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
