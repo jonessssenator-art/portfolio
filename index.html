@@ -4,16 +4,16 @@
 <script>document.documentElement.classList.add('js')</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Портфолио — Веб-дизайн и вёрстка лендингов</title>
-<meta name="description" content="Портфолио лендингов: клининг, кофейня, фитнес, стоматология, SaaS, барбершоп, доставка цветов, детейлинг, суши, школа робототехники.">
+<title>Каталог работ — лендинги под ключ | Веб-дизайн и вёрстка</title>
+<meta name="description" content="Каталог из 14 живых лендингов под разные ниши: бьюти, авто, доставка, SaaS, образование. Адаптивная вёрстка под ключ с формой заявок — цены, процесс, ответы на вопросы.">
 <link rel="canonical" href="https://jonessssenator-art.github.io/portfolio/index.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Портфолио — Веб-дизайн и вёрстка лендингов">
-<meta property="og:description" content="14 живых лендингов под разные ниши: клининг, кофейня, фитнес, стоматология, SaaS, барбершоп, детейлинг, магазин часов, перманентный макияж и другие.">
+<meta property="og:title" content="Каталог работ — лендинги под ключ">
+<meta property="og:description" content="14 живых лендингов под разные ниши — от кофейни до бьюти-мастера. Адаптивная вёрстка под ключ: цены, процесс, контакты.">
 <meta property="og:url" content="https://jonessssenator-art.github.io/portfolio/index.html">
 <meta property="og:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/01-robotrek-cover.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Портфолио — Веб-дизайн и вёрстка лендингов">
+<meta name="twitter:title" content="Каталог работ — лендинги под ключ">
 <meta name="twitter:description" content="14 живых лендингов под разные ниши — от кофейни до бьюти-мастера.">
 <meta name="twitter:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/01-robotrek-cover.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
@@ -37,6 +37,8 @@
   .nojs-grid a{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-weight:600}
   .nojs-note{text-align:center;color:var(--muted);padding-top:30px}
 
+  .grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
   /* прогресс-бар чтения */
   .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
     background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 12px rgba(99,102,241,.7)}
@@ -44,41 +46,71 @@
   /* header */
   header{position:sticky;top:0;z-index:50;background:rgba(13,13,18,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:background .3s,box-shadow .3s}
   header.scrolled{background:rgba(13,13,18,.93);box-shadow:0 10px 34px -14px rgba(0,0,0,.7)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;transition:height .3s}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px;transition:height .3s}
   header.scrolled .nav{height:60px}
-  .logo{font-family:'Space Grotesk';font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px;white-space:nowrap}
   .logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .badge{font-size:13px;color:var(--muted);border:1px solid var(--line);padding:6px 14px;border-radius:999px}
+  .menu{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--muted)}
+  .menu a{transition:color .2s}
+  .menu a:hover{color:var(--txt)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:15px;
+    padding:12px 24px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;white-space:nowrap}
+  .btn-grad{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 10px 30px -12px rgba(99,102,241,.8)}
+  .btn-grad:hover{transform:translateY(-2px);box-shadow:0 16px 38px -12px rgba(99,102,241,.9)}
+  .btn-ghost{border-color:var(--line);color:var(--txt)}
+  .btn-ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .nav .btn{padding:10px 20px}
 
   /* hero */
-  .hero{padding:90px 0 60px;text-align:center;position:relative;overflow:hidden}
+  .hero{padding:100px 0 70px;text-align:center;position:relative;overflow:hidden}
   .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -10%,rgba(99,102,241,.25),transparent 70%);pointer-events:none;animation:heroGlow 8s ease-in-out infinite alternate}
   .hero::after{content:"";position:absolute;width:460px;height:460px;left:50%;top:-150px;transform:translateX(-50%);
     background:radial-gradient(circle,rgba(168,85,247,.18),transparent 62%);filter:blur(18px);pointer-events:none;animation:heroFloat 11s ease-in-out infinite alternate}
   @keyframes heroGlow{from{opacity:.65}to{opacity:1}}
   @keyframes heroFloat{from{transform:translateX(-54%) translateY(0)}to{transform:translateX(-46%) translateY(26px)}}
   .hero .wrap{position:relative;z-index:1}
-  .hero h1{font-size:clamp(34px,6vw,60px);font-weight:700;letter-spacing:-1px}
+  .hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:8px 18px;margin-bottom:26px;background:rgba(26,26,36,.6)}
+  .hero .kicker i{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 10px #22c55e;font-style:normal}
+  .hero h1{font-size:clamp(34px,6vw,62px);font-weight:700;letter-spacing:-1px}
   .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{max-width:620px;margin:20px auto 0;color:var(--muted);font-size:18px}
-  .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+  .hero p{max-width:640px;margin:22px auto 0;color:var(--muted);font-size:18px}
+  .hero .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+  .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:52px}
   .stats b{font-family:'Space Grotesk';font-size:32px;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .stats small{color:var(--muted);font-size:14px}
 
   /* hero: каскадный вход (только при JS) */
-  .js .hero h1,.js .hero p,.js .stats>div{opacity:0;transform:translateY(20px);animation:rise .85s cubic-bezier(.2,.7,.2,1) forwards}
-  .js .hero h1{animation-delay:.05s}
+  .js .hero .kicker,.js .hero h1,.js .hero p,.js .hero .cta,.js .stats>div{opacity:0;transform:translateY(20px);animation:rise .85s cubic-bezier(.2,.7,.2,1) forwards}
+  .js .hero h1{animation-delay:.08s}
   .js .hero p{animation-delay:.2s}
-  .js .stats>div:nth-child(1){animation-delay:.34s}
-  .js .stats>div:nth-child(2){animation-delay:.44s}
-  .js .stats>div:nth-child(3){animation-delay:.54s}
+  .js .hero .cta{animation-delay:.3s}
+  .js .stats>div:nth-child(1){animation-delay:.4s}
+  .js .stats>div:nth-child(2){animation-delay:.5s}
+  .js .stats>div:nth-child(3){animation-delay:.6s}
   @keyframes rise{to{opacity:1;transform:none}}
 
-  /* grid */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:50px 0 90px}
+  /* заголовки секций */
+  section{scroll-margin-top:80px}
+  .sec-head{text-align:center;padding:80px 0 10px}
+  .sec-head .tag-line{font-size:14px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sec-head h2{font-size:clamp(28px,4vw,42px);margin-top:10px}
+  .sec-head p{color:var(--muted);max-width:560px;margin:14px auto 0}
+
+  /* фильтры каталога */
+  .filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:34px 0 6px}
+  .chip{font-family:'Manrope';font-size:14px;font-weight:700;color:var(--muted);background:var(--card);
+    border:1px solid var(--line);border-radius:999px;padding:10px 20px;cursor:pointer;transition:all .2s}
+  .chip small{opacity:.65;font-weight:600;margin-left:6px}
+  .chip:hover{color:var(--txt);border-color:var(--accent)}
+  .chip.active{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;box-shadow:0 8px 24px -10px rgba(99,102,241,.8)}
+
+  /* grid каталога */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:34px 0 90px}
   .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column;will-change:transform}
   .card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 24px 56px -22px rgba(99,102,241,.6)}
-  /* reveal карточек (только при JS) */
+  .card.hide{display:none}
   .js .card{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1),border-color .25s,box-shadow .25s}
   .js .card.in{opacity:1;transform:none}
   .thumb{height:190px;display:flex;align-items:flex-end;padding:18px;position:relative;color:#fff;overflow:hidden}
@@ -97,16 +129,80 @@
   .open svg{transition:transform .2s}
   .card:hover .open svg{transform:translateX(5px)}
 
+  /* что входит */
+  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0 90px}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .25s,border-color .25s}
+  .feat:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .feat .ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
+    background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(168,85,247,.18));border:1px solid var(--line);margin-bottom:18px}
+  .feat h3{font-size:19px;margin-bottom:8px}
+  .feat p{color:var(--muted);font-size:14.5px}
+
+  /* процесс */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:44px 0 90px;counter-reset:step}
+  .step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .step::before{counter-increment:step;content:"0" counter(step);font-family:'Space Grotesk';font-weight:700;font-size:40px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:12px}
+  .step h3{font-size:18px;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:14px}
+
+  /* тарифы */
+  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0 90px}
+  .price{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+  .price:hover{transform:translateY(-4px)}
+  .price.hot{border-color:var(--accent);position:relative;box-shadow:0 24px 56px -26px rgba(99,102,241,.55)}
+  .price.hot .pop{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .price h3{font-size:19px}
+  .price .cost{font-family:'Space Grotesk';font-size:34px;font-weight:700;margin:14px 0 4px}
+  .price .cost span{font-size:16px;color:var(--muted);font-weight:500}
+  .price ul{list-style:none;margin:18px 0 26px;flex:1}
+  .price li{color:var(--muted);font-size:14.5px;padding:7px 0 7px 28px;position:relative}
+  .price li::before{content:"✓";position:absolute;left:0;font-weight:800;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .price .btn{width:100%}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto;padding:44px 0 90px}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden}
+  .q summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;font-weight:700;font-size:16.5px}
+  .q summary::-webkit-details-marker{display:none}
+  .q summary::after{content:"+";font-family:'Space Grotesk';font-size:24px;color:var(--muted);transition:transform .25s;flex-shrink:0}
+  .q[open] summary::after{transform:rotate(45deg);color:var(--txt)}
+  .q .a{padding:0 24px 20px;color:var(--muted);font-size:15px}
+
+  /* контакты / CTA */
+  .contact{position:relative;overflow:hidden;border-top:1px solid var(--line)}
+  .contact::before{content:"";position:absolute;inset:0;background:radial-gradient(560px 280px at 50% 110%,rgba(99,102,241,.22),transparent 70%);pointer-events:none}
+  .contact .inner{position:relative;z-index:1;text-align:center;padding:90px 0}
+  .contact h2{font-size:clamp(28px,4.4vw,46px)}
+  .contact p{color:var(--muted);max-width:520px;margin:16px auto 0;font-size:17px}
+  .contact .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+  .contact .mail{margin-top:22px;font-size:15px;color:var(--muted)}
+  .contact .mail b{color:var(--txt);cursor:pointer;border-bottom:1px dashed var(--muted)}
+
   footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;color:var(--muted);font-size:14px}
 
-  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.grid{grid-template-columns:1fr}.badge{display:none}.stats{gap:26px}}
+  /* reveal секций */
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:900px){
+    .grid,.feats,.prices{grid-template-columns:repeat(2,1fr)}
+    .menu{display:none}
+  }
+  @media(max-width:560px){
+    .grid,.feats,.prices,.steps{grid-template-columns:1fr}
+    .stats{gap:26px}
+    .price.hot{order:-1}
+  }
 
   /* доступность: уважаем «уменьшить анимацию» */
   @media (prefers-reduced-motion: reduce){
     *{animation:none!important;transition:none!important}
     html{scroll-behavior:auto}
-    .js .hero h1,.js .hero p,.js .stats>div,.js .card{opacity:1!important;transform:none!important}
+    .js .hero .kicker,.js .hero h1,.js .hero p,.js .hero .cta,.js .stats>div,.js .card,.js .reveal{opacity:1!important;transform:none!important}
   }
 </style>
 </head>
@@ -115,14 +211,26 @@
 <header>
   <div class="wrap nav">
     <div class="logo">💼 <span>Веб&nbsp;Портфолио</span></div>
-    <div class="badge">Лендинги · вёрстка · адаптив</div>
+    <nav class="menu">
+      <a href="#works">Работы</a>
+      <a href="#feats">Что входит</a>
+      <a href="#steps">Как работаю</a>
+      <a href="#prices">Тарифы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn btn-grad" href="#contact">Обсудить проект</a>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
+    <div class="kicker"><i></i>Открыт к заказам</div>
     <h1>Делаю <em>лендинги</em>,<br>которые продают</h1>
-    <p>Современная адаптивная вёрстка под ключ. Ниже — 14 работ под разные ниши: от кофейни до бьюти-мастера. Откройте любую — это живая страница.</p>
+    <p>Современная адаптивная вёрстка под ключ: дизайн, форма заявок, скорость и SEO. Ниже — каталог из 14 живых работ под разные ниши. Откройте любую — это настоящая страница.</p>
+    <div class="cta">
+      <a class="btn btn-grad" href="#works">Смотреть каталог ↓</a>
+      <a class="btn btn-ghost" href="#contact">Написать мне</a>
+    </div>
     <div class="stats">
       <div><b data-count="14">14</b><small>проектов</small></div>
       <div><b data-count="100" data-suffix="%">100%</b><small>адаптив</small></div>
@@ -131,54 +239,178 @@
   </div>
 </section>
 
-<section class="wrap">
-  <h2 class="visually-hidden">Работы</h2>
-  <div class="grid" id="grid"></div>
-  <noscript>
-    <p class="nojs-note">Для интерактивной галереи включите JavaScript. Прямые ссылки на работы:</p>
-    <ul class="nojs-grid">
-      <li><a href="landings/01-robotrek.html">🤖 РОБОТРЕК — школа робототехники</a></li>
-      <li><a href="landings/02-chistodom.html">🧽 ЧистоДом — клининг</a></li>
-      <li><a href="landings/03-zerno.html">☕ Зерно — кофейня-пекарня</a></li>
-      <li><a href="landings/04-puls.html">💪 Пульс — фитнес и EMS-студия</a></li>
-      <li><a href="landings/05-dental.html">🦷 Дентал Студия — стоматология</a></li>
-      <li><a href="landings/06-flowtask.html">🚀 Flowtask — SaaS таск-менеджер</a></li>
-      <li><a href="landings/07-britva.html">💈 Бритва — барбершоп</a></li>
-      <li><a href="landings/08-buketnaya.html">💐 Букетная — доставка цветов</a></li>
-      <li><a href="landings/09-glyanec.html">🚗 Глянец — детейлинг авто</a></li>
-      <li><a href="landings/10-sakura.html">🍣 Сакура — доставка суши</a></li>
-      <li><a href="landings/11-logistic/">🚚 ГрузПоРоссии — грузоперевозки</a></li>
-      <li><a href="landings/12-concept-detailing/">🚙 Concept Detailing — детейлинг-центр</a></li>
-      <li><a href="landings/13-time-brand/">⌚ TIME BRAND — магазин часов</a></li>
-      <li><a href="landings/14-suranova-pm/">💄 Мария Суранова — перманентный макияж</a></li>
-    </ul>
-  </noscript>
+<section id="works">
+  <div class="sec-head reveal">
+    <div class="tag-line">Каталог</div>
+    <h2>14 работ под разные ниши</h2>
+    <p>Выберите свою нишу — или посмотрите всё. Каждая карточка открывает живой лендинг.</p>
+  </div>
+  <div class="wrap">
+    <div class="filters" id="filters" role="tablist" aria-label="Фильтр по нишам"></div>
+    <div class="grid" id="grid"></div>
+    <noscript>
+      <p class="nojs-note">Для интерактивной галереи включите JavaScript. Прямые ссылки на работы:</p>
+      <ul class="nojs-grid">
+        <li><a href="landings/01-robotrek.html">🤖 РОБОТРЕК — школа робототехники</a></li>
+        <li><a href="landings/02-chistodom.html">🧽 ЧистоДом — клининг</a></li>
+        <li><a href="landings/03-zerno.html">☕ Зерно — кофейня-пекарня</a></li>
+        <li><a href="landings/04-puls.html">💪 Пульс — фитнес и EMS-студия</a></li>
+        <li><a href="landings/05-dental.html">🦷 Дентал Студия — стоматология</a></li>
+        <li><a href="landings/06-flowtask.html">🚀 Flowtask — SaaS таск-менеджер</a></li>
+        <li><a href="landings/07-britva.html">💈 Бритва — барбершоп</a></li>
+        <li><a href="landings/08-buketnaya.html">💐 Букетная — доставка цветов</a></li>
+        <li><a href="landings/09-glyanec.html">🚗 Глянец — детейлинг авто</a></li>
+        <li><a href="landings/10-sakura.html">🍣 Сакура — доставка суши</a></li>
+        <li><a href="landings/11-logistic/">🚚 ГрузПоРоссии — грузоперевозки</a></li>
+        <li><a href="landings/12-concept-detailing/">🚙 Concept Detailing — детейлинг-центр</a></li>
+        <li><a href="landings/13-time-brand/">⌚ TIME BRAND — магазин часов</a></li>
+        <li><a href="landings/14-suranova-pm/">💄 Мария Суранова — перманентный макияж</a></li>
+      </ul>
+    </noscript>
+  </div>
+</section>
+
+<section id="feats">
+  <div class="sec-head reveal">
+    <div class="tag-line">Что входит</div>
+    <h2>Каждый лендинг — под ключ</h2>
+    <p>Не просто «картинка», а рабочий инструмент для заявок.</p>
+  </div>
+  <div class="wrap">
+    <div class="feats">
+      <div class="feat reveal"><div class="ico">📱</div><h3>Адаптив под все устройства</h3><p>Десктоп, планшет, телефон — брейкпоинты 1024 / 768 / 480 px. Проверяю на реальных экранах.</p></div>
+      <div class="feat reveal"><div class="ico">📨</div><h3>Форма заявки</h3><p>Валидация полей, маска телефона, согласие на обработку данных. Заявки приходят на почту или в Telegram.</p></div>
+      <div class="feat reveal"><div class="ico">⚡</div><h3>Скорость и SEO</h3><p>Быстрая загрузка без тяжёлых плагинов, title, description, Open Graph — базовая поисковая оптимизация в комплекте.</p></div>
+      <div class="feat reveal"><div class="ico">🧩</div><h3>Чистый код</h3><p>HTML/CSS/JS без фреймворков и конструкторов — сайт легко переносить, дорабатывать и размещать на любом хостинге.</p></div>
+      <div class="feat reveal"><div class="ico">✨</div><h3>Анимации и детали</h3><p>Плавные появления, микровзаимодействия, FAQ-аккордеоны, sticky-шапка — сайт ощущается современным.</p></div>
+      <div class="feat reveal"><div class="ico">🔁</div><h3>Правки включены</h3><p>Два круга правок входят в стоимость. Показываю промежуточный результат — сюрпризов не будет.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="steps">
+  <div class="sec-head reveal">
+    <div class="tag-line">Процесс</div>
+    <h2>Как проходит работа</h2>
+    <p>Понятные этапы, связь на каждом шаге, фиксируем договорённости письменно.</p>
+  </div>
+  <div class="wrap">
+    <div class="steps">
+      <div class="step reveal"><h3>Бриф</h3><p>Обсуждаем задачу, нишу и референсы. Уточняю, есть ли тексты и фото — если нет, помогу с контентом.</p></div>
+      <div class="step reveal"><h3>Структура и дизайн</h3><p>Собираю структуру страницы и дизайн-концепцию, согласовываем до вёрстки.</p></div>
+      <div class="step reveal"><h3>Вёрстка</h3><p>Адаптив, форма заявок, анимации. Показываю промежуточный результат по ссылке.</p></div>
+      <div class="step reveal"><h3>Запуск и правки</h3><p>Публикую сайт, подключаю аналитику. Два круга правок — в стоимости.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="prices">
+  <div class="sec-head reveal">
+    <div class="tag-line">Тарифы</div>
+    <h2>Понятные цены</h2>
+    <p>Точная стоимость — после короткого брифа: зависит от объёма и готовности контента.</p>
+  </div>
+  <div class="wrap">
+    <div class="prices">
+      <div class="price reveal">
+        <h3>По готовому макету</h3>
+        <div class="cost">от 5 000 ₽</div>
+        <ul>
+          <li>Вёрстка по вашему макету или ТЗ</li>
+          <li>Полный адаптив</li>
+          <li>Форма заявки с валидацией</li>
+          <li>Срок — от 3 дней</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">Обсудить</a>
+      </div>
+      <div class="price hot reveal">
+        <div class="pop">Популярный</div>
+        <h3>Лендинг под ключ</h3>
+        <div class="cost">от 12 000 ₽</div>
+        <ul>
+          <li>Дизайн + вёрстка + форма заявок</li>
+          <li>Помощь с текстами и структурой</li>
+          <li>Базовое SEO и аналитика</li>
+          <li>2 круга правок включены</li>
+          <li>Срок — от 7 дней</li>
+        </ul>
+        <a class="btn btn-grad" href="#contact">Обсудить</a>
+      </div>
+      <div class="price reveal">
+        <h3>Правки и доработки</h3>
+        <div class="cost">от 1 500 ₽</div>
+        <ul>
+          <li>Доработка существующего сайта</li>
+          <li>Подключение формы или аналитики</li>
+          <li>Адаптация под мобильные</li>
+          <li>Срок — от 1 дня</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">Обсудить</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="sec-head reveal">
+    <div class="tag-line">FAQ</div>
+    <h2>Частые вопросы</h2>
+  </div>
+  <div class="wrap">
+    <div class="faq">
+      <details class="q reveal"><summary>Сколько времени занимает лендинг?</summary><div class="a">Простой лендинг по готовому макету — 3–5 дней. Под ключ с дизайном — от недели. Точный срок называю после брифа и держу его.</div></details>
+      <details class="q reveal"><summary>Что нужно от меня для старта?</summary><div class="a">Идеально — тексты и фото. Если их нет, помогу со структурой и текстами, а фото подберём вместе. Для старта достаточно описать нишу и задачу.</div></details>
+      <details class="q reveal"><summary>Как я буду получать заявки с сайта?</summary><div class="a">Форма с проверкой полей отправляет заявки вам на почту или в Telegram — куда удобнее. Настройка входит в стоимость.</div></details>
+      <details class="q reveal"><summary>Сколько правок входит в цену?</summary><div class="a">Два круга правок включены. Дальше — по договорённости, обычно это небольшие суммы. Все договорённости фиксируем в переписке.</div></details>
+      <details class="q reveal"><summary>Где будет размещён сайт?</summary><div class="a">Помогу разместить на вашем хостинге или бесплатно на GitHub Pages, подключить домен. Сайт остаётся полностью вашим — исходники передаю.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap inner">
+    <h2>Обсудим ваш <span class="grad">проект?</span></h2>
+    <p>Напишите пару слов о задаче — отвечу с оценкой по срокам и стоимости в тот же день.</p>
+    <div class="cta">
+      <a class="btn btn-grad" href="mailto:rabimachakalaka@gmail.com?subject=Лендинг%20—%20заявка%20с%20сайта">📧 Написать на почту</a>
+      <a class="btn btn-ghost" href="#works">Ещё раз посмотреть работы</a>
+    </div>
+    <div class="mail">или скопируйте адрес: <b id="copymail" title="Нажмите, чтобы скопировать">rabimachakalaka@gmail.com</b> <span id="copied" style="display:none;color:#22c55e;font-weight:700">✓ скопировано</span></div>
+  </div>
 </section>
 
 <footer>
-  <div class="wrap">© 2026 · Портфолио лендингов · Сделано на чистом HTML/CSS/JS</div>
+  <div class="wrap">© 2026 · Каталог работ — лендинги под ключ · Сделано на чистом HTML/CSS/JS</div>
 </footer>
 
 <script>
 const works = [
-  {f:'landings/01-robotrek.html', img:'screenshots/01-robotrek-cover.png', n:'РОБОТРЕК', t:'Образование', d:'Школа робототехники и программирования для детей 7–14 лет.', e:'🤖', g:'linear-gradient(135deg,#4F46E5,#F59E0B)'},
-  {f:'landings/02-chistodom.html', img:'screenshots/02-chistodom-cover.png', n:'ЧистоДом', t:'Услуги', d:'Клининговая компания: уборка квартир и офисов.', e:'🧽', g:'linear-gradient(135deg,#06B6D4,#22C55E)'},
-  {f:'landings/03-zerno.html', img:'screenshots/03-zerno-cover.png', n:'Зерно', t:'HoReCa', d:'Кофейня-пекарня со своей обжаркой.', e:'☕', g:'linear-gradient(135deg,#6F4E37,#C75D3C)'},
-  {f:'landings/04-puls.html', img:'screenshots/04-puls-cover.png', n:'Пульс', t:'Фитнес', d:'Фитнес и EMS-студия. Результат за 8 недель.', e:'💪', g:'linear-gradient(135deg,#0B0B0F,#A3E635)'},
-  {f:'landings/05-dental.html', img:'screenshots/05-dental-cover.png', n:'Дентал Студия', t:'Медицина', d:'Стоматология: лечение, имплантация, отбеливание.', e:'🦷', g:'linear-gradient(135deg,#2563EB,#14B8A6)'},
-  {f:'landings/06-flowtask.html', img:'screenshots/06-flowtask-cover.png', n:'Flowtask', t:'SaaS', d:'Облачный таск-менеджер для команд.', e:'🚀', g:'linear-gradient(135deg,#6366F1,#A855F7)'},
-  {f:'landings/07-britva.html', img:'screenshots/07-britva-cover.png', n:'Бритва', t:'Бьюти', d:'Барбершоп премиум-класса.', e:'💈', g:'linear-gradient(135deg,#1A1A1A,#C9A227)'},
-  {f:'landings/08-buketnaya.html', img:'screenshots/08-buketnaya-cover.png', n:'Букетная', t:'Доставка', d:'Доставка цветов за 2 часа с фото перед отправкой.', e:'💐', g:'linear-gradient(135deg,#E8A0BF,#A3B18A)'},
-  {f:'landings/09-glyanec.html', img:'screenshots/09-glyanec-cover.png', n:'Глянец', t:'Авто', d:'Детейлинг-центр: керамика, полировка, химчистка.', e:'🚗', g:'linear-gradient(135deg,#0A0A0A,#DC2626)'},
-  {f:'landings/10-sakura.html', img:'screenshots/10-sakura-cover.png', n:'Сакура', t:'Доставка еды', d:'Доставка суши и роллов за 60 минут.', e:'🍣', g:'linear-gradient(135deg,#111111,#E11D48)'},
-  {f:'landings/11-logistic/', img:'screenshots/11-logistic-cover.png', n:'ГрузПоРоссии', t:'Логистика', d:'Грузоперевозки по всей России от 7 ₽/км.', e:'🚚', g:'linear-gradient(135deg,#0B1B33,#FF6A1A)'},
-  {f:'landings/12-concept-detailing/', img:'screenshots/12-concept-detailing-cover.png', n:'Concept Detailing', t:'Детейлинг', d:'Премиальный детейлинг-центр в Астрахани: керамика, оклейка, химчистка.', e:'🚙', g:'linear-gradient(135deg,#0A0A0A,#C0A062)'},
-  {f:'landings/13-time-brand/', img:'screenshots/13-time-brand-cover.png', n:'TIME BRAND', t:'Часы', d:'Магазин часов в Астрахани: Casio, Seiko, Tissot — оригинал и гарантия.', e:'⌚', g:'linear-gradient(135deg,#14110E,#C6A26D)'},
-  {f:'landings/14-suranova-pm/', img:'screenshots/14-suranova-pm-cover.png', n:'Мария Суранова', t:'Бьюти', d:'Перманентный макияж бровей, губ и век, удаление и обучение мастеров. Вологда.', e:'💄', g:'linear-gradient(135deg,#B98A7C,#C6A985)'},
+  {f:'landings/01-robotrek.html', img:'screenshots/01-robotrek-cover.png', n:'РОБОТРЕК', t:'Образование', cat:'it', d:'Школа робототехники и программирования для детей 7–14 лет.', e:'🤖', g:'linear-gradient(135deg,#4F46E5,#F59E0B)'},
+  {f:'landings/02-chistodom.html', img:'screenshots/02-chistodom-cover.png', n:'ЧистоДом', t:'Услуги', cat:'biz', d:'Клининговая компания: уборка квартир и офисов.', e:'🧽', g:'linear-gradient(135deg,#06B6D4,#22C55E)'},
+  {f:'landings/03-zerno.html', img:'screenshots/03-zerno-cover.png', n:'Зерно', t:'HoReCa', cat:'food', d:'Кофейня-пекарня со своей обжаркой.', e:'☕', g:'linear-gradient(135deg,#6F4E37,#C75D3C)'},
+  {f:'landings/04-puls.html', img:'screenshots/04-puls-cover.png', n:'Пульс', t:'Фитнес', cat:'beauty', d:'Фитнес и EMS-студия. Результат за 8 недель.', e:'💪', g:'linear-gradient(135deg,#0B0B0F,#A3E635)'},
+  {f:'landings/05-dental.html', img:'screenshots/05-dental-cover.png', n:'Дентал Студия', t:'Медицина', cat:'beauty', d:'Стоматология: лечение, имплантация, отбеливание.', e:'🦷', g:'linear-gradient(135deg,#2563EB,#14B8A6)'},
+  {f:'landings/06-flowtask.html', img:'screenshots/06-flowtask-cover.png', n:'Flowtask', t:'SaaS', cat:'it', d:'Облачный таск-менеджер для команд.', e:'🚀', g:'linear-gradient(135deg,#6366F1,#A855F7)'},
+  {f:'landings/07-britva.html', img:'screenshots/07-britva-cover.png', n:'Бритва', t:'Бьюти', cat:'beauty', d:'Барбершоп премиум-класса.', e:'💈', g:'linear-gradient(135deg,#1A1A1A,#C9A227)'},
+  {f:'landings/08-buketnaya.html', img:'screenshots/08-buketnaya-cover.png', n:'Букетная', t:'Доставка', cat:'food', d:'Доставка цветов за 2 часа с фото перед отправкой.', e:'💐', g:'linear-gradient(135deg,#E8A0BF,#A3B18A)'},
+  {f:'landings/09-glyanec.html', img:'screenshots/09-glyanec-cover.png', n:'Глянец', t:'Авто', cat:'auto', d:'Детейлинг-центр: керамика, полировка, химчистка.', e:'🚗', g:'linear-gradient(135deg,#0A0A0A,#DC2626)'},
+  {f:'landings/10-sakura.html', img:'screenshots/10-sakura-cover.png', n:'Сакура', t:'Доставка еды', cat:'food', d:'Доставка суши и роллов за 60 минут.', e:'🍣', g:'linear-gradient(135deg,#111111,#E11D48)'},
+  {f:'landings/11-logistic/', img:'screenshots/11-logistic-cover.png', n:'ГрузПоРоссии', t:'Логистика', cat:'biz', d:'Грузоперевозки по всей России от 7 ₽/км.', e:'🚚', g:'linear-gradient(135deg,#0B1B33,#FF6A1A)'},
+  {f:'landings/12-concept-detailing/', img:'screenshots/12-concept-detailing-cover.png', n:'Concept Detailing', t:'Детейлинг', cat:'auto', d:'Премиальный детейлинг-центр в Астрахани: керамика, оклейка, химчистка.', e:'🚙', g:'linear-gradient(135deg,#0A0A0A,#C0A062)'},
+  {f:'landings/13-time-brand/', img:'screenshots/13-time-brand-cover.png', n:'TIME BRAND', t:'Часы', cat:'biz', d:'Магазин часов в Астрахани: Casio, Seiko, Tissot — оригинал и гарантия.', e:'⌚', g:'linear-gradient(135deg,#14110E,#C6A26D)'},
+  {f:'landings/14-suranova-pm/', img:'screenshots/14-suranova-pm-cover.png', n:'Мария Суранова', t:'Бьюти', cat:'beauty', d:'Перманентный макияж бровей, губ и век, удаление и обучение мастеров. Вологда.', e:'💄', g:'linear-gradient(135deg,#B98A7C,#C6A985)'},
+];
+const CATS = [
+  {id:'all',    label:'Все'},
+  {id:'beauty', label:'Бьюти и здоровье'},
+  {id:'auto',   label:'Авто'},
+  {id:'food',   label:'Еда и доставка'},
+  {id:'biz',    label:'Бизнес и услуги'},
+  {id:'it',     label:'IT и образование'},
 ];
 const grid = document.getElementById('grid');
 grid.innerHTML = works.map(w=>`
-  <a class="card" href="${w.f}">
+  <a class="card" data-cat="${w.cat}" href="${w.f}">
     <div class="thumb" style="background:${w.g}">
       <img class="shot" src="${w.img}" alt="Превью лендинга ${w.n}" loading="lazy" onerror="this.remove()">
       <span class="shine"></span>
@@ -197,6 +429,24 @@ grid.innerHTML = works.map(w=>`
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const cards = [...grid.querySelectorAll('.card')];
 
+// фильтры каталога
+const filters = document.getElementById('filters');
+filters.innerHTML = CATS.map(c=>{
+  const cnt = c.id==='all' ? works.length : works.filter(w=>w.cat===c.id).length;
+  return `<button class="chip${c.id==='all'?' active':''}" data-cat="${c.id}" role="tab" aria-selected="${c.id==='all'}">${c.label}<small>${cnt}</small></button>`;
+}).join('');
+filters.addEventListener('click', e=>{
+  const chip = e.target.closest('.chip');
+  if(!chip) return;
+  filters.querySelectorAll('.chip').forEach(c=>{c.classList.toggle('active', c===chip); c.setAttribute('aria-selected', c===chip);});
+  const cat = chip.dataset.cat;
+  cards.forEach(card=>{
+    const show = cat==='all' || card.dataset.cat===cat;
+    card.classList.toggle('hide', !show);
+    if(show) card.classList.add('in'); // показываем сразу, без ожидания скролла
+  });
+});
+
 // reveal карточек со стаггером
 if ('IntersectionObserver' in window && !reduce){
   const io = new IntersectionObserver((entries)=>{
@@ -205,6 +455,17 @@ if ('IntersectionObserver' in window && !reduce){
   cards.forEach((c,i)=>{ c.style.transitionDelay = (i%3)*80 + 'ms'; io.observe(c); });
 } else {
   cards.forEach(c=>c.classList.add('in'));
+}
+
+// reveal секций
+const revs = [...document.querySelectorAll('.reveal')];
+if ('IntersectionObserver' in window && !reduce){
+  const io2 = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io2.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -30px 0px'});
+  revs.forEach((r,i)=>{ r.style.transitionDelay = (i%3)*70 + 'ms'; io2.observe(r); });
+} else {
+  revs.forEach(r=>r.classList.add('in'));
 }
 
 // 3D-наклон при наведении (только десктоп с мышью)
@@ -248,6 +509,15 @@ document.querySelectorAll('[data-count]').forEach(el=>{
     const io = new IntersectionObserver((es,o)=>{ es.forEach(e=>{ if(e.isIntersecting){ countUp(e.target); o.unobserve(e.target); } }); }, {threshold:.5});
     io.observe(el);
   } else countUp(el);
+});
+
+// копирование почты
+const cm = document.getElementById('copymail'), ok = document.getElementById('copied');
+cm.addEventListener('click', ()=>{
+  navigator.clipboard?.writeText(cm.textContent).then(()=>{
+    ok.style.display = 'inline';
+    setTimeout(()=>ok.style.display='none', 2000);
+  });
 });
 </script>
 </body>
