@@ -69,8 +69,8 @@
   /* первый экран: только 3D чёрная дыра */
   .space{position:relative;overflow:hidden;height:100vh;height:100svh;min-height:540px;
     background:radial-gradient(ellipse at 50% 42%,#07070d,#010103)}
-  .space::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;z-index:2;pointer-events:none;
-    background:linear-gradient(to bottom,transparent,var(--bg))}
+  .space::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;z-index:2;pointer-events:none;
+    background:linear-gradient(to bottom,transparent,#010103)}
   .bh{position:absolute;inset:0;z-index:0;pointer-events:none}
   .bh canvas{width:100%;height:100%;display:block}
   .scrolldn{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;
@@ -82,8 +82,13 @@
   /* змея ползает под блоками: видна в промежутках и по краям, контент не перекрывает */
   #snake-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.9}
 
+  /* переход «космическая пыль»: тёмная шторка через стык — под ней змея и контент проявляются плавно */
+  .fade-space{position:absolute;left:0;right:0;top:-170px;height:62vh;min-height:440px;pointer-events:none;
+    background:linear-gradient(to bottom,#010103 0%,#010103 22%,rgba(1,1,3,.82) 42%,rgba(13,13,18,0) 100%)}
+  .fade-space canvas{width:100%;height:100%;display:block}
+
   /* hero (представление) */
-  .hero{padding:100px 0 70px;text-align:center;position:relative;overflow:hidden}
+  .hero{padding:100px 0 70px;text-align:center;position:relative}
   .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -10%,rgba(99,102,241,.25),transparent 70%);pointer-events:none;animation:heroGlow 8s ease-in-out infinite alternate}
   .hero::after{content:"";position:absolute;width:460px;height:460px;left:50%;top:-150px;transform:translateX(-50%);
     background:radial-gradient(circle,rgba(168,85,247,.18),transparent 62%);filter:blur(18px);pointer-events:none;animation:heroFloat 11s ease-in-out infinite alternate}
@@ -243,6 +248,7 @@
 </section>
 
 <section class="hero" id="intro">
+  <div class="fade-space" id="dust" aria-hidden="true"></div>
   <div class="wrap">
     <div class="kicker reveal"><i></i>Открыт к заказам</div>
     <h1 class="reveal">Делаю <em>лендинги</em>,<br>которые продают</h1>
@@ -539,6 +545,67 @@ cm.addEventListener('click', ()=>{
     setTimeout(()=>ok.style.display='none', 2000);
   });
 });
+
+// космическая пыль в переходе между заставкой и представлением
+(function(){
+  if (reduce) return;
+  const holder = document.getElementById('dust');
+  if (!holder) return;
+  const cv = document.createElement('canvas');
+  const ctx = cv.getContext('2d');
+  if (!ctx) return;
+  holder.appendChild(cv);
+
+  let W = 0, H = 0;
+  const DPR = Math.min(2, window.devicePixelRatio || 1);
+  function resize(){
+    W = holder.clientWidth; H = holder.clientHeight;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  resize();
+  new ResizeObserver(resize).observe(holder);
+
+  const COLORS = ['255,255,255', '165,180,255', '255,205,150', '200,160,255'];
+  const N = 130;
+  const ps = Array.from({length: N}, () => ({
+    x: Math.random(), y: Math.random(),
+    r: .5 + Math.random() * 1.4,
+    vy: 6 + Math.random() * 16,          // px/с, дрейф вверх — к дыре
+    sway: 4 + Math.random() * 10,
+    phase: Math.random() * Math.PI * 2,
+    tw: .6 + Math.random() * 1.6,        // скорость мерцания
+    a: .12 + Math.random() * .4,
+    c: COLORS[Math.floor(Math.random() * COLORS.length)],
+  }));
+
+  let vis = true;
+  new IntersectionObserver(es => { vis = es[0].isIntersecting; }).observe(holder);
+
+  let prev = performance.now();
+  (function loop(now){
+    requestAnimationFrame(loop);
+    if (!vis) { prev = now; return; }
+    const dt = Math.min((now - prev) / 1000, .05);
+    prev = now;
+    const t = now / 1000;
+    ctx.clearRect(0, 0, W, H);
+    for (const p of ps){
+      p.y -= (p.vy * dt) / Math.max(H, 1);
+      if (p.y < 0) { p.y = 1; p.x = Math.random(); }
+      const x = p.x * W + Math.sin(t * .4 + p.phase) * p.sway;
+      const y = p.y * H;
+      // затухание у краёв слоя + мерцание
+      const edge = Math.min(1, y / (H * .18)) * Math.min(1, (H - y) / (H * .12));
+      const alpha = p.a * edge * (.55 + .45 * Math.sin(t * p.tw + p.phase));
+      if (alpha <= 0) continue;
+      ctx.beginPath();
+      ctx.arc(x, y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.c},${alpha.toFixed(3)})`;
+      ctx.fill();
+    }
+  })(prev);
+})();
 </script>
 
 <!-- 3D-фон hero: чёрная дыра с аккреционным диском (three.js). При reduced-motion или без WebGL остаётся обычный градиентный фон -->
@@ -992,52 +1059,8 @@ void main() {
   gl_FragColor = vec4(color, 1.0);
 }
 `;
-  const ballVert = `
-varying vec3 vNormal;
-varying vec3 vPosition;
-void main() {
-  vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-  gl_Position = projectionMatrix * viewMatrix * worldPosition;
-  vPosition = worldPosition.xyz;
-  vNormal = normalize(normalMatrix * normal);
-}
-`;
-  const ballFrag = `
-uniform vec3 u_color;
-uniform vec3 u_lightDirection;
-uniform vec3 u_cameraPosition;
-uniform float u_emissiveIntensity;
-uniform float u_specularPower;
-uniform float u_fresnelPower;
-varying vec3 vNormal;
-varying vec3 vPosition;
-void main() {
-  vec3 normal = normalize(vNormal);
-  vec3 lightDir = normalize(u_lightDirection);
-  vec3 viewDir = normalize(u_cameraPosition - vPosition);
-  float diffuse = max(dot(normal, lightDir), 0.0);
-  vec3 halfDir = normalize(lightDir + viewDir);
-  float specular = pow(max(dot(normal, halfDir), 0.0), u_specularPower);
-  float fresnel = pow(1.0 - max(dot(normal, viewDir), 0.0), u_fresnelPower);
-  vec3 emissive = u_color * u_emissiveIntensity;
-  vec3 diffuseColor = u_color * diffuse * 0.6;
-  vec3 specularColor = vec3(1.0) * specular * 0.5;
-  vec3 fresnelColor = u_color * fresnel * 0.4;
-  gl_FragColor = vec4(emissive + diffuseColor + specularColor + fresnelColor, 1.0);
-}
-`;
-
   const CONFIG = { length: 18, spineSegments: 100, radialSegments: 8, texturePoints: 100,
     dpr: Math.min(2, window.devicePixelRatio || 1), antialias: true, scaleMin: 0.1, scaleMax: 0.45 };
-
-  const Input = {
-    mouseXY: new THREE.Vector2(0, 0),
-    init() {
-      document.addEventListener("mousemove", (e) => {
-        this.mouseXY.set((e.clientX / window.innerWidth) * 2 - 1, 1 - (e.clientY / window.innerHeight) * 2);
-      }, { passive: true });
-    },
-  };
 
   function wanderForce(currentDir, noise2D, noiseTime, wanderStrength, tiltStrength) {
     const result = currentDir.clone();
@@ -1433,36 +1456,28 @@ void main() {
     }
   }
 
-  class Ball {
-    constructor() {
-      this.uniforms = {
-        u_color: { value: new THREE.Color(0x44ddff) },
-        u_lightDirection: { value: new THREE.Vector3(0.5, 1.0, 0.3).normalize() },
-        u_cameraPosition: { value: new THREE.Vector3() },
-        u_emissiveIntensity: { value: 0.6 },
-        u_specularPower: { value: 32.0 },
-        u_fresnelPower: { value: 2.5 },
-      };
-    }
-    buildScene() {
-      const geometry = new THREE.SphereGeometry(0.22, 32, 32);
-      const material = new THREE.ShaderMaterial({
-        vertexShader: ballVert,
-        fragmentShader: ballFrag,
-        uniforms: this.uniforms,
-      });
-      this.sphere = new THREE.Mesh(geometry, material);
-      return this.sphere;
-    }
-  }
-
   class Snake {
     constructor() {
       this.snakeObject = new SnakeObject();
       this.targetSpherePosition = new THREE.Vector3();
       this.raycaster = new THREE.Raycaster();
       this.groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-      this.mouseTarget = new THREE.Vector3();
+      this.waypoint = new THREE.Vector3();
+      this.waypointTimer = 99; // сразу выбрать первую цель
+    }
+    // случайная точка в видимой области плоскости — змея кочует по всему экрану
+    pickWaypoint(camera) {
+      const ndc = new THREE.Vector2();
+      const p = new THREE.Vector3();
+      for (let i = 0; i < 10; i++) {
+        ndc.set(Math.random() * 1.8 - 0.9, Math.random() * 1.2 - 0.85);
+        this.raycaster.setFromCamera(ndc, camera);
+        if (this.raycaster.ray.intersectPlane(this.groundPlane, p) && p.length() < 45) {
+          this.waypoint.copy(p);
+          return;
+        }
+      }
+      this.waypoint.set(0, 0, 0);
     }
     buildScene() {
       const group = new THREE.Group();
@@ -1489,18 +1504,16 @@ void main() {
         texturePoints: CONFIG.texturePoints,
       });
       group.add(this.snakeObject);
-      this.ball = new Ball();
-      group.add(this.ball.buildScene());
       return group;
     }
     update(camera, delta) {
-      this.raycaster.setFromCamera(Input.mouseXY, camera);
-      this.raycaster.ray.intersectPlane(this.groundPlane, this.mouseTarget);
-      this.targetSpherePosition.lerp(this.mouseTarget, 0.1);
-      if (this.ball) {
-        this.ball.sphere?.position.copy(this.targetSpherePosition);
-        this.ball.uniforms.u_cameraPosition.value.copy(camera.position);
+      // новая цель — по таймеру или когда почти доплыла до текущей
+      this.waypointTimer += delta;
+      if (this.waypointTimer > 7 || this.targetSpherePosition.distanceTo(this.waypoint) < 2.5) {
+        this.pickWaypoint(camera);
+        this.waypointTimer = 0;
       }
+      this.targetSpherePosition.lerp(this.waypoint, Math.min(1, delta * 1.2));
       this.endlessCurve?.setTarget(this.targetSpherePosition);
       this.snakeObject?.update(delta);
       this.snakeObject.uniforms.u_cameraPosition.value.copy(camera.position);
@@ -1530,7 +1543,6 @@ void main() {
   camera.position.set(0, 15, 20);
   camera.lookAt(0, 0, 0);
 
-  Input.init();
   const snake = new Snake();
   scene.add(snake.buildScene());
 
