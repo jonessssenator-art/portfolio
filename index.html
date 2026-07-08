@@ -5,21 +5,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Каталог работ — лендинги под ключ | Веб-дизайн и вёрстка</title>
-<meta name="description" content="Каталог из 15 живых работ под разные ниши: бьюти, авто, доставка, SaaS, образование, 3D-эффекты. Адаптивная вёрстка под ключ с формой заявок — цены, процесс, ответы на вопросы.">
+<meta name="description" content="Каталог из 14 живых лендингов под разные ниши: бьюти, авто, доставка, SaaS, образование. Адаптивная вёрстка под ключ с формой заявок — цены, процесс, ответы на вопросы.">
 <link rel="canonical" href="https://jonessssenator-art.github.io/portfolio/index.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Каталог работ — лендинги под ключ">
-<meta property="og:description" content="15 живых работ под разные ниши — от кофейни до 3D чёрной дыры. Адаптивная вёрстка под ключ: цены, процесс, контакты.">
+<meta property="og:description" content="14 живых лендингов под разные ниши — от кофейни до бьюти-мастера. Адаптивная вёрстка под ключ: цены, процесс, контакты.">
 <meta property="og:url" content="https://jonessssenator-art.github.io/portfolio/index.html">
 <meta property="og:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/01-robotrek-cover.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Каталог работ — лендинги под ключ">
-<meta name="twitter:description" content="15 живых работ под разные ниши — от кофейни до 3D чёрной дыры.">
+<meta name="twitter:description" content="14 живых лендингов под разные ниши — от кофейни до бьюти-мастера.">
 <meta name="twitter:image" content="https://jonessssenator-art.github.io/portfolio/screenshots/01-robotrek-cover.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+  { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+</script>
 <style>
   :root{
     --bg:#0d0d12; --bg2:#14141c; --card:#1a1a24; --line:#262633;
@@ -62,7 +66,13 @@
   .nav .btn{padding:10px 20px}
 
   /* hero */
-  .hero{padding:100px 0 70px;text-align:center;position:relative;overflow:hidden}
+  .hero{padding:90px 0 70px;text-align:center;position:relative;overflow:hidden;
+    min-height:min(92vh,860px);display:flex;align-items:center;justify-content:center}
+  /* 3D-фон: чёрная дыра (three.js) */
+  .bh{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.95;
+    -webkit-mask-image:linear-gradient(to bottom,#000 74%,transparent);mask-image:linear-gradient(to bottom,#000 74%,transparent)}
+  .bh canvas{width:100%;height:100%;display:block}
+  .hero h1,.hero p{text-shadow:0 2px 30px rgba(0,0,0,.85)}
   .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -10%,rgba(99,102,241,.25),transparent 70%);pointer-events:none;animation:heroGlow 8s ease-in-out infinite alternate}
   .hero::after{content:"";position:absolute;width:460px;height:460px;left:50%;top:-150px;transform:translateX(-50%);
     background:radial-gradient(circle,rgba(168,85,247,.18),transparent 62%);filter:blur(18px);pointer-events:none;animation:heroFloat 11s ease-in-out infinite alternate}
@@ -223,16 +233,17 @@
 </header>
 
 <section class="hero">
+  <div class="bh" id="bh" aria-hidden="true"></div>
   <div class="wrap">
     <div class="kicker"><i></i>Открыт к заказам</div>
     <h1>Делаю <em>лендинги</em>,<br>которые продают</h1>
-    <p>Современная адаптивная вёрстка под ключ: дизайн, форма заявок, скорость и SEO. Ниже — каталог из 15 живых работ под разные ниши. Откройте любую — это настоящая страница.</p>
+    <p>Современная адаптивная вёрстка под ключ: дизайн, форма заявок, скорость и SEO. Ниже — каталог из 14 живых работ под разные ниши. Откройте любую — это настоящая страница.</p>
     <div class="cta">
       <a class="btn btn-grad" href="#works">Смотреть каталог ↓</a>
       <a class="btn btn-ghost" href="#contact">Написать мне</a>
     </div>
     <div class="stats">
-      <div><b data-count="15">15</b><small>проектов</small></div>
+      <div><b data-count="14">14</b><small>проектов</small></div>
       <div><b data-count="100" data-suffix="%">100%</b><small>адаптив</small></div>
       <div><b>HTML/CSS/JS</b><small>чистый код</small></div>
     </div>
@@ -242,7 +253,7 @@
 <section id="works">
   <div class="sec-head reveal">
     <div class="tag-line">Каталог</div>
-    <h2>15 работ под разные ниши</h2>
+    <h2>14 работ под разные ниши</h2>
     <p>Выберите свою нишу — или посмотрите всё. Каждая карточка открывает живую страницу.</p>
   </div>
   <div class="wrap">
@@ -265,7 +276,6 @@
         <li><a href="landings/12-concept-detailing/">🚙 Concept Detailing — детейлинг-центр</a></li>
         <li><a href="landings/13-time-brand/">⌚ TIME BRAND — магазин часов</a></li>
         <li><a href="landings/14-suranova-pm/">💄 Мария Суранова — перманентный макияж</a></li>
-        <li><a href="effects/black-hole.html">🌌 Чёрная дыра — 3D-эффект на WebGL</a></li>
       </ul>
     </noscript>
   </div>
@@ -400,7 +410,6 @@ const works = [
   {f:'landings/12-concept-detailing/', img:'screenshots/12-concept-detailing-cover.png', n:'Concept Detailing', t:'Детейлинг', cat:'auto', d:'Премиальный детейлинг-центр в Астрахани: керамика, оклейка, химчистка.', e:'🚙', g:'linear-gradient(135deg,#0A0A0A,#C0A062)'},
   {f:'landings/13-time-brand/', img:'screenshots/13-time-brand-cover.png', n:'TIME BRAND', t:'Часы', cat:'biz', d:'Магазин часов в Астрахани: Casio, Seiko, Tissot — оригинал и гарантия.', e:'⌚', g:'linear-gradient(135deg,#14110E,#C6A26D)'},
   {f:'landings/14-suranova-pm/', img:'screenshots/14-suranova-pm-cover.png', n:'Мария Суранова', t:'Бьюти', cat:'beauty', d:'Перманентный макияж бровей, губ и век, удаление и обучение мастеров. Вологда.', e:'💄', g:'linear-gradient(135deg,#B98A7C,#C6A985)'},
-  {f:'effects/black-hole.html', img:'screenshots/15-black-hole-cover.png', n:'Чёрная дыра', t:'3D · WebGL', cat:'fx', open:'Открыть эффект', d:'Интерактивная 3D-сцена на three.js: аккреционный диск из 5000 частиц, GLSL-шейдеры, три состояния. Крутится мышью и пальцем.', e:'🌌', g:'linear-gradient(135deg,#010103,#FF6A1A)'},
 ];
 const CATS = [
   {id:'all',    label:'Все'},
@@ -409,7 +418,6 @@ const CATS = [
   {id:'food',   label:'Еда и доставка'},
   {id:'biz',    label:'Бизнес и услуги'},
   {id:'it',     label:'IT и образование'},
-  {id:'fx',     label:'3D-эффекты'},
 ];
 const grid = document.getElementById('grid');
 grid.innerHTML = works.map(w=>`
@@ -522,6 +530,210 @@ cm.addEventListener('click', ()=>{
     setTimeout(()=>ok.style.display='none', 2000);
   });
 });
+</script>
+
+<!-- 3D-фон hero: чёрная дыра с аккреционным диском (three.js). При reduced-motion или без WebGL остаётся обычный градиентный фон -->
+<script type="module">
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) (async () => {
+  let THREE;
+  try { THREE = await import('three'); } catch (e) { return; }
+  const host = document.getElementById('bh');
+  const isMobile = matchMedia('(max-width: 700px)').matches;
+
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true, powerPreference: 'high-performance' });
+  } catch (e) { return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.75 : 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.5;
+  renderer.setClearColor(0x000000, 0);
+  host.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 1000);
+
+  const noiseChunk = `
+    vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+    vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+    float snoise(vec3 v) {
+        const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+        const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+        vec3 i  = floor(v + dot(v, C.yyy) );
+        vec3 x0 = v - i + dot(i, C.xxx) ;
+        vec3 g = step(x0.yzx, x0.xyz);
+        vec3 l = 1.0 - g;
+        vec3 i1 = min( g.xyz, l.zxy );
+        vec3 i2 = max( g.xyz, l.zxy );
+        vec3 x1 = x0 - i1 + C.xxx;
+        vec3 x2 = x0 - i2 + C.yyy;
+        vec3 x3 = x0 - D.yyy;
+        i = mod289(i);
+        vec4 p = permute( permute( permute( i.z + vec4(0.0, i1.z, i2.z, 1.0 )) + i.y + vec4(0.0, i1.y, i2.y, 1.0 )) + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
+        float n_ = 0.142857142857;
+        vec3  ns = n_ * D.wyz - D.xzx;
+        vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+        vec4 x_ = floor(j * ns.z);
+        vec4 y_ = floor(j - 7.0 * x_ );
+        vec4 x = x_ *ns.x + ns.yyyy;
+        vec4 y = y_ *ns.x + ns.yyyy;
+        vec4 h = 1.0 - abs(x) - abs(y);
+        vec4 b0 = vec4( x.xy, y.xy );
+        vec4 b1 = vec4( x.zw, y.zw );
+        vec4 s0 = floor(b0)*2.0 + 1.0;
+        vec4 s1 = floor(b1)*2.0 + 1.0;
+        vec4 sh = -step(h, vec4(0.0));
+        vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+        vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+        vec3 p0 = vec3(a0.xy,h.x);
+        vec3 p1 = vec3(a0.zw,h.y);
+        vec3 p2 = vec3(a1.xy,h.z);
+        vec3 p3 = vec3(a1.zw,h.w);
+        vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+        p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+        vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+        m = m * m;
+        return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
+    }
+  `;
+
+  // горизонт событий + оранжевое свечение по краю
+  const coreGroup = new THREE.Group();
+  scene.add(coreGroup);
+  coreGroup.add(new THREE.Mesh(new THREE.SphereGeometry(4, 48, 48), new THREE.MeshBasicMaterial({ color: 0x000000 })));
+  const auraMat = new THREE.ShaderMaterial({
+    uniforms: { uIntensity: { value: 1.0 } },
+    vertexShader: `
+      varying vec3 vNormal;
+      varying vec3 vView;
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vView = normalize(-(modelViewMatrix * vec4(position, 1.0)).xyz);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uIntensity;
+      varying vec3 vNormal;
+      varying vec3 vView;
+      void main() {
+        float rim = pow(1.0 - max(dot(vNormal, vView), 0.0), 4.0);
+        gl_FragColor = vec4(vec3(1.0, 0.45, 0.1) * rim * uIntensity * 5.0, 1.0);
+      }
+    `,
+    side: THREE.BackSide, transparent: true, blending: THREE.AdditiveBlending
+  });
+  coreGroup.add(new THREE.Mesh(new THREE.SphereGeometry(4.25, 48, 48), auraMat));
+
+  // аккреционный диск из частиц-штрихов
+  const instanceCount = isMobile ? 2200 : 4000;
+  const streakGeo = new THREE.CylinderGeometry(0.01, 0.12, 2.2, 3);
+  streakGeo.rotateX(Math.PI / 2);
+  const diskMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uMorph: { value: 0.15 },
+      uCompression: { value: 1.0 },
+      uIntensity: { value: 1.05 },
+      uOrbitScale: { value: 1.0 }
+    },
+    vertexShader: `
+      ${noiseChunk}
+      uniform float uTime;
+      uniform float uMorph;
+      uniform float uCompression;
+      uniform float uIntensity;
+      uniform float uOrbitScale;
+      varying vec3 vColor;
+      varying float vOpacity;
+      void main() {
+        vec4 instPos = instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0);
+        float rOriginal = length(instPos.xz);
+        float r = rOriginal * uCompression;
+        float initialAngle = atan(instPos.z, instPos.x);
+        float orbitalVelocity = (1.5 / sqrt(rOriginal)) * uOrbitScale;
+        float currentAngle = initialAngle + (uTime * orbitalVelocity);
+        vec3 morphedWorldPos = vec3(cos(currentAngle) * r, instPos.y, sin(currentAngle) * r);
+        float noise = snoise(vec3(morphedWorldPos.x * 0.08, morphedWorldPos.z * 0.08, uTime * 0.3));
+        morphedWorldPos.y += noise * uMorph * 4.0;
+        vec3 viewDir = normalize(cameraPosition - morphedWorldPos);
+        vec3 orbitDir = normalize(vec3(-sin(currentAngle), 0.0, cos(currentAngle)));
+        float doppler = dot(orbitDir, viewDir);
+        vec3 hot = vec3(1.0, 0.95, 0.9);
+        vec3 warm = vec3(1.0, 0.45, 0.1);
+        vec3 cool = vec3(0.1, 0.35, 1.0);
+        vec3 color = mix(cool, warm, smoothstep(45.0, 12.0, r));
+        color = mix(color, hot, smoothstep(10.0, 4.0, r));
+        vColor = color * (1.3 + doppler * 0.7) * uIntensity;
+        vOpacity = (smoothstep(3.8, 5.5, r) * (1.0 - smoothstep(38.0, 48.0, r))) * 0.8;
+        float deltaAngle = currentAngle - initialAngle;
+        float c = cos(deltaAngle);
+        float s = sin(deltaAngle);
+        mat3 rotY = mat3(
+            c, 0, s,
+            0, 1, 0,
+           -s, 0, c
+        );
+        vec3 localPos = (instanceMatrix * vec4(position, 0.0)).xyz;
+        vec3 rotatedLocalPos = rotY * localPos;
+        gl_Position = projectionMatrix * viewMatrix * vec4(morphedWorldPos + rotatedLocalPos, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vColor;
+      varying float vOpacity;
+      void main() {
+        gl_FragColor = vec4(vColor, vOpacity);
+      }
+    `,
+    transparent: true, blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  const instancedDisk = new THREE.InstancedMesh(streakGeo, diskMaterial, instanceCount);
+  const dummy = new THREE.Object3D();
+  for (let i = 0; i < instanceCount; i++) {
+    const r = 5 + Math.pow(Math.random(), 1.3) * 40;
+    const angle = Math.random() * Math.PI * 2;
+    dummy.position.set(Math.cos(angle) * r, (Math.random() - 0.5) * (8 / r), Math.sin(angle) * r);
+    dummy.lookAt(dummy.position.x + Math.sin(angle), dummy.position.y, dummy.position.z - Math.cos(angle));
+    dummy.updateMatrix();
+    instancedDisk.setMatrixAt(i, dummy.matrix);
+  }
+  scene.add(instancedDisk);
+
+  // размер под hero-блок; на узких экранах отодвигаем камеру, чтобы диск влезал
+  let camDist = 85;
+  function resize() {
+    const w = host.clientWidth, h = host.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camDist = camera.aspect < 0.8 ? 135 : camera.aspect < 1.4 ? 105 : 85;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  new ResizeObserver(resize).observe(host);
+
+  // рендерим только пока hero виден на экране
+  let visible = true;
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(host);
+
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!visible) return;
+    const t = clock.getElapsedTime();
+    diskMaterial.uniforms.uTime.value = t;
+    diskMaterial.uniforms.uMorph.value = 0.15 + (Math.sin(t * 0.12) + 1) * 0.4; // медленное «дыхание» диска
+    instancedDisk.rotation.y += 0.0005;
+    const a = t * 0.05; // неспешный облёт камеры
+    camera.position.set(Math.sin(a) * camDist, 26, Math.cos(a) * camDist);
+    camera.lookAt(0, 2, 0);
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
 </script>
 </body>
 </html>
