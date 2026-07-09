@@ -4,7 +4,7 @@
 <script>document.documentElement.classList.add('js')</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d0d12">
+<meta name="theme-color" content="#012624">
 <title>Каталог работ — лендинги под ключ | Веб-дизайн и вёрстка</title>
 <meta name="description" content="Каталог из 14 живых лендингов под разные ниши: бьюти, авто, доставка, SaaS, образование. Адаптивная вёрстка под ключ с формой заявок — цены, процесс, ответы на вопросы.">
 <link rel="canonical" href="https://jonessssenator-art.github.io/portfolio/index.html">
@@ -20,208 +20,183 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
-<script type="importmap">
-  { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* Auros — abyssal terminal: тёмно-бирюзовый стек поверхностей, без теней,
+     градиент только на главных CTA, розовый — только для крупных цифр */
   :root{
-    --bg:#0d0d12; --bg2:#14141c; --card:#1a1a24; --line:#262633;
-    --txt:#f4f4f7; --muted:#9a9aac; --accent:#6366f1; --accent2:#a855f7;
-    --radius:20px;
+    --abyss:#012624; --deep:#011d1c; --kelp:#003734;
+    --mist:#edfffe; --white:#ffffff; --silver:#bbc7c6; --ash:#f2f2f2;
+    --phosphor:#fde9ff;
+    --grad-bio:linear-gradient(90deg,#00827c 0%,#cbfffc 100%);
+    --grad-aurora:linear-gradient(90deg,#cbfffc 0%,#edfffe 26%,#fffdfa 48%,#fad1ff 89%);
+    --line:rgba(255,255,255,.09);
+    --r-card:16px; --r-sm:6px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;background:var(--bg)}
-  /* фон на html, body прозрачный — чтобы змея (z-index:-1) была видна под блоками */
-  body{font-family:'Manrope',system-ui,sans-serif;background:transparent;color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html{scroll-behavior:smooth;background:var(--abyss)}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--abyss);color:var(--silver);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-  h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.15}
+  h1,h2,h3{font-weight:500;color:var(--white);line-height:1.05}
   a{color:inherit;text-decoration:none}
   a,button{-webkit-tap-highlight-color:transparent}
   .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .nojs-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:30px 0 80px}
-  .nojs-grid a{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-weight:600}
-  .nojs-note{text-align:center;color:var(--muted);padding-top:30px}
+  .nojs-grid a{display:block;background:var(--kelp);border-radius:var(--r-sm);padding:18px 20px;font-weight:500;color:var(--white)}
+  .nojs-note{text-align:center;color:var(--silver);padding-top:30px}
 
-  .grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-
-  /* прогресс-бар чтения */
-  .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
-    background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 12px rgba(99,102,241,.7)}
+  /* прогресс-бар чтения — биолюминесцентный градиент */
+  .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:100;background:var(--grad-bio)}
 
   /* header */
-  header{position:sticky;top:0;z-index:50;background:rgba(13,13,18,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:background .3s,box-shadow .3s}
-  header.scrolled{background:rgba(13,13,18,.93);box-shadow:0 10px 34px -14px rgba(0,0,0,.7)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px;transition:height .3s}
-  header.scrolled .nav{height:60px}
-  .logo{font-family:'Space Grotesk';font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px;white-space:nowrap}
-  .logo span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .menu{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--muted)}
+  header{position:sticky;top:0;z-index:50;background:rgba(1,38,36,.75);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+  header.scrolled{background:rgba(1,38,36,.93);border-bottom-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px;transition:height .3s}
+  header.scrolled .nav{height:62px}
+  .logo{display:flex;align-items:center;gap:10px;white-space:nowrap;color:var(--white);
+    font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+  .logo svg{flex-shrink:0}
+  .menu{display:flex;gap:24px;font-size:12px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--silver)}
   .menu a{transition:color .2s}
-  .menu a:hover{color:var(--txt)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:15px;
-    padding:12px 24px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;white-space:nowrap}
-  .btn-grad{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 10px 30px -12px rgba(99,102,241,.8)}
-  .btn-grad:hover{transform:translateY(-2px);box-shadow:0 16px 38px -12px rgba(99,102,241,.9)}
-  .btn-ghost{border-color:var(--line);color:var(--txt)}
-  .btn-ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
-  .nav .btn{padding:10px 20px}
+  .menu a:hover{color:var(--white)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:500;font-size:13px;
+    letter-spacing:.08em;text-transform:uppercase;padding:14px 24px;border-radius:var(--r-sm);
+    border:1px solid transparent;cursor:pointer;transition:transform .2s,filter .2s,border-color .2s,color .2s;white-space:nowrap}
+  .btn-aurora{background:var(--grad-aurora);color:#062421}
+  .btn-aurora:hover{transform:translateY(-2px);filter:brightness(1.04)}
+  .btn-ghost{border-color:rgba(255,255,255,.18);color:var(--white)}
+  .btn-ghost:hover{border-color:rgba(203,255,252,.55);transform:translateY(-2px)}
+  .nav .btn{padding:11px 20px}
 
   /* мобильное меню */
-  .burger{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:rgba(26,26,36,.6);cursor:pointer;
+  .burger{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:var(--r-sm);background:rgba(0,55,52,.6);cursor:pointer;
     flex-direction:column;align-items:center;justify-content:center;gap:5px;flex-shrink:0}
-  .burger span{display:block;width:20px;height:2px;background:var(--txt);border-radius:2px;transition:transform .25s,opacity .25s}
+  .burger span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:transform .25s,opacity .25s}
   .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .burger.open span:nth-child(2){opacity:0}
   .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .mmenu{position:fixed;left:0;right:0;top:0;z-index:49;background:rgba(13,13,18,.97);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:86px 24px 22px;
+  .mmenu{position:fixed;left:0;right:0;top:0;z-index:49;background:rgba(1,29,28,.97);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);display:flex;flex-direction:column;padding:90px 24px 22px;
     transform:translateY(-14px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
   .mmenu.open{transform:none;opacity:1;pointer-events:auto}
-  .mmenu a{padding:14px 4px;font-weight:700;font-size:16.5px;border-bottom:1px solid var(--line)}
-  .mmenu a.btn{border-bottom:0;margin-top:14px;justify-content:center}
+  .mmenu a{padding:15px 4px;font-weight:500;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--white);border-bottom:1px solid var(--line)}
+  .mmenu a.btn{border-bottom:0;margin-top:16px;justify-content:center}
 
   /* плавающая Telegram-кнопка (мобильные) */
-  .fab{position:fixed;right:16px;bottom:16px;z-index:60;width:56px;height:56px;border-radius:50%;display:none;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,#2AABEE,#229ED9);box-shadow:0 12px 30px -8px rgba(42,171,238,.7);
+  .fab{position:fixed;right:16px;bottom:16px;z-index:60;width:56px;height:56px;border-radius:var(--r-card);display:none;align-items:center;justify-content:center;
+    background:var(--grad-aurora);
     transform:translateY(110px);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
   .fab.show{transform:none}
 
-  /* первый экран: только 3D чёрная дыра */
-  .space{position:relative;overflow:hidden;height:100vh;height:100svh;min-height:540px;
-    background:radial-gradient(ellipse at 50% 42%,#07070d,#010103)}
-  .space::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;z-index:2;pointer-events:none;
-    background:linear-gradient(to bottom,transparent,#010103)}
-  .bh{position:absolute;inset:0;z-index:0;pointer-events:none}
-  .bh canvas{width:100%;height:100%;display:block}
-  .scrolldn{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;
-    display:flex;flex-direction:column;align-items:center;gap:6px;color:#fff;opacity:.65;transition:opacity .2s;
+  /* hero: полный экран, сфера из частиц как фон */
+  .hero{position:relative;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;align-items:center;text-align:center;padding:100px 0 90px}
+  #orb{position:absolute;inset:0;z-index:0;pointer-events:none}
+  #orb canvas{width:100%;height:100%;display:block}
+  .hero .wrap{position:relative;z-index:1;width:100%}
+  .hero .kicker{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--silver);margin-bottom:28px}
+  .hero .kicker i{width:7px;height:7px;border-radius:50%;background:#cbfffc;display:inline-block;box-shadow:0 0 10px #cbfffc;font-style:normal}
+  .hero h1{font-size:clamp(38px,6.4vw,76px);letter-spacing:-.035em}
+  .hero p{max-width:600px;margin:24px auto 0;color:var(--silver);font-size:17px;line-height:1.5}
+  .hero .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+  .stats{display:flex;gap:56px;justify-content:center;flex-wrap:wrap;margin-top:64px}
+  .stats b{font-size:36px;font-weight:500;letter-spacing:-.03em;display:block;color:var(--phosphor)}
+  .stats small{color:var(--silver);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .scrolldn{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--white);opacity:.55;transition:opacity .2s;
     animation:bob 2.2s ease-in-out infinite}
   .scrolldn:hover{opacity:1}
   @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
 
-  /* змея ползает под блоками: видна в промежутках и по краям, контент не перекрывает */
-  #snake-canvas{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.9}
-
-  /* переход «космическая пыль»: тёмная шторка через стык — под ней змея и контент проявляются плавно */
-  .fade-space{position:absolute;left:0;right:0;top:-170px;height:62vh;min-height:440px;pointer-events:none;
-    background:linear-gradient(to bottom,#010103 0%,#010103 22%,rgba(1,1,3,.82) 42%,rgba(13,13,18,0) 100%)}
-  .fade-space canvas{width:100%;height:100%;display:block}
-
-  /* hero (представление) */
-  .hero{padding:100px 0 70px;text-align:center;position:relative}
-  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 50% -10%,rgba(99,102,241,.25),transparent 70%);pointer-events:none;animation:heroGlow 8s ease-in-out infinite alternate}
-  .hero::after{content:"";position:absolute;width:460px;height:460px;left:50%;top:-150px;transform:translateX(-50%);
-    background:radial-gradient(circle,rgba(168,85,247,.18),transparent 62%);filter:blur(18px);pointer-events:none;animation:heroFloat 11s ease-in-out infinite alternate}
-  @keyframes heroGlow{from{opacity:.65}to{opacity:1}}
-  @keyframes heroFloat{from{transform:translateX(-54%) translateY(0)}to{transform:translateX(-46%) translateY(26px)}}
-  .hero .wrap{position:relative;z-index:1}
-  .hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--muted);
-    border:1px solid var(--line);border-radius:999px;padding:8px 18px;margin-bottom:26px;background:rgba(26,26,36,.6)}
-  .hero .kicker i{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 10px #22c55e;font-style:normal}
-  .hero h1{font-size:clamp(34px,6vw,62px);font-weight:700;letter-spacing:-1px}
-  .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{max-width:640px;margin:22px auto 0;color:var(--muted);font-size:18px}
-  .hero .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px}
-  .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:52px}
-  .stats b{font-family:'Space Grotesk';font-size:32px;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .stats small{color:var(--muted);font-size:14px}
-
-  /* hero появляется при скролле (через .reveal) */
-
   /* заголовки секций */
   section{scroll-margin-top:80px}
-  .sec-head{text-align:center;padding:80px 24px 10px}
-  .sec-head .tag-line{font-size:14px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sec-head h2{font-size:clamp(28px,4vw,42px);margin-top:10px}
-  .sec-head p{color:var(--muted);max-width:560px;margin:14px auto 0}
+  .sec-head{text-align:center;padding:88px 24px 10px}
+  .sec-head .tag-line{font-size:12px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--silver)}
+  .sec-head h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;margin-top:14px}
+  .sec-head p{color:var(--silver);max-width:560px;margin:16px auto 0}
 
   /* фильтры каталога */
-  .filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:34px 0 6px}
-  .chip{font-family:'Manrope';font-size:14px;font-weight:700;color:var(--muted);background:var(--card);
-    border:1px solid var(--line);border-radius:999px;padding:10px 20px;cursor:pointer;transition:all .2s}
-  .chip small{opacity:.65;font-weight:600;margin-left:6px}
-  .chip:hover{color:var(--txt);border-color:var(--accent)}
-  .chip.active{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;box-shadow:0 8px 24px -10px rgba(99,102,241,.8)}
+  .filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:36px 0 6px}
+  .chip{font-family:'Inter';font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--silver);background:transparent;
+    border:1px solid rgba(255,255,255,.14);border-radius:var(--r-sm);padding:11px 18px;cursor:pointer;transition:all .2s}
+  .chip small{opacity:.6;font-weight:400;margin-left:6px;letter-spacing:0}
+  .chip:hover{color:var(--white);border-color:rgba(203,255,252,.45)}
+  .chip.active{color:var(--white);background:var(--kelp);border-color:rgba(203,255,252,.45)}
 
-  /* grid каталога */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:34px 0 90px}
-  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column;will-change:transform}
-  .card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 24px 56px -22px rgba(99,102,241,.6)}
+  /* grid каталога — карточки на поверхности kelp, без теней */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:36px 0 96px}
+  .card{position:relative;background:var(--kelp);border-radius:var(--r-card);overflow:hidden;transition:transform .25s,background .25s;display:flex;flex-direction:column;will-change:transform}
+  .card:hover{transform:translateY(-6px);background:#00423e}
   .card.hide{display:none}
-  .js .card{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1),border-color .25s,box-shadow .25s}
+  .js .card{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1),background .25s}
   .js .card.in{opacity:1;transform:none}
-  .thumb{height:190px;display:flex;align-items:flex-end;padding:18px;position:relative;color:#fff;overflow:hidden}
+  .thumb{height:190px;display:flex;align-items:flex-end;padding:18px;position:relative;color:var(--white);overflow:hidden}
   .thumb .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:0;transition:transform .55s ease}
-  .card:hover .thumb .shot{transform:scale(1.07)}
-  .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 55%);z-index:1}
-  .thumb .shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.28) 50%,transparent 68%);transform:translateX(-130%);transition:transform .75s ease}
+  .card:hover .thumb .shot{transform:scale(1.06)}
+  .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(1,29,28,.55),transparent 55%);z-index:1}
+  .thumb .shine{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(237,255,254,.16) 50%,transparent 68%);transform:translateX(-130%);transition:transform .75s ease}
   .card:hover .thumb .shine{transform:translateX(130%)}
-  .thumb .emoji{position:absolute;top:16px;right:18px;font-size:30px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.45));z-index:2;transition:transform .3s}
-  .card:hover .thumb .emoji{transform:scale(1.15) rotate(-6deg)}
-  .thumb .tag{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:999px;backdrop-filter:blur(4px);position:relative;z-index:2}
-  .card .body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column}
-  .card h3{font-size:21px;font-weight:700}
-  .card .desc{color:var(--muted);font-size:14.5px;margin:8px 0 18px;flex:1}
-  .open{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--txt);align-self:flex-start}
-  .open svg{transition:transform .2s}
-  .card:hover .open svg{transform:translateX(5px)}
+  .thumb .emoji{position:absolute;top:16px;right:18px;font-size:28px;filter:drop-shadow(0 4px 8px rgba(1,29,28,.6));z-index:2;transition:transform .3s}
+  .card:hover .thumb .emoji{transform:scale(1.12) rotate(-6deg)}
+  .thumb .tag{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.15em;color:var(--mist);background:rgba(1,29,28,.72);padding:6px 12px;border-radius:var(--r-sm);backdrop-filter:blur(4px);position:relative;z-index:2}
+  .card .body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column}
+  .card h3{font-size:21px;letter-spacing:-.01em}
+  .card .desc{color:var(--silver);font-size:14.5px;margin:8px 0 20px;flex:1}
+  .open{display:inline-flex;align-items:center;gap:10px;font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--white);align-self:flex-start}
+  .open .arr{width:30px;height:30px;border-radius:var(--r-sm);background:rgba(3,81,75,.5);display:inline-flex;align-items:center;justify-content:center;transition:transform .2s,background .2s}
+  .open .arr svg{display:block}
+  .card:hover .open .arr{transform:translate(3px,-3px);background:rgba(3,81,75,.85)}
 
   /* что входит */
-  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0 90px}
-  .feat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .25s,border-color .25s}
-  .feat:hover{transform:translateY(-4px);border-color:var(--accent)}
-  .feat .ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;
-    background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(168,85,247,.18));border:1px solid var(--line);margin-bottom:18px}
+  .feats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0 96px}
+  .feat{background:var(--kelp);border-radius:var(--r-card);padding:32px;transition:transform .25s,background .25s}
+  .feat:hover{transform:translateY(-4px);background:#00423e}
+  .feat .ico{width:48px;height:48px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:22px;
+    background:var(--abyss);margin-bottom:20px}
   .feat h3{font-size:19px;margin-bottom:8px}
-  .feat p{color:var(--muted);font-size:14.5px}
+  .feat p{color:var(--silver);font-size:14.5px}
 
-  /* процесс */
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:44px 0 90px;counter-reset:step}
-  .step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
-  .step::before{counter-increment:step;content:"0" counter(step);font-family:'Space Grotesk';font-weight:700;font-size:40px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:12px}
+  /* процесс — номера шагов светятся розовым */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:44px 0 96px;counter-reset:step}
+  .step{position:relative;background:var(--kelp);border-radius:var(--r-card);padding:32px 28px}
+  .step::before{counter-increment:step;content:"0" counter(step);font-weight:500;font-size:40px;letter-spacing:-.03em;
+    color:var(--phosphor);display:block;margin-bottom:14px;line-height:1}
   .step h3{font-size:18px;margin-bottom:8px}
-  .step p{color:var(--muted);font-size:14px}
+  .step p{color:var(--silver);font-size:14px}
 
   /* тарифы */
-  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0 90px}
-  .price{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:44px 0 96px}
+  .price{background:var(--kelp);border:1px solid transparent;border-radius:var(--r-card);padding:36px 30px;display:flex;flex-direction:column;transition:transform .25s}
   .price:hover{transform:translateY(-4px)}
-  .price.hot{border-color:var(--accent);position:relative;box-shadow:0 24px 56px -26px rgba(99,102,241,.55)}
-  .price.hot .pop{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .price.hot{border-color:rgba(203,255,252,.35);position:relative}
+  .price.hot .pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+    background:var(--grad-aurora);color:#062421;padding:6px 14px;border-radius:var(--r-sm);white-space:nowrap}
   .price h3{font-size:19px}
-  .price .cost{font-family:'Space Grotesk';font-size:34px;font-weight:700;margin:14px 0 4px}
-  .price .cost span{font-size:16px;color:var(--muted);font-weight:500}
-  .price ul{list-style:none;margin:18px 0 26px;flex:1}
-  .price li{color:var(--muted);font-size:14.5px;padding:7px 0 7px 28px;position:relative}
-  .price li::before{content:"✓";position:absolute;left:0;font-weight:800;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .price .cost{font-size:34px;font-weight:500;letter-spacing:-.02em;color:var(--phosphor);margin:16px 0 4px}
+  .price .cost span{font-size:15px;color:var(--silver);font-weight:400;letter-spacing:0}
+  .price ul{list-style:none;margin:18px 0 28px;flex:1}
+  .price li{color:var(--silver);font-size:14.5px;padding:7px 0 7px 28px;position:relative}
+  .price li::before{content:"✓";position:absolute;left:0;font-weight:500;color:#cbfffc}
   .price .btn{width:100%}
 
   /* FAQ */
-  .faq{max-width:760px;margin:0 auto;padding:44px 0 90px}
-  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden}
-  .q summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;font-weight:700;font-size:16.5px}
+  .faq{max-width:760px;margin:0 auto;padding:44px 0 96px}
+  .q{background:var(--kelp);border-radius:var(--r-card);margin-bottom:14px;overflow:hidden}
+  .q summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 26px;font-weight:500;font-size:16.5px;color:var(--white)}
   .q summary::-webkit-details-marker{display:none}
-  .q summary::after{content:"+";font-family:'Space Grotesk';font-size:24px;color:var(--muted);transition:transform .25s;flex-shrink:0}
-  .q[open] summary::after{transform:rotate(45deg);color:var(--txt)}
-  .q .a{padding:0 24px 20px;color:var(--muted);font-size:15px}
+  .q summary::after{content:"+";font-size:24px;font-weight:400;color:var(--silver);transition:transform .25s;flex-shrink:0}
+  .q[open] summary::after{transform:rotate(45deg);color:var(--white)}
+  .q .a{padding:0 26px 22px;color:var(--silver);font-size:15px}
 
-  /* контакты / CTA */
-  .contact{position:relative;overflow:hidden;border-top:1px solid var(--line)}
-  .contact::before{content:"";position:absolute;inset:0;background:radial-gradient(560px 280px at 50% 110%,rgba(99,102,241,.22),transparent 70%);pointer-events:none}
-  .contact .inner{position:relative;z-index:1;text-align:center;padding:90px 0}
-  .contact h2{font-size:clamp(28px,4.4vw,46px)}
-  .contact p{color:var(--muted);max-width:520px;margin:16px auto 0;font-size:17px}
-  .contact .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
-  .contact .mail{margin-top:22px;font-size:15px;color:var(--muted)}
-  .contact .mail b{color:var(--txt);cursor:pointer;border-bottom:1px dashed var(--muted)}
+  /* контакты / CTA — утопленный «колодец» */
+  .contact{position:relative;overflow:hidden;background:var(--deep)}
+  .contact .inner{position:relative;z-index:1;text-align:center;padding:120px 0}
+  .contact h2{font-size:clamp(28px,4.4vw,48px);letter-spacing:-.02em}
+  .contact p{color:var(--silver);max-width:520px;margin:18px auto 0;font-size:17px}
+  .contact .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+  .contact .mail{margin-top:26px;font-size:14px;color:var(--silver)}
+  .contact .mail b{color:var(--white);font-weight:500;cursor:pointer;border-bottom:1px dashed var(--silver)}
 
-  footer{border-top:1px solid var(--line);padding:40px 0;text-align:center;color:var(--muted);font-size:14px}
+  footer{background:var(--deep);border-top:1px solid var(--line);padding:44px 0;text-align:center;color:var(--silver);font-size:13px;letter-spacing:.02em}
 
   /* reveal секций */
   .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
@@ -238,15 +213,15 @@
   @media(max-width:560px){
     .wrap{padding:0 18px}
     .grid,.feats,.prices,.steps{grid-template-columns:1fr}
-    .stats{gap:24px}
-    .stats b{font-size:27px}
+    .stats{gap:28px}
+    .stats b{font-size:29px}
     .price.hot{order:-1}
     .nav>a.btn{display:none}
-    .hero{padding:84px 0 56px}
-    .hero p{font-size:16.5px}
+    .hero{padding:90px 0 80px}
+    .hero p{font-size:16px}
     .hero .cta,.contact .cta{flex-direction:column;align-items:stretch}
-    .hero .cta .btn,.contact .cta .btn{justify-content:center;padding:14px 24px}
-    .sec-head{padding:62px 18px 6px}
+    .hero .cta .btn,.contact .cta .btn{justify-content:center;padding:15px 24px}
+    .sec-head{padding:66px 18px 6px}
     /* фильтры — горизонтальная лента со скроллом */
     .filters{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin:0 -18px;padding:28px 18px 8px;scrollbar-width:none}
     .filters::-webkit-scrollbar{display:none}
@@ -254,17 +229,17 @@
     .grid{padding:24px 0 64px}
     .feats,.steps,.prices{padding:34px 0 64px}
     .faq{padding:30px 0 64px}
-    .feat,.step{padding:24px}
-    .price{padding:28px 22px}
-    .q summary{padding:17px 18px;font-size:15.5px}
-    .q .a{padding:0 18px 16px}
-    .contact .inner{padding:70px 0 84px}
+    .feat,.step{padding:26px 24px}
+    .price{padding:30px 24px}
+    .q summary{padding:18px 20px;font-size:15.5px}
+    .q .a{padding:0 20px 18px}
+    .contact .inner{padding:84px 0}
     .thumb{height:210px}
-    .mmenu{padding:80px 18px 20px}
+    .mmenu{padding:84px 18px 20px}
   }
   @media(max-width:400px){
-    .logo{font-size:17px}
-    .hero h1{letter-spacing:-.5px}
+    .logo{font-size:12px;letter-spacing:.1em}
+    .hero h1{letter-spacing:-.02em}
   }
 
   /* доступность: уважаем «уменьшить анимацию» */
@@ -279,7 +254,16 @@
 <div class="progress" id="progress"></div>
 <header>
   <div class="wrap nav">
-    <div class="logo">💼 <span>Веб&nbsp;Портфолио</span></div>
+    <a class="logo" href="#top" aria-label="Веб Портфолио — наверх">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+        <defs><linearGradient id="orbg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#00827c"/><stop offset=".55" stop-color="#cbfffc"/><stop offset="1" stop-color="#fad1ff"/>
+        </linearGradient></defs>
+        <circle cx="9" cy="9" r="7" fill="none" stroke="url(#orbg)" stroke-width="1.6"/>
+        <circle cx="9" cy="9" r="2.6" fill="url(#orbg)"/>
+      </svg>
+      Веб&nbsp;Портфолио
+    </a>
     <nav class="menu">
       <a href="#works">Работы</a>
       <a href="#feats">Что входит</a>
@@ -287,7 +271,7 @@
       <a href="#prices">Тарифы</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn btn-grad" href="#contact">Обсудить проект</a>
+    <a class="btn btn-aurora" href="#contact">Обсудить проект</a>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -298,28 +282,21 @@
   <a href="#steps">Как работаю</a>
   <a href="#prices">Тарифы</a>
   <a href="#faq">Вопросы</a>
-  <a class="btn btn-grad" href="#contact">Обсудить проект</a>
+  <a class="btn btn-aurora" href="#contact">Обсудить проект</a>
 </nav>
 
 <a class="fab" id="fab" href="https://t.me/xxviiexe" target="_blank" rel="noopener" aria-label="Написать в Telegram">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M21.94 4.57 18.7 19.36c-.24 1.06-.88 1.32-1.79.82l-4.94-3.64-2.38 2.29c-.26.26-.48.48-.99.48l.36-5.03 9.15-8.27c.4-.35-.09-.55-.62-.2L6.18 12.93l-4.87-1.52c-1.06-.33-1.08-1.06.22-1.57L20.14 3.03c.88-.33 1.65.2 1.36 1.54z"/></svg>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#062421" aria-hidden="true"><path d="M21.94 4.57 18.7 19.36c-.24 1.06-.88 1.32-1.79.82l-4.94-3.64-2.38 2.29c-.26.26-.48.48-.99.48l.36-5.03 9.15-8.27c.4-.35-.09-.55-.62-.2L6.18 12.93l-4.87-1.52c-1.06-.33-1.08-1.06.22-1.57L20.14 3.03c.88-.33 1.65.2 1.36 1.54z"/></svg>
 </a>
 
-<section class="space" id="top" aria-label="3D-заставка «Чёрная дыра»">
-  <div class="bh" id="bh" aria-hidden="true"></div>
-  <a class="scrolldn" href="#intro" aria-label="Листать вниз">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-  </a>
-</section>
-
-<section class="hero" id="intro">
-  <div class="fade-space" id="dust" aria-hidden="true"></div>
+<section class="hero" id="top">
+  <div id="orb" aria-hidden="true"></div>
   <div class="wrap">
     <div class="kicker reveal"><i></i>Открыт к заказам</div>
-    <h1 class="reveal">Делаю <em>лендинги</em>,<br>которые продают</h1>
+    <h1 class="reveal">Делаю лендинги,<br>которые продают</h1>
     <p class="reveal">Современная адаптивная вёрстка под ключ: дизайн, форма заявок, скорость и SEO. Ниже — каталог из 14 живых работ под разные ниши. Откройте любую — это настоящая страница.</p>
     <div class="cta reveal">
-      <a class="btn btn-grad" href="#works">Смотреть каталог ↓</a>
+      <a class="btn btn-aurora" href="#works">Смотреть каталог ↓</a>
       <a class="btn btn-ghost" href="#contact">Написать мне</a>
     </div>
     <div class="stats">
@@ -328,6 +305,9 @@
       <div class="reveal"><b>HTML/CSS/JS</b><small>чистый код</small></div>
     </div>
   </div>
+  <a class="scrolldn" href="#works" aria-label="Листать вниз">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </a>
 </section>
 
 <section id="works">
@@ -425,7 +405,7 @@
           <li>2 круга правок включены</li>
           <li>Срок — от 7 дней</li>
         </ul>
-        <a class="btn btn-grad" href="#contact">Обсудить</a>
+        <a class="btn btn-aurora" href="#contact">Обсудить</a>
       </div>
       <div class="price reveal">
         <h3>Правки и доработки</h3>
@@ -460,13 +440,13 @@
 
 <section class="contact" id="contact">
   <div class="wrap inner">
-    <h2>Обсудим ваш <span class="grad">проект?</span></h2>
+    <h2>Обсудим ваш проект?</h2>
     <p>Напишите пару слов о задаче — отвечу с оценкой по срокам и стоимости в тот же день.</p>
     <div class="cta">
-      <a class="btn btn-grad" href="https://t.me/xxviiexe" target="_blank" rel="noopener">✈️ Написать в Telegram</a>
+      <a class="btn btn-aurora" href="https://t.me/xxviiexe" target="_blank" rel="noopener">✈️ Написать в Telegram</a>
       <a class="btn btn-ghost" href="#works">Ещё раз посмотреть работы</a>
     </div>
-    <div class="mail">или ник в Telegram: <b id="copymail" title="Нажмите, чтобы скопировать">@xxviiexe</b> <span id="copied" style="display:none;color:#22c55e;font-weight:700">✓ скопировано</span></div>
+    <div class="mail">или ник в Telegram: <b id="copymail" title="Нажмите, чтобы скопировать">@xxviiexe</b> <span id="copied" style="display:none;color:#cbfffc;font-weight:500">✓ скопировано</span></div>
   </div>
 </section>
 
@@ -511,8 +491,8 @@ grid.innerHTML = works.map(w=>`
     <div class="body">
       <h3>${w.n}</h3>
       <p class="desc">${w.d}</p>
-      <span class="open">${w.open || 'Открыть лендинг'}
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <span class="open">Открыть лендинг
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
       </span>
     </div>
   </a>`).join('');
@@ -618,7 +598,7 @@ document.querySelectorAll('[data-count]').forEach(el=>{
   } else countUp(el);
 });
 
-// копирование почты
+// копирование ника
 const cm = document.getElementById('copymail'), ok = document.getElementById('copied');
 cm.addEventListener('click', ()=>{
   navigator.clipboard?.writeText(cm.textContent).then(()=>{
@@ -627,1024 +607,90 @@ cm.addEventListener('click', ()=>{
   });
 });
 
-// космическая пыль в переходе между заставкой и представлением
+// Биолюминесцентная сфера из частиц — фон hero (canvas 2D, без WebGL и библиотек).
+// Точки на сфере Фибоначчи, медленное вращение; бирюзово-белые точки, розовые — по краям.
+// При reduced-motion рисуется один статичный кадр.
 (function(){
-  if (reduce) return;
-  const holder = document.getElementById('dust');
+  const holder = document.getElementById('orb');
   if (!holder) return;
   const cv = document.createElement('canvas');
   const ctx = cv.getContext('2d');
   if (!ctx) return;
   holder.appendChild(cv);
 
-  let W = 0, H = 0;
+  const isMobile = matchMedia('(max-width:700px)').matches;
+  const N = isMobile ? 420 : 900;
   const DPR = Math.min(2, window.devicePixelRatio || 1);
+
+  // палитра Auros: тил, бледная аква, белый; розовый — редкая точка
+  const COLORS = [];
+  for (let i = 0; i < N; i++){
+    const r = Math.random();
+    COLORS.push(r < .42 ? '0,130,124' : r < .72 ? '203,255,252' : r < .92 ? '255,255,255' : '250,209,255');
+  }
+  const GA = Math.PI * (3 - Math.sqrt(5));
+  const pts = Array.from({length: N}, (_, i) => {
+    const y = 1 - (i / (N - 1)) * 2;
+    const r = Math.sqrt(Math.max(0, 1 - y * y));
+    const th = GA * i;
+    return { x: Math.cos(th) * r, y, z: Math.sin(th) * r, c: COLORS[i], tw: Math.random() * Math.PI * 2 };
+  });
+
+  let W = 0, H = 0, R = 0, CX = 0, CY = 0;
   function resize(){
     W = holder.clientWidth; H = holder.clientHeight;
     cv.width = W * DPR; cv.height = H * DPR;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    R = Math.min(W, H) * (isMobile ? .40 : .36);
+    CX = W / 2; CY = H * .46;
   }
   resize();
   new ResizeObserver(resize).observe(holder);
 
-  const COLORS = ['255,255,255', '165,180,255', '255,205,150', '200,160,255'];
-  const N = 130;
-  const ps = Array.from({length: N}, () => ({
-    x: Math.random(), y: Math.random(),
-    r: .5 + Math.random() * 1.4,
-    vy: 6 + Math.random() * 16,          // px/с, дрейф вверх — к дыре
-    sway: 4 + Math.random() * 10,
-    phase: Math.random() * Math.PI * 2,
-    tw: .6 + Math.random() * 1.6,        // скорость мерцания
-    a: .12 + Math.random() * .4,
-    c: COLORS[Math.floor(Math.random() * COLORS.length)],
-  }));
+  const TILT = .42; // наклон оси, чтобы сфера читалась объёмной
+  function draw(t){
+    ctx.clearRect(0, 0, W, H);
+    // мягкое свечение-атмосфера позади сферы
+    const glow = ctx.createRadialGradient(CX, CY, R * .1, CX, CY, R * 1.7);
+    glow.addColorStop(0, 'rgba(0,130,124,.16)');
+    glow.addColorStop(.6, 'rgba(0,130,124,.05)');
+    glow.addColorStop(1, 'rgba(0,130,124,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+
+    const ry = t * .14;                 // основное вращение вокруг оси Y
+    const rx = TILT + Math.sin(t * .07) * .1;
+    const cy1 = Math.cos(ry), sy1 = Math.sin(ry);
+    const cx1 = Math.cos(rx), sx1 = Math.sin(rx);
+    for (const p of pts){
+      // поворот Y, затем наклон X
+      const x1 = p.x * cy1 + p.z * sy1;
+      const z1 = -p.x * sy1 + p.z * cy1;
+      const y2 = p.y * cx1 - z1 * sx1;
+      const z2 = p.y * sx1 + z1 * cx1;
+      const persp = 1 / (1.9 - z2 * .7);       // лёгкая перспектива
+      const sx = CX + x1 * R * persp;
+      const sy = CY + y2 * R * persp;
+      const depth = (z2 + 1) / 2;               // 0 — дальняя сторона, 1 — ближняя
+      const a = (.1 + .55 * depth) * (.65 + .35 * Math.sin(t * 1.1 + p.tw));
+      if (a <= 0.02) continue;
+      ctx.beginPath();
+      ctx.arc(sx, sy, (0.7 + depth * 1.3) * (isMobile ? .9 : 1), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.c},${a.toFixed(3)})`;
+      ctx.fill();
+    }
+  }
+
+  if (reduce){ draw(2.4); return; } // статичный кадр без анимации
 
   let vis = true;
   new IntersectionObserver(es => { vis = es[0].isIntersecting; }).observe(holder);
 
-  let prev = performance.now();
   (function loop(now){
     requestAnimationFrame(loop);
-    if (!vis) { prev = now; return; }
-    const dt = Math.min((now - prev) / 1000, .05);
-    prev = now;
-    const t = now / 1000;
-    ctx.clearRect(0, 0, W, H);
-    for (const p of ps){
-      p.y -= (p.vy * dt) / Math.max(H, 1);
-      if (p.y < 0) { p.y = 1; p.x = Math.random(); }
-      const x = p.x * W + Math.sin(t * .4 + p.phase) * p.sway;
-      const y = p.y * H;
-      // затухание у краёв слоя + мерцание
-      const edge = Math.min(1, y / (H * .18)) * Math.min(1, (H - y) / (H * .12));
-      const alpha = p.a * edge * (.55 + .45 * Math.sin(t * p.tw + p.phase));
-      if (alpha <= 0) continue;
-      ctx.beginPath();
-      ctx.arc(x, y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${p.c},${alpha.toFixed(3)})`;
-      ctx.fill();
-    }
-  })(prev);
-})();
-</script>
-
-<!-- 3D-фон hero: чёрная дыра с аккреционным диском (three.js). При reduced-motion или без WebGL остаётся обычный градиентный фон -->
-<script type="module">
-if (!matchMedia('(prefers-reduced-motion: reduce)').matches) (async () => {
-  let THREE;
-  try { THREE = await import('three'); } catch (e) { return; }
-  const host = document.getElementById('bh');
-  const isMobile = matchMedia('(max-width: 700px)').matches;
-
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true, powerPreference: 'high-performance' });
-  } catch (e) { return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.5;
-  renderer.setClearColor(0x000000, 0);
-  host.appendChild(renderer.domElement);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 1000);
-
-  const noiseChunk = `
-    vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-    vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-    vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
-    vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
-    float snoise(vec3 v) {
-        const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
-        const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
-        vec3 i  = floor(v + dot(v, C.yyy) );
-        vec3 x0 = v - i + dot(i, C.xxx) ;
-        vec3 g = step(x0.yzx, x0.xyz);
-        vec3 l = 1.0 - g;
-        vec3 i1 = min( g.xyz, l.zxy );
-        vec3 i2 = max( g.xyz, l.zxy );
-        vec3 x1 = x0 - i1 + C.xxx;
-        vec3 x2 = x0 - i2 + C.yyy;
-        vec3 x3 = x0 - D.yyy;
-        i = mod289(i);
-        vec4 p = permute( permute( permute( i.z + vec4(0.0, i1.z, i2.z, 1.0 )) + i.y + vec4(0.0, i1.y, i2.y, 1.0 )) + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
-        float n_ = 0.142857142857;
-        vec3  ns = n_ * D.wyz - D.xzx;
-        vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
-        vec4 x_ = floor(j * ns.z);
-        vec4 y_ = floor(j - 7.0 * x_ );
-        vec4 x = x_ *ns.x + ns.yyyy;
-        vec4 y = y_ *ns.x + ns.yyyy;
-        vec4 h = 1.0 - abs(x) - abs(y);
-        vec4 b0 = vec4( x.xy, y.xy );
-        vec4 b1 = vec4( x.zw, y.zw );
-        vec4 s0 = floor(b0)*2.0 + 1.0;
-        vec4 s1 = floor(b1)*2.0 + 1.0;
-        vec4 sh = -step(h, vec4(0.0));
-        vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
-        vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
-        vec3 p0 = vec3(a0.xy,h.x);
-        vec3 p1 = vec3(a0.zw,h.y);
-        vec3 p2 = vec3(a1.xy,h.z);
-        vec3 p3 = vec3(a1.zw,h.w);
-        vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
-        p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
-        vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
-        m = m * m;
-        return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
-    }
-  `;
-
-  // горизонт событий + оранжевое свечение по краю
-  const coreGroup = new THREE.Group();
-  scene.add(coreGroup);
-  coreGroup.add(new THREE.Mesh(new THREE.SphereGeometry(4, 48, 48), new THREE.MeshBasicMaterial({ color: 0x000000 })));
-  const auraMat = new THREE.ShaderMaterial({
-    uniforms: { uIntensity: { value: 1.0 } },
-    vertexShader: `
-      varying vec3 vNormal;
-      varying vec3 vView;
-      void main() {
-        vNormal = normalize(normalMatrix * normal);
-        vView = normalize(-(modelViewMatrix * vec4(position, 1.0)).xyz);
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      uniform float uIntensity;
-      varying vec3 vNormal;
-      varying vec3 vView;
-      void main() {
-        float rim = pow(1.0 - max(dot(vNormal, vView), 0.0), 4.0);
-        gl_FragColor = vec4(vec3(1.0, 0.45, 0.1) * rim * uIntensity * 5.0, 1.0);
-      }
-    `,
-    side: THREE.BackSide, transparent: true, blending: THREE.AdditiveBlending
-  });
-  coreGroup.add(new THREE.Mesh(new THREE.SphereGeometry(4.25, 48, 48), auraMat));
-
-  // аккреционный диск из частиц-штрихов
-  const instanceCount = isMobile ? 2200 : 4000;
-  const streakGeo = new THREE.CylinderGeometry(0.01, 0.12, 2.2, 3);
-  streakGeo.rotateX(Math.PI / 2);
-  const diskMaterial = new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uMorph: { value: 0.15 },
-      uCompression: { value: 1.0 },
-      uIntensity: { value: 1.0 },
-      uOrbitScale: { value: 1.0 }
-    },
-    vertexShader: `
-      ${noiseChunk}
-      uniform float uTime;
-      uniform float uMorph;
-      uniform float uCompression;
-      uniform float uIntensity;
-      uniform float uOrbitScale;
-      varying vec3 vColor;
-      varying float vOpacity;
-      void main() {
-        vec4 instPos = instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0);
-        float rOriginal = length(instPos.xz);
-        float r = rOriginal * uCompression;
-        float initialAngle = atan(instPos.z, instPos.x);
-        float orbitalVelocity = (1.5 / sqrt(rOriginal)) * uOrbitScale;
-        float currentAngle = initialAngle + (uTime * orbitalVelocity);
-        vec3 morphedWorldPos = vec3(cos(currentAngle) * r, instPos.y, sin(currentAngle) * r);
-        float noise = snoise(vec3(morphedWorldPos.x * 0.08, morphedWorldPos.z * 0.08, uTime * 0.3));
-        morphedWorldPos.y += noise * uMorph * 4.0;
-        vec3 viewDir = normalize(cameraPosition - morphedWorldPos);
-        vec3 orbitDir = normalize(vec3(-sin(currentAngle), 0.0, cos(currentAngle)));
-        float doppler = dot(orbitDir, viewDir);
-        vec3 hot = vec3(1.0, 0.95, 0.9);
-        vec3 warm = vec3(1.0, 0.45, 0.1);
-        vec3 cool = vec3(0.1, 0.35, 1.0);
-        vec3 color = mix(cool, warm, smoothstep(45.0, 12.0, r));
-        color = mix(color, hot, smoothstep(10.0, 4.0, r));
-        vColor = color * (1.3 + doppler * 0.7) * uIntensity;
-        vOpacity = (smoothstep(3.8, 5.5, r) * (1.0 - smoothstep(38.0, 48.0, r))) * 0.8;
-        float deltaAngle = currentAngle - initialAngle;
-        float c = cos(deltaAngle);
-        float s = sin(deltaAngle);
-        mat3 rotY = mat3(
-            c, 0, s,
-            0, 1, 0,
-           -s, 0, c
-        );
-        vec3 localPos = (instanceMatrix * vec4(position, 0.0)).xyz;
-        vec3 rotatedLocalPos = rotY * localPos;
-        gl_Position = projectionMatrix * viewMatrix * vec4(morphedWorldPos + rotatedLocalPos, 1.0);
-      }
-    `,
-    fragmentShader: `
-      varying vec3 vColor;
-      varying float vOpacity;
-      void main() {
-        gl_FragColor = vec4(vColor, vOpacity);
-      }
-    `,
-    transparent: true, blending: THREE.AdditiveBlending, depthWrite: false
-  });
-  const instancedDisk = new THREE.InstancedMesh(streakGeo, diskMaterial, instanceCount);
-  const dummy = new THREE.Object3D();
-  for (let i = 0; i < instanceCount; i++) {
-    const r = 5 + Math.pow(Math.random(), 1.3) * 40;
-    const angle = Math.random() * Math.PI * 2;
-    dummy.position.set(Math.cos(angle) * r, (Math.random() - 0.5) * (8 / r), Math.sin(angle) * r);
-    dummy.lookAt(dummy.position.x + Math.sin(angle), dummy.position.y, dummy.position.z - Math.cos(angle));
-    dummy.updateMatrix();
-    instancedDisk.setMatrixAt(i, dummy.matrix);
-  }
-  scene.add(instancedDisk);
-
-  // размер под hero-блок; на узких экранах отодвигаем камеру, чтобы диск влезал
-  let camDist = 85;
-  function resize() {
-    const w = host.clientWidth, h = host.clientHeight;
-    if (!w || !h) return;
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
-    camDist = camera.aspect < 0.8 ? 140 : camera.aspect < 1.4 ? 108 : 88;
-    camera.updateProjectionMatrix();
-  }
-  resize();
-  new ResizeObserver(resize).observe(host);
-
-  // рендерим только пока hero виден на экране
-  let visible = true;
-  new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(host);
-
-  const clock = new THREE.Clock();
-  function animate() {
-    requestAnimationFrame(animate);
-    if (!visible) return;
-    const t = clock.getElapsedTime();
-    diskMaterial.uniforms.uTime.value = t;
-    diskMaterial.uniforms.uMorph.value = 0.15 + (Math.sin(t * 0.12) + 1) * 0.4; // медленное «дыхание» диска
-    instancedDisk.rotation.y += 0.0005;
-    const a = t * 0.05; // неспешный облёт камеры
-    camera.position.set(Math.sin(a) * camDist, 24, Math.cos(a) * camDist);
-    camera.lookAt(0, 0, 0);
-    renderer.render(scene, camera);
-  }
-  animate();
-})();
-</script>
-
-<!-- Змея-компаньон: ползает поверх блоков за курсором (порт procedural-snake, MIT).
-     Только десктоп с мышью; при reduced-motion или без WebGL не запускается -->
-<script type="module">
-if (!matchMedia('(prefers-reduced-motion: reduce)').matches
-    && matchMedia('(hover:hover) and (pointer:fine)').matches
-    && window.innerWidth >= 900) (async () => {
-  let THREE;
-  try { THREE = await import('three'); } catch (e) { return; }
-
-  /* simplex-noise 2D */
-  function createNoise2D() {
-    const F2 = 0.5 * (Math.sqrt(3) - 1), G2 = (3 - Math.sqrt(3)) / 6;
-    const p = new Uint8Array(256);
-    for (let i = 0; i < 256; i++) p[i] = i;
-    for (let i = 255; i > 0; i--) { const n = Math.floor(Math.random() * (i + 1)); const t = p[i]; p[i] = p[n]; p[n] = t; }
-    const perm = new Uint8Array(512);
-    for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
-    const grad = [[1,1],[-1,1],[1,-1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]];
-    return function (xin, yin) {
-      let n0 = 0, n1 = 0, n2 = 0;
-      const s = (xin + yin) * F2;
-      const i = Math.floor(xin + s), j = Math.floor(yin + s);
-      const t = (i + j) * G2;
-      const x0 = xin - (i - t), y0 = yin - (j - t);
-      const i1 = x0 > y0 ? 1 : 0, j1 = x0 > y0 ? 0 : 1;
-      const x1 = x0 - i1 + G2, y1 = y0 - j1 + G2;
-      const x2 = x0 - 1 + 2 * G2, y2 = y0 - 1 + 2 * G2;
-      const ii = i & 255, jj = j & 255;
-      let t0 = 0.5 - x0 * x0 - y0 * y0;
-      if (t0 >= 0) { const g = grad[perm[ii + perm[jj]] % 8]; t0 *= t0; n0 = t0 * t0 * (g[0] * x0 + g[1] * y0); }
-      let t1 = 0.5 - x1 * x1 - y1 * y1;
-      if (t1 >= 0) { const g = grad[perm[ii + i1 + perm[jj + j1]] % 8]; t1 *= t1; n1 = t1 * t1 * (g[0] * x1 + g[1] * y1); }
-      let t2 = 0.5 - x2 * x2 - y2 * y2;
-      if (t2 >= 0) { const g = grad[perm[ii + 1 + perm[jj + 1]] % 8]; t2 *= t2; n2 = t2 * t2 * (g[0] * x2 + g[1] * y2); }
-      return 70 * (n0 + n1 + n2);
-    };
-  }
-
-  const snakeVert = `
-uniform sampler2D u_tPosition;
-uniform sampler2D u_tNormal;
-uniform float u_tailRampEnd;
-uniform float u_scaleMin;
-uniform float u_scaleMax;
-uniform float u_neckStart;
-uniform float u_neckEnd;
-uniform float u_neckDepth;
-uniform float u_headStart;
-uniform float u_headEnd;
-uniform float u_headRadius;
-uniform float u_headBulge;
-uniform float u_radiusN;
-uniform float u_radiusB;
-uniform float u_zOffset;
-uniform float u_twistAmount;
-uniform float u_instanceScaleX;
-uniform float u_instanceScaleY;
-uniform float u_instanceScaleZ;
-attribute float spineU;
-attribute float theta;
-varying vec3 vNormal;
-varying float vSpineU;
-varying float vTheta;
-varying vec3 vWorldPos;
-varying vec3 vInstancePos;
-void main() {
-  vec3 spinePos = texture2D(u_tPosition, vec2(spineU, 0.5)).xyz;
-  vec3 spineNormal = normalize(texture2D(u_tNormal, vec2(spineU, 0.5)).xyz * 2.0 - 1.0);
-  float delta = 0.01;
-  vec3 posAhead = texture2D(u_tPosition, vec2(spineU + delta, 0.5)).xyz;
-  vec3 posBehind = texture2D(u_tPosition, vec2(spineU - delta, 0.5)).xyz;
-  vec3 tangent = normalize(posAhead - posBehind);
-  vec3 binormal = cross(tangent, spineNormal);
-  float tailRamp = smoothstep(0.0, u_tailRampEnd, spineU);
-  float neckMid = (u_neckStart + u_neckEnd) * 0.5;
-  float neckDown = smoothstep(u_neckStart, neckMid, spineU);
-  float neckUp = smoothstep(neckMid, u_neckEnd, spineU);
-  float neckPinch = 1.0 - u_neckDepth * neckDown * (1.0 - neckUp);
-  float headMid = (u_headStart + u_headEnd) * 0.5;
-  float headRampUp = smoothstep(u_headStart, headMid, spineU);
-  float headRampDown = smoothstep(headMid, u_headEnd, spineU);
-  float headBulge = u_headBulge * headRampUp * (1.0 - headRampDown);
-  float headBaseRadius = neckPinch * mix(1.0, u_headRadius, headRampUp);
-  float tipClosure = 1.0 - smoothstep(0.97, 1.0, spineU);
-  float combinedThickness = tailRamp * (headBaseRadius + headBulge) * tipClosure;
-  float scale = max(mix(u_scaleMin, u_scaleMax, combinedThickness), 0.001);
-  float twistedTheta = theta + spineU * u_twistAmount;
-  float radiusNormal = scale * u_radiusN;
-  float radiusBinormal = scale * u_radiusB;
-  vec3 ringOffset = spineNormal * cos(twistedTheta) * radiusNormal + binormal * sin(twistedTheta) * radiusBinormal;
-  ringOffset += spineNormal * combinedThickness * u_zOffset;
-  vec3 surfacePos = spinePos + ringOffset;
-  vec3 surfaceNormal = normalize(spineNormal * cos(twistedTheta) * radiusBinormal + binormal * sin(twistedTheta) * radiusNormal);
-  vec3 circumTangent = normalize(cross(surfaceNormal, tangent));
-  vec3 spineDirection = normalize(cross(circumTangent, surfaceNormal));
-  mat3 surfaceFrame = mat3(spineDirection, circumTangent, surfaceNormal);
-  vec3 scaledPos = vec3(
-    position.x * scale * u_instanceScaleX,
-    position.y * scale * u_instanceScaleY,
-    position.z * scale * u_instanceScaleZ
-  );
-  vec3 worldPos = surfacePos + surfaceFrame * scaledPos;
-  vec3 correctedNormal = normalize(vec3(
-    normal.x / u_instanceScaleX,
-    normal.y / u_instanceScaleY,
-    normal.z / u_instanceScaleZ
-  ));
-  vec3 worldNormal = surfaceFrame * correctedNormal;
-  vNormal = normalize((modelMatrix * vec4(worldNormal, 0.0)).xyz);
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(worldPos, 1.0);
-  vSpineU = spineU;
-  vTheta = theta;
-  vWorldPos = (modelMatrix * vec4(worldPos, 1.0)).xyz;
-  vInstancePos = position;
-}
-`;
-  const snakeFrag = `
-uniform vec3 u_baseColor;
-uniform vec3 u_spotColor;
-uniform float u_spotScale;
-uniform float u_spotThreshold;
-uniform float u_spotSmoothness;
-uniform float u_spotIntensity;
-uniform int u_spotOctaves;
-uniform float u_spotPersistence;
-uniform float u_spotLacunarity;
-uniform float u_timeOffset;
-uniform float u_animationSpeed;
-uniform vec3 u_cameraPosition;
-uniform vec3 u_lightDirection;
-uniform float u_specularPower;
-uniform float u_specularIntensity;
-uniform float u_fresnelPower;
-uniform float u_fresnelIntensity;
-uniform float u_normalPerturbScale;
-uniform float u_normalPerturbStrength;
-uniform int u_normalPerturbOctaves;
-uniform float u_anisotropicStrength;
-uniform float u_anisotropicRoughness;
-uniform float u_bellyLightness;
-uniform float u_bellyWidth;
-varying vec3 vNormal;
-varying float vSpineU;
-varying float vTheta;
-varying vec3 vWorldPos;
-varying vec3 vInstancePos;
-vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-vec3 permute(vec3 x) { return mod289(((x * 34.0) + 1.0) * x); }
-float snoise(vec2 v) {
-  const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
-  vec2 i = floor(v + dot(v, C.yy));
-  vec2 x0 = v - i + dot(i, C.xx);
-  vec2 i1;
-  i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-  vec4 x12 = x0.xyxy + C.xxzz;
-  x12.xy -= i1;
-  i = mod289(i);
-  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
-  vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
-  m = m * m;
-  m = m * m;
-  vec3 x = 2.0 * fract(p * C.www) - 1.0;
-  vec3 h = abs(x) - 0.5;
-  vec3 ox = floor(x + 0.5);
-  vec3 a0 = x - ox;
-  m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);
-  vec3 g;
-  g.x = a0.x * x0.x + h.x * x0.y;
-  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-  return 130.0 * dot(m, g);
-}
-float octaveNoise(vec2 uv, int octaves, float persistence, float lacunarity) {
-  float total = 0.0;
-  float frequency = 1.0;
-  float amplitude = 1.0;
-  float maxValue = 0.0;
-  for (int i = 0; i < 8; i++) {
-    if (i >= octaves) break;
-    total += snoise(uv * frequency) * amplitude;
-    maxValue += amplitude;
-    amplitude *= persistence;
-    frequency *= lacunarity;
-  }
-  return total / maxValue;
-}
-void main() {
-  vec3 normal = normalize(vNormal);
-  if (u_normalPerturbStrength > 0.0) {
-    vec2 bumpCoord = vec2(vSpineU, vTheta / (2.0 * 3.14159265359)) * u_normalPerturbScale;
-    vec2 instanceBumpOffset = vInstancePos.xy * 0.1;
-    bumpCoord += instanceBumpOffset;
-    float bumpNoise = octaveNoise(bumpCoord, u_normalPerturbOctaves, 0.5, 2.0);
-    float delta = 0.01;
-    float bumpU = octaveNoise(bumpCoord + vec2(delta, 0.0), u_normalPerturbOctaves, 0.5, 2.0);
-    float bumpV = octaveNoise(bumpCoord + vec2(0.0, delta), u_normalPerturbOctaves, 0.5, 2.0);
-    vec2 gradient = vec2(bumpU - bumpNoise, bumpV - bumpNoise) / delta;
-    vec3 tangent = normalize(cross(normal, vec3(0.0, 1.0, 0.0)));
-    vec3 bitangent = normalize(cross(normal, tangent));
-    normal = normalize(normal - gradient.x * tangent * u_normalPerturbStrength - gradient.y * bitangent * u_normalPerturbStrength);
-  }
-  vec2 baseCoord = vec2(vSpineU, vTheta / (2.0 * 3.14159265359));
-  vec2 instanceOffset = vInstancePos.xy * 0.1;
-  vec2 noiseCoord = (baseCoord + instanceOffset) * u_spotScale;
-  if (u_animationSpeed > 0.0) {
-    noiseCoord += vec2(u_timeOffset * u_animationSpeed);
-  }
-  float noiseValue = octaveNoise(noiseCoord, u_spotOctaves, u_spotPersistence, u_spotLacunarity);
-  noiseValue = noiseValue * 0.5 + 0.5;
-  float spotMask = smoothstep(u_spotThreshold - u_spotSmoothness, u_spotThreshold + u_spotSmoothness, noiseValue);
-  vec3 color = mix(u_baseColor, u_spotColor, spotMask * u_spotIntensity);
-  if (u_bellyLightness > 0.0) {
-    float verticalPos = cos(vTheta);
-    float bellyMask = smoothstep(1.0 - u_bellyWidth, 1.0, -verticalPos + 1.0);
-    color = mix(color, color * (1.0 + u_bellyLightness), bellyMask);
-  }
-  vec3 viewDir = normalize(u_cameraPosition - vWorldPos);
-  float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), u_fresnelPower);
-  vec3 rimLight = vec3(1.0) * fresnel * u_fresnelIntensity;
-  float diffuse = max(dot(normal, u_lightDirection), 0.0);
-  diffuse = diffuse * 0.6 + 0.4;
-  vec3 specular;
-  if (u_anisotropicStrength > 0.0) {
-    vec3 spineDir = normalize(dFdx(vWorldPos));
-    vec3 tangent = normalize(cross(normal, spineDir));
-    vec3 bitangent = normalize(cross(normal, tangent));
-    vec3 halfDir = normalize(u_lightDirection + viewDir);
-    float dotTH = dot(tangent, halfDir);
-    float dotBH = dot(bitangent, halfDir);
-    float dotNH = dot(normal, halfDir);
-    float roughnessT = u_anisotropicRoughness;
-    float roughnessB = u_anisotropicRoughness * 0.1;
-    float exponentT = dotTH * dotTH / (roughnessT * roughnessT);
-    float exponentB = dotBH * dotBH / (roughnessB * roughnessB);
-    float spec = exp(-(exponentT + exponentB) / max(dotNH * dotNH, 0.001));
-    float isoSpec = pow(max(dotNH, 0.0), u_specularPower);
-    spec = mix(isoSpec, spec, u_anisotropicStrength);
-    specular = vec3(1.0) * spec * u_specularIntensity;
-  } else {
-    vec3 halfDir = normalize(u_lightDirection + viewDir);
-    float spec = pow(max(dot(normal, halfDir), 0.0), u_specularPower);
-    specular = vec3(1.0) * spec * u_specularIntensity;
-  }
-  color = color * diffuse + specular + rimLight;
-  gl_FragColor = vec4(color, 1.0);
-}
-`;
-  const CONFIG = { length: 18, spineSegments: 100, radialSegments: 8, texturePoints: 100,
-    dpr: Math.min(2, window.devicePixelRatio || 1), antialias: true, scaleMin: 0.1, scaleMax: 0.45 };
-
-  function wanderForce(currentDir, noise2D, noiseTime, wanderStrength, tiltStrength) {
-    const result = currentDir.clone();
-    const wanderNoise = noise2D(noiseTime, 0);
-    const wanderAngle = wanderNoise * wanderStrength;
-    const up = new THREE.Vector3(0, 1, 0);
-    result.applyAxisAngle(up, wanderAngle);
-    const tiltNoise = noise2D(noiseTime, 100);
-    const tiltAngle = tiltNoise * tiltStrength;
-    const side = new THREE.Vector3().crossVectors(up, result);
-    if (side.lengthSq() > 0.01) {
-      side.normalize();
-      result.applyAxisAngle(side, tiltAngle);
-    }
-    return result.normalize();
-  }
-
-  function limitTurnRate(current, desired, maxRate) {
-    const angle = current.angleTo(desired);
-    if (angle <= maxRate) return desired.clone();
-    if (angle < 0.001) return current.clone();
-    const axis = new THREE.Vector3().crossVectors(current, desired);
-    if (axis.lengthSq() < 0.0001) {
-      axis.set(0, 1, 0);
-      if (Math.abs(current.y) > 0.9) axis.set(1, 0, 0);
-      axis.crossVectors(current, axis).normalize();
-    } else {
-      axis.normalize();
-    }
-    return current.clone().applyAxisAngle(axis, maxRate);
-  }
-
-  function createCurveGenerator(options = {}) {
-    options.segmentLength ??= { min: 4, max: 8 };
-    options.maxTurnRate ??= Math.PI / 6;
-    options.orbitRadius ??= 8;
-    options.orbitWeight ??= 1.0;
-    options.wanderWeight ??= 0.15;
-    options.wanderStrength ??= Math.PI / 24;
-    options.tiltStrength ??= Math.PI / 48;
-    options.coilAmplitude ??= 3.0;
-    options.coilFrequency ??= 0.25;
-    const noise2D = createNoise2D();
-    let lastPoint = new THREE.Vector3(0, 0, 0);
-    let lastDir = new THREE.Vector3(1, 0, 0);
-    let noiseTime = 0;
-    let orbitAngle = 0;
-    let coilActivation = 0;
-    return function nextCurve(target) {
-      const { segmentLength, maxTurnRate, orbitRadius, orbitWeight, wanderWeight, wanderStrength, tiltStrength, coilAmplitude, coilFrequency } = options;
-      const length = segmentLength.min + Math.random() * (segmentLength.max - segmentLength.min);
-      noiseTime += 0.01;
-      let desiredDir = new THREE.Vector3();
-      if (target) {
-        const toTarget = target.clone().sub(lastPoint);
-        const dist = toTarget.length();
-        const targetDir = toTarget.normalize();
-        const tangent = new THREE.Vector3(-targetDir.z, 0, targetDir.x);
-        const isOrbiting = dist < orbitRadius * 1.5;
-        if (isOrbiting) {
-          const circumference = 2 * Math.PI * orbitRadius;
-          const arcFraction = length / circumference;
-          orbitAngle += arcFraction * 2 * Math.PI;
-          coilActivation = Math.min(1, coilActivation + 0.15);
-        } else {
-          coilActivation = Math.max(0, coilActivation - 0.15);
-        }
-        if (dist > orbitRadius * 1.5) {
-          desiredDir = targetDir;
-        } else {
-          const radiusError = dist - orbitRadius;
-          const radialStrength = radiusError * 0.1;
-          const coilY = coilAmplitude * coilFrequency * Math.cos(coilFrequency * orbitAngle) * coilActivation;
-          const coilTangent = new THREE.Vector3(tangent.x, coilY, tangent.z);
-          desiredDir = coilTangent.clone().addScaledVector(targetDir, radialStrength).normalize();
-        }
-      } else {
-        desiredDir.add(lastDir.clone().multiplyScalar(orbitWeight));
-      }
-      const wander = wanderForce(lastDir, noise2D, noiseTime, wanderStrength, tiltStrength);
-      const wanderDelta = wander.clone().sub(lastDir);
-      desiredDir.add(wanderDelta.multiplyScalar(wanderWeight));
-      if (desiredDir.lengthSq() > 0.001) {
-        desiredDir.normalize();
-      } else {
-        desiredDir = lastDir.clone();
-      }
-      const newDir = limitTurnRate(lastDir, desiredDir, maxTurnRate);
-      const endPoint = lastPoint.clone().add(newDir.clone().multiplyScalar(length));
-      const turnAngle = lastDir.angleTo(newDir);
-      const turnFactor = Math.min(1, turnAngle / (Math.PI / 2));
-      const controlDist = length * (0.33 + 0.34 * turnFactor);
-      const cp1 = lastPoint.clone().add(lastDir.clone().multiplyScalar(controlDist));
-      const cp2 = endPoint.clone().sub(newDir.clone().multiplyScalar(controlDist));
-      const curve = new THREE.CubicBezierCurve3(lastPoint.clone(), cp1, cp2, endPoint.clone());
-      lastPoint = endPoint.clone();
-      lastDir = newDir.clone();
-      return curve;
-    };
-  }
-
-  function getAnalyticalTangent(curve, t) {
-    if (t === 0) return curve.v1.clone().sub(curve.v0).normalize();
-    if (t === 1) return curve.v3.clone().sub(curve.v2).normalize();
-    return curve.getTangentAt(t).normalize();
-  }
-
-  class EndlessCurve extends THREE.CurvePath {
-    constructor(nextCurveFn) {
-      super();
-      this.nextCurveFn = nextCurveFn;
-      this.distanceOffset = 0;
-      this.uStart = 0;
-      this.uLength = 1;
-      this.target = undefined;
-      this.frameCache = { normals: [], uValues: [] };
-      this.samplesPerCurve = 10;
-      this.lastNormal = new THREE.Vector3(0, 1, 0);
-    }
-    setTarget(target) { this.target = target; }
-    localDistance(globalDistance) { return globalDistance - this.distanceOffset; }
-    getLengthSafe() {
-      if (!this.curves.length) return 0;
-      return this.getLength();
-    }
-    addCurve(curve) {
-      const curveIndex = this.curves.length;
-      this.curves.push(curve);
-      this.cacheLengths = null;
-      this.computeFramesForCurve(curveIndex);
-    }
-    computeFramesForCurve(curveIndex) {
-      const curve = this.curves[curveIndex];
-      let prevNormal = this.lastNormal.clone();
-      let prevTangent;
-      if (curveIndex > 0) {
-        prevTangent = getAnalyticalTangent(this.curves[curveIndex - 1], 1);
-      } else {
-        prevTangent = getAnalyticalTangent(curve, 0);
-        prevNormal = this.getArbitraryPerpendicular(prevTangent);
-      }
-      for (let i = 0; i <= this.samplesPerCurve; i++) {
-        const localU = i / this.samplesPerCurve;
-        const tangent = getAnalyticalTangent(curve, localU);
-        const normal = this.parallelTransport(prevNormal, prevTangent, tangent);
-        this.frameCache.normals.push(normal.clone());
-        this.frameCache.uValues.push(0);
-        prevNormal = normal;
-        prevTangent = tangent;
-      }
-      this.lastNormal = prevNormal.clone();
-      this.recalculateUValues();
-    }
-    parallelTransport(prevNormal, prevTangent, newTangent) {
-      const dot = prevTangent.dot(newTangent);
-      if (dot > 0.9999) return prevNormal.clone();
-      const axis = new THREE.Vector3().crossVectors(prevTangent, newTangent);
-      if (axis.lengthSq() < 0.0001) {
-        axis.set(1, 0, 0);
-        if (Math.abs(prevTangent.dot(axis)) > 0.9) axis.set(0, 1, 0);
-        axis.crossVectors(axis, prevTangent).normalize();
-      } else {
-        axis.normalize();
-      }
-      const angle = Math.acos(Math.max(-1, Math.min(1, dot)));
-      const rotatedNormal = prevNormal.clone();
-      rotatedNormal.applyAxisAngle(axis, angle);
-      rotatedNormal.sub(newTangent.clone().multiplyScalar(rotatedNormal.dot(newTangent)));
-      rotatedNormal.normalize();
-      return rotatedNormal;
-    }
-    getArbitraryPerpendicular(v) {
-      const up = new THREE.Vector3(0, 1, 0);
-      if (Math.abs(v.dot(up)) > 0.9) up.set(1, 0, 0);
-      return new THREE.Vector3().crossVectors(v, up).normalize();
-    }
-    recalculateUValues() {
-      if (this.curves.length === 0) return;
-      const totalLength = this.getLength();
-      const curveLengths = this.getCurveLengths();
-      let frameIndex = 0;
-      for (let curveIndex = 0; curveIndex < this.curves.length; curveIndex++) {
-        const startLength = curveIndex > 0 ? curveLengths[curveIndex - 1] : 0;
-        const endLength = curveLengths[curveIndex];
-        const curveLength = endLength - startLength;
-        for (let i = 0; i <= this.samplesPerCurve; i++) {
-          if (frameIndex >= this.frameCache.uValues.length) break;
-          const localU = i / this.samplesPerCurve;
-          this.frameCache.uValues[frameIndex] = (startLength + curveLength * localU) / totalLength;
-          frameIndex++;
-        }
-      }
-    }
-    interpolateNormal(u) {
-      const cache = this.frameCache;
-      if (cache.normals.length === 0) {
-        const tangent = this.getTangentAt(u).normalize();
-        return this.getArbitraryPerpendicular(tangent);
-      }
-      if (cache.normals.length === 1) return cache.normals[0].clone();
-      let low = 0;
-      let high = cache.uValues.length - 1;
-      if (u <= cache.uValues[0]) return cache.normals[0].clone();
-      if (u >= cache.uValues[high]) return cache.normals[high].clone();
-      while (low < high - 1) {
-        const mid = Math.floor((low + high) / 2);
-        if (cache.uValues[mid] <= u) low = mid;
-        else high = mid;
-      }
-      const uLow = cache.uValues[low];
-      const uHigh = cache.uValues[high];
-      const t = uHigh > uLow ? (u - uLow) / (uHigh - uLow) : 0;
-      return cache.normals[low].clone().lerp(cache.normals[high], t).normalize();
-    }
-    getBasisAt(u) {
-      return {
-        position: this.getPointAt(u),
-        tangent: this.getTangentAt(u).normalize(),
-        normal: this.interpolateNormal(u),
-      };
-    }
-    fillLength(length) {
-      const localLen = this.localDistance(length);
-      const currentLen = this.getLengthSafe();
-      if (localLen < currentLen) return;
-      this.addCurve(this.nextCurveFn(this.target));
-      this.fillLength(length);
-    }
-    removeCurvesBefore(position) {
-      const p = this.localDistance(position);
-      const lengths = this.getCurveLengths();
-      let remove = 0;
-      let distanceOffset = 0;
-      for (let i = 0; i < lengths.length; i++) {
-        if (p < lengths[i]) break;
-        distanceOffset = lengths[i];
-        remove++;
-      }
-      if (remove) {
-        this.distanceOffset += distanceOffset;
-        this.curves = this.curves.slice(remove);
-        const framesToRemove = remove * (this.samplesPerCurve + 1);
-        this.frameCache.normals = this.frameCache.normals.slice(framesToRemove);
-        this.frameCache.uValues = this.frameCache.uValues.slice(framesToRemove);
-        this.cacheLengths = null;
-        this.recalculateUValues();
-      }
-    }
-    configureStartEnd(position, length) {
-      this.fillLength(position + length);
-      this.removeCurvesBefore(position);
-      const localPos = this.localDistance(position);
-      const totalLen = this.getLengthSafe();
-      this.uStart = totalLen > 0 ? localPos / totalLen : 0;
-      this.uLength = totalLen > 0 ? length / totalLen : 1;
-    }
-    getBasisAtLocal(u) {
-      const u2 = this.uStart + this.uLength * u;
-      return this.getBasisAt(Math.min(u2, 1));
-    }
-  }
-
-  class SnakeObject extends THREE.Object3D {
-    constructor() {
-      super();
-      this.distance = 0;
-      this.config = { length: 10, speed: 16, spineSegments: 100, radialSegments: 8 };
-      this.uniforms = {
-        u_tPosition: { value: null },
-        u_tNormal: { value: null },
-        u_tailRampEnd: { value: 0.74 },
-        u_scaleMin: { value: 0.13 },
-        u_scaleMax: { value: 0.65 },
-        u_neckStart: { value: 0.74 },
-        u_neckEnd: { value: 0.95 },
-        u_neckDepth: { value: 0.3 },
-        u_headStart: { value: 0.85 },
-        u_headEnd: { value: 1.0 },
-        u_headRadius: { value: 0.75 },
-        u_headBulge: { value: 0.75 },
-        u_radiusN: { value: 0.5 },
-        u_radiusB: { value: 0.8 },
-        u_zOffset: { value: 0.2 },
-        u_twistAmount: { value: 3.0 },
-        u_instanceScaleX: { value: 0.5 },
-        u_instanceScaleY: { value: 0.43 },
-        u_instanceScaleZ: { value: 0.1 },
-        u_baseColor: { value: new THREE.Color(0x2a9d8f) },
-        u_spotColor: { value: new THREE.Color(0xe76f51) },
-        u_spotScale: { value: 5.0 },
-        u_spotThreshold: { value: 0.6 },
-        u_spotSmoothness: { value: 0.1 },
-        u_spotIntensity: { value: 0.8 },
-        u_spotOctaves: { value: 2 },
-        u_spotPersistence: { value: 0.5 },
-        u_spotLacunarity: { value: 2.0 },
-        u_timeOffset: { value: 0.0 },
-        u_animationSpeed: { value: 0.0 },
-        u_cameraPosition: { value: new THREE.Vector3() },
-        u_lightDirection: { value: new THREE.Vector3(0.5, 1.0, 0.3).normalize() },
-        u_specularPower: { value: 27.0 },
-        u_specularIntensity: { value: 0.5 },
-        u_fresnelPower: { value: 3.5 },
-        u_fresnelIntensity: { value: 0.3 },
-        u_normalPerturbScale: { value: 20.0 },
-        u_normalPerturbStrength: { value: 0.05 },
-        u_normalPerturbOctaves: { value: 4 },
-        u_anisotropicStrength: { value: 0.35 },
-        u_anisotropicRoughness: { value: 0.5 },
-        u_bellyLightness: { value: 1 },
-        u_bellyWidth: { value: 0.5 },
-      };
-    }
-    createDataTexture() {
-      const data = new Float32Array(this.texturePoints * 4);
-      const texture = new THREE.DataTexture(data, this.texturePoints, 1, THREE.RGBAFormat, THREE.FloatType);
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.needsUpdate = true;
-      return texture;
-    }
-    createGeometry() {
-      const { spineSegments, radialSegments } = this;
-      const instanceCount = spineSegments * radialSegments;
-      const geometry = new THREE.OctahedronGeometry(1, 1);
-      const spineUs = new Float32Array(instanceCount);
-      const thetas = new Float32Array(instanceCount);
-      for (let row = 0; row < spineSegments; row++) {
-        const u = spineSegments > 1 ? row / (spineSegments - 1) : 0;
-        for (let col = 0; col < radialSegments; col++) {
-          const angle = (col / radialSegments) * Math.PI * 2;
-          const idx = row * radialSegments + col;
-          spineUs[idx] = u;
-          thetas[idx] = angle;
-        }
-      }
-      geometry.setAttribute("spineU", new THREE.InstancedBufferAttribute(spineUs, 1));
-      geometry.setAttribute("theta", new THREE.InstancedBufferAttribute(thetas, 1));
-      return geometry;
-    }
-    updateTextures() {
-      if (!this.curve || !this.positionTex || !this.normalTex) return;
-      const posData = this.positionTex.image.data;
-      const normData = this.normalTex.image.data;
-      for (let i = 0; i < this.texturePoints; i++) {
-        const u = i / (this.texturePoints - 1);
-        const basis = this.curve.getBasisAtLocal(u);
-        const idx = i * 4;
-        posData[idx] = basis.position.x;
-        posData[idx + 1] = basis.position.y;
-        posData[idx + 2] = basis.position.z;
-        posData[idx + 3] = 1.0;
-        normData[idx] = basis.normal.x * 0.5 + 0.5;
-        normData[idx + 1] = basis.normal.y * 0.5 + 0.5;
-        normData[idx + 2] = basis.normal.z * 0.5 + 0.5;
-        normData[idx + 3] = 1.0;
-      }
-      this.positionTex.needsUpdate = true;
-      this.normalTex.needsUpdate = true;
-    }
-    buildScene(curve, options = {}) {
-      this.curve = curve;
-      this.config.length = options.length ?? 10;
-      this.config.speed = options.speed ?? 2;
-      this.config.spineSegments = options.spineSegments ?? 100;
-      this.config.radialSegments = options.radialSegments ?? 8;
-      this.spineSegments = this.config.spineSegments;
-      this.radialSegments = this.config.radialSegments;
-      this.texturePoints = options.texturePoints ?? 100;
-      this.positionTex = this.createDataTexture();
-      this.normalTex = this.createDataTexture();
-      const geometry = this.createGeometry();
-      const instanceCount = this.spineSegments * this.radialSegments;
-      this.uniforms.u_tPosition.value = this.positionTex;
-      this.uniforms.u_tNormal.value = this.normalTex;
-      this.material = new THREE.ShaderMaterial({
-        vertexShader: snakeVert,
-        fragmentShader: snakeFrag,
-        uniforms: this.uniforms,
-        side: THREE.DoubleSide,
-      });
-      this.mesh = new THREE.InstancedMesh(geometry, this.material, instanceCount);
-      this.mesh.frustumCulled = false;
-      const matrix = new THREE.Matrix4();
-      for (let i = 0; i < instanceCount; i++) this.mesh.setMatrixAt(i, matrix);
-      this.add(this.mesh);
-    }
-    update(delta) {
-      this.distance += delta * this.config.speed;
-      this.curve?.configureStartEnd(this.distance, this.config.length);
-      this.updateTextures();
-      this.uniforms.u_timeOffset.value = this.distance * 0.1;
-    }
-  }
-
-  class Snake {
-    constructor() {
-      this.snakeObject = new SnakeObject();
-      this.targetSpherePosition = new THREE.Vector3();
-      this.raycaster = new THREE.Raycaster();
-      this.groundPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-      this.waypoint = new THREE.Vector3();
-      this.waypointTimer = 99; // сразу выбрать первую цель
-    }
-    // случайная точка в видимой области плоскости — змея кочует по всему экрану
-    pickWaypoint(camera) {
-      const ndc = new THREE.Vector2();
-      const p = new THREE.Vector3();
-      for (let i = 0; i < 10; i++) {
-        ndc.set(Math.random() * 1.8 - 0.9, Math.random() * 1.2 - 0.85);
-        this.raycaster.setFromCamera(ndc, camera);
-        if (this.raycaster.ray.intersectPlane(this.groundPlane, p) && p.length() < 45) {
-          this.waypoint.copy(p);
-          return;
-        }
-      }
-      this.waypoint.set(0, 0, 0);
-    }
-    buildScene() {
-      const group = new THREE.Group();
-      const orbitRadius = Math.max(1.0, Math.min(2.5, window.innerWidth / 800));
-      const curveGenerator = createCurveGenerator({
-        segmentLength: { min: 4, max: 8 },
-        maxTurnRate: 1.15,
-        orbitRadius: orbitRadius,
-        orbitWeight: 1.0,
-        wanderWeight: 0.2,
-        wanderStrength: Math.PI / 12,
-        tiltStrength: Math.PI / 24,
-        coilAmplitude: 3.0,
-        coilFrequency: 0.25,
-      });
-      this.endlessCurve = new EndlessCurve(curveGenerator);
-      this.snakeObject.uniforms.u_scaleMin.value = CONFIG.scaleMin;
-      this.snakeObject.uniforms.u_scaleMax.value = CONFIG.scaleMax;
-      this.snakeObject.buildScene(this.endlessCurve, {
-        length: CONFIG.length,
-        speed: 4,
-        spineSegments: CONFIG.spineSegments,
-        radialSegments: CONFIG.radialSegments,
-        texturePoints: CONFIG.texturePoints,
-      });
-      group.add(this.snakeObject);
-      return group;
-    }
-    update(camera, delta) {
-      // новая цель — по таймеру или когда почти доплыла до текущей
-      this.waypointTimer += delta;
-      if (this.waypointTimer > 7 || this.targetSpherePosition.distanceTo(this.waypoint) < 2.5) {
-        this.pickWaypoint(camera);
-        this.waypointTimer = 0;
-      }
-      this.targetSpherePosition.lerp(this.waypoint, Math.min(1, delta * 1.2));
-      this.endlessCurve?.setTarget(this.targetSpherePosition);
-      this.snakeObject?.update(delta);
-      this.snakeObject.uniforms.u_cameraPosition.value.copy(camera.position);
-    }
-  }
-
-  /* приложение: прозрачный fixed-слой поверх страницы */
-  let gl;
-  try {
-    gl = new THREE.WebGLRenderer({ alpha: true, antialias: CONFIG.antialias, powerPreference: "high-performance" });
-  } catch (e) { return; }
-  gl.outputColorSpace = THREE.SRGBColorSpace;
-  gl.toneMapping = THREE.NoToneMapping;
-  gl.setSize(window.innerWidth, window.innerHeight);
-  gl.setClearColor(0x000000, 0);
-  gl.setPixelRatio(CONFIG.dpr);
-  gl.domElement.id = "snake-canvas";
-  gl.domElement.setAttribute("aria-hidden", "true");
-  document.body.appendChild(gl.domElement);
-
-  let contextLost = false;
-  gl.domElement.addEventListener("webglcontextlost", (e) => { e.preventDefault(); contextLost = true; });
-  gl.domElement.addEventListener("webglcontextrestored", () => { contextLost = false; });
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
-  camera.position.set(0, 15, 20);
-  camera.lookAt(0, 0, 0);
-
-  const snake = new Snake();
-  scene.add(snake.buildScene());
-
-  window.addEventListener("resize", () => {
-    gl.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-  });
-
-  let prev = performance.now();
-  function update() {
-    requestAnimationFrame(update);
-    if (contextLost) return;
-    const now = performance.now();
-    let delta = (now - prev) / 1e3;
-    prev = now;
-    delta = Math.min(delta, 1 / 20);
-    snake.update(camera, delta);
-    gl.render(scene, camera);
-  }
-  update();
+    if (!vis) return;
+    draw(now / 1000);
+  })(performance.now());
 })();
 </script>
 </body>
