@@ -38,50 +38,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.1; te
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; }
 
-/* ===== Прелоадер-шторка ===== */
-.preloader {
-  position: fixed; inset: 0; z-index: 200;
-  background: #050506;
-  display: flex; align-items: center; justify-content: center;
-  animation: curtainUp 0.9s cubic-bezier(0.76, 0, 0.24, 1) 1.3s forwards;
-}
-.preloader .pl-logo {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: clamp(22px, 4vw, 38px);
-  letter-spacing: 0.28em;
-  color: var(--gold);
-  opacity: 0;
-  animation: plIn 0.8s ease 0.15s forwards;
-}
-@keyframes plIn { to { opacity: 1; letter-spacing: 0.38em; } }
-@keyframes curtainUp { to { transform: translateY(-101%); } }
-
 /* ===== Прогресс и курсор ===== */
 .progress {
   position: fixed; top: 0; left: 0; height: 2px; width: 0;
   background: linear-gradient(90deg, var(--gold), var(--gold-bright));
   z-index: 150;
 }
-.cursor-ring, .cursor-dot { display: none; }
-@media (pointer: fine) {
-  .cursor-ring {
-    display: block; position: fixed; z-index: 190; pointer-events: none;
-    width: 34px; height: 34px; border: 1px solid rgba(212,175,122,0.55);
-    border-radius: 50%; transform: translate(-50%, -50%);
-    transition: width .25s, height .25s, border-color .25s, opacity .3s;
-    opacity: 0;
-  }
-  .cursor-dot {
-    display: block; position: fixed; z-index: 190; pointer-events: none;
-    width: 4px; height: 4px; background: var(--gold-bright);
-    border-radius: 50%; transform: translate(-50%, -50%);
-    opacity: 0; transition: opacity .3s;
-  }
-  body.cursor-on .cursor-ring, body.cursor-on .cursor-dot { opacity: 1; }
-  .cursor-ring.hot { width: 58px; height: 58px; border-color: var(--gold-bright); }
-}
-
 /* ===== Навигация ===== */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -229,24 +191,6 @@ nav.scrolled {
   .hero-stats { grid-template-columns: repeat(2, 1fr); width: 100%; gap: 26px; }
 }
 
-/* ===== Бегущая строка ===== */
-.marquee {
-  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  overflow: hidden; padding: 26px 0; background: var(--bg-soft);
-}
-.marquee-track {
-  display: flex; gap: 60px; width: max-content;
-  animation: marquee 26s linear infinite;
-}
-.marquee span {
-  font-family: var(--display); font-weight: 400; font-size: 22px;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: transparent; -webkit-text-stroke: 1px rgba(212,175,122,0.5);
-  white-space: nowrap;
-}
-.marquee span.solid { color: var(--gold); -webkit-text-stroke: 0; }
-@keyframes marquee { to { transform: translateX(-50%); } }
-
 /* ===== Секции ===== */
 section { padding: clamp(90px, 12vh, 150px) clamp(20px, 4vw, 56px); }
 .wrap { max-width: 1280px; margin: 0 auto; }
@@ -380,7 +324,6 @@ blockquote::after { content: '»'; color: var(--gold); }
   border-top: 1px solid var(--line);
   padding-top: clamp(110px, 16vh, 180px); padding-bottom: clamp(110px, 16vh, 180px);
 }
-#dust { position: absolute; inset: 0; width: 100%; height: 100%; }
 .cta-inner { position: relative; z-index: 2; }
 .cta h2 {
   font-size: clamp(34px, 6.5vw, 84px); text-transform: uppercase;
@@ -479,6 +422,26 @@ footer {
 .photo-track img:hover { filter: grayscale(0.15) sepia(0.32) saturate(1.15); transform: scale(1.02); }
 @keyframes strip { to { transform: translateX(-50%); } }
 
+.hero .hero-actions { margin-bottom: 26px; }
+.hero-steps { font-size: 13.5px; color: var(--muted); margin-bottom: clamp(44px, 7vh, 80px); }
+.hero-steps b { color: var(--gold-bright); font-weight: 600; }
+.services-note { margin-top: 24px; color: var(--muted); font-size: 14px; }
+.addr .addr-act { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 4px; }
+.addr .book { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: var(--gold); white-space: nowrap; }
+.addr .book:hover { color: var(--gold-bright); }
+.addr .book::after { content: " \2192"; }
+.sticky-book { display: none; }
+@media (max-width: 700px) {
+  .sticky-book {
+    display: flex; position: fixed; left: 14px; right: 14px; bottom: 14px; z-index: 120;
+    justify-content: center; padding: 17px; border-radius: 100px;
+    background: var(--gold); background: linear-gradient(120deg, var(--gold), var(--gold-bright));
+    color: #08080a; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 14px;
+    box-shadow: 0 12px 34px rgba(0,0,0,0.55);
+  }
+  body { padding-bottom: 74px; }
+}
+
 /* ===== Появление при скролле ===== */
 .reveal { opacity: 0; transform: translateY(42px); transition: opacity .9s cubic-bezier(0.22, 1, 0.36, 1), transform .9s cubic-bezier(0.22, 1, 0.36, 1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -486,7 +449,6 @@ footer {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee-track { animation: none; }
   .photo-track { animation: none; }
   .photo-strip { overflow-x: auto; }
   html { scroll-behavior: auto; }
@@ -495,10 +457,7 @@ footer {
 </head>
 <body>
 
-<div class="preloader"><div class="pl-logo">GSNV—LAB</div></div>
 <div class="progress" id="progress"></div>
-<div class="cursor-ring" id="cring"></div>
-<div class="cursor-dot" id="cdot"></div>
 
 <nav id="nav">
   <a class="nav-logo" href="#">
@@ -515,20 +474,18 @@ footer {
   </a>
   <ul class="nav-links">
     <li><a href="#brands">Бренды</a></li>
-    <li><a href="#philosophy">Философия</a></li>
     <li><a href="#atmosphere">Атмосфера</a></li>
     <li><a href="#services">Услуги</a></li>
     <li><a href="#education">Обучение</a></li>
     <li><a href="#addresses">Адреса</a></li>
   </ul>
-  <a class="nav-cta magnetic" href="#cta">Записаться</a>
+  <a class="nav-cta" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a>
   <button class="burger" id="burger" aria-label="Меню">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="mobile-menu" id="mmenu">
   <a href="#brands">Бренды</a>
-  <a href="#philosophy">Философия</a>
   <a href="#atmosphere">Атмосфера</a>
   <a href="#services">Услуги</a>
   <a href="#education">Обучение</a>
@@ -545,11 +502,12 @@ footer {
       <span class="outline">Лаборатория</span>
       <span class="fill">эмоций</span>
     </h1>
-    <p class="hero-sub"><strong>Мы не продаём услуги — мы дарим эмоции.</strong> Салоны красоты и барбершопы GSNV-Lab: мировые тренды по честной цене, мастера, влюблённые в профессию.</p>
+    <p class="hero-sub"><strong>12 салонов и барбершопов в Астрахани.</strong> Стрижка, борода, окрашивание, уход — мастера, к которым возвращаются 50 000 гостей.</p>
     <div class="hero-actions">
-      <a class="btn btn-gold magnetic" href="#cta">Записаться</a>
-      <a class="btn btn-ghost magnetic" href="#brands">Наши бренды</a>
+      <a class="btn btn-gold" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться онлайн</a>
+      <a class="btn btn-ghost" href="#addresses">Адреса и телефоны</a>
     </div>
+    <div class="hero-steps reveal">Онлайн-запись: <b>филиал</b> → <b>мастер</b> → <b>время</b>. Занимает минуту, без звонков.</div>
     <div class="hero-stats">
       <div class="stat"><div class="num"><span data-count="12">12</span></div><div class="lbl">салонов</div></div>
       <div class="stat"><div class="num"><span data-count="50000">50 000</span><sup>+</sup></div><div class="lbl">постоянных гостей</div></div>
@@ -559,34 +517,84 @@ footer {
   </div>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>#gsnv_lab_family</span><span class="solid">эмоции</span><span>стиль</span><span class="solid">барберинг</span><span>окрашивание</span><span class="solid">Астрахань</span>
-    <span>#gsnv_lab_family</span><span class="solid">эмоции</span><span>стиль</span><span class="solid">барберинг</span><span>окрашивание</span><span class="solid">Астрахань</span>
+<!-- ===== УСЛУГИ ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Что мы делаем</div>
+      <h2>Услуги — <em>запись в два клика</em></h2>
+    </div>
+    <div>
+      <a class="service-row reveal" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">
+        <h3>Мужские стрижки</h3>
+        <p>Классика и актуальные формы — от фейда до кроп-текстур. Подбор под тип волос и образ жизни.</p>
+        <div class="arr">→</div>
+      </a>
+      <a class="service-row reveal" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">
+        <h3>Борода и бритьё</h3>
+        <p>Моделирование бороды, королевское бритьё, горячие полотенца — полный барбер-ритуал.</p>
+        <div class="arr">→</div>
+      </a>
+      <a class="service-row reveal" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">
+        <h3>Женские стрижки и укладки</h3>
+        <p>Форма, которая живёт и без укладки. Вечерние и повседневные образы.</p>
+        <div class="arr">→</div>
+      </a>
+      <a class="service-row reveal" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">
+        <h3>Окрашивание</h3>
+        <p>Сложные техники по мировым трендам: от глубокого одного тона до аиртач и блонда.</p>
+        <div class="arr">→</div>
+      </a>
+      <a class="service-row reveal" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">
+        <h3>Уход и восстановление</h3>
+        <p>Профессиональные уходы, которые возвращают волосам плотность и блеск.</p>
+        <div class="arr">→</div>
+      </a>
+    </div>
+    <p class="services-note reveal">Цены зависят от филиала и мастера — точный прайс открывается при выборе услуги в онлайн-записи.</p>
   </div>
-</div>
-
-<!-- ===== ФИЛОСОФИЯ ===== -->
-<section class="philosophy" id="philosophy">
-  <div class="wrap phil-grid">
-    <div class="reveal">
-      <blockquote>Ваш успех зависит от меня, мой успех зависит от вас</blockquote>
-      <div class="phil-author">
-        <div class="ava">ТГ</div>
-        <div class="who"><b>Теймур Гасанов</b><span>основатель сети GSNV-Lab</span></div>
-      </div>
-      <div class="phil-text" style="margin-top: 34px;">
-        <p>История GSNV-Lab началась в 2000-х — с настоящей страсти к парикмахерскому искусству. Сегодня это <strong>12 салонов и 4 бренда</strong>, но правило одно: каждый гость уходит не со стрижкой, а с эмоцией.</p>
-        <p>Мы — команда-семья. Наша миссия — <strong>сделать мир красивее</strong>, а наши клиенты становятся нашими друзьями.</p>
-        <span class="tag">#gsnv_lab_family</span>
+</section>
+<!-- ===== АДРЕСА ===== -->
+<section id="addresses">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">12 салонов рядом с вами</div>
+      <h2>Найдите <em>свой</em> GSNV-Lab</h2>
+    </div>
+    <div class="addr-group reveal">
+      <div class="g-name">GSNV-Lab</div>
+      <div class="addr-list">
+        <div class="addr"><span class="street">ул. 28 Армии, 14</span><div class="addr-act"><a class="phone" href="tel:+78512999542">+7 (8512) 999-542</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Тургенева, 1</span><div class="addr-act"><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
       </div>
     </div>
-    <div class="phil-photo reveal">
-      <img src="images/phil.jpg" alt="Интерьер салона GSNV-Lab" loading="lazy">
+    <div class="addr-group reveal">
+      <div class="g-name">GSNV-Lab Pro</div>
+      <div class="addr-list">
+        <div class="addr"><span class="street">ул. Никольская, 8</span><div class="addr-act"><a class="phone" href="tel:+78512293293">+7 (8512) 293-293</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+      </div>
+    </div>
+    <div class="addr-group reveal">
+      <div class="g-name">Barber-Lab</div>
+      <div class="addr-list">
+        <div class="addr"><span class="street">ул. Тургенева, 1</span><div class="addr-act"><a class="phone" href="tel:+78512424555">+7 (8512) 424-555</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Космонавтов, 14</span><div class="addr-act"><a class="phone" href="tel:+78512424999">+7 (8512) 424-999</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Фиолетова, 9</span><div class="addr-act"><a class="phone" href="tel:+78512435243">+7 (8512) 435-243</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Яблочкова, 42</span><div class="addr-act"><a class="phone" href="tel:+78512428384">+7 (8512) 428-384</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Б. Хмельницкого, 21</span><div class="addr-act"><a class="phone" href="tel:+78512438384">+7 (8512) 438-384</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Сен-Симона, 48к1</span><div class="addr-act"><a class="phone" href="tel:+78512414424">+7 (8512) 414-424</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Кирова, 92</span><div class="addr-act"><a class="phone" href="tel:+78512410180">+7 (8512) 410-180</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Белгородская, 1/4</span><div class="addr-act"><a class="phone" href="tel:+78512414222">+7 (8512) 414-222</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+      </div>
+    </div>
+    <div class="addr-group reveal">
+      <div class="g-name">GSNV-Lab Girls</div>
+      <div class="addr-list">
+        <div class="addr"><span class="street">ул. Тургенева, 1</span><div class="addr-act"><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+      </div>
     </div>
   </div>
 </section>
-
 <!-- ===== БРЕНДЫ ===== -->
 <section id="brands">
   <div class="wrap">
@@ -599,34 +607,33 @@ footer {
         <img class="bg" src="images/brand-classic.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Классика сети</div>
         <h3>GSNV-Lab</h3>
-        <p>Салоны, с которых всё началось. Стрижки, окрашивание и укладки для всей семьи.</p>
+        <p>Стрижки, окрашивание и укладки для всей семьи.</p>
         <div class="meta">2 салона · 28 Армии, Тургенева</div>
       </div>
       <div class="brand-card reveal">
         <img class="bg" src="images/brand-pro.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Флагман</div>
         <h3>GSNV-Lab Pro</h3>
-        <p>Продвинутый формат: топ-мастера сети и самые сложные работы.</p>
+        <p>Топ-мастера сети и самые сложные работы.</p>
         <div class="meta">Никольская, 8</div>
       </div>
       <div class="brand-card reveal">
         <img class="bg" src="images/brand-barber.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Мужское направление</div>
         <h3>Barber-Lab</h3>
-        <p>Сеть барбершопов: мужские стрижки, борода, бритьё опасной бритвой.</p>
+        <p>Мужские стрижки, борода, бритьё опасной бритвой.</p>
         <div class="meta">9 барбершопов по всему городу</div>
       </div>
       <div class="brand-card reveal">
         <img class="bg" src="images/brand-girls.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Женское направление</div>
         <h3>GSNV-Lab Girls</h3>
-        <p>Пространство для девушек: цвет, форма и уход в атмосфере заботы.</p>
+        <p>Женский зал: цвет, форма и уход.</p>
         <div class="meta">Тургенева, 1</div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- ===== АТМОСФЕРА ===== -->
 <section class="atmosphere" id="atmosphere">
   <div class="wrap">
@@ -656,58 +663,20 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- ===== УСЛУГИ ===== -->
-<section class="services" id="services">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">Что мы делаем</div>
-      <h2>Услуги <em>мирового уровня</em> — по честной цене</h2>
-    </div>
-    <div>
-      <div class="service-row reveal">
-        <h3>Мужские стрижки</h3>
-        <p>Классика и актуальные формы — от фейда до кроп-текстур. Подбор под тип волос и образ жизни.</p>
-        <div class="arr">→</div>
-      </div>
-      <div class="service-row reveal">
-        <h3>Борода и бритьё</h3>
-        <p>Моделирование бороды, королевское бритьё, горячие полотенца — полный барбер-ритуал.</p>
-        <div class="arr">→</div>
-      </div>
-      <div class="service-row reveal">
-        <h3>Женские стрижки и укладки</h3>
-        <p>Форма, которая живёт и без укладки. Вечерние и повседневные образы.</p>
-        <div class="arr">→</div>
-      </div>
-      <div class="service-row reveal">
-        <h3>Окрашивание</h3>
-        <p>Сложные техники по мировым трендам: от глубокого одного тона до аиртач и блонда.</p>
-        <div class="arr">→</div>
-      </div>
-      <div class="service-row reveal">
-        <h3>Уход и восстановление</h3>
-        <p>Профессиональные уходы, которые возвращают волосам плотность и блеск.</p>
-        <div class="arr">→</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== ОБУЧЕНИЕ ===== -->
 <section class="philosophy" id="education">
   <div class="wrap edu-grid">
     <div class="reveal">
       <div class="eyebrow">Академия</div>
       <h2 class="edu-title">Мы не только стрижём — <em>мы растим мастеров</em></h2>
-      <p class="edu-sub">Обучение барберингу и парикмахерскому искусству от практикующих мастеров GSNV-Lab — тех самых, к которым записываются за неделю.</p>
+      <p class="edu-sub">Курсы барберинга и парикмахерского дела от практикующих мастеров сети. Набор и условия — в директе.</p>
       <div class="edu-points">
-        <div class="edu-point"><span class="dot"></span><span><b>С нуля до первого клиента.</b> База профессии: мужские стрижки, борода, бритьё, работа с гостем.</span></div>
-        <div class="edu-point"><span class="dot"></span><span><b>Прокачка для практикующих.</b> Актуальные техники и разборы сложных работ для действующих мастеров.</span></div>
-        <div class="edu-point"><span class="dot"></span><span><b>Практика в настоящих салонах.</b> Учишься у кресла, а не у доски — в действующих пространствах сети.</span></div>
+        <div class="edu-point"><span class="dot"></span><span><b>С нуля:</b> стрижки, борода, бритьё, работа с гостем.</span></div>
+        <div class="edu-point"><span class="dot"></span><span><b>Для мастеров:</b> актуальные техники и разборы сложных работ.</span></div>
+        <div class="edu-point"><span class="dot"></span><span><b>Практика</b> в действующих салонах сети.</span></div>
       </div>
       <div class="hero-actions" style="margin-bottom: 0;">
-        <a class="btn btn-gold magnetic" href="https://www.instagram.com/gsnv_lab" target="_blank" rel="noopener">Узнать про обучение</a>
+        <a class="btn btn-gold" href="https://www.instagram.com/gsnv_lab" target="_blank" rel="noopener">Узнать про обучение</a>
       </div>
     </div>
     <div class="phil-photo reveal">
@@ -715,62 +684,26 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- ===== АДРЕСА ===== -->
-<section id="addresses">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="eyebrow">12 салонов рядом с вами</div>
-      <h2>Найдите <em>свой</em> GSNV-Lab</h2>
-    </div>
-    <div class="addr-group reveal">
-      <div class="g-name">GSNV-Lab</div>
-      <div class="addr-list">
-        <a class="addr" href="tel:+78512999542"><span class="street">ул. 28 Армии, 14</span><span class="phone">+7 (8512) 999-542</span></a>
-        <a class="addr" href="tel:+78512428424"><span class="street">ул. Тургенева, 1</span><span class="phone">+7 (8512) 428-424</span></a>
-      </div>
-    </div>
-    <div class="addr-group reveal">
-      <div class="g-name">GSNV-Lab Pro</div>
-      <div class="addr-list">
-        <a class="addr" href="tel:+78512293293"><span class="street">ул. Никольская, 8</span><span class="phone">+7 (8512) 293-293</span></a>
-      </div>
-    </div>
-    <div class="addr-group reveal">
-      <div class="g-name">Barber-Lab</div>
-      <div class="addr-list">
-        <a class="addr" href="tel:+78512424555"><span class="street">ул. Тургенева, 1</span><span class="phone">+7 (8512) 424-555</span></a>
-        <a class="addr" href="tel:+78512424999"><span class="street">ул. Космонавтов, 14</span><span class="phone">+7 (8512) 424-999</span></a>
-        <a class="addr" href="tel:+78512435243"><span class="street">ул. Фиолетова, 9</span><span class="phone">+7 (8512) 435-243</span></a>
-        <a class="addr" href="tel:+78512428384"><span class="street">ул. Яблочкова, 42</span><span class="phone">+7 (8512) 428-384</span></a>
-        <a class="addr" href="tel:+78512438384"><span class="street">ул. Б. Хмельницкого, 21</span><span class="phone">+7 (8512) 438-384</span></a>
-        <a class="addr" href="tel:+78512414424"><span class="street">ул. Сен-Симона, 48к1</span><span class="phone">+7 (8512) 414-424</span></a>
-        <a class="addr" href="tel:+78512410180"><span class="street">ул. Кирова, 92</span><span class="phone">+7 (8512) 410-180</span></a>
-        <a class="addr" href="tel:+78512414222"><span class="street">ул. Белгородская, 1/4</span><span class="phone">+7 (8512) 414-222</span></a>
-      </div>
-    </div>
-    <div class="addr-group reveal">
-      <div class="g-name">GSNV-Lab Girls</div>
-      <div class="addr-list">
-        <a class="addr" href="tel:+78512428424"><span class="street">ул. Тургенева, 1</span><span class="phone">+7 (8512) 428-424</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== CTA ===== -->
 <section class="cta" id="cta">
-  <canvas id="dust"></canvas>
   <div class="cta-inner">
-    <h2 class="reveal">Готовы <em>к эмоциям?</em></h2>
-    <p class="reveal">Запишитесь онлайн или позвоните в ближайший салон — остальное сделаем мы.</p>
+    <h2 class="reveal">Запись — <em>за минуту</em></h2>
+    <p class="reveal">Выберите филиал, мастера и время онлайн — или просто позвоните.</p>
     <div class="hero-actions reveal" style="justify-content: center;">
-      <a class="btn btn-gold magnetic" href="tel:+78512999542">Позвонить</a>
-      <a class="btn btn-ghost magnetic" href="https://www.instagram.com/gsnv_lab" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn-gold" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться онлайн</a>
+      <a class="btn btn-ghost" href="tel:+78512999542">Позвонить</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/gsnv_lab" target="_blank" rel="noopener">Instagram</a>
     </div>
-    <div class="hours reveal">Ежедневно <b>10:00 — 20:00</b></div>
+    <div class="hours reveal">Ежедневно <b>10:00 — 20:00</b> · 12 салонов в Астрахани</div>
   </div>
 </section>
+
+
+
+
+
+
+
 
 <footer>
   <div class="foot">
@@ -973,27 +906,6 @@ mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   mmenu.classList.remove('open');
 }));
 
-/* ===== Кастомный курсор ===== */
-if (matchMedia('(pointer: fine)').matches && !reducedMotion) {
-  const ring = document.getElementById('cring');
-  const dot = document.getElementById('cdot');
-  let rx = -100, ry = -100, tx = -100, ty = -100;
-  window.addEventListener('mousemove', (e) => {
-    tx = e.clientX; ty = e.clientY;
-    dot.style.left = tx + 'px'; dot.style.top = ty + 'px';
-    document.body.classList.add('cursor-on');
-  });
-  (function loop() {
-    rx += 0.18 * (tx - rx); ry += 0.18 * (ty - ry);
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hot'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hot'));
-  });
-}
-
 /* ===== Появление при скролле ===== */
 const io = new IntersectionObserver((entries) => {
   for (const en of entries) if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
@@ -1037,71 +949,8 @@ if (matchMedia('(pointer: fine)').matches && !reducedMotion) {
   });
 }
 
-/* ===== Магнитные кнопки ===== */
-if (matchMedia('(pointer: fine)').matches && !reducedMotion) {
-  document.querySelectorAll('.magnetic').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const r = btn.getBoundingClientRect();
-      const dx = e.clientX - (r.left + r.width / 2);
-      const dy = e.clientY - (r.top + r.height / 2);
-      btn.style.transform = `translate(${dx * 0.22}px, ${dy * 0.22}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transition = 'transform .45s cubic-bezier(0.22, 1, 0.36, 1)';
-      btn.style.transform = '';
-      setTimeout(() => btn.style.transition = '', 450);
-    });
-  });
-}
 
-/* ===== Золотая пыль в CTA ===== */
-(function () {
-  const canvas = document.getElementById('dust');
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-  let W, H, parts = [];
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = canvas.clientWidth; H = canvas.clientHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  const N = matchMedia('(max-width: 700px)').matches ? 40 : 90;
-  for (let i = 0; i < N; i++) {
-    parts.push({
-      x: Math.random() * W, y: Math.random() * H,
-      r: 0.6 + Math.random() * 1.8,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: -0.08 - Math.random() * 0.3,
-      a: 0.15 + Math.random() * 0.5,
-      tw: Math.random() * Math.PI * 2,
-    });
-  }
-  let visible = false;
-  new IntersectionObserver((en) => { visible = en[0].isIntersecting; }).observe(canvas);
-  function frame(t) {
-    if (visible) {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of parts) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
-        if (p.x < -4) p.x = W + 4;
-        if (p.x > W + 4) p.x = -4;
-        const tw = 0.55 + 0.45 * Math.sin(t * 0.0016 + p.tw);
-        ctx.globalAlpha = p.a * tw;
-        ctx.fillStyle = '#d4af7a';
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-    }
-    if (!reducedMotion) requestAnimationFrame(frame);
-  }
-  frame(0);
-})();
 </script>
+<a class="sticky-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться онлайн</a>
 </body>
 </html>
