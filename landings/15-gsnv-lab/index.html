@@ -111,7 +111,8 @@ nav.scrolled {
 .nav-links a:hover { color: var(--gold-bright); }
 .nav-cta {
   font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-  color: #08080a; background: linear-gradient(120deg, var(--gold), var(--gold-bright));
+  color: #08080a; background: var(--gold);
+  background: linear-gradient(120deg, var(--gold), var(--gold-bright));
   padding: 11px 22px; border-radius: 100px;
   transition: transform .25s, box-shadow .25s;
 }
@@ -202,6 +203,7 @@ nav.scrolled {
 }
 .btn-gold {
   color: #08080a;
+  background: var(--gold);
   background: linear-gradient(120deg, var(--gold), var(--gold-bright));
 }
 .btn-gold:hover { box-shadow: 0 10px 44px rgba(212,175,122,0.4); }
@@ -443,6 +445,25 @@ footer {
   filter: grayscale(1); display: block;
 }
 
+/* ===== Академия ===== */
+.edu-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(40px, 6vw, 90px); align-items: center; }
+.edu-title { font-size: clamp(30px, 5vw, 58px); text-transform: uppercase; margin: 18px 0 14px; }
+.edu-title em {
+  font-style: normal;
+  background: linear-gradient(105deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.edu-sub { color: var(--muted); max-width: 520px; }
+.edu-points { margin: 32px 0 40px; display: flex; flex-direction: column; gap: 18px; }
+.edu-point { display: flex; gap: 15px; align-items: flex-start; color: var(--muted); font-size: 15.5px; }
+.edu-point .dot {
+  width: 9px; height: 9px; border-radius: 50%; flex: none; margin-top: 8px;
+  background: linear-gradient(120deg, var(--gold), var(--gold-bright));
+  box-shadow: 0 0 12px rgba(212,175,122,0.6);
+}
+.edu-point b { color: var(--text); font-weight: 600; }
+@media (max-width: 860px) { .edu-grid { grid-template-columns: 1fr; } }
+
 /* ===== Атмосфера: фотолента ===== */
 .atmosphere { padding-left: 0; padding-right: 0; overflow: hidden; }
 .atmosphere .wrap { padding: 0 clamp(20px, 4vw, 56px); }
@@ -497,6 +518,7 @@ footer {
     <li><a href="#philosophy">Философия</a></li>
     <li><a href="#atmosphere">Атмосфера</a></li>
     <li><a href="#services">Услуги</a></li>
+    <li><a href="#education">Обучение</a></li>
     <li><a href="#addresses">Адреса</a></li>
   </ul>
   <a class="nav-cta magnetic" href="#cta">Записаться</a>
@@ -509,6 +531,7 @@ footer {
   <a href="#philosophy">Философия</a>
   <a href="#atmosphere">Атмосфера</a>
   <a href="#services">Услуги</a>
+  <a href="#education">Обучение</a>
   <a href="#addresses">Адреса</a>
   <a href="#cta" style="color: var(--gold)">Записаться</a>
 </div>
@@ -667,6 +690,28 @@ footer {
         <p>Профессиональные уходы, которые возвращают волосам плотность и блеск.</p>
         <div class="arr">→</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ОБУЧЕНИЕ ===== -->
+<section class="philosophy" id="education">
+  <div class="wrap edu-grid">
+    <div class="reveal">
+      <div class="eyebrow">Академия</div>
+      <h2 class="edu-title">Мы не только стрижём — <em>мы растим мастеров</em></h2>
+      <p class="edu-sub">Обучение барберингу и парикмахерскому искусству от практикующих мастеров GSNV-Lab — тех самых, к которым записываются за неделю.</p>
+      <div class="edu-points">
+        <div class="edu-point"><span class="dot"></span><span><b>С нуля до первого клиента.</b> База профессии: мужские стрижки, борода, бритьё, работа с гостем.</span></div>
+        <div class="edu-point"><span class="dot"></span><span><b>Прокачка для практикующих.</b> Актуальные техники и разборы сложных работ для действующих мастеров.</span></div>
+        <div class="edu-point"><span class="dot"></span><span><b>Практика в настоящих салонах.</b> Учишься у кресла, а не у доски — в действующих пространствах сети.</span></div>
+      </div>
+      <div class="hero-actions" style="margin-bottom: 0;">
+        <a class="btn btn-gold magnetic" href="https://www.instagram.com/gsnv_lab" target="_blank" rel="noopener">Узнать про обучение</a>
+      </div>
+    </div>
+    <div class="phil-photo reveal">
+      <img src="images/edu.jpg" alt="Зал салона GSNV-Lab — рабочие места мастеров" loading="lazy">
     </div>
   </div>
 </section>
