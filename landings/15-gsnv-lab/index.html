@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSNV-Lab — лаборатория эмоций. Сеть салонов красоты и барбершопов в Астрахани</title>
+<meta name="description" content="GSNV-Lab — 12 салонов красоты и барбершопов в Астрахани. Мы не продаём услуги — мы дарим эмоции. 50 000+ постоянных гостей.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08080a;
+  --bg-soft: #0e0e12;
+  --line: rgba(212, 175, 122, 0.14);
+  --gold: #d4af7a;
+  --gold-bright: #edd3a6;
+  --text: #f2efe9;
+  --muted: #8f8a80;
+  --display: 'Unbounded', sans-serif;
+  --body: 'Manrope', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+::selection { background: var(--gold); color: #08080a; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.1; text-wrap: balance; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+
+/* ===== Прелоадер-шторка ===== */
+.preloader {
+  position: fixed; inset: 0; z-index: 200;
+  background: #050506;
+  display: flex; align-items: center; justify-content: center;
+  animation: curtainUp 0.9s cubic-bezier(0.76, 0, 0.24, 1) 1.3s forwards;
+}
+.preloader .pl-logo {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(22px, 4vw, 38px);
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  opacity: 0;
+  animation: plIn 0.8s ease 0.15s forwards;
+}
+@keyframes plIn { to { opacity: 1; letter-spacing: 0.38em; } }
+@keyframes curtainUp { to { transform: translateY(-101%); } }
+
+/* ===== Прогресс и курсор ===== */
+.progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  z-index: 150;
+}
+.cursor-ring, .cursor-dot { display: none; }
+@media (pointer: fine) {
+  .cursor-ring {
+    display: block; position: fixed; z-index: 190; pointer-events: none;
+    width: 34px; height: 34px; border: 1px solid rgba(212,175,122,0.55);
+    border-radius: 50%; transform: translate(-50%, -50%);
+    transition: width .25s, height .25s, border-color .25s, opacity .3s;
+    opacity: 0;
+  }
+  .cursor-dot {
+    display: block; position: fixed; z-index: 190; pointer-events: none;
+    width: 4px; height: 4px; background: var(--gold-bright);
+    border-radius: 50%; transform: translate(-50%, -50%);
+    opacity: 0; transition: opacity .3s;
+  }
+  body.cursor-on .cursor-ring, body.cursor-on .cursor-dot { opacity: 1; }
+  .cursor-ring.hot { width: 58px; height: 58px; border-color: var(--gold-bright); }
+}
+
+/* ===== Навигация ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px clamp(20px, 4vw, 56px);
+  transition: background .4s, padding .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(8, 8, 10, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding-top: 14px; padding-bottom: 14px;
+  border-bottom-color: var(--line);
+}
+.nav-logo {
+  font-family: var(--display); font-size: 15px; font-weight: 500;
+  letter-spacing: 0.22em; color: var(--text);
+}
+.nav-logo em { color: var(--gold); font-style: normal; }
+.nav-links { display: flex; gap: 34px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  transition: color .25s;
+}
+.nav-links a:hover { color: var(--gold-bright); }
+.nav-cta {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #08080a; background: linear-gradient(120deg, var(--gold), var(--gold-bright));
+  padding: 11px 22px; border-radius: 100px;
+  transition: transform .25s, box-shadow .25s;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(212,175,122,0.35); }
+.burger { display: none; }
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .burger {
+    display: flex; flex-direction: column; gap: 5px;
+    background: none; border: 0; cursor: pointer; padding: 8px;
+  }
+  .burger span { width: 24px; height: 2px; background: var(--gold); transition: transform .3s, opacity .3s; }
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 99;
+    background: rgba(5, 5, 6, 0.97);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px;
+    opacity: 0; pointer-events: none; transition: opacity .35s;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: auto; }
+  .mobile-menu a {
+    font-family: var(--display); font-size: 22px; font-weight: 400;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+}
+@media (min-width: 861px) { .mobile-menu { display: none; } }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px clamp(20px, 4vw, 56px) 40px;
+  overflow: hidden;
+}
+#threads {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: block;
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 45%, transparent 40%, rgba(8,8,10,0.85) 100%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; width: 100%; pointer-events: none; }
+.hero-inner a { pointer-events: auto; }
+.eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.eyebrow::before { content: ''; width: 44px; height: 1px; background: var(--gold); }
+.hero h1 {
+  font-size: clamp(42px, 9.5vw, 128px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin-bottom: 34px;
+}
+.hero h1 .outline {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(242, 239, 233, 0.75);
+}
+.hero h1 .fill {
+  display: block;
+  background: linear-gradient(105deg, var(--gold-bright) 10%, var(--gold) 55%, #9a7845 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-sub {
+  max-width: 560px; color: var(--muted); font-size: clamp(16px, 1.6vw, 19px);
+  margin-bottom: 44px;
+}
+.hero-sub strong { color: var(--text); font-weight: 600; }
+.hero-actions { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: clamp(50px, 8vh, 90px); }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 18px 36px; border-radius: 100px;
+  transition: transform .25s, box-shadow .25s, background .25s, color .25s;
+  will-change: transform;
+}
+.btn-gold {
+  color: #08080a;
+  background: linear-gradient(120deg, var(--gold), var(--gold-bright));
+}
+.btn-gold:hover { box-shadow: 0 10px 44px rgba(212,175,122,0.4); }
+.btn-ghost {
+  color: var(--text); border: 1px solid rgba(242,239,233,0.28);
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-bright); }
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, auto);
+  gap: clamp(28px, 6vw, 90px);
+  width: fit-content;
+}
+.stat .num {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(26px, 3.4vw, 44px);
+  color: var(--gold-bright);
+  font-variant-numeric: tabular-nums;
+}
+.stat .num sup { font-size: 0.55em; color: var(--gold); }
+.stat .lbl { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+@media (max-width: 700px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); width: 100%; gap: 26px; }
+}
+
+/* ===== Бегущая строка ===== */
+.marquee {
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  overflow: hidden; padding: 26px 0; background: var(--bg-soft);
+}
+.marquee-track {
+  display: flex; gap: 60px; width: max-content;
+  animation: marquee 26s linear infinite;
+}
+.marquee span {
+  font-family: var(--display); font-weight: 400; font-size: 22px;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: transparent; -webkit-text-stroke: 1px rgba(212,175,122,0.5);
+  white-space: nowrap;
+}
+.marquee span.solid { color: var(--gold); -webkit-text-stroke: 0; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ===== Секции ===== */
+section { padding: clamp(90px, 12vh, 150px) clamp(20px, 4vw, 56px); }
+.wrap { max-width: 1280px; margin: 0 auto; }
+.sec-head { margin-bottom: clamp(44px, 7vh, 80px); max-width: 760px; }
+.sec-head h2 {
+  font-size: clamp(30px, 5vw, 58px);
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+.sec-head h2 em {
+  font-style: normal;
+  background: linear-gradient(105deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ===== Философия ===== */
+.philosophy { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.phil-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(40px, 6vw, 90px); align-items: center; }
+blockquote {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(22px, 3vw, 36px); line-height: 1.35;
+  color: var(--text);
+}
+blockquote::before { content: '«'; color: var(--gold); }
+blockquote::after { content: '»'; color: var(--gold); }
+.phil-author { margin-top: 28px; display: flex; align-items: center; gap: 16px; }
+.phil-author .ava {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #6d5327);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 16px; color: #08080a; font-weight: 600;
+}
+.phil-author .who b { display: block; font-size: 16px; }
+.phil-author .who span { font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
+.phil-text p { color: var(--muted); margin-bottom: 18px; }
+.phil-text p strong { color: var(--text); }
+.phil-text .tag {
+  display: inline-block; margin-top: 8px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.14em;
+  color: var(--gold); border: 1px solid var(--line);
+  padding: 9px 18px; border-radius: 100px;
+}
+@media (max-width: 860px) { .phil-grid { grid-template-columns: 1fr; } }
+
+/* ===== Бренды ===== */
+.brands-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  perspective: 1200px;
+}
+.brand-card {
+  position: relative;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 40px 30px 34px;
+  min-height: 340px;
+  display: flex; flex-direction: column;
+  transform-style: preserve-3d;
+  transition: border-color .3s;
+  overflow: hidden;
+}
+.brand-card .glow {
+  position: absolute; inset: 0; opacity: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(212,175,122,0.16), transparent 65%);
+  transition: opacity .3s; pointer-events: none;
+}
+.brand-card:hover { border-color: rgba(212,175,122,0.45); }
+.brand-card:hover .glow { opacity: 1; }
+.brand-card .idx {
+  font-size: 12px; letter-spacing: 0.2em; color: var(--muted);
+  text-transform: uppercase; margin-bottom: auto;
+}
+.brand-card h3 {
+  font-size: 21px; text-transform: uppercase; letter-spacing: 0.04em;
+  margin: 18px 0 12px; color: var(--gold-bright);
+}
+.brand-card p { font-size: 14.5px; color: var(--muted); line-height: 1.6; }
+.brand-card .meta { margin-top: 18px; font-size: 13px; color: var(--text); opacity: 0.8; }
+@media (max-width: 1080px) { .brands-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .brands-grid { grid-template-columns: 1fr; } .brand-card { min-height: auto; } }
+
+/* ===== Услуги ===== */
+.services { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.service-row {
+  display: grid; grid-template-columns: 1fr 2fr auto; align-items: center; gap: 24px;
+  padding: 34px 10px;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left .3s, background .3s;
+  cursor: default;
+}
+.service-row:first-child { border-top: 1px solid var(--line); }
+.service-row h3 { font-size: clamp(18px, 2.2vw, 26px); text-transform: uppercase; font-weight: 400; transition: color .3s; }
+.service-row p { color: var(--muted); font-size: 15px; max-width: 520px; }
+.service-row .arr {
+  font-family: var(--display); color: var(--muted); font-size: 20px;
+  transition: transform .3s, color .3s;
+}
+.service-row:hover { padding-left: 26px; background: rgba(212,175,122,0.04); }
+.service-row:hover h3 { color: var(--gold-bright); }
+.service-row:hover .arr { transform: translateX(8px); color: var(--gold); }
+@media (max-width: 760px) {
+  .service-row { grid-template-columns: 1fr auto; }
+  .service-row p { grid-column: 1 / -1; }
+}
+
+/* ===== Адреса ===== */
+.addr-group { margin-bottom: 46px; }
+.addr-group:last-child { margin-bottom: 0; }
+.addr-group .g-name {
+  font-family: var(--display); font-size: 15px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+}
+.addr-group .g-name::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.addr-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.addr {
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 6px;
+  transition: border-color .3s, transform .3s, background .3s;
+}
+.addr:hover { border-color: rgba(212,175,122,0.5); transform: translateY(-3px); background: rgba(212,175,122,0.05); }
+.addr .street { font-weight: 600; font-size: 16px; }
+.addr .phone { font-size: 14px; color: var(--gold-bright); font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
+@media (max-width: 960px) { .addr-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .addr-list { grid-template-columns: 1fr; } }
+
+/* ===== CTA ===== */
+.cta {
+  position: relative; text-align: center; overflow: hidden;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(110px, 16vh, 180px); padding-bottom: clamp(110px, 16vh, 180px);
+}
+#dust { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cta-inner { position: relative; z-index: 2; }
+.cta h2 {
+  font-size: clamp(34px, 6.5vw, 84px); text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.cta h2 em {
+  font-style: normal;
+  background: linear-gradient(105deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.cta p { color: var(--muted); max-width: 480px; margin: 0 auto 44px; }
+.cta .hours { margin-top: 34px; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.cta .hours b { color: var(--gold-bright); font-weight: 600; }
+
+/* ===== Футер ===== */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 44px clamp(20px, 4vw, 56px);
+  background: #050506;
+}
+.foot {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.foot .f-logo { font-family: var(--display); letter-spacing: 0.22em; font-size: 14px; }
+.foot .f-logo em { color: var(--gold); font-style: normal; }
+.foot .socials { display: flex; gap: 22px; }
+.foot .socials a { font-size: 13px; color: var(--muted); letter-spacing: 0.08em; transition: color .25s; }
+.foot .socials a:hover { color: var(--gold-bright); }
+.foot .copy { font-size: 12px; color: #55524b; }
+
+/* ===== Появление при скролле ===== */
+.reveal { opacity: 0; transform: translateY(42px); transition: opacity .9s cubic-bezier(0.22, 1, 0.36, 1), transform .9s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.in { opacity: 1; transform: none; }
+.no-js .reveal { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="preloader"><div class="pl-logo">GSNV—LAB</div></div>
+<div class="progress" id="progress"></div>
+<div class="cursor-ring" id="cring"></div>
+<div class="cursor-dot" id="cdot"></div>
+
+<nav id="nav">
+  <a class="nav-logo" href="#">GSNV<em>—</em>LAB</a>
+  <ul class="nav-links">
+    <li><a href="#brands">Бренды</a></li>
+    <li><a href="#philosophy">Философия</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#addresses">Адреса</a></li>
+  </ul>
+  <a class="nav-cta magnetic" href="#cta">Записаться</a>
+  <button class="burger" id="burger" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mmenu">
+  <a href="#brands">Бренды</a>
+  <a href="#philosophy">Философия</a>
+  <a href="#services">Услуги</a>
+  <a href="#addresses">Адреса</a>
+  <a href="#cta" style="color: var(--gold)">Записаться</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <canvas id="threads"></canvas>
+  <div class="hero-inner">
+    <div class="eyebrow">Сеть салонов · Астрахань</div>
+    <h1>
+      <span class="outline">Лаборатория</span>
+      <span class="fill">эмоций</span>
+    </h1>
+    <p class="hero-sub"><strong>Мы не продаём услуги — мы дарим эмоции.</strong> Салоны красоты и барбершопы GSNV-Lab: мировые тренды по честной цене, мастера, влюблённые в профессию.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold magnetic" href="#cta">Записаться</a>
+      <a class="btn btn-ghost magnetic" href="#brands">Наши бренды</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num"><span data-count="12">0</span></div><div class="lbl">салонов</div></div>
+      <div class="stat"><div class="num"><span data-count="50000">0</span><sup>+</sup></div><div class="lbl">постоянных гостей</div></div>
+      <div class="stat"><div class="num"><span data-count="4">0</span></div><div class="lbl">бренда</div></div>
+      <div class="stat"><div class="num"><span data-count="20">0</span><sup>+</sup></div><div class="lbl">лет в профессии</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>#gsnv_lab_family</span><span class="solid">эмоции</span><span>стиль</span><span class="solid">барберинг</span><span>окрашивание</span><span class="solid">Астрахань</span>
+    <span>#gsnv_lab_family</span><span class="solid">эмоции</span><span>стиль</span><span class="solid">барберинг</span><span>окрашивание</span><span class="solid">Астрахань</span>
+  </div>
+</div>
+
+<!-- ===== ФИЛОСОФИЯ ===== -->
+<section class="philosophy" id="philosophy">
+  <div class="wrap phil-grid">
+    <div class="reveal">
+      <blockquote>Ваш успех зависит от меня, мой успех зависит от вас</blockquote>
+      <div class="phil-author">
+        <div class="ava">ТГ</div>
+        <div class="who"><b>Теймур Гасанов</b><span>основатель сети GSNV-Lab</span></div>
+      </div>
+    </div>
+    <div class="phil-text reveal">
+      <p>История GSNV-Lab началась в 2000-х — с настоящей страсти к парикмахерскому искусству. Сегодня это <strong>12 салонов и 4 бренда</strong>, но правило одно: каждый гость уходит не со стрижкой, а с эмоцией.</p>
+      <p>Мы — команда-семья. Наша миссия — <strong>сделать мир красивее</strong>, а наши клиенты становятся нашими друзьями.</p>
+      <span class="tag">#gsnv_lab_family</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== БРЕНДЫ ===== -->
+<section id="brands">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Экосистема</div>
+      <h2>Четыре бренда — <em>одна лаборатория</em></h2>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-card reveal"><div class="glow"></div>
+        <div class="idx">Классика сети</div>
+        <h3>GSNV-Lab</h3>
+        <p>Салоны, с которых всё началось. Стрижки, окрашивание и укладки для всей семьи.</p>
+        <div class="meta">2 салона · 28 Армии, Тургенева</div>
+      </div>
+      <div class="brand-card reveal"><div class="glow"></div>
+        <div class="idx">Флагман</div>
+        <h3>GSNV-Lab Pro</h3>
+        <p>Продвинутый формат: топ-мастера сети и самые сложные работы.</p>
+        <div class="meta">Никольская, 8</div>
+      </div>
+      <div class="brand-card reveal"><div class="glow"></div>
+        <div class="idx">Мужское направление</div>
+        <h3>Barber-Lab</h3>
+        <p>Сеть барбершопов: мужские стрижки, борода, бритьё опасной бритвой.</p>
+        <div class="meta">9 барбершопов по всему городу</div>
+      </div>
+      <div class="brand-card reveal"><div class="glow"></div>
+        <div class="idx">Женское направление</div>
+        <h3>GSNV-Lab Girls</h3>
+        <p>Пространство для девушек: цвет, форма и уход в атмосфере заботы.</p>
+        <div class="meta">Тургенева, 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== УСЛУГИ ===== -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Что мы делаем</div>
+      <h2>Услуги <em>мирового уровня</em> — по честной цене</h2>
+    </div>
+    <div>
+      <div class="service-row reveal">
+        <h3>Мужские стрижки</h3>
+        <p>Классика и актуальные формы — от фейда до кроп-текстур. Подбор под тип волос и образ жизни.</p>
+        <div class="arr">→</div>
+      </div>
+      <div class="service-row reveal">
+        <h3>Борода и бритьё</h3>
+        <p>Моделирование бороды, королевское бритьё, горячие полотенца — полный барбер-ритуал.</p>
+        <div class="arr">→</div>
+      </div>
+      <div class="service-row reveal">
+        <h3>Женские стрижки и укладки</h3>
+        <p>Форма, которая живёт и без укладки. Вечерние и повседневные образы.</p>
+        <div class="arr">→</div>
+      </div>
+      <div class="service-row reveal">
+        <h3>Окрашивание</h3>
+        <p>Сложные техники по мировым трендам: от глубокого одного тона до аиртач и блонда.</p>
+        <div class="arr">→</div>
+      </div>
+      <div class="service-row reveal">
+        <h3>Уход и восстановление</h3>
+        <p>Профессиональные уходы, которые возвращают волосам плотность и блеск.</p>
+        <div class="arr">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== АДРЕСА ===== -->
+<section id="addresses">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">12 салонов рядом с вами</div>
+      <h2>Найдите <em>свой</em> GSNV-Lab</h2>
+    </div>
+    <div class="addr-group reveal">
+      <div class="g-name">GSNV-Lab</div>
+      <div class="addr-list">
+        <a class="addr" href="tel:+78512999542"><span class="street">ул. 28 Армии, 14</span><span class="phone">+7 (8512) 999-542</span></a>
+        <a class="addr" href="tel:+78512428424"><span class="street">ул. Тургенева, 1</span><span class="phone">+7 (8512) 428-424</span></a>
+      </div>
+    </div>
+    <div class="addr-group reveal">
+      <div class="g-name">GSNV-Lab Pro</div>
+      <div class="addr-list">
+        <a class="addr" href="tel:+78512293293"><span class="street">ул. Никольская, 8</span><span class="phone">+7 (8512) 293-293</span></a>
+      </div>
+    </div>
+    <div class="addr-group reveal">
+      <div class="g-name">Barber-Lab</div>
+      <div class="addr-list">
+        <a class="addr" href="tel:+78512424555"><span class="street">ул. Тургенева, 1</span><span class="phone">+7 (8512) 424-555</span></a>
+        <a class="addr" href="tel:+78512424999"><span class="street">ул. Космонавтов, 14</span><span class="phone">+7 (8512) 424-999</span></a>
+        <a class="addr" href="tel:+78512435243"><span class="street">ул. Фиолетова, 9</span><span class="phone">+7 (8512) 435-243</span></a>
+        <a class="addr" href="tel:+78512428384"><span class="street">ул. Яблочкова, 42</span><span class="phone">+7 (8512) 428-384</span></a>
+        <a class="addr" href="tel:+78512438384"><span class="street">ул. Б. Хмельницкого, 21</span><span class="phone">+7 (8512) 438-384</span></a>
+        <a class="addr" href="tel:+78512414424"><span class="street">ул. Сен-Симона, 48к1</span><span class="phone">+7 (8512) 414-424</span></a>
+        <a class="addr" href="tel:+78512410180"><span class="street">ул. Кирова, 92</span><span class="phone">+7 (8512) 410-180</span></a>
+        <a class="addr" href="tel:+78512414222"><span class="street">ул. Белгородская, 1/4</span><span class="phone">+7 (8512) 414-222</span></a>
+      </div>
+    </div>
+    <div class="addr-group reveal">
+      <div class="g-name">GSNV-Lab Girls</div>
+      <div class="addr-list">
+        <a class="addr" href="tel:+78512428424"><span class="street">ул. Тургенева, 1</span><span class="phone">+7 (8512) 428-424</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="cta">
+  <canvas id="dust"></canvas>
+  <div class="cta-inner">
+    <h2 class="reveal">Готовы <em>к эмоциям?</em></h2>
+    <p class="reveal">Запишитесь онлайн или позвоните в ближайший салон — остальное сделаем мы.</p>
+    <div class="hero-actions reveal" style="justify-content: center;">
+      <a class="btn btn-gold magnetic" href="tel:+78512999542">Позвонить</a>
+      <a class="btn btn-ghost magnetic" href="https://www.instagram.com/gsnv_lab" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <div class="hours reveal">Ежедневно <b>10:00 — 20:00</b></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div class="f-logo">GSNV<em>—</em>LAB</div>
+    <div class="socials">
+      <a href="https://www.instagram.com/gsnv_lab" target="_blank" rel="noopener">@gsnv_lab</a>
+      <a href="https://www.instagram.com/b.a.r.b.e.r_lab" target="_blank" rel="noopener">@b.a.r.b.e.r_lab</a>
+      <a href="https://www.instagram.com/teimur_gasanov" target="_blank" rel="noopener">@teimur_gasanov</a>
+    </div>
+    <div class="copy">GSNV-Lab · Астрахань · концепт-лендинг</div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.remove('no-js');
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ===== Threads (WebGL, струящиеся «пряди») ===== */
+(function () {
+  const canvas = document.getElementById('threads');
+  let gl;
+  try { gl = canvas.getContext('webgl', { alpha: false, antialias: true }); } catch (e) { gl = null; }
+  if (!gl) { canvas.style.display = 'none'; return; }
+
+  const VERT = 'attribute vec2 position; void main(){ gl_Position = vec4(position, 0.0, 1.0); }';
+  const FRAG = `
+precision highp float;
+uniform float iTime;
+uniform vec3  iResolution;
+uniform vec3  uColor;
+uniform float uAmplitude;
+uniform float uDistance;
+uniform vec2  uMouse;
+#define PI 3.1415926538
+const int   u_line_count = 40;
+const float u_line_width = 7.0;
+const float u_line_blur  = 10.0;
+float Perlin2D(vec2 P) {
+  vec2 Pi = floor(P);
+  vec4 Pf_Pfmin1 = P.xyxy - vec4(Pi, Pi + 1.0);
+  vec4 Pt = vec4(Pi.xy, Pi.xy + 1.0);
+  Pt = Pt - floor(Pt * (1.0 / 71.0)) * 71.0;
+  Pt += vec2(26.0, 161.0).xyxy;
+  Pt *= Pt;
+  Pt = Pt.xzxz * Pt.yyww;
+  vec4 hash_x = fract(Pt * (1.0 / 951.135664));
+  vec4 hash_y = fract(Pt * (1.0 / 642.949883));
+  vec4 grad_x = hash_x - 0.49999;
+  vec4 grad_y = hash_y - 0.49999;
+  vec4 grad_results = inversesqrt(grad_x * grad_x + grad_y * grad_y)
+    * (grad_x * Pf_Pfmin1.xzxz + grad_y * Pf_Pfmin1.yyww);
+  grad_results *= 1.4142135623730950;
+  vec2 blend = Pf_Pfmin1.xy * Pf_Pfmin1.xy * Pf_Pfmin1.xy
+    * (Pf_Pfmin1.xy * (Pf_Pfmin1.xy * 6.0 - 15.0) + 10.0);
+  vec4 blend2 = vec4(blend, vec2(1.0 - blend));
+  return grad_results.x * blend2.z * blend2.w
+       + grad_results.y * blend2.x * blend2.w
+       + grad_results.z * blend2.z * blend2.y
+       + grad_results.w * blend2.x * blend2.y;
+}
+float pixel(float count, vec2 resolution) {
+  return (1.0 / max(resolution.x, resolution.y)) * count;
+}
+float lineFn(vec2 st, float width, float perc, float offset,
+             vec2 mouse, float time, float amplitude, float distance) {
+  float split_offset = perc * 0.4;
+  float split_point = 0.1 + split_offset;
+  float amplitude_normal = smoothstep(split_point, 0.7, st.x);
+  float amplitude_strength = 0.5;
+  float finalAmplitude = amplitude_normal * amplitude_strength
+    * amplitude * (1.0 + (mouse.y - 0.5) * 0.2);
+  float time_scaled = time / 10.0 + (mouse.x - 0.5) * 1.0;
+  float blur = smoothstep(split_point, split_point + 0.05, st.x) * perc;
+  float xnoise = mix(
+    Perlin2D(vec2(time_scaled, st.x + perc) * 2.5),
+    Perlin2D(vec2(time_scaled, st.x + time_scaled) * 3.5) / 1.5,
+    st.x * 0.3
+  );
+  float y = 0.5 + (perc - 0.5) * distance + xnoise / 2.0 * finalAmplitude;
+  float line_start = smoothstep(
+    y + (width / 2.0) + (u_line_blur * pixel(1.0, iResolution.xy) * blur), y, st.y);
+  float line_end = smoothstep(
+    y, y - (width / 2.0) - (u_line_blur * pixel(1.0, iResolution.xy) * blur), st.y);
+  return clamp(
+    (line_start - line_end) * (1.0 - smoothstep(0.0, 1.0, pow(perc, 0.3))), 0.0, 1.0);
+}
+void main() {
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  float line_strength = 1.0;
+  for (int i = 0; i < u_line_count; i++) {
+    float p = float(i) / float(u_line_count);
+    line_strength *= (1.0 - lineFn(
+      uv,
+      u_line_width * pixel(1.0, iResolution.xy) * (1.0 - p),
+      p, (PI * 1.0) * p, uMouse, iTime, uAmplitude, uDistance));
+  }
+  float colorVal = 1.0 - line_strength;
+  vec3 bg = vec3(0.031, 0.031, 0.039);
+  gl_FragColor = vec4(bg + uColor * colorVal, 1.0);
+}`;
+
+  function compile(type, src) {
+    const sh = gl.createShader(type);
+    gl.shaderSource(sh, src);
+    gl.compileShader(sh);
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(sh));
+    return sh;
+  }
+  let program;
+  try {
+    program = gl.createProgram();
+    gl.attachShader(program, compile(gl.VERTEX_SHADER, VERT));
+    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, FRAG));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(program));
+  } catch (e) { canvas.style.display = 'none'; return; }
+  gl.useProgram(program);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const posLoc = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  const U = {};
+  for (const n of ['iTime', 'iResolution', 'uColor', 'uAmplitude', 'uDistance', 'uMouse'])
+    U[n] = gl.getUniformLocation(program, n);
+
+  gl.uniform3f(U.uColor, 0.83, 0.66, 0.42); // золото
+  gl.uniform1f(U.uAmplitude, 1.5);
+  gl.uniform1f(U.uDistance, 0.6);
+
+  const isMobile = matchMedia('(max-width: 700px)').matches;
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
+    canvas.width = Math.floor(canvas.clientWidth * dpr);
+    canvas.height = Math.floor(canvas.clientHeight * dpr);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform3f(U.iResolution, canvas.width, canvas.height, canvas.width / canvas.height);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let target = [0.5, 0.5], cur = [0.5, 0.5];
+  window.addEventListener('mousemove', (e) => {
+    target = [e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight];
+  });
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length) target = [e.touches[0].clientX / window.innerWidth, 1 - e.touches[0].clientY / window.innerHeight];
+  }, { passive: true });
+
+  let visible = true;
+  new IntersectionObserver((en) => { visible = en[0].isIntersecting; }).observe(canvas);
+
+  const t0 = performance.now();
+  function draw(now) {
+    cur[0] += 0.05 * (target[0] - cur[0]);
+    cur[1] += 0.05 * (target[1] - cur[1]);
+    gl.uniform2f(U.uMouse, cur[0], cur[1]);
+    gl.uniform1f(U.iTime, (now - t0) * 0.001);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  if (reducedMotion) { draw(t0 + 4000); return; }
+  (function frame(now) {
+    if (visible) draw(now || t0);
+    requestAnimationFrame(frame);
+  })(t0);
+})();
+
+/* ===== Навигация, меню, прогресс ===== */
+const nav = document.getElementById('nav');
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}, { passive: true });
+
+const burger = document.getElementById('burger');
+const mmenu = document.getElementById('mmenu');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mmenu.classList.toggle('open');
+});
+mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open');
+  mmenu.classList.remove('open');
+}));
+
+/* ===== Кастомный курсор ===== */
+if (matchMedia('(pointer: fine)').matches && !reducedMotion) {
+  const ring = document.getElementById('cring');
+  const dot = document.getElementById('cdot');
+  let rx = -100, ry = -100, tx = -100, ty = -100;
+  window.addEventListener('mousemove', (e) => {
+    tx = e.clientX; ty = e.clientY;
+    dot.style.left = tx + 'px'; dot.style.top = ty + 'px';
+    document.body.classList.add('cursor-on');
+  });
+  (function loop() {
+    rx += 0.18 * (tx - rx); ry += 0.18 * (ty - ry);
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hot'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hot'));
+  });
+}
+
+/* ===== Появление при скролле ===== */
+const io = new IntersectionObserver((entries) => {
+  for (const en of entries) if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ===== Счётчики ===== */
+const fmt = new Intl.NumberFormat('ru-RU');
+const cio = new IntersectionObserver((entries) => {
+  for (const en of entries) {
+    if (!en.isIntersecting) continue;
+    cio.unobserve(en.target);
+    const el = en.target, goal = +el.dataset.count, t0 = performance.now(), dur = 1600;
+    if (reducedMotion) { el.textContent = fmt.format(goal); continue; }
+    (function tick(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = fmt.format(Math.round(goal * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+/* ===== 3D-наклон карточек брендов ===== */
+if (matchMedia('(pointer: fine)').matches && !reducedMotion) {
+  document.querySelectorAll('.brand-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      card.style.setProperty('--mx', (x * 100) + '%');
+      card.style.setProperty('--my', (y * 100) + '%');
+      card.style.transform = `rotateY(${(x - 0.5) * 10}deg) rotateX(${(0.5 - y) * 10}deg) translateZ(6px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform .5s cubic-bezier(0.22, 1, 0.36, 1)';
+      card.style.transform = '';
+      setTimeout(() => card.style.transition = '', 500);
+    });
+  });
+}
+
+/* ===== Магнитные кнопки ===== */
+if (matchMedia('(pointer: fine)').matches && !reducedMotion) {
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      btn.style.transform = `translate(${dx * 0.22}px, ${dy * 0.22}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform .45s cubic-bezier(0.22, 1, 0.36, 1)';
+      btn.style.transform = '';
+      setTimeout(() => btn.style.transition = '', 450);
+    });
+  });
+}
+
+/* ===== Золотая пыль в CTA ===== */
+(function () {
+  const canvas = document.getElementById('dust');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  let W, H, parts = [];
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  const N = matchMedia('(max-width: 700px)').matches ? 40 : 90;
+  for (let i = 0; i < N; i++) {
+    parts.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: 0.6 + Math.random() * 1.8,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: -0.08 - Math.random() * 0.3,
+      a: 0.15 + Math.random() * 0.5,
+      tw: Math.random() * Math.PI * 2,
+    });
+  }
+  let visible = false;
+  new IntersectionObserver((en) => { visible = en[0].isIntersecting; }).observe(canvas);
+  function frame(t) {
+    if (visible) {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of parts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.y < -4) { p.y = H + 4; p.x = Math.random() * W; }
+        if (p.x < -4) p.x = W + 4;
+        if (p.x > W + 4) p.x = -4;
+        const tw = 0.55 + 0.45 * Math.sin(t * 0.0016 + p.tw);
+        ctx.globalAlpha = p.a * tw;
+        ctx.fillStyle = '#d4af7a';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    if (!reducedMotion) requestAnimationFrame(frame);
+  }
+  frame(0);
+})();
+</script>
+</body>
+</html>
