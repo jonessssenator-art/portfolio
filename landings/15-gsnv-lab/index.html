@@ -464,10 +464,10 @@ footer {
       <a class="btn btn-ghost magnetic" href="#brands">Наши бренды</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="num"><span data-count="12">0</span></div><div class="lbl">салонов</div></div>
-      <div class="stat"><div class="num"><span data-count="50000">0</span><sup>+</sup></div><div class="lbl">постоянных гостей</div></div>
-      <div class="stat"><div class="num"><span data-count="4">0</span></div><div class="lbl">бренда</div></div>
-      <div class="stat"><div class="num"><span data-count="20">0</span><sup>+</sup></div><div class="lbl">лет в профессии</div></div>
+      <div class="stat"><div class="num"><span data-count="12">12</span></div><div class="lbl">салонов</div></div>
+      <div class="stat"><div class="num"><span data-count="50000">50 000</span><sup>+</sup></div><div class="lbl">постоянных гостей</div></div>
+      <div class="stat"><div class="num"><span data-count="4">4</span></div><div class="lbl">бренда</div></div>
+      <div class="stat"><div class="num"><span data-count="20">20</span><sup>+</sup></div><div class="lbl">лет в профессии</div></div>
     </div>
   </div>
 </header>
@@ -850,6 +850,7 @@ const cio = new IntersectionObserver((entries) => {
     if (!en.isIntersecting) continue;
     cio.unobserve(en.target);
     const el = en.target, goal = +el.dataset.count, t0 = performance.now(), dur = 1600;
+    el.textContent = '0';
     if (reducedMotion) { el.textContent = fmt.format(goal); continue; }
     (function tick(now) {
       const p = Math.min((now - t0) / dur, 1);
