@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бриф — лендинг (для заказчика)</title>
+<meta name="description" content="Бриф-анкета на разработку лендинга: 12 разделов вопросов и чек-лист материалов.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; }
+</style>
+<style>
+  :root {
+    --bg: #F7F6FA;
+    --surface: #FFFFFF;
+    --ink: #17131F;
+    --muted: #6A6577;
+    --line: #E3E0EB;
+    --accent: #D9FF3F;
+    --accent-ink: #3E4A00;
+    --mark-bg: #EFF5D2;
+    --hl-shadow: inset 0 -0.45em var(--accent);
+    --hl-color: currentColor;
+    --sans: "Helvetica Neue", Arial, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E0B16;
+      --surface: #171224;
+      --ink: #ECEAF2;
+      --muted: #9B94AC;
+      --line: #2B2440;
+      --accent: #D9FF3F;
+      --accent-ink: #D9FF3F;
+      --mark-bg: #232B0E;
+      --hl-shadow: none;
+      --hl-color: var(--accent);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E0B16;
+    --surface: #171224;
+    --ink: #ECEAF2;
+    --muted: #9B94AC;
+    --line: #2B2440;
+    --accent: #D9FF3F;
+    --accent-ink: #D9FF3F;
+    --mark-bg: #232B0E;
+    --hl-shadow: none;
+    --hl-color: var(--accent);
+  }
+  :root[data-theme="light"] {
+    --bg: #F7F6FA;
+    --surface: #FFFFFF;
+    --ink: #17131F;
+    --muted: #6A6577;
+    --line: #E3E0EB;
+    --accent: #D9FF3F;
+    --accent-ink: #3E4A00;
+    --mark-bg: #EFF5D2;
+    --hl-shadow: inset 0 -0.45em var(--accent);
+    --hl-color: currentColor;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .page {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 5rem;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .eyebrow b {
+    color: var(--accent-ink);
+    background: var(--mark-bg);
+    padding: 0.15em 0.5em;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0 0 1.25rem;
+  }
+  h1 .hl {
+    box-shadow: var(--hl-shadow);
+    color: var(--hl-color);
+  }
+
+  .intro {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    padding: 1.1rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .intro p { margin: 0; }
+  .intro b { color: var(--accent-ink); }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 3rem;
+  }
+  .meta .blank {
+    color: var(--ink);
+    border-bottom: 1px dotted var(--muted);
+    min-width: 11rem;
+    display: inline-block;
+  }
+
+  section { margin-bottom: 2.75rem; }
+  h2 {
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    margin: 0 0 1.1rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+  }
+  h2 .num {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-ink);
+    background: var(--mark-bg);
+    padding: 0.2em 0.55em;
+    flex-shrink: 0;
+  }
+
+  .q { margin: 0 0 1.15rem; }
+  .q .qt { margin: 0 0 0.35rem; }
+  .q .qn {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-right: 0.5em;
+  }
+  .answer {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-bottom: 1px dotted var(--muted);
+    padding-bottom: 1.4rem;
+    max-width: 38rem;
+  }
+
+  ul.checks {
+    list-style: none;
+    padding: 0;
+    margin: 0.4rem 0 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    max-width: 38rem;
+  }
+  ul.checks li {
+    display: flex;
+    gap: 0.65rem;
+    align-items: baseline;
+  }
+  ul.checks li::before {
+    content: "";
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 1.5px solid var(--muted);
+    flex-shrink: 0;
+    transform: translateY(0.15rem);
+  }
+  .note {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin: -0.5rem 0 1rem;
+  }
+
+  .checklist {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 1.3rem 1.4rem 1.1rem;
+  }
+  .checklist h2 { border-top: none; padding-top: 0; }
+
+  .outro {
+    margin-top: 2.5rem;
+    padding: 1.1rem 1.3rem;
+    background: var(--mark-bg);
+    color: var(--ink);
+  }
+  .outro p { margin: 0 0 0.4rem; }
+  .outro p:last-child { margin: 0; }
+  .contact-blank {
+    border-bottom: 1px dotted var(--muted);
+    min-width: 12rem;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="eyebrow"><b>Бриф</b> · анкета для заказчика · заполнение ~15–20 минут</div>
+  <h1>Бриф на разработку <span class="hl">лендинга</span> (Landing&nbsp;Page)</h1>
+
+  <div class="intro">
+    <p><b>Что это.</b> Бриф — короткая анкета, которая помогает мне понять ваш бизнес и задачу, чтобы сделать сайт, который продаёт, а не просто «красивую страницу».</p>
+    <p><b>Как заполнять.</b> Отвечайте своими словами, прямо в документе после каждого пункта. Если на вопрос пока нет ответа — пишите «не знаю» или «на ваше усмотрение», подскажу.</p>
+    <p><b>Чем подробнее — тем точнее результат</b> и меньше правок.</p>
+  </div>
+
+  <div class="meta">
+    <span>📅 Дата заполнения: <span class="blank">&nbsp;</span></span>
+    <span>🏢 Проект / название: <span class="blank">&nbsp;</span></span>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>О компании и продукте</h2>
+    <div class="q"><p class="qt"><span class="qn">1.1</span>Чем занимаетесь, что продаёте (услуга / товар)?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">1.2</span>В каком городе/регионе работаете? Принимаете клиентов офлайн, онлайн или везде?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">1.3</span>Сколько лет на рынке, ключевые цифры (клиенты, проекты, отзывы) — если есть и можно показать?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">1.4</span>В чём ваше главное отличие от конкурентов (почему выбирают именно вас)?</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>Цель сайта</h2>
+    <div class="q">
+      <p class="qt"><span class="qn">2.1</span>Какое <b>главное действие</b> должен совершить посетитель? (отметьте)</p>
+      <ul class="checks">
+        <li>Оставить заявку / записаться</li>
+        <li>Позвонить</li>
+        <li>Написать в мессенджер (WhatsApp / Telegram)</li>
+        <li>Перейти в каталог / на оплату</li>
+        <li>Другое: ________________</li>
+      </ul>
+    </div>
+    <div class="q"><p class="qt"><span class="qn">2.2</span>Куда должны приходить заявки? (WhatsApp, Telegram, почта, CRM (система управления клиентами) — укажите контакт/аккаунт)</p><div class="answer">Ответ:</div></div>
+    <div class="q">
+      <p class="qt"><span class="qn">2.3</span>Откуда пойдёт трафик (посетители)? (отметьте)</p>
+      <ul class="checks">
+        <li>Реклама в Яндекс / Google</li>
+        <li>Соцсети (Instagram, ВК, TikTok)</li>
+        <li>Авито / маркетплейсы</li>
+        <li>Визитки / офлайн (QR-код)</li>
+        <li>Пока не знаю</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>Целевая аудитория</h2>
+    <div class="q"><p class="qt"><span class="qn">3.1</span>Кто ваши клиенты (пол, возраст, доход, интересы)?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">3.2</span>Какую проблему клиента вы решаете? Какие у него возражения и страхи перед покупкой?</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>Конкуренты и референсы (примеры)</h2>
+    <div class="q"><p class="qt"><span class="qn">4.1</span>1–3 сайта конкурентов (ссылки):</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">4.2</span>1–3 сайта, которые вам <b>нравятся по стилю</b> (не обязательно из вашей ниши) — и что именно нравится:</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">4.3</span>Что вам <b>не нравится</b> в сайтах конкурентов (чего избегать)?</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span>Структура: какие блоки нужны на лендинге</h2>
+    <p class="note">Отметьте нужное, лишнее уберите:</p>
+    <ul class="checks">
+      <li>Первый экран с заголовком и кнопкой</li>
+      <li>О компании</li>
+      <li>Услуги / товары + <b>цены</b> (или «от …»)</li>
+      <li>Калькулятор стоимости</li>
+      <li>Галерея работ / портфолио (в т.ч. «До / После»)</li>
+      <li>Этапы работы («как мы работаем»)</li>
+      <li>Преимущества / почему мы</li>
+      <li>Команда / мастера</li>
+      <li>Отзывы клиентов</li>
+      <li>Частые вопросы (FAQ)</li>
+      <li>Акция / спецпредложение</li>
+      <li>Форма заявки / онлайн-запись</li>
+      <li>Карта и контакты</li>
+      <li>Другое: ________________</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span>Дизайн и фирменный стиль</h2>
+    <div class="q"><p class="qt"><span class="qn">6.1</span>Есть ли <b>логотип</b> и фирменные цвета? (пришлите файлы; если нет — сделаю/подберу)</p><div class="answer">Ответ:</div></div>
+    <div class="q">
+      <p class="qt"><span class="qn">6.2</span>Желаемое настроение сайта (отметьте 1–3):</p>
+      <ul class="checks">
+        <li>Премиум / люкс (тёмный, дорогой)</li>
+        <li>Светлый и минималистичный</li>
+        <li>Яркий и энергичный</li>
+        <li>Тёплый, «человечный», уютный</li>
+        <li>Строгий, деловой / корпоративный</li>
+        <li>На ваш профессиональный вкус</li>
+      </ul>
+    </div>
+    <div class="q"><p class="qt"><span class="qn">6.3</span>Любимые / обязательные цвета и те, которых точно избегать:</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">6.4</span>Язык(и) сайта:</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span>Функциональность и интеграции</h2>
+    <div class="q">
+      <p class="qt"><span class="qn">7.1</span>Что должно работать на сайте? (отметьте)</p>
+      <ul class="checks">
+        <li>Форма заявки (имя, телефон, комментарий)</li>
+        <li>Кнопки WhatsApp / Telegram / звонок</li>
+        <li>Калькулятор стоимости</li>
+        <li>Онлайн-оплата</li>
+        <li>Квиз (пошаговый опрос с подбором)</li>
+        <li>Чат / виджет</li>
+        <li>Многостраничность (несколько разделов)</li>
+        <li>Другое: ________________</li>
+      </ul>
+    </div>
+    <div class="q"><p class="qt"><span class="qn">7.2</span>Нужна ли веб-аналитика (Яндекс.Метрика / Google Analytics) и пиксели рекламы?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">7.3</span>Есть ли уже CRM (система управления заявками) или таблица, куда заносить лиды?</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">08</span>Контент: кто предоставляет материалы</h2>
+    <div class="q"><p class="qt"><span class="qn">8.1</span><b>Тексты</b> — есть готовые, или писать мне?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">8.2</span><b>Фотографии</b> — свои есть? Или использовать качественные стоковые (свободная лицензия)?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">8.3</span><b>Логотип</b> в векторе (SVG/AI/PDF) — есть?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">8.4</span>Прайс / список услуг с ценами — приложите файлом или текстом:</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">09</span>Контакты на сайте</h2>
+    <div class="q"><p class="qt"><span class="qn">9.1</span>Телефон(ы) для кнопок «Позвонить»:</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">9.2</span>WhatsApp / Telegram (номер или ссылка):</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">9.3</span>Соцсети (Instagram, ВК и т.д. — ссылки/ники):</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">9.4</span>Адрес, режим работы (если нужно показывать):</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">9.5</span>Реквизиты / ИНН (если нужна страница политики конфиденциальности по 152-ФЗ):</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">10</span>Технические детали</h2>
+    <div class="q"><p class="qt"><span class="qn">10.1</span>Есть ли <b>домен</b> (адрес сайта)? Если да — какой; если нет — нужна помощь с покупкой?</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">10.2</span>Есть ли <b>хостинг</b> (где разместить сайт)? (можно бесплатно на GitHub Pages)</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">10.3</span>Был ли раньше сайт? Что с ним не так?</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">11</span>Сроки и бюджет</h2>
+    <div class="q"><p class="qt"><span class="qn">11.1</span>Желаемый срок запуска (дедлайн):</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">11.2</span>Ориентировочный бюджет (это помогает подобрать оптимальное решение):</p><div class="answer">Ответ:</div></div>
+    <div class="q"><p class="qt"><span class="qn">11.3</span>Кто принимает финальное решение и согласовывает макет?</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section>
+    <h2><span class="num">12</span>Дополнительно</h2>
+    <div class="q"><p class="qt">Что ещё важно знать о проекте, чего я не спросил?</p><div class="answer">Ответ:</div></div>
+  </section>
+
+  <section class="checklist">
+    <h2><span class="num">✓</span>Чек-лист: что прислать вместе с брифом</h2>
+    <ul class="checks">
+      <li>Логотип (по возможности в векторе) и фирменные цвета</li>
+      <li>Прайс / список услуг с ценами</li>
+      <li>Тексты (если есть) или ключевые тезисы</li>
+      <li>Фотографии работ / товаров / команды</li>
+      <li>Ссылки: соцсети, конкуренты, понравившиеся сайты</li>
+      <li>Контакты: телефон, WhatsApp/Telegram, адрес, режим работы</li>
+    </ul>
+  </section>
+
+  <div class="outro">
+    <p><b>Спасибо!</b> После получения брифа я уточню детали (если потребуется), оценю сроки и стоимость и приступлю к работе.</p>
+    <p>Связь: <span class="contact-blank">&nbsp;</span></p>
+  </div>
+</div>
+
+</body>
+</html>
