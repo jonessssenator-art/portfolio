@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#171310"/>
-  <path d="M32 8 C32 8 17 28.5 17 40 A15 15 0 0 0 47 40 C47 28.5 32 8 32 8 Z" fill="none" stroke="#A07C33" stroke-width="2.5" stroke-linejoin="round"/>
-  <text x="32" y="47" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#A07C33">27</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="27 Souls">
+  <!-- Иконка 3: «27» в тонкой квадратной рамке-паспарту, линия парит над цифрами -->
+  <rect width="64" height="64" fill="#171310"/>
+  <rect x="7.5" y="7.5" width="49" height="49" fill="none" stroke="#A07C33" stroke-width="1"/>
+  <line x1="20" y1="17" x2="44" y2="17" stroke="#A07C33" stroke-width="1"/>
+  <text x="32" y="46" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="30" font-weight="500" fill="#A07C33">27</text>
 </svg>
