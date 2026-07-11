@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>10 вариантов фона — выбери свой</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎇</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0A0812;--lime:#D9FF3F;--violet:#8A5CFF;--ink:#F4F2FF;--ink2:rgba(244,242,255,.6);
+    --mono:'JetBrains Mono',monospace;--disp:'Unbounded',sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:var(--bg)}
+  body{font-family:var(--mono);color:var(--ink)}
+  #cv{position:fixed;inset:0;width:100%;height:100%;display:block}
+  .top{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;background:linear-gradient(to bottom,rgba(10,8,18,.8),transparent)}
+  .back{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);text-decoration:none}
+  .back:hover{color:var(--lime)}
+  .hint{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+  .label{position:fixed;left:20px;bottom:96px;z-index:5;pointer-events:none}
+  .label b{font-family:var(--disp);font-size:clamp(22px,5vw,40px);font-weight:700;color:var(--ink);display:block;line-height:1.1}
+  .label span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}
+  .chips{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:8px;overflow-x:auto;
+    padding:14px 20px 22px;scrollbar-width:none;background:linear-gradient(to top,rgba(10,8,18,.85),transparent)}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink2);cursor:pointer;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:12px 16px;
+    transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+  .chip.active{background:var(--lime);color:#0A0812;border-color:var(--lime);font-weight:500}
+  .chip:not(.active):hover{color:var(--ink);border-color:var(--violet)}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div class="top">
+  <a class="back" href="index.html">← в портфолио</a>
+  <span class="hint">тапни по фону — взрыв</span>
+</div>
+<div class="label"><span id="lnum">вариант 01</span><b id="lname">…</b></div>
+<div class="chips" id="chips"></div>
+
+<script>
+// ======== 10 вариантов фонового шейдера в палитре Acid Luxe ========
+const COMMON = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+uniform float u_time;
+uniform vec2 u_res;
+uniform vec2 u_mouse;
+uniform float u_mstr;
+const vec3 BASE=vec3(.039,.031,.07);
+const vec3 VIO=vec3(.54,.36,1.);
+const vec3 LIM=vec3(.85,1.,.25);
+const vec3 MAG=vec3(1.,.24,.5);
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123);}
+float noise(vec2 p){
+  vec2 i=floor(p),f=fract(p);
+  vec2 u=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1.,0.)),u.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),u.x),u.y);
+}
+float fbm(vec2 p){
+  float v=0.,a=.5;
+  for(int i=0;i<4;i++){v+=a*noise(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}
+  return v;
+}
+mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
+float vign(vec2 uv){return 1.-smoothstep(.35,1.3,distance(uv,vec2(.5,.45)));}
+vec2 push(vec2 p, vec2 m, float k){float d=length(p-m);return p+normalize(p-m+.0001)*exp(-d*3.5)*k;}
+`;
+
+const VARIANTS = [
+{ name:'Аврора', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y); vec2 m=vec2(u_mouse.x*asp,u_mouse.y);
+  float t=u_time*.13;
+  p=push(p,m,.2*u_mstr);
+  vec3 col=BASE;
+  for(int i=0;i<3;i++){
+    float fi=float(i);
+    float w=fbm(vec2(p.x*1.3+fi*7.3+t*3., t*1.8+fi));
+    float band=exp(-abs(uv.y-.3-fi*.16-(w-.5)*.85)*(5.+fi*2.));
+    vec3 c=i==0?VIO:(i==1?LIM*.8:MAG*.6);
+    col+=c*band*(.55-.12*fi);
+  }
+  col+=vec3(.8,.85,1.)*step(.9975,hash(floor(p*130.)))*.5;
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Кислотная плазма', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y); vec2 m=vec2(u_mouse.x*asp,u_mouse.y);
+  float t=u_time*.3;
+  p=push(p,m,.25*u_mstr);
+  float v=sin(p.x*3.+t)+sin(p.y*3.5-t*1.2)+sin((p.x+p.y)*2.5+t*.7)+fbm(p*2.+t*.2)*2.;
+  v*=.25;
+  vec3 col=BASE
+    +VIO*(.5+.5*sin(v*3.14159+t*.5))*.5
+    +LIM*pow(max(sin(v*6.283+1.7),0.),3.)*.45
+    +MAG*pow(max(sin(v*6.283+4.),0.),5.)*.4;
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Жидкие шары', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y); vec2 m=vec2(u_mouse.x*asp,u_mouse.y);
+  float t=u_time*.5;
+  float f=0.;
+  for(int i=0;i<5;i++){
+    float fi=float(i);
+    vec2 c=vec2(.5*asp,.5)+vec2(sin(t*.7+fi*2.4),cos(t*.9+fi*1.7))*vec2(.4,.28);
+    f+=.012/(dot(p-c,p-c)+.002);
+  }
+  f+=.02*max(u_mstr,.25)/(dot(p-m,p-m)+.003);
+  vec3 col=BASE
+    +VIO*smoothstep(.7,1.5,f)*.65
+    +LIM*smoothstep(1.7,2.5,f)*.9
+    +MAG*smoothstep(2.8,3.8,f)*.8;
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Ретро-сетка', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 q=uv*2.-1.; q.x*=asp;
+  float t=u_time*.7;
+  float hor=-.08;
+  vec3 col=BASE;
+  if(q.y<hor){
+    float z=hor-q.y;
+    float depth=1./(z+.02);
+    vec2 g=vec2((q.x+(u_mouse.x-.5)*.6)*depth, depth*1.1+t*2.2);
+    vec2 gc=abs(fract(g)-.5);
+    float line=1.-smoothstep(0.,.07,min(gc.x,gc.y));
+    col+=mix(MAG,VIO,clamp(z*1.2,0.,1.))*line*smoothstep(0.,.13,z)*(.8+.3*u_mstr);
+  } else {
+    col+=MAG*exp(-abs(q.y-hor)*7.)*.5;
+    col+=VIO*exp(-length(q-vec2(0.,.3))*2.2)*.35;
+    col+=vec3(.9)*step(.9985,hash(floor(q*70.)))*.6;
+  }
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Космический туман', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y); vec2 m=vec2(u_mouse.x*asp,u_mouse.y);
+  float t=u_time*.5;
+  p=push(p,m,.22*u_mstr);
+  vec2 w=vec2(fbm(p*1.5+t*.05),fbm(p*1.5-t*.04+3.7));
+  float n1=fbm(p*2.+w*1.6);
+  float n2=fbm(p*3.5-w*2.+vec2(t*.07,0.));
+  vec3 col=BASE
+    +VIO*pow(n1,2.2)*1.1
+    +MAG*pow(n2,3.5)*.8
+    +LIM*pow(max(n1*n2-.18,0.),2.)*1.6;
+  float st=step(.9975,hash(floor(p*140.)));
+  col+=vec3(.8,.85,1.)*st*(.35+.35*sin(t*3.+hash(floor(p*140.))*40.));
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Струящиеся нити', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y);
+  float t=u_time*.8;
+  vec3 col=BASE;
+  for(int i=0;i<5;i++){
+    float fi=float(i);
+    float y=.5+(fi-2.)*.09+(fbm(vec2(p.x*1.2+fi*1.26+t*.3,t*.4+fi*1.26))-.5)*.55;
+    y+=(u_mouse.y-.5)*.25*exp(-abs(uv.x-u_mouse.x)*4.)*u_mstr;
+    float glow=exp(-abs(uv.y-y)*(60.-fi*8.));
+    vec3 c=i==4?MAG:mix(VIO,LIM,fi/4.);
+    col+=c*glow*(.55+.3*sin(t+fi));
+  }
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Неоновые соты', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y); vec2 m=vec2(u_mouse.x*asp,u_mouse.y);
+  float t=u_time*.6;
+  p=push(p,m,.18*u_mstr);
+  vec2 g=p*4.; vec2 ig=floor(g), fg=fract(g);
+  float f1=8.,f2=8.;
+  for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){
+    vec2 o=vec2(float(x),float(y));
+    vec2 pt=o+.5+.38*sin(t+6.28*vec2(hash(ig+o),hash(ig+o+3.3)))-fg;
+    float d=dot(pt,pt);
+    if(d<f1){f2=f1;f1=d;}else if(d<f2){f2=d;}
+  }
+  float edge=f2-f1;
+  vec3 col=BASE
+    +VIO*(1.-smoothstep(0.,.09,edge))*.85
+    +LIM*exp(-f1*9.)*.3
+    +MAG*(1.-smoothstep(0.,.35,f1))*.12;
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Вихрь', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y);
+  float t=u_time*.4;
+  vec2 c=vec2(.5*asp,.45)+(vec2(u_mouse.x*asp,u_mouse.y)-vec2(.5*asp,.45))*.15*u_mstr;
+  vec2 d=p-c;
+  float r=length(d), a=atan(d.y,d.x);
+  float sw=a+log(r+.12)*3.5-t*1.6;
+  float arm=.5+.5*sin(sw*3.);
+  float n=fbm(vec2(r*4.-t*.8,a*2.));
+  vec3 col=BASE
+    +VIO*arm*exp(-r*1.6)*.85
+    +LIM*pow(arm,5.)*exp(-r*2.3)*.9
+    +MAG*n*exp(-r*1.2)*.35;
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Каустика', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 p=vec2(uv.x*asp,uv.y); vec2 m=vec2(u_mouse.x*asp,u_mouse.y);
+  float t=u_time*.5;
+  p=push(p,m,.2*u_mstr);
+  vec2 q=p*3.;
+  float ca=0.;
+  for(int i=0;i<3;i++){
+    float fi=float(i);
+    vec2 s=q*rot(fi*2.1)+vec2(t*(.3+.1*fi),fi*4.);
+    ca+=pow(1.-abs(noise(s)*2.-1.),6.);
+  }
+  ca/=3.;
+  vec3 col=BASE
+    +mix(VIO,LIM,uv.y)*ca*.75
+    +vec3(.9)*pow(ca,3.)*.4
+    +MAG*pow(ca,2.)*(.5+.5*sin(t))*.15;
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+{ name:'Гиперпрыжок', body:`
+void main(){
+  vec2 uv=gl_FragCoord.xy/u_res; float asp=u_res.x/u_res.y;
+  vec2 q=uv*2.-1.; q.x*=asp;
+  q-=(u_mouse*2.-1.)*vec2(asp,1.)*.12;
+  float t=u_time*(1.+u_mstr*.8);
+  float r=length(q)+.06, a=atan(q.y,q.x);
+  vec3 col=BASE;
+  for(int i=0;i<3;i++){
+    float fi=float(i);
+    float streak=pow(max(noise(vec2(a*18.+fi*13.,.8/r-t*(1.8+fi*.6)))*1.7-.65,0.),2.);
+    vec3 c=i==0?VIO:(i==1?LIM:MAG);
+    col+=c*streak*smoothstep(.05,.55,r)*.6;
+  }
+  col+=VIO*exp(-r*3.)*.45;
+  col+=vec3(.9,.95,1.)*exp(-r*8.)*.3;
+  col=mix(BASE*.8,col,vign(uv));
+  gl_FragColor=vec4(col,1.);
+}`},
+];
+
+// ======== движок: один canvas, пересборка программы при переключении ========
+const cv = document.getElementById('cv');
+const gl = cv.getContext('webgl', {antialias:false, alpha:false});
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lname = document.getElementById('lname'), lnumEl = document.getElementById('lnum');
+const chips = document.getElementById('chips');
+let prg = null, U = null, cur = -1;
+
+const VERT = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+function mkShader(type, src){
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src); gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+    console.error('SHADER FAIL:', gl.getShaderInfoLog(s));
+    return null;
+  }
+  return s;
+}
+const vs = mkShader(gl.VERTEX_SHADER, VERT);
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+
+function use(i){
+  const v = VARIANTS[i];
+  const fs = mkShader(gl.FRAGMENT_SHADER, COMMON + v.body);
+  if (!fs){ lname.textContent = v.name + ' — ошибка'; console.error('VARIANT FAIL:', v.name); return; }
+  const np = gl.createProgram();
+  gl.attachShader(np, vs); gl.attachShader(np, fs); gl.linkProgram(np);
+  if (!gl.getProgramParameter(np, gl.LINK_STATUS)){ console.error('LINK FAIL:', v.name, gl.getProgramInfoLog(np)); return; }
+  if (prg) gl.deleteProgram(prg);
+  prg = np;
+  gl.useProgram(prg);
+  const loc = gl.getAttribLocation(prg, 'p');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  U = {
+    time: gl.getUniformLocation(prg,'u_time'),
+    res:  gl.getUniformLocation(prg,'u_res'),
+    mouse:gl.getUniformLocation(prg,'u_mouse'),
+    mstr: gl.getUniformLocation(prg,'u_mstr'),
+  };
+  cur = i;
+  lname.textContent = v.name;
+  lnumEl.textContent = 'вариант ' + String(i+1).padStart(2,'0');
+  [...chips.children].forEach((c,j)=>c.classList.toggle('active', j===i));
+  history.replaceState(null,'','?v='+(i+1));
+  if (reduce) draw(7.0);
+}
+
+chips.innerHTML = VARIANTS.map((v,i)=>`<button class="chip">${String(i+1).padStart(2,'0')} ${v.name}</button>`).join('');
+[...chips.children].forEach((c,i)=>c.addEventListener('click', ()=>use(i)));
+
+const isMobile = matchMedia('(max-width:700px)').matches;
+const DPR = Math.min(isMobile ? 1.5 : 2, window.devicePixelRatio || 1);
+const SCALE = isMobile ? .7 : 1;
+function resize(){
+  cv.width  = Math.max(1, Math.floor(innerWidth  * DPR * SCALE));
+  cv.height = Math.max(1, Math.floor(innerHeight * DPR * SCALE));
+  gl.viewport(0, 0, cv.width, cv.height);
+  if (reduce && prg) draw(7.0);
+}
+addEventListener('resize', resize);
+resize();
+
+let tx=.5, ty=.55, mx=.5, my=.55, mstr=0;
+addEventListener('pointermove', e=>{
+  if (e.target.closest('.chip,.top')) return;
+  tx = e.clientX/innerWidth; ty = 1 - e.clientY/innerHeight; mstr = Math.max(mstr, 1);
+}, {passive:true});
+addEventListener('pointerdown', e=>{
+  if (e.target.closest('.chip,.top')) return;
+  tx = e.clientX/innerWidth; ty = 1 - e.clientY/innerHeight; mstr = 2.4;
+}, {passive:true});
+
+function draw(t){
+  if (!prg) return;
+  mx += (tx-mx)*.06; my += (ty-my)*.06; mstr *= .985;
+  gl.uniform1f(U.time, t);
+  gl.uniform2f(U.res, cv.width, cv.height);
+  gl.uniform2f(U.mouse, mx, my);
+  gl.uniform1f(U.mstr, mstr);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+}
+
+const start = Math.max(0, Math.min(9, (parseInt(new URLSearchParams(location.search).get('v'),10) || 1) - 1));
+use(start);
+
+if (!reduce){
+  (function loop(now){
+    requestAnimationFrame(loop);
+    draw((now/1000) % 1800);
+  })(performance.now());
+}
+</script>
+</body>
+</html>
