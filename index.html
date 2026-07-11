@@ -173,7 +173,7 @@
     background:radial-gradient(340px at var(--mx,50%) var(--my,50%),rgba(255,255,255,.16),transparent 70%)}
   .card:hover .glare{opacity:1}
   .card .num{position:absolute;top:10px;left:16px;z-index:2;font-family:var(--disp);font-weight:800;font-size:44px;line-height:1;
-    color:transparent;-webkit-text-stroke:1px rgba(244,242,255,.55);pointer-events:none}
+    color:transparent;-webkit-text-stroke:1px rgba(244,242,255,.85);pointer-events:none;mix-blend-mode:difference}
   .thumb{height:200px;position:relative;overflow:hidden}
   .thumb .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s var(--ease)}
   .card:hover .thumb .shot{transform:scale(1.07)}
@@ -294,6 +294,9 @@
     .thumb{height:210px}
     .mmenu{padding:86px 18px 22px}
     .card,.feat,.step,.price,.chip{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(22,16,40,.72)}
+    .kicker{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(22,16,40,.72)}
+    .thumb .tag{backdrop-filter:none;-webkit-backdrop-filter:none}
+    header{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
   }
 
   /* прелоадер — шторка со счётчиком */
@@ -517,7 +520,7 @@
     <div class="prices">
       <div class="price reveal">
         <h3>По готовому макету</h3>
-        <div class="cost">от 5 000 ₽</div>
+        <div class="cost">от 5&nbsp;000&nbsp;₽</div>
         <ul>
           <li>Вёрстка по вашему макету или ТЗ</li>
           <li>Полный адаптив</li>
@@ -529,7 +532,7 @@
       <div class="price hot reveal">
         <div class="pop">Выбирают чаще</div>
         <h3>Лендинг под ключ</h3>
-        <div class="cost">от 12 000 ₽</div>
+        <div class="cost">от 12&nbsp;000&nbsp;₽</div>
         <ul>
           <li>Дизайн + вёрстка + форма заявок</li>
           <li>Помощь с текстами и структурой</li>
@@ -541,7 +544,7 @@
       </div>
       <div class="price reveal">
         <h3>Правки и доработки</h3>
-        <div class="cost">от 1 500 ₽</div>
+        <div class="cost">от 1&nbsp;500&nbsp;₽</div>
         <ul>
           <li>Доработка существующего сайта</li>
           <li>Подключение формы или аналитики</li>
@@ -580,7 +583,7 @@
 <section class="contact" id="contact">
   <div class="inner">
     <h2 class="reveal">Понравился этот сайт? <span class="acid">Он тоже мой.</span></h2>
-    <p class="reveal">Такой же уровень — под вашу нишу. От 5 000 ₽ по готовому макету, от 12 000 ₽ под ключ. Напишите — обсудим задачу и точную цену в тот же день.</p>
+    <p class="reveal">Такой же уровень — под вашу нишу. От 5&nbsp;000&nbsp;₽ по готовому макету, от 12&nbsp;000&nbsp;₽ под ключ. Напишите — обсудим задачу и точную цену в тот же день.</p>
     <div class="cta reveal">
       <a class="btn btn-lime magnet" href="https://t.me/xxviiexe" target="_blank" rel="noopener">Хочу такой же</a>
       <a class="btn btn-ghost magnet" href="#works">Ещё раз посмотреть работы</a>
@@ -723,6 +726,21 @@ if (!loader || reduce){
   setTimeout(loaderDone, 3000); // страховка: шторка уедет в любом случае
 }
 
+// страховка от «пустых» секций: если браузер восстановил позицию скролла
+// или экран перепрыгнул, показываем всё, что уже выше низа экрана
+let sweepPending = [...cards, ...restRevs];
+function sweep(){
+  if (!sweepPending.length) return;
+  const vh = innerHeight;
+  sweepPending = sweepPending.filter(el=>{
+    if (el.classList.contains('in')) return false;
+    if (el.getBoundingClientRect().top < vh){ el.classList.add('in'); return false; }
+    return true;
+  });
+}
+addEventListener('scroll', sweep, {passive:true});
+addEventListener('load', sweep);
+
 // печатающийся код в плитке «Чистый код»
 const tc = document.getElementById('typecode');
 if (tc){
@@ -863,7 +881,11 @@ cm.addEventListener('click', ()=>{
 
   const VERT = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   const FRAG = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
+#else
+precision mediump float;
+#endif
 uniform float u_time;
 uniform vec2 u_res;
 uniform vec2 u_mouse;
@@ -1010,7 +1032,7 @@ void main(){
   (function loop(now){
     requestAnimationFrame(loop);
     if (!vis) return;
-    draw(now / 1000);
+    draw((now / 1000) % 1800); // не даём счётчику времени расти бесконечно — иначе шум теряет точность
   })(performance.now());
 })();
 </script>
