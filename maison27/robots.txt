@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /cart/
+Disallow: /favorites/
+
+Sitemap: https://jonessssenator-art.github.io/portfolio/maison27/sitemap.xml
