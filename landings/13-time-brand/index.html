@@ -253,6 +253,9 @@ footer{border-top:1px solid var(--ash);padding:56px 0 40px}
   .foot-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:520px){
+  /* тап-таргеты ≥40px: ссылки футера */
+  .foot-grid a{display:inline-block;padding:9px 0;margin:-5px 0}
+  .foot-grid ul{gap:5px}
   .hero-stats{gap:26px}
   .hero-actions{width:100%}
   .hero-actions .btn{flex:1 1 150px}

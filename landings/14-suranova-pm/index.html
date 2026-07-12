@@ -249,7 +249,7 @@ h1,h2,h3{font-weight:400;margin:0}
 .lb-next{right:22px;top:50%;transform:translateY(-50%)}
 
 /* reviews */
-.rev-track{display:flex;gap:clamp(14px,1.8vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 20px;margin:0 -2px;scrollbar-width:none}
+.rev-track{display:flex;gap:clamp(14px,1.8vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 20px;scrollbar-width:none}
 .rev-track::-webkit-scrollbar{display:none}
 .review{scroll-snap-align:start;flex:0 0 clamp(280px,86vw,380px);background:var(--white);border:1px solid var(--line-soft);border-radius:var(--r-card);padding:32px 30px;display:flex;flex-direction:column}
 .review .stars{display:inline-flex;gap:3px;color:var(--gold);margin-bottom:18px}
@@ -336,7 +336,7 @@ h1,h2,h3{font-weight:400;margin:0}
 .cal-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px}
 .cal-dow span{text-align:center;font-size:9.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;padding:2px 0}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-grid button{height:29px;border:none;background:transparent;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--ink);transition:.18s;display:grid;place-items:center}
+.cal-grid button{height:38px;border:none;background:transparent;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--ink);transition:.18s;display:grid;place-items:center}
 .cal-grid button:hover:not(:disabled){background:var(--sand);color:var(--ink)}
 .cal-grid button:disabled{color:var(--line);cursor:not-allowed}
 .cal-grid button.today{color:var(--gold-deep);font-weight:700;box-shadow:inset 0 0 0 1px var(--champagne)}
@@ -426,6 +426,11 @@ footer{border-top:1px solid var(--line);padding:clamp(48px,6vw,72px) 0 40px;back
   .training-cols{grid-template-columns:1fr}
   .about-list,.b-fields{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
+  /* тап-таргеты ≥40px: ссылки футера и контактов, иконки соцсетей в шапке */
+  .foot-grid a{display:inline-block;padding:9px 0;margin:-6px 0}
+  .foot-grid ul{gap:6px}
+  .foot-bottom a{display:inline-block;padding:10px 0}
+  .nav-soc{width:44px;height:44px}
   .hero-badge{left:0}
   .fab{bottom:16px;right:16px}.fab a{width:50px;height:50px}
 }
@@ -984,7 +989,7 @@ window.SURANOVA_CONTENT = {
   var lb=document.createElement('div'); lb.className='lb'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Просмотр работы');
   lb.innerHTML='<button class="lb-btn lb-close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>'
     +'<button class="lb-btn lb-prev" aria-label="Предыдущая"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-    +'<img alt="">'
+    +'<img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">'
     +'<button class="lb-btn lb-next" aria-label="Следующая"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
   document.body.appendChild(lb);
   var lbImg=lb.querySelector('img'), lbIndex=0;

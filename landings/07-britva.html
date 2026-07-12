@@ -346,13 +346,16 @@
   .foot-contact li{display:flex;align-items:flex-start;gap:10px}
   .foot-contact svg{width:18px;height:18px;color:var(--gold);flex-shrink:0;margin-top:3px}
   .socials{display:flex;gap:12px;margin-top:6px}
-  .socials a{
+  .socials a,.socials span{
     width:42px;height:42px;border-radius:12px;border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;transition:.28s;
   }
   .socials a:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-3px)}
   .socials a:hover svg{color:#161616}
   .socials svg{width:20px;height:20px;color:var(--text);transition:.28s}
+  .foot-policy{border-top:1px solid var(--line);padding:26px 0}
+  .foot-policy h4{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:15px;margin-bottom:10px;color:var(--gold)}
+  .foot-policy p{color:var(--muted);font-size:13.5px;max-width:760px}
   .foot-bottom{border-top:1px solid var(--line);padding-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .foot-bottom p,.foot-bottom a{color:var(--muted);font-size:13.5px}
   .foot-bottom a:hover{color:var(--gold)}
@@ -398,8 +401,11 @@
       transform:translateY(-130%);transition:.4s;backdrop-filter:blur(14px);
     }
     .nav-menu.open{transform:translateY(0)}
+    header.scrolled .nav-menu{top:68px}
     .nav-menu a{padding:16px 0;border-bottom:1px solid var(--line);font-size:18px}
     .burger{display:flex}
+    /* Тап-таргеты ≥40px: увеличенная зона нажатия без изменения вёрстки */
+    .foot-col li a,.foot-bottom a,.check a{display:inline-block;padding:10px 0;margin:-10px 0}
     .nav-phone,.nav .btn-gold{display:none}
     .hero-grid,.cta-grid{grid-template-columns:1fr}
     .hero-visual{order:-1;max-width:420px;margin:0 auto}
@@ -409,6 +415,7 @@
   @media(max-width:480px){
     .container{padding:0 18px}
     .features-grid,.steps-grid,.barbers-grid,.stats-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr;gap:32px}
     .hero-cta{flex-direction:column}
     .hero-cta .btn{width:100%}
     .hero-badge{left:0;bottom:-20px;padding:16px 20px}
@@ -837,9 +844,9 @@
         </a>
         <p>Барбершоп для мужчин, которые ценят своё время и внешний вид. 8 лет, 6 мастеров, премиальная косметика.</p>
         <div class="socials">
-          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.8 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></a>
-          <a href="#" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 16.3c-5 0-8.3-3.5-8.4-9.3h2.5c.1 4.3 2 6 3.5 6.4V7h2.4v3.6c1.5-.2 3-1.8 3.6-3.6h2.3c-.4 2.2-2 3.8-3.1 4.5 1.1.6 2.9 2 3.6 4.4h-2.6c-.5-1.7-1.9-3-3.8-3.2v3.2h-1.6z"/></svg></a>
-          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.7 2.6 4.1 3.5 1.9.8 2 .5 2.4.5.4 0 1.2-.5 1.4-1 .2-.5.2-.9.1-1z"/></svg></a>
+          <span role="img" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.8 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></span>
+          <span role="img" aria-label="ВКонтакте" title="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 16.3c-5 0-8.3-3.5-8.4-9.3h2.5c.1 4.3 2 6 3.5 6.4V7h2.4v3.6c1.5-.2 3-1.8 3.6-3.6h2.3c-.4 2.2-2 3.8-3.1 4.5 1.1.6 2.9 2 3.6 4.4h-2.6c-.5-1.7-1.9-3-3.8-3.2v3.2h-1.6z"/></svg></span>
+          <span role="img" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.8.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.1-.3 0-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4 0-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.4c.1.2 1.7 2.6 4.1 3.5 1.9.8 2 .5 2.4.5.4 0 1.2-.5 1.4-1 .2-.5.2-.9.1-1z"/></svg></span>
         </div>
       </div>
       <div class="foot-col">
@@ -868,6 +875,10 @@
           <li>Без выходных и перерывов</li>
         </ul>
       </div>
+    </div>
+    <div class="foot-policy" id="privacy">
+      <h4>Политика конфиденциальности</h4>
+      <p>Мы используем ваши имя и номер телефона только для связи по заявке и подтверждения записи. Данные не передаются третьим лицам и удаляются по вашему запросу. Отправляя форму, вы соглашаетесь с этими условиями.</p>
     </div>
     <div class="foot-bottom">
       <p>© 2026 Барбершоп «Бритва». Все права защищены.</p>

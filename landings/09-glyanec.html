@@ -193,6 +193,7 @@
   .card-icon svg{width:28px;height:28px;color:var(--red)}
   .card h3{font-size:20px;margin-bottom:10px}
   .card p{color:var(--muted);font-size:15px}
+  .card h3,.card p,.step h3,.step p{overflow-wrap:break-word}
 
   /* Services */
   .service{
@@ -329,6 +330,9 @@
   .social:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
   .social svg{width:20px;height:20px;color:var(--silver)}
   .social:hover svg{color:#fff}
+  .footer-policy{border-top:1px solid var(--line);padding:26px 0}
+  .footer-policy h4{font-size:15px;letter-spacing:.04em;margin-bottom:10px;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:700}
+  .footer-policy p{color:var(--muted);font-size:14px;max-width:760px;margin:0}
   .footer-bottom{border-top:1px solid var(--line);padding-top:28px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;color:var(--gray);font-size:14px}
   .footer-bottom a{color:var(--gray)}
   .footer-bottom a:hover{color:var(--silver)}
@@ -455,8 +459,13 @@
       border-top:1px solid var(--line);z-index:99;
     }
     .nav-menu.open{display:flex;transform:translateX(0)}
+    .header.scrolled .nav-menu{top:64px}
     .nav-menu a{width:100%;padding:18px 0;font-size:18px;border-bottom:1px solid var(--line)}
     .nav-menu a::after{display:none}
+    /* Тап-таргеты ≥40px: увеличенная зона нажатия без изменения вёрстки */
+    .service-link{padding:12px 0;margin:-12px 0}
+    .footer-col a{padding:8px 0;margin-bottom:4px}
+    .footer-contact a,.footer-bottom a,.consent a{display:inline-block;padding:10px 0;margin:-10px 0}
     .hero-grid{grid-template-columns:1fr}
     .hero-visual{order:-1;max-width:420px;margin:0 auto}
     .grid-3,.grid-2,.pricing,.reviews,.ba-grid{grid-template-columns:1fr}
@@ -472,6 +481,7 @@
     .hero h1{font-size:32px}
     .hero-cta{flex-direction:column}
     .hero-cta .btn{width:100%}
+    .grid-4,.steps,.footer-grid{grid-template-columns:1fr}
     .stats{grid-template-columns:1fr;padding:32px 24px}
     .strip-item{width:100%}
     .ba-cap,.service-body,.card,.review,.plan{padding:24px}
@@ -984,10 +994,10 @@
         </a>
         <p style="max-width:300px">Профессиональный уход за автомобилем: химчистка, полировка, керамика и защитная плёнка. Работаем с 2014 года.</p>
         <div class="socials" style="margin-top:8px">
-          <a href="#" class="social" aria-label="Telegram"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.6l-3.3 15.56c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.43 2.34c-.27.27-.5.5-1 .5l.36-5.13L18.05 6.4c.4-.36-.09-.56-.63-.2L5.85 13.6.83 12.04c-1.1-.34-1.12-1.1.23-1.62l19.4-7.48c.91-.34 1.7.2 1.48 1.66z"/></svg></a>
-          <a href="#" class="social" aria-label="WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.4-.4-.5-.8-1-1.2-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.2.2-.3.2-.5 0-.1 0-.3-.1-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.7.7-.9 1.5-.9 2.5 0 1.4 1 2.8 1.2 3 .1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/></svg></a>
-          <a href="#" class="social" aria-label="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" class="social" aria-label="ВКонтакте"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 16.3c-5.3 0-8.6-3.7-8.7-9.8h2.7c.1 4.5 2.1 6.4 3.6 6.8V6.5h2.5v3.8c1.5-.2 3-1.8 3.5-3.8h2.5c-.4 2.4-2 4-3.1 4.7 1.1.6 3 2 3.7 4.6h-2.8c-.6-1.8-2-3.2-3.8-3.4v3.4h-.6z"/></svg></a>
+          <span class="social" role="img" aria-label="Telegram" title="Telegram"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.6l-3.3 15.56c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.43 2.34c-.27.27-.5.5-1 .5l.36-5.13L18.05 6.4c.4-.36-.09-.56-.63-.2L5.85 13.6.83 12.04c-1.1-.34-1.12-1.1.23-1.62l19.4-7.48c.91-.34 1.7.2 1.48 1.66z"/></svg></span>
+          <span class="social" role="img" aria-label="WhatsApp" title="WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8.9-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.4-.4-.5-.8-1-1.2-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.2.2-.3.2-.5 0-.1 0-.3-.1-.4l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.7.7-.9 1.5-.9 2.5 0 1.4 1 2.8 1.2 3 .1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/></svg></span>
+          <span class="social" role="img" aria-label="Instagram" title="Instagram"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+          <span class="social" role="img" aria-label="ВКонтакте" title="ВКонтакте"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12.8 16.3c-5.3 0-8.6-3.7-8.7-9.8h2.7c.1 4.5 2.1 6.4 3.6 6.8V6.5h2.5v3.8c1.5-.2 3-1.8 3.5-3.8h2.5c-.4 2.4-2 4-3.1 4.7 1.1.6 3 2 3.7 4.6h-2.8c-.6-1.8-2-3.2-3.8-3.4v3.4h-.6z"/></svg></span>
         </div>
       </div>
 
@@ -1018,9 +1028,13 @@
       </div>
     </div>
 
+    <div class="footer-policy" id="privacy">
+      <h4>Политика конфиденциальности</h4>
+      <p>Мы используем ваши имя, телефон и данные об автомобиле только для связи по заявке и записи на услуги. Данные не передаются третьим лицам и удаляются по вашему запросу. Отправляя форму, вы соглашаетесь с этими условиями.</p>
+    </div>
     <div class="footer-bottom">
       <span>© 2014–2026 Детейлинг-центр «Глянец». Все права защищены.</span>
-      <span><a href="#privacy">Политика конфиденциальности</a> · <a href="#">Договор оферты</a></span>
+      <span><a href="#privacy">Политика конфиденциальности</a></span>
     </div>
   </div>
 </footer>

@@ -544,7 +544,7 @@ html.js .hero__scroll{opacity:0;animation:heroIn .85s ease 1.1s forwards}
 .footer__about{color:var(--muted);font-size:14.5px;max-width:40ch;line-height:1.65}
 .footer h4{font-family:'Oswald',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink);margin-bottom:18px;font-weight:500}
 .footer__links{display:grid;gap:11px}
-.footer__links a{color:var(--muted);font-size:14.5px;transition:var(--t-s)}
+.footer__links a{color:var(--muted);font-size:14.5px;transition:var(--t-s);display:inline-block;padding:8px 0;margin:-4px 0}
 .footer__links a:hover{color:var(--red);padding-left:4px}
 .footer__contact{display:grid;gap:14px}
 .footer__contact a,.footer__contact span{display:flex;align-items:center;gap:11px;color:var(--ink-2);font-size:14.5px}

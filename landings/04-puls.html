@@ -170,7 +170,7 @@
   }
   .logo-mark svg{width:22px;height:22px}
   .nav-links{display:flex;align-items:center;gap:32px}
-  .nav-links a{font-size:15px;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav-links a{font-size:15px;font-weight:500;color:var(--muted);transition:color .2s;white-space:nowrap}
   .nav-links a:hover{color:var(--text)}
   .nav-actions{display:flex;align-items:center;gap:20px}
   .nav-phone{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;transition:color .2s}
@@ -461,13 +461,16 @@
   .footer-about .logo{margin-bottom:18px}
   .footer-about p{max-width:280px}
   .socials{display:flex;gap:12px;margin-top:8px}
-  .socials a{
+  .socials a,.socials span{
     width:42px;height:42px;border-radius:12px;border:1px solid var(--line-2);
     display:grid;place-items:center;margin:0;transition:.25s;
   }
   .socials a:hover{background:var(--lime);border-color:var(--lime)}
   .socials a:hover svg{color:#0B0B0F}
   .socials svg{width:20px;height:20px;color:var(--muted);transition:color .25s}
+  .footer-legal{border-top:1px solid var(--line);padding-top:26px;margin-bottom:26px;display:grid;gap:12px}
+  .footer-legal p{font-size:13px;line-height:1.6;color:var(--muted);max-width:860px}
+  .footer-legal strong{color:var(--text);font-weight:600}
   .footer-bottom{
     border-top:1px solid var(--line);padding-top:28px;
     display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
@@ -498,28 +501,41 @@
     transform:translateY(-12px);opacity:0;pointer-events:none;transition:.3s;
   }
   .mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:auto}
+  header.scrolled .mobile-nav{top:64px}
   .mobile-nav a{padding:14px 12px;font-size:17px;font-weight:600;border-radius:10px}
   .mobile-nav a:hover{background:var(--bg-3)}
   .mobile-nav .mn-cta{margin-top:10px}
   .mobile-nav .mn-cta .btn{width:100%}
 
   /* Responsive */
+  @media (max-width:1150px){
+    .nav-links{gap:18px}
+    .nav-phone{display:none}
+  }
   @media (max-width:1024px){
     section{padding:80px 0}
     .features-grid,.steps-grid,.stats-grid{grid-template-columns:repeat(2,1fr)}
     .hero-grid{gap:40px}
     .cta-box{padding:48px}
   }
-  @media (max-width:768px){
-    .nav-links,.nav-phone{display:none}
+  @media (max-width:900px){
+    .nav-links{display:none}
     .burger{display:flex}
     .mobile-nav{display:flex}
+  }
+  @media (max-width:768px){
     .hero-grid{grid-template-columns:1fr}
     .hero-visual{max-width:440px;margin:0 auto;width:100%}
     .services-grid,.reviews-grid,.pricing-grid{grid-template-columns:1fr}
     .cta-box{grid-template-columns:1fr;padding:40px 28px}
     .footer-grid{grid-template-columns:1fr 1fr}
     .plan.featured{transform:none}
+    /* удобные тап-таргеты в футере (>=40px) */
+    .footer-col a{padding:8px 0;margin-bottom:2px}
+    .footer-bottom a{display:inline-block;padding:10px 2px;margin:-6px 0}
+  }
+  @media (max-width:520px){
+    .nav-actions .btn{display:none}
   }
   @media (max-width:480px){
     section{padding:64px 0}
@@ -531,7 +547,6 @@
     .hero-badge{left:8px}
     .cta-box{padding:32px 20px}
     .form{padding:24px 20px}
-    .nav-actions .btn{padding:12px 20px;font-size:14px}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -1115,10 +1130,10 @@
         </a>
         <p>Фитнес и EMS-студия в центре Москвы. Умные тренировки, личное сопровождение и результат, который видно.</p>
         <div class="socials">
-          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L5.1 13l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5L20.6 2.9c.9-.3 1.7.2 1.3 1.4Z"/></svg></a>
-          <a href="#" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 16.5c-5 0-8.2-3.5-8.3-9.3h2.5c.1 4.3 2 6.1 3.5 6.5V7.2h2.4v3.6c1.5-.2 3-1.8 3.6-3.6h2.4c-.4 2.2-2 3.8-3.1 4.5 1.1.5 2.9 1.9 3.6 4.8h-2.6c-.5-1.7-1.9-3-3.9-3.2v3.2h-.1Z"/></svg></a>
-          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C16.7 4 12 4 12 4s-4.7 0-7.8.2c-.5.1-1.4.1-2.3 1C1.2 5.9 1 7.5 1 7.5S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.6 1 1.9.2 7.5.2 7.5.2s4.7 0 7.8-.2c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8ZM9.8 15.1V8.9l6 3.1-6 3.1Z"/></svg></a>
-          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-1.4-.4-3.4-1.5-4.9-3.6-.6-.8-1.1-1.7-1.3-2.6-.1-.5 0-1 .3-1.4.2-.3.5-.5.8-.5h.5c.2 0 .3.1.5.4l.7 1.6c.1.2.1.4 0 .5l-.4.7c-.1.1-.1.3 0 .4.4.7 1 1.3 1.7 1.7.1.1.3.1.4 0l.7-.6c.2-.1.4-.1.5-.1l1.6.7c.3.1.4.3.4.5 0 .3 0 .6-.1.9Z"/></svg></a>
+          <span title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.5 20c-.3 1.1-.9 1.4-1.9.9l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L5.1 13l-4.9-1.5c-1.1-.3-1.1-1 .2-1.5L20.6 2.9c.9-.3 1.7.2 1.3 1.4Z"/></svg></span>
+          <span title="ВКонтакте"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.8 16.5c-5 0-8.2-3.5-8.3-9.3h2.5c.1 4.3 2 6.1 3.5 6.5V7.2h2.4v3.6c1.5-.2 3-1.8 3.6-3.6h2.4c-.4 2.2-2 3.8-3.1 4.5 1.1.5 2.9 1.9 3.6 4.8h-2.6c-.5-1.7-1.9-3-3.9-3.2v3.2h-.1Z"/></svg></span>
+          <span title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.5s-.2-1.6-.9-2.3c-.9-.9-1.8-.9-2.3-1C16.7 4 12 4 12 4s-4.7 0-7.8.2c-.5.1-1.4.1-2.3 1C1.2 5.9 1 7.5 1 7.5S.8 9.4.8 11.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.6 1 1.9.2 7.5.2 7.5.2s4.7 0 7.8-.2c.5-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8ZM9.8 15.1V8.9l6 3.1-6 3.1Z"/></svg></span>
+          <span title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.6 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-1.4-.4-3.4-1.5-4.9-3.6-.6-.8-1.1-1.7-1.3-2.6-.1-.5 0-1 .3-1.4.2-.3.5-.5.8-.5h.5c.2 0 .3.1.5.4l.7 1.6c.1.2.1.4 0 .5l-.4.7c-.1.1-.1.3 0 .4.4.7 1 1.3 1.7 1.7.1.1.3.1.4 0l.7-.6c.2-.1.4-.1.5-.1l1.6.7c.3.1.4.3.4.5 0 .3 0 .6-.1.9Z"/></svg></span>
         </div>
       </div>
       <div class="footer-col">
@@ -1143,6 +1158,10 @@
         <p>г. Москва, ул. Энергетиков, 14, 2 этаж</p>
         <p>Ежедневно 7:00–23:00</p>
       </div>
+    </div>
+    <div class="footer-legal">
+      <p id="privacy"><strong>Политика конфиденциальности.</strong> Оставляя заявку, вы соглашаетесь на обработку персональных данных — имени и номера телефона — только для связи по вашему запросу. Мы не передаём данные третьим лицам и удаляем их по первому требованию.</p>
+      <p id="offer"><strong>Публичная оферта.</strong> Цены на абонементы и тренировки, указанные на сайте, носят информационный характер и не являются публичной офертой. Точную стоимость и условия подтвердит администратор при записи.</p>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Студия «Пульс». Все права защищены.</span>
