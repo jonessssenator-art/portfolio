@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0b0b0d">
 
-<title>TIME BRAND — оригинальные часы в Астрахани · Casio · Seiko · Tissot · 100 моделей в наличии</title>
-<meta name="description" content="Магазин оригинальных часов TIME BRAND, Астрахань. 100 моделей Casio, Seiko, Tissot, Citizen в наличии с реальными ценами. Примерка перед покупкой, доставка по России, гарантия подлинности.">
+<title>TIME BRAND — оригинальные часы в Астрахани · Casio · Seiko · Tissot · 129 моделей в наличии</title>
+<meta name="description" content="Магазин оригинальных часов TIME BRAND, Астрахань. 129 моделей Casio, Seiko, Tissot, Citizen в наличии с реальными ценами. Примерка перед покупкой, доставка по России, гарантия подлинности.">
 <meta name="keywords" content="часы Астрахань, купить часы, Casio, G-Shock, Seiko, Tissot, PRX, оригинальные часы, Time Brand">
 <meta name="author" content="Time Brand">
 <link rel="canonical" href="https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/">
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="TIME BRAND">
-<meta property="og:title" content="TIME BRAND — оригинальные часы в Астрахани. 100 моделей в наличии">
+<meta property="og:title" content="TIME BRAND — оригинальные часы в Астрахани. 129 моделей в наличии">
 <meta property="og:description" content="Casio, Seiko, Tissot, Citizen с реальными ценами. Примерка перед покупкой, доставка по России.">
 <meta property="og:url" content="https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/">
 <meta property="og:image" content="https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/images/hero.jpg">
@@ -281,8 +281,70 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1!important;transform:none!important;transition:none!important}}
 
 /* toast */
-.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);z-index:130;background:var(--panel2);border:1px solid rgba(201,163,95,.5);color:var(--txt);font-size:14px;padding:13px 22px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:.35s var(--ease-out);max-width:88vw;text-align:center}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);z-index:160;background:var(--panel2);border:1px solid rgba(201,163,95,.5);color:var(--txt);font-size:14px;padding:13px 22px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:.35s var(--ease-out);max-width:88vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ============================================================ ИЗБРАННОЕ */
+.p-badge.hit{border-color:rgba(201,163,95,.6);color:var(--gold-bright)}
+.fav-btn{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(9,9,11,.55);color:#f2efe9;display:grid;place-items:center;transition:.25s;z-index:2;backdrop-filter:blur(4px);padding:0}
+.fav-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
+.fav-btn.on{background:var(--gold-grad);color:#181307;border-color:transparent}
+.fav-btn.on svg{fill:currentColor;stroke:none}
+.fav-pill{position:relative;width:48px;min-height:44px;border:1px solid var(--line);border-radius:var(--r-pill);background:transparent;color:var(--txt);display:grid;place-items:center;transition:.25s;margin-left:auto}
+.nav-links+.fav-pill{margin-left:0}
+.fav-pill:hover{border-color:var(--gold);color:var(--gold-bright)}
+.fav-pill svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8}
+.fav-badge{position:absolute;top:1px;right:-3px;background:var(--gold-grad);color:#181307;font-size:10.5px;font-weight:700;min-width:17px;height:17px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+.fav-badge[hidden]{display:none}
+.sticky-bar .bar-fav{flex:0 0 56px;position:relative;padding:0}
+.sticky-bar .bar-fav svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8}
+
+/* ============================================================ ШТОРКА (товар / избранное) */
+.sheet{position:fixed;inset:0;z-index:150;visibility:hidden}
+.sheet.open{visibility:visible}
+.sheet-back{position:absolute;inset:0;background:rgba(5,5,7,.74);backdrop-filter:blur(6px);opacity:0;transition:opacity .3s}
+.sheet.open .sheet-back{opacity:1}
+.sheet-box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.97);opacity:0;width:min(94vw,900px);max-height:88vh;overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;transition:transform .3s var(--ease-out),opacity .3s}
+.sheet.open .sheet-box{transform:translate(-50%,-50%) scale(1);opacity:1}
+.sheet-close{position:absolute;top:14px;right:14px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(9,9,11,.6);color:var(--txt);display:grid;place-items:center;backdrop-filter:blur(4px)}
+.sheet-close svg{width:18px;height:18px}
+.prod{display:grid;grid-template-columns:1fr 1fr}
+.prod-ph{position:relative;background:#0e0e10;min-height:320px}
+.prod-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.prod-info{padding:clamp(22px,3vw,36px);display:flex;flex-direction:column}
+.prod-info h3{font-family:var(--fd);font-size:clamp(24px,2.6vw,32px);font-weight:600;margin:0 0 4px;line-height:1.1;padding-right:44px}
+.prod-brand{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.prod-price{font-size:26px;font-weight:700;color:var(--gold-bright);margin:4px 0 16px}
+.prod-specs{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:8px}
+.prod-specs li{font-size:13.5px;color:#cfcabf;line-height:1.5;padding-left:16px;position:relative}
+.prod-specs li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.prod-actions{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
+.prod-actions .btn{flex:1 1 auto}
+.prod-tglink{font-size:13px;color:var(--mut);margin-top:14px;display:inline-flex;gap:6px;align-items:center}
+.prod-tglink:hover{color:var(--gold-bright)}
+.prod-tglink svg{width:14px;height:14px}
+.sim{padding:0 clamp(22px,3vw,36px) clamp(22px,3vw,36px)}
+.sim h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin:24px 0 14px;font-weight:600}
+.sim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mini{display:block;cursor:pointer}
+.mini .mph{display:block;aspect-ratio:1/1;overflow:hidden;border-radius:var(--r-sm);background:#0e0e10;border:1px solid var(--line)}
+.mini img{width:100%;height:100%;object-fit:cover}
+.mini .mn{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12.5px;font-weight:600;margin-top:8px;line-height:1.3}
+.mini .mp{display:block;font-size:13px;font-weight:700;color:var(--gold-bright);margin-top:3px}
+.fav-list{padding:clamp(22px,3vw,36px)}
+.fav-list h3{font-family:var(--fd);font-size:28px;margin:0 0 10px;padding-right:44px}
+.fav-row{display:grid;grid-template-columns:64px 1fr auto auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.fav-row img{width:64px;height:64px;object-fit:cover;border-radius:var(--r-sm)}
+.fav-row .n{font-size:14px;font-weight:600;line-height:1.3}
+.fav-row .s{font-size:12px;color:var(--mut);margin-top:2px}
+.fav-row .p{font-size:15px;font-weight:700;color:var(--gold-bright);white-space:nowrap}
+.fav-row button{width:44px;height:44px;border:none;background:none;color:var(--mut);font-size:20px;padding:0}
+.fav-row button:hover{color:var(--txt)}
+.fav-total{display:flex;justify-content:space-between;align-items:center;padding:18px 0 4px;font-size:15px;color:var(--mut)}
+.fav-total b{font-size:19px;color:var(--gold-bright)}
+.fav-cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.fav-cta .btn{flex:1 1 auto}
+.fav-empty{color:var(--mut);font-size:14.5px;padding:16px 0}
 
 /* ============================================================ RESPONSIVE */
 @media (max-width:1020px){
@@ -292,7 +354,12 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 }
 @media (max-width:860px){
   .nav-links{display:none}
-  .burger{display:grid}
+  .burger{display:grid;margin-left:0}
+  .fav-pill{margin-left:auto}
+  .sheet-box{left:0;right:0;top:auto;bottom:0;width:100%;max-height:92vh;border-radius:18px 18px 0 0;transform:translateY(40px)}
+  .sheet.open .sheet-box{transform:none}
+  .prod{grid-template-columns:1fr}
+  .prod-ph{aspect-ratio:1/1;min-height:0}
   .rev-inner{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
   .qr-grid{grid-template-columns:1fr}
@@ -347,6 +414,10 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
       <li><a href="#trust">Гарантии</a></li>
       <li><a href="#faq">Вопросы</a></li>
     </ul>
+    <button class="fav-pill" id="navFav" aria-label="Избранное">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z" stroke-linejoin="round"/></svg>
+      <span class="fav-badge" id="navFavN" hidden>0</span>
+    </button>
     <a class="btn btn-gold btn-sm nav-cta" href="#zayavka" style="margin-left:8px">Оставить заявку</a>
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
@@ -356,7 +427,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Меню">
   <button class="mm-close" id="mmClose" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
-  <a href="#catalog">Каталог — <b>100 моделей</b></a>
+  <a href="#catalog">Каталог — <b>129 моделей</b></a>
   <a href="#podbor">Подбор за 30 секунд</a>
   <a href="#trust">Гарантии</a>
   <a href="#faq">Вопросы</a>
@@ -373,7 +444,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
   <div class="wrap hero-inner">
     <span class="live reveal"><span class="dot"></span><span id="liveLine">Астрахань · отвечаем в течение часа</span></span>
     <h1 class="reveal d1">Часы говорят о вас <em>раньше, чем вы</em></h1>
-    <p class="hero-sub reveal d2">Оригинальные Casio, Seiko, Tissot и Citizen в Астрахани. 100 моделей с реальными ценами прямо на этой странице — выбирайте, примеряйте, платите за то, что подошло.</p>
+    <p class="hero-sub reveal d2">Оригинальные Casio, Seiko, Tissot и Citizen в Астрахани. 129 моделей с реальными ценами прямо на этой странице — выбирайте, примеряйте, платите за то, что подошло.</p>
     <div class="hero-actions reveal d3">
       <a class="btn btn-gold" href="#catalog">Смотреть каталог
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -382,7 +453,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
     </div>
     <div class="hero-trust reveal d3">
       <div class="t"><div class="n" data-count="257" data-suffix=" 000+">257 000+</div><div class="l">подписчиков в Instagram*</div></div>
-      <div class="t"><div class="n" data-count="100" data-suffix="">100</div><div class="l">моделей в каталоге сайта</div></div>
+      <div class="t"><div class="n" data-count="129" data-suffix="">129</div><div class="l">моделей в каталоге сайта</div></div>
       <div class="t"><div class="n"><small>от</small> 2 990 ₽</div><div class="l">реальные цены, без «уточняйте»</div></div>
     </div>
   </div>
@@ -429,7 +500,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
   <div class="cat-head">
     <div>
       <span class="eyebrow reveal">Каталог · всё в наличии</span>
-      <h2 class="sec-title reveal d1">100 моделей с реальными ценами</h2>
+      <h2 class="sec-title reveal d1">129 моделей с реальными ценами</h2>
       <p class="sec-sub reveal d2">Это не витрина «для красоты»: каждая позиция — реальный товар из нашего магазина с реальной ценой. Нашли своё — жмите «Забронировать».</p>
     </div>
   </div>
@@ -453,6 +524,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
         <option value="40000-999999">От 40 тыс. ₽</option>
       </select>
       <select class="sel" id="sortSel" aria-label="Сортировка">
+        <option value="top">Сначала популярные</option>
         <option value="new">Сначала новинки</option>
         <option value="cheap">Сначала дешевле</option>
         <option value="exp">Сначала дороже</option>
@@ -563,6 +635,8 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 
     <form class="lead-form reveal d2" id="leadForm" novalidate>
       <div id="formFields">
+        <!-- ловушка для спам-ботов: люди это поле не видят -->
+        <input type="text" id="fWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <input type="hidden" id="fModel" name="model">
         <div class="model-chip" id="modelChip" hidden>
           <span id="modelChipText"></span>
@@ -661,7 +735,20 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 <!-- ================= STICKY MOBILE BAR ================= -->
 <div class="sticky-bar" id="stickyBar">
   <a class="btn btn-ghost" href="#catalog">Каталог</a>
+  <button class="btn btn-ghost bar-fav" id="barFav" aria-label="Избранное">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z" stroke-linejoin="round"/></svg>
+    <span class="fav-badge" id="barFavN" hidden>0</span>
+  </button>
   <a class="btn btn-gold" href="#zayavka">Оставить заявку</a>
+</div>
+
+<!-- шторка: карточка товара / избранное -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Карточка товара">
+  <div class="sheet-back" id="sheetBack"></div>
+  <div class="sheet-box">
+    <button class="sheet-close" id="sheetClose" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+    <div id="sheetBody"></div>
+  </div>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
@@ -673,6 +760,8 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 var $=function(s){return document.querySelector(s)};
 var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
 var CAT=(window.CATALOG||[]);
+var FAV=[];
+try{FAV=JSON.parse(localStorage.getItem('tbfav')||'[]')}catch(e){}
 
 document.getElementById('year').textContent=new Date().getFullYear();
 
@@ -682,7 +771,7 @@ burger.addEventListener('click',function(){mm.classList.add('open');document.bod
 $('#mmClose').addEventListener('click',closeMenu);
 mm.addEventListener('click',function(e){if(e.target.tagName==='A')closeMenu()});
 function closeMenu(){mm.classList.remove('open');document.body.style.overflow='';burger.setAttribute('aria-expanded','false')}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeMenu();if(typeof closeSheet==='function')closeSheet()}});
 
 /* ---------- reveal (с фолбэком для старых WebView) ---------- */
 if('IntersectionObserver' in window){
@@ -731,7 +820,7 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefe
 }
 
 /* ---------- каталог ---------- */
-var state={brand:'all',price:'all',sort:'new',q:'',shown:12};
+var state={brand:'all',price:'all',sort:'top',q:'',shown:12};
 var grid=$('#catGrid'),PAGE=12;
 var fmt=function(n){return n.toLocaleString('ru-RU')+' ₽'};
 
@@ -752,12 +841,16 @@ function filtered(){
   });
   if(state.sort==='cheap')list.sort(function(a,b){return a.p-b.p});
   else if(state.sort==='exp')list.sort(function(a,b){return b.p-a.p});
-  else list.sort(function(a,b){return b.i-a.i});
+  else if(state.sort==='new')list.sort(function(a,b){return b.i-a.i});
+  else list.sort(function(a,b){return (b.v||0)-(a.v||0)});
   return list;
 }
+var HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z" stroke-linejoin="round"/></svg>';
 function cardHTML(p){
-  return '<article class="p-card">'
-    +'<div class="p-ph"><img src="'+p.img+'" alt="'+esc(p.n)+'" loading="lazy" decoding="async"><span class="p-badge">В наличии</span></div>'
+  return '<article class="p-card" data-id="'+p.i+'">'
+    +'<div class="p-ph"><img src="'+p.img+'" alt="'+esc(p.n)+'" loading="lazy" decoding="async">'
+    +'<span class="p-badge'+(p.hit?' hit':'')+'">'+(p.hit?'Хит продаж':'В наличии')+'</span>'
+    +'<button class="fav-btn'+(favHas(p.i)?' on':'')+'" data-fav="'+p.i+'" aria-label="В избранное" aria-pressed="'+!!favHas(p.i)+'">'+HEART+'</button></div>'
     +'<div class="p-body">'
     +'<div class="p-name">'+esc(p.n)+'</div>'
     +'<div class="p-spec">'+esc(p.s)+'</div>'
@@ -821,13 +914,115 @@ function setModel(v){
 }
 $('#modelClear').addEventListener('click',function(){setModel('')});
 document.addEventListener('click',function(e){
-  var b=e.target.closest('[data-book]');if(!b)return;
-  var p=CAT.find(function(x){return x.i===+b.dataset.book});if(!p)return;
-  setModel(p.n+' — '+fmt(p.p));
-  /* scrollIntoView вместо location.hash: hash не срабатывает повторно */
-  document.getElementById('zayavka').scrollIntoView({behavior:'smooth',block:'start'});
-  toast('Модель добавлена в заявку — осталось оставить контакт');
+  var f=e.target.closest('[data-fav]');
+  if(f){favToggle(+f.dataset.fav);e.preventDefault();return}
+  var b=e.target.closest('[data-book]');
+  if(b){
+    var p=CAT.find(function(x){return x.i===+b.dataset.book});if(!p)return;
+    setModel(p.n+' — '+fmt(p.p));
+    closeSheet();
+    /* scrollIntoView вместо location.hash: hash не срабатывает повторно */
+    document.getElementById('zayavka').scrollIntoView({behavior:'smooth',block:'start'});
+    toast('Модель добавлена в заявку — осталось оставить контакт');
+    return;
+  }
+  var card=e.target.closest('[data-id]');
+  if(card&&!e.target.closest('a[href],button:not(.mini)')){openProduct(+card.dataset.id)}
 });
+
+/* ---------- шторка (карточка товара / избранное) ---------- */
+var sheet=$('#sheet'),sheetBody=$('#sheetBody');
+function openSheet(html,label){
+  sheetBody.innerHTML=html;
+  sheet.setAttribute('aria-label',label);
+  sheet.classList.add('open');document.body.style.overflow='hidden';
+  sheetBody.parentElement.scrollTop=0;
+  if(!(history.state&&history.state.sheet))history.pushState({sheet:1},'');
+}
+function closeSheet(fromPop){
+  if(!sheet.classList.contains('open'))return;
+  sheet.classList.remove('open');document.body.style.overflow='';
+  if(!fromPop&&history.state&&history.state.sheet)history.back();
+}
+$('#sheetClose').addEventListener('click',function(){closeSheet()});
+$('#sheetBack').addEventListener('click',function(){closeSheet()});
+window.addEventListener('popstate',function(){closeSheet(true)});
+
+function similar(p){
+  return CAT.filter(function(x){return x.i!==p.i&&(x.b===p.b||Math.abs(x.p-p.p)<=p.p*0.15)})
+    .sort(function(a,b){return (b.v||0)-(a.v||0)}).slice(0,3);
+}
+function miniHTML(p){
+  return '<span class="mini" data-id="'+p.i+'" role="button" tabindex="0">'
+    +'<span class="mph"><img src="'+p.img+'" alt="'+esc(p.n)+'" loading="lazy"></span>'
+    +'<span class="mn">'+esc(p.n)+'</span><span class="mp">'+fmt(p.p)+'</span></span>';
+}
+function openProduct(id){
+  var p=CAT.find(function(x){return x.i===id});if(!p)return;
+  var sim=similar(p);
+  var html='<div class="prod">'
+    +'<div class="prod-ph"><img src="'+p.img+'" alt="'+esc(p.n)+'">'
+    +'<button class="fav-btn'+(favHas(p.i)?' on':'')+'" data-fav="'+p.i+'" aria-label="В избранное" aria-pressed="'+!!favHas(p.i)+'">'+HEART+'</button>'
+    +(p.hit?'<span class="p-badge hit">Хит продаж</span>':'')
+    +'</div>'
+    +'<div class="prod-info">'
+    +'<div class="prod-brand">'+esc(p.b)+' · '+(p.m==='механика'?'механика':'кварц')+'</div>'
+    +'<h3>'+esc(p.n)+'</h3>'
+    +'<div class="prod-price">'+fmt(p.p)+'</div>'
+    +(p.sp&&p.sp.length?'<ul class="prod-specs">'+p.sp.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')
+    +'<div class="prod-actions"><button class="btn btn-gold" data-book="'+p.i+'">Забронировать</button></div>'
+    +'<a class="prod-tglink" href="'+p.l+'" target="_blank" rel="noopener">Пост об этой модели в канале <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></a>'
+    +'</div></div>'
+    +(sim.length?'<div class="sim"><h4>Похожие модели</h4><div class="sim-grid">'+sim.map(miniHTML).join('')+'</div></div>':'');
+  openSheet(html,'Карточка товара: '+p.n);
+}
+
+/* ---------- избранное ---------- */
+function favHas(i){return (FAV||[]).indexOf(i)>-1}
+function favToggle(i){
+  var ix=FAV.indexOf(i);
+  if(ix>-1)FAV.splice(ix,1);else{FAV.push(i);toast('Добавлено в избранное')}
+  try{localStorage.setItem('tbfav',JSON.stringify(FAV))}catch(e){}
+  $$('[data-fav="'+i+'"]').forEach(function(b){b.classList.toggle('on',favHas(i));b.setAttribute('aria-pressed',favHas(i))});
+  updateFavUI();
+  if(sheet.classList.contains('open')&&sheetBody.querySelector('.fav-list'))renderFavPanel(false);
+}
+function updateFavUI(){
+  ['navFavN','barFavN'].forEach(function(id){
+    var el=document.getElementById(id);
+    el.textContent=FAV.length;el.hidden=!FAV.length;
+  });
+}
+function renderFavPanel(push){
+  var items=FAV.map(function(i){return CAT.find(function(x){return x.i===i})}).filter(Boolean);
+  var html='<div class="fav-list"><h3>Избранное</h3>';
+  if(!items.length){
+    html+='<p class="fav-empty">Пока пусто. Нажимайте сердечко на понравившихся часах — подборка сохранится на этом устройстве.</p></div>';
+  }else{
+    var sum=items.reduce(function(a,p){return a+p.p},0);
+    html+=items.map(function(p){
+      return '<div class="fav-row"><img src="'+p.img+'" alt="" loading="lazy">'
+        +'<span><span class="n" data-id="'+p.i+'" role="button" tabindex="0">'+esc(p.n)+'</span><span class="s">'+esc(p.s)+'</span></span>'
+        +'<span class="p">'+fmt(p.p)+'</span>'
+        +'<button data-fav="'+p.i+'" aria-label="Убрать из избранного">✕</button></div>';
+    }).join('');
+    html+='<div class="fav-total"><span>'+items.length+' шт.</span><span>итого <b>'+fmt(sum)+'</b></span></div>';
+    html+='<div class="fav-cta"><button class="btn btn-gold" id="favSend">Отправить подборку одной заявкой</button></div>';
+    html+='</div>';
+  }
+  if(push===false){sheetBody.innerHTML=html}else{openSheet(html,'Избранное')}
+  var send=$('#favSend');
+  if(send)send.addEventListener('click',function(){
+    var names=items.map(function(p){return p.n+' ('+fmt(p.p)+')'}).join('; ');
+    setModel('Подборка '+items.length+' шт.: '+names);
+    closeSheet();
+    document.getElementById('zayavka').scrollIntoView({behavior:'smooth',block:'start'});
+    toast('Подборка в заявке — осталось оставить контакт');
+  });
+}
+$('#navFav').addEventListener('click',function(){renderFavPanel()});
+$('#barFav').addEventListener('click',function(){renderFavPanel()});
+updateFavUI();
 
 /* ---------- квиз ---------- */
 var QS=[
@@ -890,8 +1085,13 @@ drawQuiz();
 /* ---------- форма заявки ---------- */
 /* Демоверсия: заявка формируется текстом, копируется и открывается чат менеджера.
    Для боевого режима заменить sendLead() на POST к бэкенду или Telegram-боту. */
+/* URL Cloudflare Worker из bot/ИНСТРУКЦИЯ.md; пусто — заявка идёт через личку менеджера */
+var LEAD_ENDPOINT='';
+var sending=false;
 $('#leadForm').addEventListener('submit',function(e){
   e.preventDefault();
+  if(sending)return;
+  if($('#fWebsite').value){$('#formFields').style.display='none';$('#formOk').style.display='block';return}
   var contact=$('#fContact').value.trim();
   if(!contact){toast('Оставьте телефон или ник — иначе не сможем ответить');return}
   var model=$('#fModel').value.trim();
@@ -899,6 +1099,24 @@ $('#leadForm').addEventListener('submit',function(e){
   sendLead(text);
 });
 function sendLead(text){
+  if(LEAD_ENDPOINT){
+    sending=true;
+    var btn=$('#leadForm button[type=submit]');btn.disabled=true;btn.style.opacity='.6';
+    fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text})})
+      .then(function(r){if(!r.ok)throw 0;
+        $('#formFields').style.display='none';$('#formOk').style.display='block';
+        $('#okTitle').textContent='Заявка у менеджера';
+        $('#okHint').textContent='Ответим в течение часа в рабочее время.';
+        $('#okText').style.display='none';
+        $('#okTgBtn').textContent='Написать в Telegram самому';
+      })
+      .catch(function(){sendLeadFallback(text)})
+      .then(function(){sending=false;btn.disabled=false;btn.style.opacity='';});
+    return;
+  }
+  sendLeadFallback(text);
+}
+function sendLeadFallback(text){
   $('#okText').value=text;
   $('#formFields').style.display='none';$('#formOk').style.display='block';
   /* чат открываем синхронно — в setTimeout теряется user-gesture,
@@ -932,7 +1150,7 @@ if(v&&wantVideo){
   "@context":"https://schema.org",
   "@type":"Store",
   "name":"TIME BRAND",
-  "description":"Магазин оригинальных часов в Астрахани: Casio, Seiko, Tissot, Citizen. 100 моделей в наличии, примерка, доставка по России.",
+  "description":"Магазин оригинальных часов в Астрахани: Casio, Seiko, Tissot, Citizen. 129 моделей в наличии, примерка, доставка по России.",
   "url":"https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/",
   "image":"https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/images/hero.jpg",
   "address":{"@type":"PostalAddress","addressLocality":"Астрахань","addressCountry":"RU"},
