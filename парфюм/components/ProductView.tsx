@@ -91,7 +91,7 @@ export default function ProductView({ product }: { product: Product }) {
       <div className="mt-6 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
         {/* галерея: огромное чистое фото, ниже — атмосферный кадр, если есть */}
         <div className="space-y-4 lg:space-y-6">
-          <div className="flex items-center justify-center bg-[#FBF9F5] px-6 py-12 sm:py-16">
+          <div className="flex items-center justify-center bg-stage px-6 py-12 sm:py-16">
             <img
               src={photoSrc(product)}
               alt={`${product.brand} ${product.name} — оригинальный флакон`}

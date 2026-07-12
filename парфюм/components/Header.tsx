@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useStore } from '@/lib/store';
 import { SHOP } from '@/lib/config';
 import { LogoWordmark } from './Logo';
+import ThemeToggle from './ThemeToggle';
 import { BagIcon, HeartIcon, SearchIcon, TelegramIcon } from './icons';
 
 function Badge({ count }: { count: number }) {
@@ -28,8 +29,8 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40">
-      {/* информационная полоса */}
-      <div className="bg-ivory text-noir">
+      {/* информационная полоса: в тёмной теме — приподнятый уголь вместо инверсии */}
+      <div className="bg-ivory text-noir dark:bg-graphite dark:text-smoke">
         <div className="container-m27 flex h-8 items-center justify-center gap-6 text-[11px] tracking-wide sm:justify-between">
           <p className="hidden sm:block">Оригиналы · проверка батч-кода · чек в каждом заказе</p>
           <p>Доставка по России 2–5 дней, бесплатно от {SHOP.freeShippingFrom.toLocaleString('ru-RU')} ₽</p>
@@ -60,6 +61,7 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-1">
+            <ThemeToggle />
             <Link
               href="/catalog/"
               className="p-2.5 text-ivory transition-colors hover:text-gold"

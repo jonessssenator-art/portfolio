@@ -56,7 +56,7 @@ export default function ProductCard({ product }: { product: Product }) {
           aria-label={`${product.brand} ${product.name}`}
         />
 
-        <div className="relative aspect-[3/4] overflow-hidden">
+        <div className="relative aspect-[3/4] overflow-hidden bg-stage">
           <div
             className="absolute inset-0 opacity-70"
             style={{

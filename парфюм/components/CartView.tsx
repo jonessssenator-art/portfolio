@@ -172,7 +172,7 @@ export default function CartView() {
         <div className="space-y-4">
           {items.map(({ product, qty }) => (
             <div key={product.slug} className="flex gap-4 border hairline bg-graphite p-4">
-              <Link href={`/product/${product.slug}/`} className="block h-28 w-20 shrink-0 bg-coal">
+              <Link href={`/product/${product.slug}/`} className="block h-28 w-20 shrink-0 bg-stage">
                 <img
                   src={photoSrc(product)}
                   alt={`${product.brand} ${product.name}`}
@@ -282,7 +282,7 @@ export default function CartView() {
                       name="delivery"
                       checked={delivery === d.id}
                       onChange={() => setDelivery(d.id)}
-                      className="accent-[#A07C33]"
+                      className="accent-gold"
                     />
                     {d.label}
                   </span>
@@ -310,7 +310,7 @@ export default function CartView() {
                     disabled={p.disabled}
                     checked={payment === p.id}
                     onChange={() => setPayment(p.id)}
-                    className="accent-[#A07C33]"
+                    className="accent-gold"
                   />
                   <span>
                     {p.label}

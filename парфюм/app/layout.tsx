@@ -45,14 +45,23 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F6F1E8',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F6F1E8' },
+    { media: '(prefers-color-scheme: dark)', color: '#0B0908' },
+  ],
   width: 'device-width',
   initialScale: 1,
 };
 
+/* ставит .dark на <html> до первой отрисовки — без вспышки светлой темы */
+const themeScript = `(function(){try{var t=localStorage.getItem('theme27');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${display.variable} ${body.variable}`}>
+    <html lang="ru" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <StoreProvider>
           <Header />
