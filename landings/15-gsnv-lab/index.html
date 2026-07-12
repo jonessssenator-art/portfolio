@@ -271,6 +271,10 @@ blockquote::after { content: '»'; color: var(--gold); }
 .brand-card .meta { margin-top: 18px; font-size: 13px; color: var(--text); opacity: 0.8; }
 @media (max-width: 1080px) { .brands-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .brands-grid { grid-template-columns: 1fr; } .brand-card { min-height: auto; } }
+.brands-grid .brand-card:nth-child(1) { transition-delay: 0s; }
+.brands-grid .brand-card:nth-child(2) { transition-delay: .12s; }
+.brands-grid .brand-card:nth-child(3) { transition-delay: .24s; }
+.brands-grid .brand-card:nth-child(4) { transition-delay: .36s; }
 
 /* ===== Услуги ===== */
 .services { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -302,19 +306,24 @@ blockquote::after { content: '»'; color: var(--gold); }
 .addr-group .g-name {
   font-family: var(--display); font-size: 15px; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--gold);
-  margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 14px;
 }
-.addr-group .g-name::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-.addr-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.addr-group .g-name .g-line { flex: 1; height: 1px; background: var(--line); }
+.addr-group .g-name .g-book {
+  font-family: var(--body); font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+  text-transform: none; color: var(--gold); white-space: nowrap;
+  padding: 10px 0; margin: -10px 0; transition: color .25s;
+}
+.addr-group .g-name .g-book:hover { color: var(--gold-bright); }
+.addr-list { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 32px; }
 .addr {
-  border: 1px solid var(--line); border-radius: 14px;
-  padding: 20px 22px;
-  display: flex; flex-direction: column; gap: 6px;
-  transition: border-color .3s, transform .3s, background .3s;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
 }
-.addr:hover { border-color: rgba(212,175,122,0.5); transform: translateY(-3px); background: rgba(212,175,122,0.05); }
-.addr .street { font-weight: 600; font-size: 16px; }
-.addr .phone { font-size: 14px; color: var(--gold-bright); font-variant-numeric: tabular-nums; letter-spacing: 0.03em; display: inline-block; padding: 10px 0; margin: -10px 0; }
+.addr .street { font-weight: 600; font-size: 15px; }
+.addr .phone { font-size: 13.5px; color: var(--gold-bright); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; white-space: nowrap; transition: color .25s; }
+.addr .phone:hover { color: var(--gold); }
 @media (max-width: 960px) { .addr-list { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .addr-list { grid-template-columns: 1fr; } }
 
@@ -426,10 +435,6 @@ footer {
 .hero-steps { font-size: 13.5px; color: var(--muted); margin-bottom: clamp(44px, 7vh, 80px); }
 .hero-steps b { color: var(--gold-bright); font-weight: 600; }
 .services-note { margin-top: 24px; color: var(--muted); font-size: 14px; }
-.addr .addr-act { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 4px; }
-.addr .book { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: var(--gold); white-space: nowrap; display: inline-block; padding: 10px 0; margin: -10px 0; }
-.addr .book:hover { color: var(--gold-bright); }
-.addr .book::after { content: " \2192"; }
 .sticky-book { display: none; }
 @media (max-width: 700px) {
   .sticky-book {
@@ -564,35 +569,35 @@ footer {
       <h2>Найдите <em>свой</em> GSNV-Lab</h2>
     </div>
     <div class="addr-group reveal">
-      <div class="g-name">GSNV-Lab</div>
+      <div class="g-name"><span>GSNV-Lab</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
-        <div class="addr"><span class="street">ул. 28 Армии, 14</span><div class="addr-act"><a class="phone" href="tel:+78512999542">+7 (8512) 999-542</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Тургенева, 1</span><div class="addr-act"><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. 28 Армии, 14</span><a class="phone" href="tel:+78512999542">+7 (8512) 999-542</a></div>
+        <div class="addr"><span class="street">ул. Тургенева, 1</span><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a></div>
       </div>
     </div>
     <div class="addr-group reveal">
-      <div class="g-name">GSNV-Lab Pro</div>
+      <div class="g-name"><span>GSNV-Lab Pro</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
-        <div class="addr"><span class="street">ул. Никольская, 8</span><div class="addr-act"><a class="phone" href="tel:+78512293293">+7 (8512) 293-293</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Никольская, 8</span><a class="phone" href="tel:+78512293293">+7 (8512) 293-293</a></div>
       </div>
     </div>
     <div class="addr-group reveal">
-      <div class="g-name">Barber-Lab</div>
+      <div class="g-name"><span>Barber-Lab</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
-        <div class="addr"><span class="street">ул. Тургенева, 1</span><div class="addr-act"><a class="phone" href="tel:+78512424555">+7 (8512) 424-555</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Космонавтов, 14</span><div class="addr-act"><a class="phone" href="tel:+78512424999">+7 (8512) 424-999</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Фиолетова, 9</span><div class="addr-act"><a class="phone" href="tel:+78512435243">+7 (8512) 435-243</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Яблочкова, 42</span><div class="addr-act"><a class="phone" href="tel:+78512428384">+7 (8512) 428-384</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Б. Хмельницкого, 21</span><div class="addr-act"><a class="phone" href="tel:+78512438384">+7 (8512) 438-384</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Сен-Симона, 48к1</span><div class="addr-act"><a class="phone" href="tel:+78512414424">+7 (8512) 414-424</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Кирова, 92</span><div class="addr-act"><a class="phone" href="tel:+78512410180">+7 (8512) 410-180</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
-        <div class="addr"><span class="street">ул. Белгородская, 1/4</span><div class="addr-act"><a class="phone" href="tel:+78512414222">+7 (8512) 414-222</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Тургенева, 1</span><a class="phone" href="tel:+78512424555">+7 (8512) 424-555</a></div>
+        <div class="addr"><span class="street">ул. Космонавтов, 14</span><a class="phone" href="tel:+78512424999">+7 (8512) 424-999</a></div>
+        <div class="addr"><span class="street">ул. Фиолетова, 9</span><a class="phone" href="tel:+78512435243">+7 (8512) 435-243</a></div>
+        <div class="addr"><span class="street">ул. Яблочкова, 42</span><a class="phone" href="tel:+78512428384">+7 (8512) 428-384</a></div>
+        <div class="addr"><span class="street">ул. Б. Хмельницкого, 21</span><a class="phone" href="tel:+78512438384">+7 (8512) 438-384</a></div>
+        <div class="addr"><span class="street">ул. Сен-Симона, 48к1</span><a class="phone" href="tel:+78512414424">+7 (8512) 414-424</a></div>
+        <div class="addr"><span class="street">ул. Кирова, 92</span><a class="phone" href="tel:+78512410180">+7 (8512) 410-180</a></div>
+        <div class="addr"><span class="street">ул. Белгородская, 1/4</span><a class="phone" href="tel:+78512414222">+7 (8512) 414-222</a></div>
       </div>
     </div>
     <div class="addr-group reveal">
-      <div class="g-name">GSNV-Lab Girls</div>
+      <div class="g-name"><span>GSNV-Lab Girls</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
-        <div class="addr"><span class="street">ул. Тургенева, 1</span><div class="addr-act"><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a><a class="book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться</a></div></div>
+        <div class="addr"><span class="street">ул. Тургенева, 1</span><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a></div>
       </div>
     </div>
   </div>
