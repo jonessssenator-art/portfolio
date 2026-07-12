@@ -4,267 +4,313 @@
 <script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0b0b0d">
 
-<title>TIME BRAND — часы в Астрахани · Casio · Seiko · Tissot · оригинал и гарантия</title>
-<meta name="description" content="TIME BRAND — магазин оригинальных часов в Астрахани. Casio, G-Shock, Edifice, Seiko, Tissot. Оригинал, гарантия, быстрое оформление и доставка по всей России.">
-<meta name="keywords" content="часы Астрахань, купить часы, Casio, G-Shock, Edifice, Seiko, Tissot, оригинальные часы, Time Brand">
+<title>TIME BRAND — оригинальные часы в Астрахани · Casio · Seiko · Tissot · 100 моделей в наличии</title>
+<meta name="description" content="Магазин оригинальных часов TIME BRAND, Астрахань. 100 моделей Casio, Seiko, Tissot, Citizen в наличии с реальными ценами. Примерка перед покупкой, доставка по России, гарантия подлинности.">
+<meta name="keywords" content="часы Астрахань, купить часы, Casio, G-Shock, Seiko, Tissot, PRX, оригинальные часы, Time Brand">
 <meta name="author" content="Time Brand">
 <link rel="canonical" href="https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="TIME BRAND">
-<meta property="og:title" content="TIME BRAND — оригинальные часы в Астрахани">
-<meta property="og:description" content="Casio, G-Shock, Edifice, Seiko, Tissot. Оригинал, гарантия, доставка по России.">
+<meta property="og:title" content="TIME BRAND — оригинальные часы в Астрахани. 100 моделей в наличии">
+<meta property="og:description" content="Casio, Seiko, Tissot, Citizen с реальными ценами. Примерка перед покупкой, доставка по России.">
 <meta property="og:url" content="https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/">
-<meta property="og:image" content="https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/images/tissot-black.jpg">
+<meta property="og:image" content="https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/images/hero.jpg">
 
-<!-- Фото часов — свободная лицензия (Wikimedia Commons), временные плейсхолдеры.
-     Заменить на собственную предметную съёмку магазина перед публикацией. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%23ffffff'/%3E%3Ccircle cx='24' cy='24' r='17' fill='none' stroke='%230c0c0d' stroke-width='1.6'/%3E%3Cpath d='M24 9v3.4' stroke='%230c0c0d' stroke-width='1.8' stroke-linecap='round'/%3E%3Ctext x='24' y='30' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='15' fill='%230c0c0d'%3ETB%3C/text%3E%3C/svg%3E">
+<!-- ДАННЫЕ: каталог (catalog.js) собран из открытого канала t.me/timebrand 12.07.2026.
+     Цены реальные на эту дату — перед запуском сверить с владельцем.
+     Фото секции «Коллекции» — имиджевые (нейрогенерация), фото каталога — реальные из канала.
+     Форма заявки работает через Telegram (@shamil_time_brand). Для приёма заявок на сервер —
+     заменить sendLead() на POST к своему бэкенду/боту. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%230b0b0d'/%3E%3Ccircle cx='24' cy='24' r='17' fill='none' stroke='%23c9a35f' stroke-width='1.6'/%3E%3Cpath d='M24 9v3.4' stroke='%23c9a35f' stroke-width='1.8' stroke-linecap='round'/%3E%3Ctext x='24' y='30' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='15' fill='%23f2efe9'%3ETB%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   TIME BRAND — «Gallery» concept (по DESIGN.md / Gamma)
-   Белый холст · ахроматичный UI · тонкие хайрлайны · без теней
+   TIME BRAND — тёмный премиум. Продаёт, а не украшает.
    ============================================================ */
 :root{
-  --ink:#0c0c0d;
-  --white:#ffffff;
-  --ash:#e9e9ec;
-  --smoke:#6b6b6b;
-  --graphite:#242629;
-  --charcoal:#1d1d1e;
-  --paper:#f6f6f7;
-  --blush:linear-gradient(168.57deg,#ffffff 8%,#fbf0ed 26%,#e0a6b5 80%,#dc94d5 96%);
-
-  --ff:'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --r-img:4px; --r-card:8px; --r-pill:999px; --r-lg:12px;
-  --container:1200px;
+  --bg:#0b0b0d;
+  --panel:#131316;
+  --panel2:#18181c;
+  --line:rgba(255,255,255,.09);
+  --txt:#f2efe9;
+  --mut:#a29e94;
+  --gold:#c9a35f;
+  --gold-bright:#e3c185;
+  --gold-grad:linear-gradient(115deg,#b18c47,#e3c185 55%,#b18c47);
+  --ff:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --fd:'Cormorant Garamond',Georgia,serif;
+  --r:10px; --r-sm:8px; --r-pill:999px;
+  --container:1240px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
 }
-
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--white);color:var(--ink);font-family:var(--ff);font-size:16px;line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--ff);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
-::selection{background:var(--ink);color:var(--white)}
+input,select,textarea{font-family:inherit}
+::selection{background:var(--gold);color:#141210}
 
-.wrap{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
-.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);font-weight:600}
+.wrap{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:clamp(18px,4.5vw,40px)}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52px);line-height:1.05;letter-spacing:.005em;margin:12px 0 0}
+.sec-sub{color:var(--mut);font-size:15.5px;max-width:56ch;margin:14px 0 0}
+.section{padding:clamp(60px,8vw,110px) 0}
 
-/* buttons — single dark fill = primary; ghost = secondary */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:46px;padding:0 26px;border-radius:var(--r-pill);font-size:14px;font-weight:600;letter-spacing:.005em;border:1px solid transparent;transition:.35s var(--ease);white-space:nowrap}
-.btn svg{width:16px;height:16px}
-.btn-fill{background:var(--ink);color:var(--white)}
-.btn-fill:hover{background:#000;transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
-.btn-ghost:hover{background:var(--ink);color:var(--white)}
-.btn-sm{height:40px;padding:0 20px;font-size:13px}
+/* кнопки */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 28px;border-radius:var(--r-pill);font-size:14.5px;font-weight:600;letter-spacing:.01em;border:1px solid transparent;transition:.3s var(--ease);white-space:nowrap}
+.btn svg{width:17px;height:17px;flex:none}
+.btn-gold{background:var(--gold-grad);color:#181307;box-shadow:0 6px 24px rgba(201,163,95,.22)}
+.btn-gold:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--txt);border-color:rgba(255,255,255,.28)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
+.btn-sm{min-height:42px;padding:0 18px;font-size:13.5px}
 .btn-block{width:100%}
 
 /* ============================================================ NAV */
-.nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--ash)}
-.nav-inner{display:flex;align-items:center;gap:28px;height:68px}
-.logo{display:flex;align-items:center;gap:11px;color:var(--ink)}
-.logo .mark{width:34px;height:34px;flex:none;color:var(--ink)}
-.logo .txt{font-size:14px;letter-spacing:.22em;font-weight:600;text-transform:uppercase}
-.nav-search{flex:1;max-width:280px;height:40px;display:flex;align-items:center;gap:9px;padding:0 16px;border:1px solid var(--ash);border-radius:var(--r-pill);color:var(--smoke);transition:border-color .3s;cursor:pointer}
-.nav-search:hover{border-color:#d3d3d8}
-.nav-search svg{width:16px;height:16px;flex:none}
-.nav-search span{font-size:13.5px}
-.nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;margin-left:auto}
-.nav-links a{font-size:14px;color:var(--ink);font-weight:400;transition:color .25s}
-.nav-links a:hover{color:var(--smoke)}
-.nav-cta{margin-left:8px}
-.burger{display:none;margin-left:auto;width:42px;height:42px;border:1px solid var(--ash);border-radius:var(--r-pill);background:transparent;color:var(--ink);place-items:center}
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,11,13,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:26px;height:70px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .mark{width:34px;height:34px;flex:none}
+.logo .txt{font-size:14px;letter-spacing:.24em;font-weight:600;text-transform:uppercase}
+.logo .txt em{font-style:normal;color:var(--gold)}
+.nav-links{display:flex;gap:26px;list-style:none;margin:0 0 0 auto;padding:0}
+.nav-links a{font-size:14px;color:var(--txt);opacity:.85;transition:.25s;padding:10px 2px}
+.nav-links a:hover{opacity:1;color:var(--gold-bright)}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);border-radius:var(--r-pill);background:transparent;color:var(--txt);place-items:center}
 .burger svg{width:20px;height:20px}
-
-.mobile-menu{position:fixed;inset:0;z-index:99;background:var(--white);display:flex;flex-direction:column;justify-content:center;padding:36px;gap:4px;transform:translateY(-100%);transition:transform .5s var(--ease-out);visibility:hidden}
+.mobile-menu{position:fixed;inset:0;z-index:120;background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:38px;gap:2px;transform:translateY(-100%);transition:transform .5s var(--ease-out);visibility:hidden}
 .mobile-menu.open{transform:translateY(0);visibility:visible}
-.mobile-menu a{font-size:32px;font-weight:300;letter-spacing:-.02em;color:var(--ink);padding:14px 0;border-bottom:1px solid var(--ash)}
-.mm-close{position:absolute;top:22px;right:22px;width:42px;height:42px;border:1px solid var(--ash);border-radius:var(--r-pill);background:transparent;display:grid;place-items:center}
+.mobile-menu a{font-family:var(--fd);font-size:34px;font-weight:500;color:var(--txt);padding:15px 0;border-bottom:1px solid var(--line)}
+.mobile-menu a b{color:var(--gold)}
+.mm-close{position:absolute;top:20px;right:20px;width:46px;height:46px;border:1px solid var(--line);border-radius:var(--r-pill);background:transparent;color:var(--txt);display:grid;place-items:center}
 .mm-close svg{width:20px;height:20px}
 
 /* ============================================================ HERO */
-.hero{padding:clamp(48px,7vw,86px) 0 clamp(64px,8vw,104px)}
-.hero-grid{display:grid;grid-template-columns:1fr .92fr;gap:clamp(32px,5vw,64px);align-items:center}
-.hero h1{font-size:clamp(44px,7vw,76px);font-weight:300;line-height:1.03;letter-spacing:-.035em;margin:20px 0 0;color:var(--ink)}
-.hero h1 b{font-weight:600}
-.hero-sub{font-size:clamp(16px,1.5vw,18px);color:var(--smoke);margin:26px 0 0;max-width:46ch;line-height:1.6}
-.hero-actions{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:40px;margin-top:52px;flex-wrap:wrap}
-.hero-stats .s .n{font-size:34px;font-weight:300;letter-spacing:-.02em;line-height:1}
-.hero-stats .s .l{font-size:13px;color:var(--smoke);margin-top:6px}
+.hero{position:relative;min-height:min(92vh,860px);display:flex;align-items:center;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover}
+.hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.93) 0%,rgba(11,11,13,.72) 42%,rgba(11,11,13,.25) 75%,rgba(11,11,13,.45) 100%),linear-gradient(0deg,var(--bg) 0%,transparent 22%)}
+.hero-inner{position:relative;z-index:1;padding:clamp(70px,10vw,120px) 0}
+.hero .live{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--mut);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 16px;background:rgba(19,19,22,.6)}
+.hero .live .dot{width:7px;height:7px;border-radius:50%;background:#59c96a;box-shadow:0 0 10px #59c96a;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.hero h1{font-family:var(--fd);font-weight:600;font-size:clamp(42px,6.6vw,84px);line-height:1.02;letter-spacing:.002em;margin:24px 0 0;max-width:15ch}
+.hero h1 em{font-style:italic;color:var(--gold-bright)}
+.hero-sub{font-size:clamp(16px,1.5vw,18.5px);color:#cfcabf;margin:22px 0 0;max-width:47ch;line-height:1.65}
+.hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero-trust{display:flex;gap:clamp(24px,4vw,48px);margin-top:clamp(36px,5vw,56px);flex-wrap:wrap}
+.hero-trust .t .n{font-size:clamp(26px,2.6vw,34px);font-weight:700;letter-spacing:-.01em;color:var(--txt)}
+.hero-trust .t .n small{font-size:60%;color:var(--gold)}
+.hero-trust .t .l{font-size:13px;color:var(--mut);margin-top:4px}
 
-.hero-feature{position:relative}
-.hero-feature .frame{position:relative;border-radius:var(--r-img);overflow:hidden;aspect-ratio:4/5;background:var(--paper)}
-.hero-feature .frame img{width:100%;height:100%;object-fit:cover}
-.hero-feature .cap{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:16px}
-.hero-feature .cap .t{font-size:20px;font-weight:400}
-.hero-feature .cap .d{font-size:14px;color:var(--smoke);margin-top:3px}
-.hero-feature .cap .price{font-size:18px;font-weight:600;white-space:nowrap}
+/* ============================================================ MARQUEE */
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--panel)}
+.marquee-track{display:flex;gap:64px;width:max-content;animation:mq 30s linear infinite}
+.marquee span{font-size:15px;letter-spacing:.34em;color:var(--mut);font-weight:500;white-space:nowrap}
+.marquee span b{color:var(--gold);font-weight:500}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
 
-/* ============================================================ Section framing */
-.section{padding:clamp(56px,8vw,88px) 0}
-.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap}
-.sec-head .l h2{font-size:clamp(26px,3.4vw,40px);font-weight:400;letter-spacing:-.02em;line-height:1.08;margin:10px 0 0}
-.sec-head .l p{color:var(--smoke);margin:8px 0 0;max-width:44ch;font-size:15px}
-.sec-link{font-size:14px;color:var(--ink);font-weight:600;display:inline-flex;gap:7px;align-items:center;white-space:nowrap;transition:gap .3s}
-.sec-link:hover{gap:12px}
-.sec-link svg{width:15px;height:15px}
+/* ============================================================ COLLECTIONS (имиджевые нейрофото + 3D tilt) */
+.collections{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,24px);margin-top:44px}
+.col-card{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;border:1px solid var(--line);background:var(--panel);transform-style:preserve-3d;transition:transform .5s var(--ease-out);display:block}
+.col-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out)}
+.col-card .shine{position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,236,200,.16),transparent 55%);opacity:0;transition:opacity .4s;pointer-events:none}
+.col-card:hover .shine{opacity:1}
+.col-card:hover img{transform:scale(1.045)}
+.col-card .cap{position:absolute;left:0;right:0;bottom:0;padding:20px;background:linear-gradient(0deg,rgba(9,9,11,.92),transparent);display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.col-card .cap .t{font-family:var(--fd);font-size:24px;font-weight:600;line-height:1.1}
+.col-card .cap .d{font-size:12.5px;color:var(--mut);margin-top:4px}
+.col-card .cap .arr{width:40px;height:40px;flex:none;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:grid;place-items:center;transition:.3s}
+.col-card .cap .arr svg{width:15px;height:15px}
+.col-card:hover .cap .arr{background:var(--gold);border-color:var(--gold);color:#181307}
 
-/* featured 2-col grid */
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px)}
-.f-card .ph{position:relative;border-radius:var(--r-img);overflow:hidden;aspect-ratio:16/11;background:var(--paper)}
-.f-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
-.f-card:hover .ph img{transform:scale(1.03)}
-.f-card .meta{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-top:18px}
-.f-card .meta h3{font-size:20px;font-weight:400;margin:0}
-.f-card .meta .desc{font-size:14px;color:var(--smoke);margin:6px 0 0;max-width:34ch}
-.f-card .meta .right{text-align:right;flex:none}
-.f-card .meta .price{font-size:18px;font-weight:600}
-.f-card .meta .price small{display:block;font-size:12px;font-weight:400;color:var(--smoke)}
-.f-card .meta .view{margin-top:12px}
+/* ============================================================ CATALOG */
+.cat-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.cat-tools{display:flex;flex-direction:column;gap:14px;margin-top:34px}
+.cat-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.chip{padding:11px 20px;border-radius:var(--r-pill);border:1px solid var(--line);background:transparent;color:var(--txt);font-size:14px;font-weight:500;transition:.25s;min-height:44px}
+.chip:hover{border-color:rgba(255,255,255,.35)}
+.chip.on{background:var(--gold-grad);color:#181307;border-color:transparent;font-weight:600}
+.cat-search{flex:1;min-width:210px;display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:var(--r-pill);padding:0 18px;height:48px;background:var(--panel)}
+.cat-search svg{width:17px;height:17px;color:var(--mut);flex:none}
+.cat-search input{flex:1;background:none;border:none;outline:none;color:var(--txt);font-size:14.5px;min-width:0}
+.cat-search input::placeholder{color:var(--mut)}
+.sel{height:48px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--panel);color:var(--txt);font-size:14px;padding:0 38px 0 18px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a29e94' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.cat-count{font-size:13.5px;color:var(--mut);margin-left:auto}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.8vw,22px);margin-top:30px}
+.p-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .35s var(--ease),border-color .35s}
+.p-card:hover{transform:translateY(-4px);border-color:rgba(201,163,95,.45)}
+.p-ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0e0e10}
+.p-ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
+.p-card:hover .p-ph img{transform:scale(1.05)}
+.p-badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:600;letter-spacing:.06em;padding:5px 11px;border-radius:var(--r-pill);background:rgba(9,9,11,.72);border:1px solid rgba(89,201,106,.4);color:#7ad786;backdrop-filter:blur(4px)}
+.p-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.p-name{font-size:14.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
+.p-spec{font-size:12.5px;color:var(--mut);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.p-price{font-size:19px;font-weight:700;color:var(--gold-bright);margin-top:auto;padding-top:8px}
+.p-actions{display:flex;gap:8px;margin-top:10px}
+.p-book{flex:1;min-height:44px;border-radius:var(--r-sm);border:none;background:var(--gold-grad);color:#181307;font-size:13.5px;font-weight:600;transition:.25s}
+.p-book:hover{filter:brightness(1.07)}
+.p-tg{width:44px;min-height:44px;flex:none;border-radius:var(--r-sm);border:1px solid var(--line);display:grid;place-items:center;color:var(--mut);transition:.25s}
+.p-tg:hover{color:var(--gold-bright);border-color:var(--gold)}
+.p-tg svg{width:17px;height:17px}
+.cat-more{display:flex;justify-content:center;margin-top:36px}
+.cat-empty{padding:60px 20px;text-align:center;color:var(--mut);display:none}
+.price-note{font-size:12.5px;color:var(--mut);margin-top:22px;text-align:center}
 
-/* numbered list */
-.numbered{border-top:1px solid var(--ash)}
-.num-item{display:grid;grid-template-columns:auto 76px 1fr auto;align-items:center;gap:22px;padding:20px 0;border-bottom:1px solid var(--ash);transition:padding-left .35s var(--ease)}
-.num-item:hover{padding-left:8px}
-.num-item .ord{font-size:24px;font-weight:300;color:var(--smoke);width:26px}
-.num-item .thumb{width:76px;height:76px;border-radius:var(--r-img);overflow:hidden;background:var(--paper)}
-.num-item .thumb img{width:100%;height:100%;object-fit:cover}
-.num-item .info{display:flex;flex-direction:column;gap:2px;min-width:0}
-.num-item .info .t{font-size:18px;font-weight:400}
-.num-item .info .m{font-size:14px;color:var(--smoke);margin-top:3px}
-.num-item .price{font-size:16px;font-weight:600;white-space:nowrap}
+/* ============================================================ QUIZ */
+.quiz-sec{background:radial-gradient(1200px 600px at 70% -10%,rgba(201,163,95,.12),transparent 60%),var(--panel)}
+.quiz-box{border:1px solid rgba(201,163,95,.3);border-radius:16px;padding:clamp(26px,4.5vw,56px);background:rgba(11,11,13,.55);margin-top:40px}
+.quiz-steps{display:flex;gap:8px;margin-bottom:26px}
+.quiz-steps .st{height:3px;flex:1;background:var(--line);border-radius:2px;overflow:hidden}
+.quiz-steps .st i{display:block;height:100%;width:0;background:var(--gold-grad);transition:width .4s var(--ease)}
+.quiz-steps .st.done i{width:100%}
+.quiz-q{font-family:var(--fd);font-size:clamp(24px,3vw,34px);font-weight:600;margin:0 0 22px}
+.quiz-opts{display:flex;gap:12px;flex-wrap:wrap}
+.q-opt{padding:15px 26px;border-radius:var(--r-pill);border:1px solid var(--line);background:transparent;color:var(--txt);font-size:15px;font-weight:500;transition:.25s;min-height:52px}
+.q-opt:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-1px)}
+.quiz-back{margin-top:22px;background:none;border:none;color:var(--mut);font-size:13.5px;display:none;padding:8px 0}
+.quiz-back:hover{color:var(--txt)}
+.quiz-res{display:none}
+.quiz-res .qr-title{font-family:var(--fd);font-size:clamp(24px,3vw,34px);font-weight:600;margin:0}
+.quiz-res .qr-sub{color:var(--mut);font-size:14.5px;margin:8px 0 24px}
+.qr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.qr-actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
 
-/* ============================================================ 3D configurator (blush section) */
-.config-sec{background:var(--blush);border-radius:var(--r-lg);overflow:hidden}
-.config{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(28px,5vw,64px)}
-.config-stage{position:relative;aspect-ratio:1/1;border-radius:var(--r-card);overflow:hidden}
-.config-stage canvas{width:100%!important;height:100%!important;display:block;cursor:grab;touch-action:none;position:relative;z-index:1}
-.config-stage canvas:active{cursor:grabbing}
-.config-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%;z-index:0;transition:opacity .35s;mix-blend-mode:multiply}
-.config-stage.ready .config-fallback{opacity:0}
-.config-copy .eyebrow{color:var(--charcoal)}
-.config-copy h2{font-size:clamp(26px,3.4vw,40px);font-weight:300;letter-spacing:-.02em;line-height:1.08;margin:12px 0 0;color:var(--ink)}
-.config-copy p{color:var(--charcoal);margin:16px 0 0;font-size:15px;max-width:40ch}
-.strap-controls{display:flex;align-items:center;gap:12px;margin-top:28px;flex-wrap:wrap}
-.sc-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--charcoal);opacity:.7}
-.swatch{width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.15);cursor:pointer;transition:.3s var(--ease);padding:0}
-.swatch:hover{transform:scale(1.08)}
-.swatch.active{outline:2px solid var(--ink);outline-offset:2px;border-color:var(--white)}
-.config-hint{display:inline-flex;align-items:center;gap:7px;margin-top:22px;font-size:13px;color:var(--charcoal);opacity:.7}
-.config-hint svg{width:15px;height:15px}
+/* ============================================================ LIFESTYLE + STEPS */
+.life{position:relative;overflow:hidden;border-block:1px solid var(--line)}
+.life img{width:100%;height:clamp(340px,48vw,560px);object-fit:cover}
+.life::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.88) 0%,rgba(11,11,13,.45) 55%,transparent 100%)}
+.life .life-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;z-index:1}
+.life h2{font-family:var(--fd);font-size:clamp(28px,4vw,48px);font-weight:600;line-height:1.08;margin:14px 0 0;max-width:17ch}
+.life p{color:#cfcabf;max-width:42ch;margin:16px 0 0;font-size:15.5px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,36px);margin-top:44px}
+.step{border-top:2px solid var(--gold);padding-top:20px}
+.step .num{font-family:var(--fd);font-size:44px;font-weight:600;color:var(--gold);line-height:1}
+.step h3{font-size:17.5px;font-weight:600;margin:14px 0 8px}
+.step p{font-size:14.5px;color:var(--mut);margin:0;line-height:1.6}
 
-/* ============================================================ brands */
-.brands{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--ash);border-bottom:1px solid var(--ash)}
-.brand{display:grid;place-items:center;padding:32px 12px;font-size:clamp(13px,1.4vw,16px);font-weight:400;letter-spacing:.08em;color:var(--smoke);transition:color .3s}
-.brand:hover{color:var(--ink)}
+/* ============================================================ TRUST */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,28px);margin-top:44px}
+.tr-item{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px}
+.tr-item .ic{width:30px;height:30px;color:var(--gold);margin-bottom:18px}
+.tr-item .ic svg{width:30px;height:30px}
+.tr-item h3{font-size:16.5px;font-weight:600;margin:0 0 8px}
+.tr-item p{font-size:14px;color:var(--mut);margin:0;line-height:1.6}
 
-/* ============================================================ why / trust */
-.why{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,48px)}
-.why-item{border-top:1px solid var(--ash);padding-top:20px}
-.why-item .ic{width:26px;height:26px;color:var(--graphite);margin-bottom:16px}
-.why-item .ic svg{width:26px;height:26px}
-.why-item h3{font-size:18px;font-weight:600;margin:0 0 8px}
-.why-item p{font-size:14.5px;color:var(--smoke);margin:0;line-height:1.6}
+/* ============================================================ REVIEWS */
+.rev-band{background:var(--panel);border-block:1px solid var(--line)}
+.rev-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(28px,5vw,72px);align-items:center}
+.rev-inner h2{font-family:var(--fd);font-size:clamp(28px,3.8vw,46px);font-weight:600;line-height:1.08;margin:12px 0 0}
+.rev-inner p{color:var(--mut);font-size:15.5px;margin:16px 0 0;max-width:48ch}
+.rev-card{border:1px solid var(--line);border-radius:14px;padding:30px;background:var(--bg);text-align:center}
+.rev-card .big{font-family:var(--fd);font-size:52px;font-weight:600;color:var(--gold-bright);line-height:1}
+.rev-card .cap{color:var(--mut);font-size:14px;margin:8px 0 22px}
 
-/* ============================================================ reviews */
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,32px)}
-.review{border-top:1px solid var(--ash);padding-top:22px}
-.review .stars{display:inline-flex;gap:2px;color:var(--ink);margin-bottom:16px}
-.review .stars svg{width:14px;height:14px}
-.review blockquote{margin:0;font-size:19px;font-weight:300;line-height:1.45;letter-spacing:-.01em;color:var(--ink)}
-.review .who{display:flex;align-items:center;gap:12px;margin-top:22px}
-.review .av{width:38px;height:38px;border-radius:50%;background:var(--paper);border:1px solid var(--ash);display:grid;place-items:center;font-size:14px;font-weight:600;color:var(--ink)}
-.review .who .nm{font-size:14px;font-weight:600}
-.review .who .rl{font-size:12.5px;color:var(--smoke)}
+/* ============================================================ FORM */
+.form-sec{background:radial-gradient(900px 500px at 20% 0%,rgba(201,163,95,.1),transparent 60%)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);margin-top:14px;align-items:start}
+.form-info h2{font-family:var(--fd);font-size:clamp(30px,4.2vw,50px);font-weight:600;line-height:1.05;margin:12px 0 0}
+.form-info p{color:var(--mut);font-size:15.5px;margin:18px 0 0;max-width:44ch}
+.form-info ul{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px}
+.form-info li{display:flex;gap:12px;font-size:14.5px;color:#cfcabf}
+.form-info li svg{width:19px;height:19px;color:var(--gold);flex:none;margin-top:2px}
+.lead-form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(24px,3.4vw,40px)}
+.lead-form .fld{margin-bottom:16px}
+.lead-form label{display:block;font-size:13px;color:var(--mut);margin-bottom:8px;font-weight:500}
+.lead-form input,.lead-form textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);color:var(--txt);font-size:15px;padding:14px 16px;outline:none;transition:border-color .25s}
+.lead-form input:focus,.lead-form textarea:focus{border-color:var(--gold)}
+.lead-form textarea{resize:vertical;min-height:74px}
+.form-note{font-size:12.5px;color:var(--mut);margin-top:14px;line-height:1.55;text-align:center}
+.form-ok{display:none;text-align:center;padding:30px 6px}
+.form-ok .ic{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:rgba(89,201,106,.12);border:1px solid rgba(89,201,106,.4);display:grid;place-items:center;color:#7ad786}
+.form-ok .ic svg{width:26px;height:26px}
+.form-ok h3{font-family:var(--fd);font-size:26px;margin:0 0 10px}
+.form-ok p{color:var(--mut);font-size:14.5px;margin:0 0 20px}
+.form-ok textarea{width:100%;background:var(--bg);border:1px dashed var(--line);border-radius:var(--r-sm);color:var(--mut);font-size:13px;padding:12px;min-height:110px;margin-bottom:18px}
 
-/* ============================================================ CTA */
-.cta{text-align:left;padding:clamp(56px,9vw,116px) 0}
-.cta .eyebrow{color:var(--smoke)}
-.cta h2{font-size:clamp(34px,6vw,72px);font-weight:300;letter-spacing:-.035em;line-height:1.02;margin:16px 0 0;max-width:18ch}
-.cta p{color:var(--smoke);max-width:44ch;margin:20px 0 0;font-size:15px}
-.cta-actions{display:flex;gap:12px;justify-content:flex-start;margin-top:36px;flex-wrap:wrap}
+/* ============================================================ FAQ */
+.faq{max-width:860px;margin:44px auto 0}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:22px 4px;font-size:16.5px;font-weight:600;min-height:52px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .x{width:30px;height:30px;flex:none;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--gold);transition:transform .3s;font-weight:400;font-size:18px}
+.faq details[open] summary .x{transform:rotate(45deg)}
+.faq .a{padding:0 4px 24px;color:var(--mut);font-size:14.5px;line-height:1.7;max-width:70ch}
 
-/* ============================================================ footer */
-footer{border-top:1px solid var(--ash);padding:56px 0 40px}
-.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
-.foot-about p{color:var(--smoke);font-size:14px;max-width:32ch;margin:18px 0 0;line-height:1.65}
-.foot-grid h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--smoke);margin:0 0 18px;font-weight:600}
-.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.foot-grid a{color:var(--ink);font-size:14px;transition:color .25s}
-.foot-grid a:hover{color:var(--smoke)}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:26px;border-top:1px solid var(--ash);flex-wrap:wrap}
-.foot-bottom p{color:var(--smoke);font-size:13px;margin:0}
-.socials{display:flex;gap:8px}
-.socials a{width:40px;height:40px;border:1px solid var(--ash);border-radius:var(--r-pill);display:grid;place-items:center;color:var(--ink);transition:.3s}
-.socials a:hover{background:var(--ink);color:var(--white)}
-.socials svg{width:17px;height:17px}
+/* ============================================================ FOOTER */
+footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--panel)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.foot-about p{color:var(--mut);font-size:14px;max-width:34ch;margin:18px 0 0;line-height:1.65}
+.foot-grid h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 18px;font-weight:600}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot-grid a{color:var(--txt);font-size:14px;transition:color .25s;display:inline-block;padding:7px 0}
+.foot-grid a:hover{color:var(--gold-bright)}
+.foot-grid li span{display:inline-block;padding:7px 0;font-size:14px;color:var(--mut)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:26px;border-top:1px solid var(--line);flex-wrap:wrap}
+.foot-bottom p{color:var(--mut);font-size:12.5px;margin:0;max-width:72ch}
 
-/* ============================================================ concierge */
-.concierge-btn{position:fixed;bottom:24px;right:24px;z-index:90;display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 20px;border-radius:var(--r-pill);border:1px solid var(--ash);background:var(--white);color:var(--ink);font-size:13.5px;font-weight:600}
-.concierge-btn:hover{border-color:var(--ink)}
-.concierge-btn svg{width:18px;height:18px}
-.concierge-panel{position:fixed;bottom:24px;right:24px;z-index:91;width:min(92vw,360px);background:var(--white);border:1px solid var(--ash);border-radius:var(--r-card);overflow:hidden;transform:translateY(16px) scale(.98);opacity:0;visibility:hidden;transform-origin:bottom right;transition:.35s var(--ease-out)}
-.concierge-panel.open{transform:none;opacity:1;visibility:visible}
-.cp-head{display:flex;align-items:center;gap:11px;padding:16px 18px;border-bottom:1px solid var(--ash)}
-.cp-head .nm{font-weight:600;font-size:14.5px}
-.cp-head .st{font-size:12px;color:var(--smoke)}
-.cp-close{margin-left:auto;background:none;border:none;color:var(--smoke);font-size:17px}
-.cp-body{padding:18px;display:flex;flex-direction:column;gap:12px}
-.msg{background:var(--paper);border-radius:var(--r-card);padding:13px 15px;font-size:14px;color:var(--ink)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{padding:8px 13px;border-radius:var(--r-pill);border:1px solid var(--ash);background:transparent;color:var(--ink);font-size:13px;transition:.25s}
-.chip:hover{border-color:var(--ink)}
-.cp-foot{padding:14px 18px;border-top:1px solid var(--ash)}
+/* ============================================================ STICKY MOBILE BAR */
+.sticky-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:110;background:rgba(11,11,13,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px clamp(14px,4vw,20px) calc(10px + env(safe-area-inset-bottom));gap:10px}
+.sticky-bar .btn{flex:1;min-height:48px;padding:0 10px}
 
 /* reveal */
-.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
 .js .reveal.in{opacity:1;transform:none}
-.js .reveal.d1{transition-delay:.06s}.js .reveal.d2{transition-delay:.12s}.js .reveal.d3{transition-delay:.18s}
+.js .reveal.d1{transition-delay:.07s}.js .reveal.d2{transition-delay:.14s}.js .reveal.d3{transition-delay:.21s}
 @media (prefers-reduced-motion:reduce){.js .reveal{opacity:1!important;transform:none!important;transition:none!important}}
 
-/* responsive */
-@media (max-width:900px){
-  .nav-search{display:none}
-  .nav-links{display:none}
-  .nav-cta{display:none}
-  .burger{display:grid}
-  .hero-grid{grid-template-columns:1fr;gap:36px}
-  .hero-feature{order:-1}
-  .feature-grid{grid-template-columns:1fr}
-  .config{grid-template-columns:1fr;gap:28px}
-  .config-copy{order:-1}
-  .why{grid-template-columns:1fr}
-  .reviews{grid-template-columns:1fr}
-  .brands{grid-template-columns:repeat(3,1fr)}
-  .foot-grid{grid-template-columns:1fr 1fr}
+/* toast */
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);z-index:130;background:var(--panel2);border:1px solid rgba(201,163,95,.5);color:var(--txt);font-size:14px;padding:13px 22px;border-radius:var(--r-pill);opacity:0;pointer-events:none;transition:.35s var(--ease-out);max-width:88vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ============================================================ RESPONSIVE */
+@media (max-width:1020px){
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .collections{grid-template-columns:repeat(2,1fr)}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media (max-width:520px){
-  /* тап-таргеты ≥40px: ссылки футера */
-  .foot-grid a{display:inline-block;padding:9px 0;margin:-5px 0}
-  .foot-grid ul{gap:5px}
-  .hero-stats{gap:26px}
-  .hero-actions{width:100%}
-  .hero-actions .btn{flex:1 1 150px}
-  .num-item{grid-template-columns:auto 60px 1fr;gap:16px}
-  .num-item .price{grid-column:2/4;text-align:left;margin-top:-6px;padding-left:76px}
-  .num-item .thumb{width:60px;height:60px}
-  .brands{grid-template-columns:repeat(2,1fr)}
+@media (max-width:860px){
+  .nav-links{display:none}
+  .burger{display:grid}
+  .rev-inner{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .qr-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;gap:26px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .sticky-bar{display:flex}
+  body{padding-bottom:74px}
+  .life img{min-height:420px}
+}
+@media (max-width:560px){
+  .cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .p-body{padding:11px 11px 13px}
+  .p-name{font-size:13px}
+  .p-spec{display:none}
+  .p-price{font-size:16.5px}
+  .p-tg{display:none}
+  .collections{grid-template-columns:1fr 1fr;gap:10px}
+  .col-card .cap{padding:13px}
+  .col-card .cap .t{font-size:18px}
+  .col-card .cap .arr{display:none}
+  .hero-actions .btn{flex:1 1 46%}
   .foot-grid{grid-template-columns:1fr}
-  .concierge-btn span{display:none}
+  .quiz-opts{flex-direction:column}
+  .q-opt{width:100%}
+  .qr-actions .btn{flex:1 1 100%}
 }
 </style>
 </head>
@@ -275,23 +321,19 @@ footer{border-top:1px solid var(--ash);padding:56px 0 40px}
   <div class="wrap nav-inner">
     <a href="#top" class="logo" aria-label="Time Brand">
       <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <circle cx="24" cy="24" r="21.4" stroke="currentColor" stroke-width="1.3"/>
-        <path d="M24 5v4.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <text x="24" y="30.5" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="1" fill="currentColor">TB</text>
+        <circle cx="24" cy="24" r="21.4" stroke="#c9a35f" stroke-width="1.3"/>
+        <path d="M24 5v4.2" stroke="#c9a35f" stroke-width="1.5" stroke-linecap="round"/>
+        <text x="24" y="30.5" text-anchor="middle" font-family="Georgia,serif" font-weight="600" font-size="17" fill="#f2efe9">TB</text>
       </svg>
-      <span class="txt">Time&nbsp;Brand</span>
-    </a>
-    <a class="nav-search" href="https://t.me/timebrand" target="_blank" rel="noopener" aria-label="Поиск по каталогу в Telegram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3" stroke-linecap="round"/></svg>
-      <span>Поиск по каталогу…</span>
+      <span class="txt">Time&nbsp;<em>Brand</em></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#collection">Коллекция</a></li>
-      <li><a href="#configurator">Конфигуратор</a></li>
-      <li><a href="#brands">Бренды</a></li>
+      <li><a href="#catalog">Каталог</a></li>
+      <li><a href="#podbor">Подбор за 30 секунд</a></li>
       <li><a href="#trust">Гарантии</a></li>
+      <li><a href="#faq">Вопросы</a></li>
     </ul>
-    <a class="btn btn-fill btn-sm nav-cta" href="https://t.me/timebrand" target="_blank" rel="noopener">Каталог в Telegram</a>
+    <a class="btn btn-gold btn-sm" href="#zayavka" style="margin-left:8px">Оставить заявку</a>
     <button class="burger" id="burger" aria-label="Меню">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
     </button>
@@ -300,207 +342,272 @@ footer{border-top:1px solid var(--ash);padding:56px 0 40px}
 
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Меню">
   <button class="mm-close" id="mmClose" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
-  <a href="#collection">Коллекция</a>
-  <a href="#configurator">Конфигуратор</a>
-  <a href="#brands">Бренды</a>
+  <a href="#catalog">Каталог — <b>100 моделей</b></a>
+  <a href="#podbor">Подбор за 30 секунд</a>
   <a href="#trust">Гарантии</a>
+  <a href="#faq">Вопросы</a>
+  <a href="#zayavka"><b>Оставить заявку</b></a>
 </div>
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow reveal">Астрахань · Оригинальные часы</span>
-      <h1 class="reveal d1">Время, которое<br><b>подчёркивает</b> вас</h1>
-      <p class="hero-sub reveal d2">Оригинальные часы Casio, Seiko и Tissot в наличии в Астрахани. Гарантия, быстрое оформление и доставка по всей России.</p>
-      <div class="hero-actions reveal d3">
-        <a class="btn btn-fill" href="#collection">Смотреть коллекцию
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a class="btn btn-ghost" href="#configurator">Собрать свои часы</a>
-      </div>
-      <div class="hero-stats reveal d3">
-        <div class="s"><div class="n">257K</div><div class="l">подписчиков</div></div>
-        <div class="s"><div class="n">500+</div><div class="l">моделей в наличии</div></div>
-        <div class="s"><div class="n">4.9</div><div class="l">рейтинг клиентов</div></div>
-      </div>
+  <div class="hero-media" aria-hidden="true">
+    <!-- нейровидео: медленный облёт часов; постер = кадр из него -->
+    <video autoplay muted loop playsinline poster="images/hero.jpg" id="heroVideo">
+      <source src="images/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="wrap hero-inner">
+    <span class="live reveal"><span class="dot"></span><span id="liveLine">Астрахань · отвечаем в течение часа</span></span>
+    <h1 class="reveal d1">Оригинальные часы —<br>без наценки <em>бутиков</em></h1>
+    <p class="hero-sub reveal d2">Casio, Seiko, Tissot и Citizen в наличии в Астрахани. 100 моделей с реальными ценами прямо на этой странице. Примерите до покупки — платите только за то, что подошло.</p>
+    <div class="hero-actions reveal d3">
+      <a class="btn btn-gold" href="#catalog">Смотреть каталог
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#podbor">Подбор за 30 секунд</a>
     </div>
-    <div class="hero-feature reveal d2">
-      <div class="frame"><img src="images/tissot-black.jpg" alt="Часы Tissot 1853 — хронограф" fetchpriority="high"></div>
-      <div class="cap">
-        <div><div class="t">Tissot 1853</div><div class="d">Швейцарский хронограф</div></div>
-        <div class="price">от 27 900 ₽</div>
-      </div>
+    <div class="hero-trust reveal d3">
+      <div class="t"><div class="n" data-count="257" data-suffix=" 000+">0</div><div class="l">подписчиков в Instagram*</div></div>
+      <div class="t"><div class="n" data-count="100" data-suffix="">0</div><div class="l">моделей в каталоге сайта</div></div>
+      <div class="t"><div class="n"><small>от</small> 2 990 ₽</div><div class="l">реальные цены, без «уточняйте»</div></div>
     </div>
   </div>
 </header>
 
-<!-- ================= FEATURED COLLECTION ================= -->
-<section class="section wrap" id="collection">
-  <div class="sec-head">
-    <div class="l">
-      <span class="eyebrow reveal">Коллекция</span>
-      <h2 class="reveal d1">Избранные модели</h2>
-      <p class="reveal d1">Оригинал с гарантией и полным комплектом. Проверяйте при получении.</p>
-    </div>
-    <a class="sec-link reveal d2" href="https://t.me/timebrand" target="_blank" rel="noopener">Весь каталог
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+<!-- ================= MARQUEE ================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="mqTrack">
+    <span>CASIO <b>·</b> G-SHOCK <b>·</b> EDIFICE <b>·</b> SEIKO <b>·</b> PRESAGE <b>·</b> PROSPEX <b>·</b> TISSOT <b>·</b> PRX <b>·</b> CITIZEN <b>·</b> FOSSIL <b>·</b>&nbsp;</span>
   </div>
-  <div class="feature-grid">
-    <a class="f-card reveal" href="https://t.me/timebrand" target="_blank" rel="noopener">
-      <div class="ph"><img src="images/gshock-ga100.jpg" alt="Casio G-Shock GA-100" loading="lazy" decoding="async"></div>
-      <div class="meta">
-        <div><h3>Casio G-Shock</h3><div class="desc">Ударопрочные часы для города и спорта. Легендарная серия GA.</div></div>
-        <div class="right"><div class="price">от 9 900 ₽</div><span class="btn btn-ghost btn-sm view">Смотреть</span></div>
-      </div>
+</div>
+
+<!-- ================= COLLECTIONS ================= -->
+<section class="section wrap" id="collections">
+  <span class="eyebrow reveal">Коллекции</span>
+  <h2 class="sec-title reveal d1">С чего начать выбор</h2>
+  <p class="sec-sub reveal d2">Четыре направления, которые покупают чаще всего. Нажмите — покажем подходящие модели из наличия.</p>
+  <div class="collections">
+    <a class="col-card tilt reveal" href="#catalog" data-preset="gshock">
+      <img src="images/ai/ai-gshock-metal.jpg" alt="G-Shock — ударопрочные часы" loading="lazy" decoding="async">
+      <span class="shine"></span>
+      <div class="cap"><div><div class="t">G-Shock</div><div class="d">Неубиваемая классика</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </a>
-    <a class="f-card reveal d1" href="https://t.me/timebrand" target="_blank" rel="noopener">
-      <div class="ph"><img src="images/seiko-diver.jpg" alt="Seiko Automatic Diver" loading="lazy" decoding="async"></div>
-      <div class="meta">
-        <div><h3>Seiko Automatic</h3><div class="desc">Японская механика с автоподзаводом. Дайверская классика 200 м.</div></div>
-        <div class="right"><div class="price">от 18 900 ₽</div><span class="btn btn-ghost btn-sm view">Смотреть</span></div>
-      </div>
+    <a class="col-card tilt reveal d1" href="#catalog" data-preset="tissot">
+      <img src="images/ai/ai-prx.jpg" alt="Tissot — швейцарские часы" loading="lazy" decoding="async">
+      <span class="shine"></span>
+      <div class="cap"><div><div class="t">Tissot</div><div class="d">Swiss Made без переплат</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    </a>
+    <a class="col-card tilt reveal d2" href="#catalog" data-preset="seiko">
+      <img src="images/ai/ai-seiko5.jpg" alt="Seiko — японская механика" loading="lazy" decoding="async">
+      <span class="shine"></span>
+      <div class="cap"><div><div class="t">Seiko</div><div class="d">Живая японская механика</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    </a>
+    <a class="col-card tilt reveal d3" href="#catalog" data-preset="budget">
+      <img src="images/ai/ai-casio-gold.jpg" alt="Casio Vintage — ретро" loading="lazy" decoding="async">
+      <span class="shine"></span>
+      <div class="cap"><div><div class="t">До 10 000 ₽</div><div class="d">Стильный вход в тему</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </a>
   </div>
 </section>
 
-<!-- ================= NUMBERED POPULAR ================= -->
-<section class="section wrap">
-  <div class="sec-head">
-    <div class="l">
-      <span class="eyebrow reveal">Популярное</span>
-      <h2 class="reveal d1">Выбор покупателей</h2>
+<!-- ================= CATALOG ================= -->
+<section class="section wrap" id="catalog">
+  <div class="cat-head">
+    <div>
+      <span class="eyebrow reveal">Каталог · всё в наличии</span>
+      <h2 class="sec-title reveal d1">100 моделей с реальными ценами</h2>
+      <p class="sec-sub reveal d2">Это не витрина «для красоты»: каждая позиция — реальный товар из нашего магазина с реальной ценой. Нашли своё — жмите «Забронировать».</p>
     </div>
   </div>
-  <div class="numbered">
-    <a class="num-item reveal" href="https://t.me/timebrand" target="_blank" rel="noopener">
-      <span class="ord">1</span>
-      <span class="thumb"><img src="images/edifice-thumb.jpg" alt="Casio Edifice" loading="lazy" decoding="async" width="76" height="76"></span>
-      <span class="info"><span class="t">Casio Edifice</span><span class="m">Хронограф · нержавеющая сталь · сапфир</span></span>
-      <span class="price">от 14 900 ₽</span>
-    </a>
-    <a class="num-item reveal d1" href="https://t.me/timebrand" target="_blank" rel="noopener">
-      <span class="ord">2</span>
-      <span class="thumb"><img src="images/casio-f91w-thumb.jpg" alt="Casio F-91W" loading="lazy" decoding="async" width="76" height="76"></span>
-      <span class="info"><span class="t">Casio F-91W</span><span class="m">Ретро-классика · цифровые · культовая модель</span></span>
-      <span class="price">от 3 900 ₽</span>
-    </a>
-    <a class="num-item reveal d2" href="https://t.me/timebrand" target="_blank" rel="noopener">
-      <span class="ord">3</span>
-      <span class="thumb"><img src="images/tissot-black-thumb.jpg" alt="Tissot 1853" loading="lazy" decoding="async" width="76" height="76"></span>
-      <span class="info"><span class="t">Tissot 1853</span><span class="m">Швейцарский хронограф · тахиметр · Swiss Made</span></span>
-      <span class="price">от 27 900 ₽</span>
-    </a>
+
+  <div class="cat-tools reveal">
+    <div class="cat-row" id="brandChips" role="group" aria-label="Фильтр по бренду">
+      <button class="chip on" data-brand="all">Все</button>
+      <button class="chip" data-brand="Casio">Casio</button>
+      <button class="chip" data-brand="Tissot">Tissot</button>
+      <button class="chip" data-brand="Seiko">Seiko</button>
+      <button class="chip" data-brand="Citizen">Citizen</button>
+      <button class="chip" data-brand="Fossil">Fossil</button>
+    </div>
+    <div class="cat-row">
+      <label class="cat-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3" stroke-linecap="round"/></svg><input type="search" id="catSearch" placeholder="Поиск: PRX, G-Shock, механика…" aria-label="Поиск по каталогу"></label>
+      <select class="sel" id="priceSel" aria-label="Бюджет">
+        <option value="all">Любой бюджет</option>
+        <option value="0-10000">До 10 000 ₽</option>
+        <option value="10000-25000">10–25 тыс. ₽</option>
+        <option value="25000-40000">25–40 тыс. ₽</option>
+        <option value="40000-999999">От 40 тыс. ₽</option>
+      </select>
+      <select class="sel" id="sortSel" aria-label="Сортировка">
+        <option value="new">Сначала новинки</option>
+        <option value="cheap">Сначала дешевле</option>
+        <option value="exp">Сначала дороже</option>
+      </select>
+      <span class="cat-count" id="catCount"></span>
+    </div>
   </div>
+
+  <div class="cat-grid" id="catGrid"></div>
+  <div class="cat-empty" id="catEmpty">Ничего не нашлось. Сбросьте фильтры — или напишите нам, найдём под заказ.</div>
+  <div class="cat-more"><button class="btn btn-ghost" id="moreBtn">Показать ещё</button></div>
+  <p class="price-note">Цены актуальны на 12.07.2026 по данным канала магазина и подтверждаются при бронировании.</p>
 </section>
 
-<!-- ================= 3D CONFIGURATOR ================= -->
-<section class="section wrap" id="configurator">
-  <div class="config-sec reveal">
-    <div class="config">
-      <div class="config-stage" id="watch3d">
-        <canvas id="watchCanvas"></canvas>
-        <img class="config-fallback" src="images/tissot-black.jpg" alt="3D-модель часов Time Brand" loading="lazy" decoding="async">
+<!-- ================= QUIZ ================= -->
+<section class="section quiz-sec" id="podbor">
+  <div class="wrap">
+    <span class="eyebrow reveal">Изюминка сайта</span>
+    <h2 class="sec-title reveal d1">Подбор часов за 30 секунд</h2>
+    <p class="sec-sub reveal d2">Три вопроса — и мы покажем модели из реального наличия под ваш бюджет. Быстрее, чем листать сто карточек.</p>
+
+    <div class="quiz-box reveal">
+      <div class="quiz-steps" aria-hidden="true"><div class="st" id="qs1"><i></i></div><div class="st" id="qs2"><i></i></div><div class="st" id="qs3"><i></i></div></div>
+
+      <div id="quizFlow">
+        <p class="quiz-q" id="quizQ">Для кого выбираете часы?</p>
+        <div class="quiz-opts" id="quizOpts"></div>
+        <button class="quiz-back" id="quizBack">← Назад</button>
       </div>
-      <div class="config-copy">
-        <span class="eyebrow">Конфигуратор</span>
-        <h2>Соберите свои часы</h2>
-        <p>Вращайте модель мышью или пальцем и выбирайте ремешок — так вы увидите часы со всех сторон ещё до покупки.</p>
-        <div class="strap-controls" id="strapControls" role="group" aria-label="Выбор ремешка">
-          <span class="sc-label">Ремешок</span>
-          <button class="swatch active" data-strap="steel" style="background:linear-gradient(135deg,#e2e5ea,#9aa0a8)" title="Сталь" aria-label="Стальной браслет"></button>
-          <button class="swatch" data-strap="black" style="background:linear-gradient(135deg,#33353a,#141518)" title="Чёрный каучук" aria-label="Чёрный каучук"></button>
-          <button class="swatch" data-strap="brown" style="background:linear-gradient(135deg,#8a5a30,#4a2c15)" title="Коричневая кожа" aria-label="Коричневая кожа"></button>
-          <button class="swatch" data-strap="green" style="background:linear-gradient(135deg,#4c6a38,#243719)" title="Зелёный NATO" aria-label="Зелёный NATO"></button>
+
+      <div class="quiz-res" id="quizRes">
+        <p class="qr-title">Вот что мы подобрали</p>
+        <p class="qr-sub" id="qrSub"></p>
+        <div class="qr-grid" id="qrGrid"></div>
+        <div class="qr-actions">
+          <button class="btn btn-ghost" id="qrAll">Показать все подходящие в каталоге</button>
+          <button class="btn btn-ghost" id="qrRestart">Пройти заново</button>
         </div>
-        <div class="config-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4l4 4-4 4M9 20l-4-4 4-4M19 8H9a4 4 0 0 0-4 4M5 16h10" stroke-linecap="round" stroke-linejoin="round"/></svg> Потяните, чтобы вращать</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= BRANDS ================= -->
-<section class="section wrap" id="brands">
-  <div class="sec-head">
-    <div class="l">
-      <span class="eyebrow reveal">Бренды</span>
-      <h2 class="reveal d1">Только оригинал</h2>
-    </div>
-    <p class="sec-head-note reveal d2" style="color:var(--smoke);max-width:34ch;font-size:15px;margin:0">Casio, Seiko и Tissot — с гарантией и полным комплектом документов.</p>
+<!-- ================= LIFESTYLE ================= -->
+<div class="life reveal">
+  <img src="images/ai/ai-lifestyle.jpg" alt="Часы Time Brand на запястье" loading="lazy" decoding="async">
+  <div class="wrap life-copy">
+    <span class="eyebrow">Примерка перед покупкой</span>
+    <h2>Сначала на руку. Потом — деньги</h2>
+    <p>В Астрахани примерите вживую, по России — проверите комплект и часы при получении. Не подошли — не платите.</p>
   </div>
-  <div class="brands reveal">
-    <div class="brand">CASIO</div>
-    <div class="brand">G-SHOCK</div>
-    <div class="brand">EDIFICE</div>
-    <div class="brand">SEIKO</div>
-    <div class="brand">TISSOT</div>
-    <div class="brand">PRO TREK</div>
+</div>
+
+<!-- ================= HOW TO BUY ================= -->
+<section class="section wrap">
+  <span class="eyebrow reveal">Как купить</span>
+  <h2 class="sec-title reveal d1">Три шага до часов на руке</h2>
+  <div class="steps">
+    <div class="step reveal"><div class="num">01</div><h3>Оставьте заявку</h3><p>Выберите модель в каталоге или пройдите подбор — и отправьте заявку. Это ни к чему не обязывает.</p></div>
+    <div class="step reveal d1"><div class="num">02</div><h3>Подтвердим наличие и цену</h3><p>Ответим в течение часа в рабочее время: наличие, финальная цена, сроки. Без спама и навязывания.</p></div>
+    <div class="step reveal d2"><div class="num">03</div><h3>Примерка и оплата</h3><p>В Астрахани — примерка в магазине. В другие города — доставка с проверкой при получении.</p></div>
   </div>
 </section>
 
-<!-- ================= WHY / TRUST ================= -->
-<section class="section wrap" id="trust">
-  <div class="sec-head">
-    <div class="l">
-      <span class="eyebrow reveal">Почему Time Brand</span>
-      <h2 class="reveal d1">Спокойная покупка без сомнений</h2>
-    </div>
-  </div>
-  <div class="why">
-    <div class="why-item reveal">
-      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3>Гарантия подлинности</h3><p>Каждая модель — оригинал с гарантийным талоном и полным комплектом.</p>
-    </div>
-    <div class="why-item reveal d1">
-      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3" stroke-linecap="round"/></svg></div>
-      <h3>Проверка при получении</h3><p>Осматривайте часы перед оплатой — забираете только то, что устраивает.</p>
-    </div>
-    <div class="why-item reveal d2">
-      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke-linejoin="round"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
-      <h3>Доставка по России</h3><p>Бережная отправка в любой город. По Астрахани — самовывоз и курьер.</p>
-    </div>
+<!-- ================= TRUST ================= -->
+<section class="section wrap" id="trust" style="padding-top:0">
+  <span class="eyebrow reveal">Почему нам доверяют</span>
+  <h2 class="sec-title reveal d1">Только оригинал — и это легко проверить</h2>
+  <div class="trust-grid">
+    <div class="tr-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Гарантия подлинности</h3><p>Каждая модель — оригинал с документами и полным комплектом. Проверяйте серийные номера.</p></div>
+    <div class="tr-item reveal d1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Ответ в течение часа</h3><p>Пишете — отвечаем. В рабочее время реакция на заявку занимает меньше часа.</p></div>
+    <div class="tr-item reveal d2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke-linejoin="round"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><h3>Доставка по России</h3><p>Отправляем в любой город с проверкой при получении. По Астрахани — самовывоз и примерка.</p></div>
+    <div class="tr-item reveal d3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 8a5 5 0 1 0-10 0c0 5-2 6-2 6h14s-2-1-2-6z" stroke-linejoin="round"/><path d="M10 18a2 2 0 0 0 4 0" stroke-linecap="round"/></svg></div><h3>Нас легко проверить</h3><p>Открытый канал с товарами, публичные отзывы и 257 000+ подписчиков в Instagram*.</p></div>
   </div>
 </section>
 
 <!-- ================= REVIEWS ================= -->
-<section class="section wrap">
-  <div class="sec-head">
-    <div class="l">
+<section class="section rev-band">
+  <div class="wrap rev-inner">
+    <div>
       <span class="eyebrow reveal">Отзывы</span>
-      <h2 class="reveal d1">Что говорят покупатели</h2>
+      <h2 class="reveal d1">Не верьте нам на слово — читайте покупателей</h2>
+      <p class="reveal d2">Мы не публикуем «отзывы» на сайте, которые нельзя проверить. Все настоящие отзывы — в открытом Telegram-канале: с фото, датами и профилями реальных людей.</p>
     </div>
-    <p style="color:var(--smoke);max-width:30ch;font-size:15px;margin:0" class="reveal d2">Средняя оценка 4.9 из 5 по отзывам покупателей.</p>
-  </div>
-  <div class="reviews">
-    <div class="review reveal">
-      <div class="stars" aria-label="5 из 5"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg></div>
-      <blockquote>«Взял G-Shock — оригинал, документы на месте. Оформили быстро, забрал в тот же день.»</blockquote>
-      <div class="who"><div class="av">А</div><div><div class="nm">Артём К.</div><div class="rl">Астрахань</div></div></div>
-    </div>
-    <div class="review reveal d1">
-      <div class="stars" aria-label="5 из 5"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg></div>
-      <blockquote>«Помогли выбрать Tissot в подарок мужу, ничего не навязывали. Доставка — всё чётко.»</blockquote>
-      <div class="who"><div class="av">М</div><div><div class="nm">Марина В.</div><div class="rl">Волгоград</div></div></div>
-    </div>
-    <div class="review reveal d2">
-      <div class="stars" aria-label="5 из 5"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg></div>
-      <blockquote>«Seiko на автоподзаводе — мечта. Приятная консультация и аккуратный сайт, доверие сразу.»</blockquote>
-      <div class="who"><div class="av">Р</div><div><div class="nm">Руслан Д.</div><div class="rl">Астрахань</div></div></div>
+    <div class="rev-card reveal d2">
+      <div class="big">Проверьте нас</div>
+      <div class="cap">отзывы с фото, датами и профилями покупателей</div>
+      <a class="btn btn-gold btn-block" href="https://t.me/otzivi_time_brand" target="_blank" rel="noopener">Открыть канал отзывов
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ================= CTA ================= -->
-<section class="cta wrap">
-  <span class="eyebrow reveal">Персональный подбор</span>
-  <h2 class="reveal d1">Подберём часы под ваш стиль</h2>
-  <p class="reveal d1">Напишите в Telegram — задайте бюджет и повод, а мы предложим несколько идеальных вариантов.</p>
-  <div class="cta-actions reveal d2">
-    <a class="btn btn-fill" href="https://t.me/timebrand" target="_blank" rel="noopener">Написать в Telegram
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg>
-    </a>
-    <a class="btn btn-ghost" href="https://instagram.com/time__brand__" target="_blank" rel="noopener">Мы в Instagram</a>
+<!-- ================= LEAD FORM ================= -->
+<section class="section form-sec" id="zayavka">
+  <div class="wrap form-grid">
+    <div class="form-info">
+      <span class="eyebrow reveal">Заявка</span>
+      <h2 class="reveal d1">Забронируйте часы — это бесплатно</h2>
+      <p class="reveal d2">Оставьте контакт — подтвердим наличие, финальную цену и договоримся о примерке или доставке. Никаких предоплат на этом шаге.</p>
+      <ul class="reveal d3">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Ответ в течение часа в рабочее время</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Бронь ни к чему не обязывает</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Поможем выбрать, если сомневаетесь</li>
+      </ul>
+    </div>
+
+    <form class="lead-form reveal d2" id="leadForm" novalidate>
+      <div id="formFields">
+        <div class="fld">
+          <label for="fName">Ваше имя</label>
+          <input type="text" id="fName" name="name" autocomplete="name" placeholder="Как к вам обращаться" required>
+        </div>
+        <div class="fld">
+          <label for="fContact">Телефон или ник в Telegram</label>
+          <input type="text" id="fContact" name="contact" autocomplete="tel" placeholder="+7 ··· ··· ·· ·· или @nickname" required>
+        </div>
+        <div class="fld">
+          <label for="fModel">Модель</label>
+          <input type="text" id="fModel" name="model" placeholder="Заполнится сама, если выбрать в каталоге">
+        </div>
+        <div class="fld">
+          <label for="fMsg">Комментарий (необязательно)</label>
+          <textarea id="fMsg" name="msg" placeholder="Бюджет, повод, пожелания…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold btn-block">Отправить заявку
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg>
+        </button>
+        <p class="form-note">Заявка уходит менеджеру магазина в Telegram. Нажимая кнопку, вы соглашаетесь на обработку данных для связи по заявке.</p>
+      </div>
+
+      <div class="form-ok" id="formOk">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Заявка готова и скопирована</h3>
+        <p>Сейчас откроется чат менеджера — просто вставьте текст и отправьте. Если чат не открылся, скопируйте вручную:</p>
+        <textarea readonly id="okText"></textarea>
+        <a class="btn btn-gold btn-block" href="https://t.me/shamil_time_brand" target="_blank" rel="noopener" id="okTgBtn">Открыть чат менеджера</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section wrap" id="faq" style="padding-top:0">
+  <span class="eyebrow reveal">Вопросы</span>
+  <h2 class="sec-title reveal d1">Отвечаем до того, как вы спросили</h2>
+  <div class="faq reveal d2">
+    <details>
+      <summary>Это точно оригиналы? <span class="x">+</span></summary>
+      <div class="a">Да. Работаем только с оригинальными Casio, Seiko, Tissot, Citizen и Fossil: полный комплект, документы, серийные номера. При получении можете проверить всё до оплаты — в этом и смысл.</div>
+    </details>
+    <details>
+      <summary>Почему дешевле, чем в торговых центрах? <span class="x">+</span></summary>
+      <div class="a">У нас нет аренды бутика в ТЦ и наценки «за витрину». Продаём через Telegram и Instagram напрямую, поэтому те же модели стоят заметно дешевле.</div>
+    </details>
+    <details>
+      <summary>Как проходит доставка в другой город? <span class="x">+</span></summary>
+      <div class="a">Отправляем проверенными службами с описью и возможностью осмотра при получении. Сначала осматриваете часы и комплект — потом оплачиваете.</div>
+    </details>
+    <details>
+      <summary>Можно примерить перед покупкой? <span class="x">+</span></summary>
+      <div class="a">В Астрахани — да, приходите и меряйте. Напишите заранее, чтобы нужная модель ждала вас в магазине.</div>
+    </details>
+    <details>
+      <summary>Нужной модели нет в каталоге. Привезёте? <span class="x">+</span></summary>
+      <div class="a">Скорее всего, да. Оставьте заявку с названием модели — найдём и привезём под заказ, сроки и цену скажем сразу.</div>
+    </details>
   </div>
 </section>
 
@@ -511,227 +618,286 @@ footer{border-top:1px solid var(--ash);padding:56px 0 40px}
       <div class="foot-about">
         <a href="#top" class="logo">
           <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <circle cx="24" cy="24" r="21.4" stroke="currentColor" stroke-width="1.3"/>
-            <path d="M24 5v4.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            <text x="24" y="30.5" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="18" letter-spacing="1" fill="currentColor">TB</text>
+            <circle cx="24" cy="24" r="21.4" stroke="#c9a35f" stroke-width="1.3"/>
+            <path d="M24 5v4.2" stroke="#c9a35f" stroke-width="1.5" stroke-linecap="round"/>
+            <text x="24" y="30.5" text-anchor="middle" font-family="Georgia,serif" font-weight="600" font-size="17" fill="#f2efe9">TB</text>
           </svg>
-          <span class="txt">Time&nbsp;Brand</span>
+          <span class="txt">Time&nbsp;<em>Brand</em></span>
         </a>
-        <p>Магазин оригинальных часов в Астрахани. Casio, Seiko, Tissot — оригинал, гарантия и быстрое оформление.</p>
+        <p>Магазин оригинальных часов в Астрахани. Casio, Seiko, Tissot, Citizen — реальные цены, примерка, доставка по России.</p>
       </div>
       <div>
-        <h4>Каталог</h4>
-        <ul><li><a href="#collection">G-Shock</a></li><li><a href="#collection">Seiko</a></li><li><a href="#collection">Tissot</a></li><li><a href="#configurator">Конфигуратор</a></li></ul>
-      </div>
-      <div>
-        <h4>Покупателю</h4>
-        <ul><li><a href="#trust">Доставка и оплата</a></li><li><a href="#trust">Гарантия</a></li><li><a href="#trust">Проверка</a></li></ul>
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#catalog">Каталог</a></li>
+          <li><a href="#podbor">Подбор за 30 секунд</a></li>
+          <li><a href="#trust">Гарантии</a></li>
+          <li><a href="#zayavka">Оставить заявку</a></li>
+        </ul>
       </div>
       <div>
         <h4>Контакты</h4>
         <ul>
-          <li><a href="https://t.me/timebrand" target="_blank" rel="noopener">Telegram: @timebrand</a></li>
+          <li><a href="https://t.me/shamil_time_brand" target="_blank" rel="noopener">Менеджер: @shamil_time_brand</a></li>
+          <li><a href="https://t.me/timebrand" target="_blank" rel="noopener">Канал: @timebrand</a></li>
+          <li><a href="https://t.me/otzivi_time_brand" target="_blank" rel="noopener">Отзывы в Telegram</a></li>
           <li><a href="https://instagram.com/time__brand__" target="_blank" rel="noopener">Instagram: @time__brand__</a></li>
           <li><span>г. Астрахань</span></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <p>© <span id="year">2026</span> Time Brand. Все права защищены.</p>
-      <div class="socials">
-        <a href="https://instagram.com/time__brand__" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://t.me/timebrand" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></a>
-      </div>
+      <p>© <span id="year">2026</span> Time Brand. *Instagram принадлежит Meta, признанной экстремистской организацией и запрещённой в РФ. Цены на сайте актуальны на 12.07.2026 и подтверждаются при бронировании.</p>
     </div>
   </div>
 </footer>
 
-<!-- ================= CONCIERGE ================= -->
-<button class="concierge-btn" id="conciergeBtn" aria-label="Помощник по подбору">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3a5 5 0 0 1 5 5v1a5 5 0 0 1-10 0V8a5 5 0 0 1 5-5z"/><path d="M5 20c0-3 3-5 7-5s7 2 7 5" stroke-linecap="round"/></svg>
-  <span>Подобрать часы</span>
-</button>
-
-<div class="concierge-panel" id="conciergePanel" role="dialog" aria-modal="true" aria-label="Помощник по подбору">
-  <div class="cp-head">
-    <div><div class="nm">Помощник Time Brand</div><div class="st">Отвечаем в рабочее время</div></div>
-    <button class="cp-close" id="cpClose" aria-label="Закрыть">✕</button>
-  </div>
-  <div class="cp-body">
-    <div class="msg">Здравствуйте. Помогу подобрать часы под ваш стиль и бюджет. С чего начнём?</div>
-    <div class="chips">
-      <button class="chip" data-soon>Часы под костюм</button>
-      <button class="chip" data-soon>До 20 000 ₽</button>
-      <button class="chip" data-soon>В подарок</button>
-      <button class="chip" data-soon>G-Shock</button>
-    </div>
-  </div>
-  <div class="cp-foot">
-    <a class="btn btn-fill btn-block btn-sm" href="https://t.me/timebrand" target="_blank" rel="noopener">Написать в Telegram</a>
-  </div>
+<!-- ================= STICKY MOBILE BAR ================= -->
+<div class="sticky-bar" id="stickyBar">
+  <a class="btn btn-ghost" href="#catalog">Каталог</a>
+  <a class="btn btn-gold" href="#zayavka">Оставить заявку</a>
 </div>
 
+<div class="toast" id="toast" role="status"></div>
+
+<script src="catalog.js"></script>
 <script>
 (function(){
-  document.getElementById('year').textContent = new Date().getFullYear();
+'use strict';
+var $=function(s){return document.querySelector(s)};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var CAT=(window.CATALOG||[]);
 
-  var mm = document.getElementById('mobileMenu');
-  document.getElementById('burger').addEventListener('click', function(){ mm.classList.add('open'); document.body.style.overflow='hidden'; });
-  document.getElementById('mmClose').addEventListener('click', function(){ mm.classList.remove('open'); document.body.style.overflow=''; });
-  mm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ mm.classList.remove('open'); document.body.style.overflow=''; }); });
+document.getElementById('year').textContent=new Date().getFullYear();
 
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+/* ---------- мобильное меню ---------- */
+var mm=$('#mobileMenu');
+$('#burger').addEventListener('click',function(){mm.classList.add('open');document.body.style.overflow='hidden'});
+$('#mmClose').addEventListener('click',closeMenu);
+mm.addEventListener('click',function(e){if(e.target.tagName==='A')closeMenu()});
+function closeMenu(){mm.classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
 
-  var panel = document.getElementById('conciergePanel');
-  document.getElementById('conciergeBtn').addEventListener('click', function(){ panel.classList.toggle('open'); });
-  document.getElementById('cpClose').addEventListener('click', function(){ panel.classList.remove('open'); });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ mm.classList.remove('open'); document.body.style.overflow=''; panel.classList.remove('open'); } });
-  document.querySelectorAll('[data-soon]').forEach(function(b){
-    b.addEventListener('click', function(){ var t=b.textContent; b.textContent='Скоро'; b.disabled=true; setTimeout(function(){ b.textContent=t; b.disabled=false; },1300); });
+/* ---------- reveal ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -5% 0px'});
+$$('.reveal').forEach(function(el){io.observe(el)});
+
+/* ---------- живая строка: время в Астрахани ---------- */
+function tickLive(){
+  try{
+    var t=new Intl.DateTimeFormat('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Astrakhan'}).format(new Date());
+    $('#liveLine').textContent='В Астрахани сейчас '+t+' · отвечаем в течение часа';
+  }catch(e){}
+}
+tickLive();setInterval(tickLive,30000);
+
+/* ---------- счётчики ---------- */
+var cio=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(!e.isIntersecting)return;cio.unobserve(e.target);
+    var el=e.target,target=+el.dataset.count,suf=el.dataset.suffix||'',start=null;
+    function frame(ts){if(!start)start=ts;var p=Math.min((ts-start)/1200,1);p=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*p)+suf;if(p<1)requestAnimationFrame(frame)}
+    requestAnimationFrame(frame);
   });
+},{threshold:.6});
+$$('[data-count]').forEach(function(el){cio.observe(el)});
+
+/* ---------- marquee: дублируем дорожку ---------- */
+var mq=$('#mqTrack');mq.innerHTML+=mq.innerHTML;
+
+/* ---------- 3D-tilt на коллекциях (только устройства с курсором) ---------- */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+  $$('.tilt').forEach(function(card){
+    card.addEventListener('pointermove',function(e){
+      var r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      card.style.transform='perspective(900px) rotateY('+((x-.5)*10)+'deg) rotateX('+((.5-y)*8)+'deg)';
+      card.style.setProperty('--mx',(x*100)+'%');card.style.setProperty('--my',(y*100)+'%');
+    });
+    card.addEventListener('pointerleave',function(){card.style.transform=''});
+  });
+}
+
+/* ---------- каталог ---------- */
+var state={brand:'all',price:'all',sort:'new',q:'',shown:12};
+var grid=$('#catGrid'),PAGE=12;
+var fmt=function(n){return n.toLocaleString('ru-RU')+' ₽'};
+
+function styleOf(p){
+  var s=(p.n+' '+p.s).toUpperCase();
+  if(/G-SHOCK|G SHOCK|PROSPEX|DIVER|SPORT|EDIFICE|PRO TREK|ХРОНОГРАФ ДЛЯ СПОРТА/.test(s))return 'sport';
+  if(/BALLADE|PRESAGE|CLASSIC|VINTAGE|DRESS|LE LOCLE|EVERYTIME|КОЖАН|РИМСК/.test(s))return 'classic';
+  return 'casual';
+}
+function filtered(){
+  var list=CAT.filter(function(p){
+    if(state.brand!=='all'&&p.b!==state.brand)return false;
+    if(state.price!=='all'){var pr=state.price.split('-');if(p.p<+pr[0]||p.p>+pr[1])return false}
+    if(state.q){var q=state.q.toUpperCase();
+      var hay=(p.n+' '+p.b+' '+p.s+' '+p.m).toUpperCase();
+      if(hay.indexOf(q)===-1)return false}
+    return true;
+  });
+  if(state.sort==='cheap')list.sort(function(a,b){return a.p-b.p});
+  else if(state.sort==='exp')list.sort(function(a,b){return b.p-a.p});
+  else list.sort(function(a,b){return b.i-a.i});
+  return list;
+}
+function cardHTML(p){
+  return '<article class="p-card">'
+    +'<div class="p-ph"><img src="'+p.img+'" alt="'+esc(p.n)+'" loading="lazy" decoding="async"><span class="p-badge">В наличии</span></div>'
+    +'<div class="p-body">'
+    +'<div class="p-name">'+esc(p.n)+'</div>'
+    +'<div class="p-spec">'+esc(p.s)+'</div>'
+    +'<div class="p-price">'+fmt(p.p)+'</div>'
+    +'<div class="p-actions">'
+    +'<button class="p-book" data-book="'+p.i+'">Забронировать</button>'
+    +'<a class="p-tg" href="'+p.l+'" target="_blank" rel="noopener" aria-label="Пост о модели в Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></a>'
+    +'</div></div></article>';
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function render(){
+  var list=filtered();
+  grid.innerHTML=list.slice(0,state.shown).map(cardHTML).join('');
+  $('#catEmpty').style.display=list.length?'none':'block';
+  $('#catCount').textContent='Найдено: '+list.length;
+  var more=$('#moreBtn');
+  if(list.length>state.shown){more.style.display='';more.textContent='Показать ещё '+Math.min(PAGE,list.length-state.shown)+' из '+(list.length-state.shown)}
+  else more.style.display='none';
+}
+$('#moreBtn').addEventListener('click',function(){state.shown+=PAGE;render()});
+$('#brandChips').addEventListener('click',function(e){
+  var b=e.target.closest('[data-brand]');if(!b)return;
+  $$('#brandChips .chip').forEach(function(c){c.classList.remove('on')});b.classList.add('on');
+  state.brand=b.dataset.brand;state.shown=PAGE;render();
+});
+$('#priceSel').addEventListener('change',function(){state.price=this.value;state.shown=PAGE;render()});
+$('#sortSel').addEventListener('change',function(){state.sort=this.value;state.shown=PAGE;render()});
+var qTimer;
+$('#catSearch').addEventListener('input',function(){clearTimeout(qTimer);var v=this.value;qTimer=setTimeout(function(){state.q=v.trim();state.shown=PAGE;render()},200)});
+render();
+
+/* пресеты из «Коллекций» */
+function applyPreset(name){
+  state.q='';$('#catSearch').value='';state.price='all';$('#priceSel').value='all';state.brand='all';
+  if(name==='gshock'){state.q='G-SHOCK';$('#catSearch').value='G-SHOCK'}
+  else if(name==='tissot'){state.brand='Tissot'}
+  else if(name==='seiko'){state.brand='Seiko'}
+  else if(name==='budget'){state.price='0-10000';$('#priceSel').value='0-10000'}
+  $$('#brandChips .chip').forEach(function(c){c.classList.toggle('on',c.dataset.brand===state.brand)});
+  state.shown=PAGE;render();
+}
+$$('[data-preset]').forEach(function(a){a.addEventListener('click',function(){applyPreset(a.dataset.preset)})});
+
+/* бронирование из карточки → форма */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-book]');if(!b)return;
+  var p=CAT.find(function(x){return x.i===+b.dataset.book});if(!p)return;
+  $('#fModel').value=p.n+' — '+fmt(p.p);
+  location.hash='#zayavka';
+  toast('Модель добавлена в заявку — осталось оставить контакт');
+});
+
+/* ---------- квиз ---------- */
+var QS=[
+  {q:'Для кого выбираете часы?',opts:[['Мужские','муж'],['Женские','жен'],['Не важно','any']]},
+  {q:'Какой бюджет?',opts:[['До 10 000 ₽','0-10000'],['10–25 тыс. ₽','10000-25000'],['25–40 тыс. ₽','25000-40000'],['Не важен','any']]},
+  {q:'Какой характер у часов?',opts:[['Спорт и улица','sport'],['Классика и костюм','classic'],['На каждый день','casual'],['Удивите меня','any']]}
+];
+var qStep=0,qAns=[];
+function drawQuiz(){
+  $('#quizQ').textContent=QS[qStep].q;
+  $('#quizOpts').innerHTML=QS[qStep].opts.map(function(o,i){return '<button class="q-opt" data-v="'+o[1]+'">'+o[0]+'</button>'}).join('');
+  $('#quizBack').style.display=qStep>0?'inline-block':'none';
+  for(var i=1;i<=3;i++)document.getElementById('qs'+i).classList.toggle('done',i<=qStep);
+}
+$('#quizOpts').addEventListener('click',function(e){
+  var b=e.target.closest('.q-opt');if(!b)return;
+  qAns[qStep]=b.dataset.v;qStep++;
+  if(qStep<QS.length){drawQuiz()}else{quizResult()}
+});
+$('#quizBack').addEventListener('click',function(){if(qStep>0){qStep--;drawQuiz()}});
+$('#qrRestart').addEventListener('click',function(){qStep=0;qAns=[];$('#quizRes').style.display='none';$('#quizFlow').style.display='block';drawQuiz()});
+function quizMatch(relax){
+  return CAT.filter(function(p){
+    if(qAns[0]!=='any'&&!(p.g===qAns[0]||p.g==='уни'))return false;
+    if(qAns[1]!=='any'){var pr=qAns[1].split('-');var lo=+pr[0],hi=+pr[1];
+      if(relax){lo*=0.8;hi*=1.25}
+      if(p.p<lo||p.p>hi)return false}
+    if(qAns[2]!=='any'&&styleOf(p)!==qAns[2])return false;
+    return true;
+  });
+}
+function quizResult(){
+  for(var i=1;i<=3;i++)document.getElementById('qs'+i).classList.add('done');
+  var m=quizMatch(false);if(m.length<3)m=m.concat(quizMatch(true).filter(function(p){return m.indexOf(p)===-1}));
+  if(!m.length)m=CAT.slice(0,9);
+  // перемешиваем топ, чтобы подбор был живым
+  var pick=m.slice(0,12).sort(function(){return Math.random()-.5}).slice(0,3);
+  $('#qrGrid').innerHTML=pick.map(cardHTML).join('');
+  $('#qrSub').textContent='Под ваши ответы в наличии: '+m.length+' модел'+plural(m.length)+'. Вот три из них:';
+  $('#quizFlow').style.display='none';$('#quizRes').style.display='block';
+  $('#qrAll').onclick=function(){
+    state.brand='all';state.q='';$('#catSearch').value='';
+    state.price=qAns[1]!=='any'?qAns[1]:'all';$('#priceSel').value=state.price;
+    $$('#brandChips .chip').forEach(function(c){c.classList.toggle('on',c.dataset.brand==='all')});
+    state.shown=PAGE;render();location.hash='#catalog';
+  };
+}
+function plural(n){var r=n%10,h=n%100;if(h>=11&&h<=14)return 'ей';if(r===1)return 'ь';if(r>=2&&r<=4)return 'и';return 'ей'}
+drawQuiz();
+
+/* ---------- форма заявки ---------- */
+/* Демоверсия: заявка формируется текстом, копируется и открывается чат менеджера.
+   Для боевого режима заменить sendLead() на POST к бэкенду или Telegram-боту. */
+$('#leadForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var name=$('#fName').value.trim(),contact=$('#fContact').value.trim();
+  if(!name||!contact){toast('Заполните имя и контакт — иначе не сможем ответить');return}
+  var model=$('#fModel').value.trim(),msg=$('#fMsg').value.trim();
+  var text='Заявка с сайта TIME BRAND\nИмя: '+name+'\nСвязь: '+contact+(model?'\nМодель: '+model:'')+(msg?'\nКомментарий: '+msg:'');
+  sendLead(text);
+});
+function sendLead(text){
+  $('#okText').value=text;
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).catch(function(){});
+  $('#formFields').style.display='none';$('#formOk').style.display='block';
+  setTimeout(function(){window.open('https://t.me/shamil_time_brand','_blank','noopener')},600);
+}
+
+/* ---------- toast ---------- */
+var toastTimer;
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){el.classList.remove('show')},3200)}
+
+/* ---------- hero-видео: экономим трафик на мобилке ---------- */
+var v=$('#heroVideo');
+if(v&&matchMedia('(prefers-reduced-motion:reduce)').matches){v.removeAttribute('autoplay');v.pause()}
 })();
 </script>
 
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-}}
-</script>
-<script type="module">
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-
-const wrap = document.getElementById('watch3d');
-const canvas = document.getElementById('watchCanvas');
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-let renderer;
-try { renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true }); }
-catch(e){ renderer = null; }
-
-if (renderer) start();
-
-function makeDial(){
-  const c = document.createElement('canvas'); c.width = c.height = 512;
-  const g = c.getContext('2d');
-  const grad = g.createRadialGradient(256,226,30,256,256,300);
-  grad.addColorStop(0,'#20252d'); grad.addColorStop(.62,'#141a21'); grad.addColorStop(1,'#0b0f14');
-  g.fillStyle = grad; g.beginPath(); g.arc(256,256,256,0,7); g.fill();
-  g.strokeStyle = 'rgba(226,229,234,.5)'; g.lineWidth = 2;
-  for(let i=0;i<60;i++){ const a=i/60*Math.PI*2, r1=228, r2=(i%5===0?212:221);
-    g.beginPath(); g.moveTo(256+Math.cos(a)*r1,256+Math.sin(a)*r1); g.lineTo(256+Math.cos(a)*r2,256+Math.sin(a)*r2); g.stroke(); }
-  g.fillStyle = '#e6e8ec';
-  for(let i=0;i<12;i++){ const a=i/12*Math.PI*2 - Math.PI/2, w=(i%3===0?13:8), len=(i%3===0?34:24), r=198;
-    g.save(); g.translate(256+Math.cos(a)*r,256+Math.sin(a)*r); g.rotate(a+Math.PI/2); g.fillRect(-w/2,-len/2,w,len); g.restore(); }
-  g.textAlign='center'; g.fillStyle='#f2f2f0'; g.font='600 27px Inter, Arial'; g.fillText('TIME BRAND',256,152);
-  g.fillStyle='#9aa0a8'; g.font='400 15px Inter, Arial'; g.fillText('AUTOMATIC',256,180);
-  g.fillText('ASTRAKHAN',256,352);
-  g.strokeStyle='rgba(226,229,234,.4)'; g.lineWidth=2; g.beginPath(); g.arc(256,318,38,0,7); g.stroke();
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Store",
+  "name":"TIME BRAND",
+  "description":"Магазин оригинальных часов в Астрахани: Casio, Seiko, Tissot, Citizen. 100 моделей в наличии, примерка, доставка по России.",
+  "url":"https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/",
+  "image":"https://jonessssenator-art.github.io/portfolio/landings/13-time-brand/images/hero.jpg",
+  "address":{"@type":"PostalAddress","addressLocality":"Астрахань","addressCountry":"RU"},
+  "sameAs":["https://t.me/timebrand","https://instagram.com/time__brand__"],
+  "priceRange":"2990-44000 RUB"
 }
-
-function start(){
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setSize(wrap.clientWidth, wrap.clientHeight, false);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(38, wrap.clientWidth/wrap.clientHeight, 0.1, 100);
-  camera.position.set(0, 0.35, 8.2);
-
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.45));
-  const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(4,6,5); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffffff, 0.9); fill.position.set(-5,1,-2); scene.add(fill);
-
-  const watch = new THREE.Group(); scene.add(watch);
-
-  const steel = new THREE.MeshStandardMaterial({ color:0xd2d6dc, metalness:1, roughness:0.22 });
-  const steelDark = new THREE.MeshStandardMaterial({ color:0xa9adb4, metalness:1, roughness:0.28 });
-  const glass = new THREE.MeshPhysicalMaterial({ color:0xffffff, metalness:0, roughness:0.03, transparent:true, opacity:0.08, clearcoat:1, clearcoatRoughness:0.04 });
-  const handLight = new THREE.MeshStandardMaterial({ color:0xf2f3f5, metalness:0.7, roughness:0.3 });
-
-  // case
-  const caseMesh = new THREE.Mesh(new THREE.CylinderGeometry(1.16,1.16,0.36,72), steel);
-  caseMesh.rotation.x = Math.PI/2; watch.add(caseMesh);
-  // bezel
-  const bezel = new THREE.Mesh(new THREE.TorusGeometry(1.05,0.12,26,84), steelDark); bezel.position.z = 0.16; watch.add(bezel);
-  // dial
-  const dial = new THREE.Mesh(new THREE.CircleGeometry(1.0,72), new THREE.MeshStandardMaterial({ map:makeDial(), metalness:0.2, roughness:0.55 }));
-  dial.position.z = 0.13; watch.add(dial);
-  // crystal
-  const crystal = new THREE.Mesh(new THREE.CircleGeometry(1.02,72), glass); crystal.position.z = 0.235; watch.add(crystal);
-  // crown
-  const crown = new THREE.Mesh(new THREE.CylinderGeometry(0.09,0.09,0.16,24), steel); crown.rotation.z = Math.PI/2; crown.position.set(1.22,0,0.02); watch.add(crown);
-
-  // hands
-  function hand(w,l,mat,z,off){ const grp=new THREE.Group(); grp.position.z=z; const m=new THREE.Mesh(new THREE.BoxGeometry(w,l,0.02),mat); m.position.y=l/2-off; grp.add(m); watch.add(grp); return grp; }
-  const hHour = hand(0.07,0.52,handLight,0.15,0.06);
-  const hMin  = hand(0.05,0.74,handLight,0.17,0.06);
-  const hSec  = hand(0.02,0.86,new THREE.MeshStandardMaterial({color:0xe2e5ea,metalness:1,roughness:0.3}),0.19,0.22);
-  const capC = new THREE.Mesh(new THREE.CircleGeometry(0.06,24), steel); capC.position.z=0.2; watch.add(capC);
-
-  // lugs
-  [1,-1].forEach(function(d){ const lug=new THREE.Mesh(new THREE.BoxGeometry(0.95,0.24,0.3), steel); lug.position.set(0,d*1.05,0.02); watch.add(lug); });
-
-  // straps (swappable)
-  const strapMat = { steel:new THREE.MeshStandardMaterial({color:0xc2c6cc,metalness:1,roughness:0.3}),
-    black:new THREE.MeshStandardMaterial({color:0x1b1c1f,metalness:0.1,roughness:0.65}),
-    brown:new THREE.MeshStandardMaterial({color:0x6b4324,metalness:0,roughness:0.72}),
-    green:new THREE.MeshStandardMaterial({color:0x3f5a2e,metalness:0,roughness:0.8}) };
-  let current = strapMat.steel;
-  const strapMeshes = [];
-  [1,-1].forEach(function(d){
-    const segs = 7;
-    for(let i=0;i<segs;i++){ const t=i/(segs-1); const ang=t*0.95;
-      const seg = new THREE.Mesh(new THREE.BoxGeometry(0.9 - t*0.2, 0.30, 0.14), current);
-      seg.position.set(0, d*(1.12 + Math.sin(ang)*1.55), 0.02 - (1-Math.cos(ang))*1.35);
-      seg.rotation.x = d*ang; watch.add(seg); strapMeshes.push(seg);
-    }
-  });
-
-  watch.rotation.x = -0.12;
-
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true; controls.dampingFactor = 0.08;
-  controls.enablePan = false; controls.enableZoom = false;
-  controls.minPolarAngle = Math.PI*0.28; controls.maxPolarAngle = Math.PI*0.72;
-  controls.autoRotate = !reduce; controls.autoRotateSpeed = 0.9;
-  controls.target.set(0,0,0);
-
-  // strap swatches
-  document.querySelectorAll('#strapControls .swatch').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('#strapControls .swatch').forEach(function(s){ s.classList.remove('active'); });
-      btn.classList.add('active');
-      const mat = strapMat[btn.dataset.strap]; if(!mat) return;
-      strapMeshes.forEach(function(m){ m.material = mat; });
-    });
-  });
-
-  const clock = new THREE.Clock();
-  let ready = false;
-  function resize(){ const w=wrap.clientWidth,h=wrap.clientHeight; if(!w||!h) return; camera.aspect=w/h; camera.updateProjectionMatrix(); renderer.setSize(w,h,false); }
-  window.addEventListener('resize', resize);
-  if(window.ResizeObserver){ new ResizeObserver(resize).observe(wrap); }
-
-  function loop(){
-    requestAnimationFrame(loop);
-    const e = clock.getElapsedTime();
-    if(!reduce){ hHour.rotation.z = -e*0.03; hMin.rotation.z = -e*0.22; hSec.rotation.z = -e*0.9; }
-    controls.update();
-    renderer.render(scene, camera);
-    if(!ready){ ready = true; wrap.classList.add('ready'); }
-  }
-  loop();
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Это точно оригиналы?","acceptedAnswer":{"@type":"Answer","text":"Да. Только оригинальные Casio, Seiko, Tissot, Citizen и Fossil с полным комплектом и документами. Всё можно проверить до оплаты."}},
+    {"@type":"Question","name":"Почему дешевле, чем в торговых центрах?","acceptedAnswer":{"@type":"Answer","text":"Нет аренды бутика и наценки за витрину: продаём напрямую через Telegram и Instagram."}},
+    {"@type":"Question","name":"Как проходит доставка в другой город?","acceptedAnswer":{"@type":"Answer","text":"Проверенными службами с осмотром при получении: сначала осматриваете часы, потом оплачиваете."}},
+    {"@type":"Question","name":"Можно примерить перед покупкой?","acceptedAnswer":{"@type":"Answer","text":"В Астрахани — да. Напишите заранее, чтобы модель ждала вас в магазине."}}
+  ]
 }
 </script>
 </body>
