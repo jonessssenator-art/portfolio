@@ -63,41 +63,50 @@ function NotesTable({ notes }: { notes: Product['notes'] }) {
   );
 }
 
-/* полка состава под флаконом: до 4 главных нот в одну строгую строку */
+/* полка состава под флаконом: только ноты с картинками — единый ровный ряд */
 function CompositionShelf({ notes }: { notes: string[] }) {
+  const withArt = notes
+    .map((n) => ({ n, art: noteArtKey(n) }))
+    .filter((x): x is { n: string; art: string } => Boolean(x.art))
+    .slice(0, 4);
+
+  /* картинок мало — показываем состав строгой текстовой строкой */
+  if (withArt.length < 2) {
+    return (
+      <div className="border-t border-ivory/10 bg-[#FBF9F3]/70 px-4 py-3.5 text-center">
+        <span className="text-[10px] uppercase tracking-[0.16em] text-smoke">
+          {notes.join(' · ')}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className="relative border-t border-ivory/10 bg-[#FBF9F3]/70 px-3 py-3.5">
       <div className="flex flex-wrap items-center justify-center gap-y-2">
-        {notes.map((n, i) => {
-          const art = noteArtKey(n);
-          return (
-            <motion.div
-              key={n}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 + i * 0.1, duration: 0.6, ease: 'easeOut' }}
-              className={`flex items-center gap-2 px-3 py-1 sm:px-4 ${
-                i > 0 ? 'border-l-0 sm:border-l sm:border-ivory/10' : ''
-              }`}
-            >
-              {art ? (
-                <img
-                  src={noteArtSrc(art)}
-                  alt=""
-                  width={72}
-                  height={72}
-                  loading="lazy"
-                  className="h-8 w-8 object-contain sm:h-9 sm:w-9"
-                />
-              ) : (
-                <span className="h-1 w-1 rounded-full bg-gold" />
-              )}
-              <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.16em] text-smoke">
-                {n}
-              </span>
-            </motion.div>
-          );
-        })}
+        {withArt.map(({ n, art }, i) => (
+          <motion.div
+            key={n}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 + i * 0.1, duration: 0.6, ease: 'easeOut' }}
+            className={`flex items-center gap-2 px-3 py-1 sm:px-4 ${
+              i > 0 ? 'border-l-0 sm:border-l sm:border-ivory/10' : ''
+            }`}
+          >
+            <img
+              src={noteArtSrc(art)}
+              alt=""
+              width={72}
+              height={72}
+              loading="lazy"
+              className="h-8 w-8 object-contain sm:h-9 sm:w-9"
+            />
+            <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.16em] text-smoke">
+              {n}
+            </span>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
@@ -232,8 +241,8 @@ function BottleStage({ product }: { product: Product }) {
         )}
       </div>
 
-      {/* полка состава */}
-      <CompositionShelf notes={shelfNotes} />
+      {/* полка состава — только для галерейной витрины: в кино-сцене ингредиенты уже в кадре */}
+      {!scene && <CompositionShelf notes={shelfNotes} />}
     </div>
   );
 }
