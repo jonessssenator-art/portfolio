@@ -192,7 +192,7 @@ export default function ProductView({ product }: { product: Product }) {
                   <li key={d.id} className="flex justify-between gap-4">
                     <span>{d.label}</span>
                     <span className="shrink-0 text-ivory/80">
-                      {d.external || d.price === 0 ? '—' : formatPrice(d.price)} · {d.days}
+                      {d.external ? '—' : formatPrice(d.price)} · {d.days}
                     </span>
                   </li>
                 ))}
