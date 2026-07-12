@@ -9,26 +9,10 @@ import { formatPrice } from '@/lib/format';
 import { useStore } from '@/lib/store';
 import { ArrowRightIcon } from './icons';
 
-/** пул ароматов со сценами: каждый день сайт сам выбирает пятёрку по дате */
-const SCENE_POOL = [
-  'lattafa-khamrah',
-  'dior-sauvage-elixir',
-  'pdm-delina',
-  'mfk-baccarat-rouge-540',
-  'creed-aventus',
-  'tom-ford-lost-cherry',
-  'nishane-hacivat',
-  'ysl-black-opium',
-  'armaf-club-de-nuit-intense',
-  'kilian-love-dont-be-shy',
-];
-const SHOWCASE_SIZE = 5;
+import { SCENE_SLUGS as SCENE_POOL, scenePortrait, sceneWide } from '@/lib/scenes';
 
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
-/** вертикальная сцена (телефон) */
-const scenePortrait = (slug: string) => `${BASE}/hero/${slug}.jpg`;
-/** широкая дорисованная сцена (компьютер) */
-const sceneWide = (slug: string) => `${BASE}/hero/${slug}-wide.jpg`;
+/** каждый день сайт сам выбирает пятёрку по дате */
+const SHOWCASE_SIZE = 5;
 
 function resolveFeatured(slugs: string[]): Product[] {
   return slugs

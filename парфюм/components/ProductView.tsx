@@ -11,6 +11,7 @@ import {
   useReducedMotion,
 } from 'framer-motion';
 import { GENDER_LABEL, photoSrc, type Product } from '@/lib/products';
+import { hasScene, scenePortrait } from '@/lib/scenes';
 import { noteArtKey, noteArtSrc } from '@/lib/note-art';
 import { formatPrice } from '@/lib/format';
 import { useStore } from '@/lib/store';
@@ -138,9 +139,11 @@ function BottleStage({ product }: { product: Product }) {
     rawY.set(0);
   };
 
+  const scene = hasScene(product.slug) && product.inStock ? scenePortrait(product.slug) : null;
+
   return (
     <div className="border hairline bg-graphite lg:sticky lg:top-24">
-      {/* сцена-витрина */}
+      {/* сцена-витрина: кино-сцена, если есть; иначе — светлая галерея */}
       <div
         onPointerMove={onPointerMove}
         onPointerLeave={onLeave}
@@ -149,19 +152,36 @@ function BottleStage({ product }: { product: Product }) {
         className="relative h-[420px] touch-pan-y overflow-hidden sm:h-[500px]"
         style={{
           perspective: 900,
-          background: 'linear-gradient(180deg, #FDFBF7 0%, #F4EEE3 100%)',
+          background: scene ? '#171310' : 'linear-gradient(180deg, #FDFBF7 0%, #F4EEE3 100%)',
         }}
       >
-        {/* паспарту — тонкая внутренняя рамка */}
-        <div className="pointer-events-none absolute inset-3 z-20 border border-ivory/10" />
-
-        {/* деликатная аура в цвет аромата */}
-        <div className="pointer-events-none absolute left-1/2 top-[54%] h-[65%] w-[78%] -translate-x-1/2 -translate-y-1/2">
-          <div
-            className="h-full w-full rounded-full"
-            style={{ background: `radial-gradient(ellipse, ${product.accent}1f, transparent 62%)` }}
+        {scene && (
+          <motion.img
+            src={scene}
+            alt={`${product.brand} ${product.name} — атмосфера аромата`}
+            initial={reduced ? false : { opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
-        </div>
+        )}
+
+        {/* паспарту — тонкая внутренняя рамка */}
+        <div
+          className={`pointer-events-none absolute inset-3 z-20 border ${
+            scene ? 'border-[#F6F1E8]/25' : 'border-ivory/10'
+          }`}
+        />
+
+        {/* деликатная аура в цвет аромата (только для галерейного фона) */}
+        {!scene && (
+          <div className="pointer-events-none absolute left-1/2 top-[54%] h-[65%] w-[78%] -translate-x-1/2 -translate-y-1/2">
+            <div
+              className="h-full w-full rounded-full"
+              style={{ background: `radial-gradient(ellipse, ${product.accent}1f, transparent 62%)` }}
+            />
+          </div>
+        )}
 
         {!product.inStock ? (
           <span className="absolute left-6 top-6 z-30 border border-ivory/30 bg-graphite px-2.5 py-1 text-[10px] uppercase tracking-widest2 text-smoke">
@@ -169,39 +189,47 @@ function BottleStage({ product }: { product: Product }) {
           </span>
         ) : (
           product.tags.length > 0 && (
-            <span className="absolute left-6 top-6 z-30 border border-gold/60 bg-graphite px-2.5 py-1 text-[10px] uppercase tracking-widest2 text-gold">
+            <span className="absolute left-6 top-6 z-30 border border-gold/60 bg-graphite/80 px-2.5 py-1 text-[10px] uppercase tracking-widest2 text-gold backdrop-blur-sm">
               {product.tags[0]}
             </span>
           )
         )}
-        <span className="absolute right-6 top-6 z-30 text-[10px] uppercase tracking-widest2 text-smoke">
+        <span
+          className={`absolute right-6 top-6 z-30 text-[10px] uppercase tracking-widest2 ${
+            scene ? 'text-[#F6F1E8]/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.5)]' : 'text-smoke'
+          }`}
+        >
           {product.volume} мл · {product.concentration}
         </span>
 
-        {/* флакон */}
-        <motion.div
-          style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-          className="absolute inset-0 z-10 flex items-center justify-center"
-        >
+        {/* флакон рисуем только на галерейном фоне — в сцене он уже есть */}
+        {!scene && (
           <motion.div
-            animate={reduced ? {} : { y: [0, -6, 0] }}
-            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative h-[74%] w-auto"
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            className="absolute inset-0 z-10 flex items-center justify-center"
           >
-            <img
-              src={photoSrc(product)}
-              alt={`${product.brand} ${product.name} — оригинальный флакон`}
-              width={750}
-              height={1000}
-              className={`h-full w-auto drop-shadow-[0_30px_38px_rgba(23,19,16,0.24)] ${
-                product.inStock ? '' : 'opacity-60 grayscale'
-              }`}
-            />
+            <motion.div
+              animate={reduced ? {} : { y: [0, -6, 0] }}
+              transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative h-[74%] w-auto"
+            >
+              <img
+                src={photoSrc(product)}
+                alt={`${product.brand} ${product.name} — оригинальный флакон`}
+                width={750}
+                height={1000}
+                className={`h-full w-auto drop-shadow-[0_30px_38px_rgba(23,19,16,0.24)] ${
+                  product.inStock ? '' : 'opacity-60 grayscale'
+                }`}
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        )}
 
         {/* естественная тень под флаконом */}
-        <div className="pointer-events-none absolute bottom-10 left-1/2 h-4 w-52 -translate-x-1/2 rounded-full bg-[#171310]/15 blur-xl" />
+        {!scene && (
+          <div className="pointer-events-none absolute bottom-10 left-1/2 h-4 w-52 -translate-x-1/2 rounded-full bg-[#171310]/15 blur-xl" />
+        )}
       </div>
 
       {/* полка состава */}

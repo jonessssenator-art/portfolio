@@ -70,7 +70,7 @@ export default function ProductCard({ product }: { product: Product }) {
             height={1000}
             loading="lazy"
             decoding="async"
-            className={`absolute inset-0 h-full w-full object-contain p-6 drop-shadow-[0_14px_22px_rgba(23,19,16,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.05] ${
+            className={`pointer-events-none absolute inset-0 h-full w-full object-contain p-6 drop-shadow-[0_14px_22px_rgba(23,19,16,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.05] ${
               available ? '' : 'opacity-55 grayscale'
             }`}
             style={{ transform: 'translateZ(28px)' }}
