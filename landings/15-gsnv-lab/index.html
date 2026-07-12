@@ -269,6 +269,13 @@ blockquote::after { content: '»'; color: var(--gold); }
 }
 .brand-card p { font-size: 14.5px; color: var(--muted); line-height: 1.6; }
 .brand-card .meta { margin-top: 18px; font-size: 13px; color: var(--text); opacity: 0.8; }
+.brand-card { cursor: pointer; }
+.brand-card .go {
+  position: relative; z-index: 3;
+  margin-top: 14px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em;
+  color: var(--gold-bright); transition: color .25s, transform .25s;
+}
+.brand-card:hover .go { color: var(--text); transform: translateX(4px); }
 @media (max-width: 1080px) { .brands-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .brands-grid { grid-template-columns: 1fr; } .brand-card { min-height: auto; } }
 .brands-grid .brand-card:nth-child(1) { transition-delay: 0s; }
@@ -301,7 +308,7 @@ blockquote::after { content: '»'; color: var(--gold); }
 }
 
 /* ===== Адреса ===== */
-.addr-group { margin-bottom: 46px; }
+.addr-group { margin-bottom: 46px; scroll-margin-top: 100px; }
 .addr-group:last-child { margin-bottom: 0; }
 .addr-group .g-name {
   font-family: var(--display); font-size: 15px; letter-spacing: 0.16em;
@@ -568,20 +575,20 @@ footer {
       <div class="eyebrow">12 салонов рядом с вами</div>
       <h2>Найдите <em>свой</em> GSNV-Lab</h2>
     </div>
-    <div class="addr-group reveal">
+    <div class="addr-group reveal" id="addr-gsnv-lab">
       <div class="g-name"><span>GSNV-Lab</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
         <div class="addr"><span class="street">ул. 28 Армии, 14</span><a class="phone" href="tel:+78512999542">+7 (8512) 999-542</a></div>
         <div class="addr"><span class="street">ул. Тургенева, 1</span><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a></div>
       </div>
     </div>
-    <div class="addr-group reveal">
+    <div class="addr-group reveal" id="addr-gsnv-lab-pro">
       <div class="g-name"><span>GSNV-Lab Pro</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
         <div class="addr"><span class="street">ул. Никольская, 8</span><a class="phone" href="tel:+78512293293">+7 (8512) 293-293</a></div>
       </div>
     </div>
-    <div class="addr-group reveal">
+    <div class="addr-group reveal" id="addr-barber-lab">
       <div class="g-name"><span>Barber-Lab</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
         <div class="addr"><span class="street">ул. Тургенева, 1</span><a class="phone" href="tel:+78512424555">+7 (8512) 424-555</a></div>
@@ -594,7 +601,7 @@ footer {
         <div class="addr"><span class="street">ул. Белгородская, 1/4</span><a class="phone" href="tel:+78512414222">+7 (8512) 414-222</a></div>
       </div>
     </div>
-    <div class="addr-group reveal">
+    <div class="addr-group reveal" id="addr-gsnv-lab-girls">
       <div class="g-name"><span>GSNV-Lab Girls</span><span class="g-line"></span><a class="g-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться →</a></div>
       <div class="addr-list">
         <div class="addr"><span class="street">ул. Тургенева, 1</span><a class="phone" href="tel:+78512428424">+7 (8512) 428-424</a></div>
@@ -610,34 +617,38 @@ footer {
       <h2>Четыре бренда — <em>одна лаборатория</em></h2>
     </div>
     <div class="brands-grid">
-      <div class="brand-card reveal">
+      <a class="brand-card reveal" href="#addr-gsnv-lab">
         <img class="bg" src="images/brand-classic.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Классика сети</div>
         <h3>GSNV-Lab</h3>
         <p>Стрижки, окрашивание и укладки для всей семьи.</p>
         <div class="meta">2 салона · 28 Армии, Тургенева</div>
-      </div>
-      <div class="brand-card reveal">
+        <div class="go">Смотреть адреса →</div>
+      </a>
+      <a class="brand-card reveal" href="#addr-gsnv-lab-pro">
         <img class="bg" src="images/brand-pro.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Флагман</div>
         <h3>GSNV-Lab Pro</h3>
         <p>Топ-мастера сети и самые сложные работы.</p>
         <div class="meta">Никольская, 8</div>
-      </div>
-      <div class="brand-card reveal">
+        <div class="go">Смотреть адреса →</div>
+      </a>
+      <a class="brand-card reveal" href="#addr-barber-lab">
         <img class="bg" src="images/brand-barber.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Мужское направление</div>
         <h3>Barber-Lab</h3>
         <p>Мужские стрижки, борода, бритьё опасной бритвой.</p>
         <div class="meta">9 барбершопов по всему городу</div>
-      </div>
-      <div class="brand-card reveal">
+        <div class="go">Смотреть адреса →</div>
+      </a>
+      <a class="brand-card reveal" href="#addr-gsnv-lab-girls">
         <img class="bg" src="images/brand-girls.jpg" alt="" loading="lazy"><div class="shade"></div><div class="glow"></div>
         <div class="idx">Женское направление</div>
         <h3>GSNV-Lab Girls</h3>
         <p>Женский зал: цвет, форма и уход.</p>
         <div class="meta">Тургенева, 1</div>
-      </div>
+        <div class="go">Смотреть адреса →</div>
+      </a>
     </div>
   </div>
 </section>
