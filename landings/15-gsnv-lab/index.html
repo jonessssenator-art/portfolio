@@ -438,7 +438,9 @@ footer {
     background: var(--gold); background: linear-gradient(120deg, var(--gold), var(--gold-bright));
     color: #08080a; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 14px;
     box-shadow: 0 12px 34px rgba(0,0,0,0.55);
+    transition: opacity .25s, transform .25s;
   }
+  .sticky-book.hidden { opacity: 0; transform: translateY(20px); pointer-events: none; }
   body { padding-bottom: 74px; }
 }
 
@@ -727,6 +729,7 @@ footer {
     <div class="copy">GSNV-Lab · Астрахань · концепт-лендинг</div>
   </div>
 </footer>
+<a class="sticky-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться онлайн</a>
 
 <script>
 document.documentElement.classList.remove('no-js');
@@ -897,13 +900,16 @@ window.addEventListener('scroll', () => {
 
 const burger = document.getElementById('burger');
 const mmenu = document.getElementById('mmenu');
+const stickyBook = document.querySelector('.sticky-book');
 burger.addEventListener('click', () => {
-  burger.classList.toggle('open');
-  mmenu.classList.toggle('open');
+  const isOpen = burger.classList.toggle('open');
+  mmenu.classList.toggle('open', isOpen);
+  stickyBook?.classList.toggle('hidden', isOpen);
 });
 mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   burger.classList.remove('open');
   mmenu.classList.remove('open');
+  stickyBook?.classList.remove('hidden');
 }));
 
 /* ===== Появление при скролле ===== */
@@ -951,6 +957,5 @@ if (matchMedia('(pointer: fine)').matches && !reducedMotion) {
 
 
 </script>
-<a class="sticky-book" href="https://n590972.yclients.com/group:524160/city:92#1" target="_blank" rel="noopener">Записаться онлайн</a>
 </body>
 </html>
