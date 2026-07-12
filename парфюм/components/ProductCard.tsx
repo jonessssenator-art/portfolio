@@ -47,7 +47,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <motion.div
         onPointerMove={onPointerMove}
         onPointerLeave={resetTilt}
-        style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d' }}
+        style={{ rotateX: rx, rotateY: ry }}
         whileTap={{ scale: 0.97 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
         className="border hairline bg-graphite shadow-card transition-shadow duration-500 group-hover:shadow-[0_30px_55px_-18px_rgba(23,19,16,0.3)]"
@@ -76,7 +76,6 @@ export default function ProductCard({ product }: { product: Product }) {
             className={`pointer-events-none absolute inset-0 h-full w-full object-contain p-6 drop-shadow-[0_14px_22px_rgba(23,19,16,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.05] ${
               available ? '' : 'opacity-55 grayscale'
             }`}
-            style={{ transform: 'translateZ(28px)' }}
           />
           {!available ? (
             <span className="absolute left-3 top-3 border border-ivory/25 bg-graphite/80 px-2 py-1 text-[10px] uppercase tracking-widest2 text-smoke">
