@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-noir text-ivory font-body antialiased;
+  }
+  ::selection {
+    background: rgba(160, 124, 51, 0.25);
+    color: #171310;
+  }
+}
+
+@layer components {
+  .container-m27 {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+  /* главная кнопка — чёрная, как у Chanel; золото появляется при наведении */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 bg-ivory text-noir font-semibold
+      tracking-wide px-7 py-4 text-[15px] transition-all duration-300
+      hover:bg-gold active:scale-[0.98] select-none;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-ivory/30 text-ivory
+      tracking-wide px-7 py-4 text-[15px] transition-all duration-300
+      hover:border-gold hover:text-gold active:scale-[0.98] select-none;
+  }
+  .hairline {
+    @apply border-gold/15;
+  }
+  .kicker {
+    @apply text-[11px] uppercase tracking-widest2 text-gold;
+  }
+  .field {
+    /* 16px, не меньше — иначе iOS Safari зумит страницу при фокусе */
+    @apply w-full bg-graphite border border-gold/20 px-4 py-3.5 text-[16px] text-ivory
+      placeholder:text-smoke/60 outline-none transition-colors focus:border-gold/60;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* блик, пробегающий по карточке товара при наведении */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(23, 19, 16, 0.05) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.9s ease;
+  pointer-events: none;
+}
+.card-shine:hover::after {
+  transform: translateX(120%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

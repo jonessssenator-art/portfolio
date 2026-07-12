@@ -1,0 +1,917 @@
+export type Gender = 'м' | 'ж' | 'у';
+
+export interface Product {
+  slug: string;
+  brand: string;
+  name: string;
+  price: number;
+  oldPrice?: number;
+  volume: number;
+  concentration: string;
+  gender: Gender;
+  tags: Array<'хит' | 'новинка'>;
+  notes: { top: string[]; heart: string[]; base: string[] };
+  longevityHours: number;
+  sillage: 1 | 2 | 3 | 4 | 5;
+  accords: string[];
+  desc: string;
+  /** акцентный цвет ауры вокруг флакона */
+  accent: string;
+  /** false — позиции нет в наличии */
+  inStock: boolean;
+}
+
+export type RawProduct = Omit<Product, 'inStock'> & { inStock?: boolean };
+
+import { SEG_LUX_A } from './catalog/seg-lux-a';
+import { SEG_KILIAN } from './catalog/seg-kilian';
+import { SEG_ARAB } from './catalog/seg-arab';
+import { SEG_NICHE_TOP } from './catalog/seg-niche-top';
+import { SEG_NICHE_2 } from './catalog/seg-niche-2';
+import { SEG_DESIGNER_M } from './catalog/seg-designer-m';
+import { SEG_DESIGNER_W } from './catalog/seg-designer-w';
+import { SEG_SELECTIVE } from './catalog/seg-selective';
+
+const RAW: RawProduct[] = [
+  /* ─── НИША: ТОП-15 ЯДРА МАГАЗИНА ─── */
+  {
+    slug: 'mfk-baccarat-rouge-540', brand: 'Maison Francis Kurkdjian', name: 'Baccarat Rouge 540',
+    price: 33900, volume: 70, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Шафран', 'Жасмин'], heart: ['Амбровое дерево', 'Амбергрис'], base: ['Пихтовая смола', 'Кедр'] },
+    longevityHours: 12, sillage: 5, accords: ['амбра', 'сладкий', 'древесный'],
+    desc: 'Самый узнаваемый аромат десятилетия: сладкая амбра и шафран, которые слышно с другого конца комнаты. О нём спрашивают незнакомцы.',
+    accent: '#E8B54B',
+  },
+  {
+    slug: 'creed-aventus', brand: 'Creed', name: 'Aventus',
+    price: 37900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: ['хит'],
+    notes: { top: ['Ананас', 'Бергамот', 'Чёрная смородина'], heart: ['Берёза', 'Пачули', 'Роза'], base: ['Мускус', 'Дубовый мох', 'Ваниль'] },
+    longevityHours: 10, sillage: 4, accords: ['фруктовый', 'дымный', 'древесный'],
+    desc: 'Эталон мужского парфюма: дымный ананас и берёза. Десять лет в топе мировых продаж — и всё ещё вне конкуренции.',
+    accent: '#4A5240',
+  },
+  {
+    slug: 'tom-ford-lost-cherry', brand: 'Tom Ford', name: 'Lost Cherry',
+    price: 33500, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Чёрная вишня', 'Вишнёвый ликёр'], heart: ['Горький миндаль', 'Роза'], base: ['Бобы тонка', 'Сандал', 'Ваниль'] },
+    longevityHours: 8, sillage: 4, accords: ['фруктовый', 'сладкий', 'гурманский'],
+    desc: 'Спелая вишня в тёмном шоколаде с миндалём. Провокационный вечерний аромат — самый комплиментарный Tom Ford.',
+    accent: '#C41833',
+  },
+  {
+    slug: 'tom-ford-ombre-leather', brand: 'Tom Ford', name: 'Ombré Leather',
+    price: 21900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Кардамон'], heart: ['Кожа', 'Жасмин самбак'], base: ['Амбра', 'Мох', 'Пачули'] },
+    longevityHours: 10, sillage: 4, accords: ['кожаный', 'пряный', 'древесный'],
+    desc: 'Запах салона дорогого автомобиля и кожаной куртки. Строгий, взрослый, без сладости — особенно хорош осенью.',
+    accent: '#7A4A2B',
+  },
+  {
+    slug: 'le-labo-santal-33', brand: 'Le Labo', name: 'Santal 33',
+    price: 27900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Фиалка', 'Кардамон'], heart: ['Ирис', 'Амбокс'], base: ['Сандал', 'Кедр', 'Кожа'] },
+    longevityHours: 9, sillage: 3, accords: ['древесный', 'кожаный', 'дымный'],
+    desc: 'Аромат Нью-Йорка: молочный сандал, кожа и дым. Культовый унисекс «на каждый день».',
+    accent: '#CDB878',
+  },
+  {
+    slug: 'byredo-bal-dafrique', brand: 'Byredo', name: "Bal d'Afrique",
+    price: 22900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Бергамот', 'Лимон', 'Нероли'], heart: ['Фиалка', 'Жасмин', 'Цикламен'], base: ['Ветивер', 'Мускус', 'Амбра'] },
+    longevityHours: 7, sillage: 3, accords: ['цитрусовый', 'цветочный', 'древесный'],
+    desc: 'Солнечный и лёгкий, как отпуск: цитрусы, фиалка и ветивер. Идеален на лето, когда тяжёлые парфюмы невыносимы.',
+    accent: '#DCC98E',
+  },
+  {
+    slug: 'pdm-layton', brand: 'Parfums de Marly', name: 'Layton',
+    price: 25900, volume: 75, concentration: 'Eau de Parfum', gender: 'м', tags: ['хит'],
+    notes: { top: ['Яблоко', 'Лаванда', 'Бергамот'], heart: ['Герань', 'Фиалка', 'Жасмин'], base: ['Ваниль', 'Кардамон', 'Гваяк'] },
+    longevityHours: 12, sillage: 5, accords: ['сладкий', 'пряный', 'фужерный'],
+    desc: 'Яблоко, лаванда и ваниль с пряностями. Один из самых комплиментарных мужских ароматов в мире, стойкость огромная.',
+    accent: '#D9C69A',
+  },
+  {
+    slug: 'kilian-angels-share', brand: 'Kilian', name: "Angels' Share",
+    price: 28500, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: ['новинка'],
+    notes: { top: ['Коньяк'], heart: ['Корица', 'Бобы тонка', 'Дубовая бочка'], base: ['Пралине', 'Ваниль', 'Сандал'] },
+    longevityHours: 9, sillage: 4, accords: ['гурманский', 'сладкий', 'пряный'],
+    desc: 'Коньяк, корица и пралине — дорогой бар зимним вечером. В подарок мужчине — беспроигрышно.',
+    accent: '#B67A2E',
+  },
+  {
+    slug: 'initio-side-effect', brand: 'Initio Parfums Privés', name: 'Side Effect',
+    price: 29900, volume: 90, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Ром', 'Корица'], heart: ['Табак', 'Ваниль'], base: ['Сандал', 'Мускус'] },
+    longevityHours: 10, sillage: 4, accords: ['табачный', 'сладкий', 'пряный'],
+    desc: 'Ром, табак и ваниль — густой вечерний аромат-соблазнение. Побочный эффект — повышенное внимание.',
+    accent: '#8A5A2A',
+  },
+  {
+    slug: 'xerjoff-naxos', brand: 'Xerjoff', name: 'Naxos',
+    price: 32900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Лаванда', 'Бергамот', 'Лайм'], heart: ['Мёд', 'Корица', 'Жасмин'], base: ['Табачный лист', 'Ваниль', 'Бобы тонка'] },
+    longevityHours: 12, sillage: 5, accords: ['табачный', 'медовый', 'сладкий'],
+    desc: 'Мёд и табак итальянской выделки. Статусный аромат человека, которому не нужно ничего доказывать.',
+    accent: '#2E4470',
+  },
+  {
+    slug: 'dior-sauvage-elixir', brand: 'Dior', name: 'Sauvage Elixir',
+    price: 17900, volume: 60, concentration: 'Elixir', gender: 'м', tags: ['хит'],
+    notes: { top: ['Корица', 'Мускатный орех', 'Грейпфрут'], heart: ['Лаванда'], base: ['Лакрица', 'Сандал', 'Амбра'] },
+    longevityHours: 14, sillage: 5, accords: ['пряный', 'фужерный', 'амбра'],
+    desc: 'Самая мощная версия легендарного Sauvage: два пшика хватает на весь день. Зверь по стойкости и шлейфу.',
+    accent: '#5A2B1A',
+  },
+  {
+    slug: 'chanel-coco-mademoiselle', brand: 'Chanel', name: 'Coco Mademoiselle',
+    price: 19500, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Апельсин', 'Бергамот'], heart: ['Роза', 'Жасмин', 'Личи'], base: ['Пачули', 'Ваниль', 'Белый мускус'] },
+    longevityHours: 8, sillage: 3, accords: ['цветочный', 'цитрусовый', 'шипровый'],
+    desc: 'Классика, которая не подводит: свежая роза с пачули. Самый безопасный дорогой подарок женщине.',
+    accent: '#E5C078',
+  },
+  {
+    slug: 'ysl-libre-intense', brand: 'Yves Saint Laurent', name: 'Libre Intense',
+    price: 14900, volume: 90, concentration: 'EDP Intense', gender: 'ж', tags: [],
+    notes: { top: ['Мандарин', 'Лаванда'], heart: ['Апельсиновый цвет', 'Жасмин'], base: ['Ваниль-бурбон', 'Амбра'] },
+    longevityHours: 9, sillage: 4, accords: ['цветочный', 'сладкий', 'амбра'],
+    desc: 'Лаванда и горячая ваниль — дерзкий вечерний характер для тех, кто не выбирает между нежным и сильным.',
+    accent: '#D3A652',
+  },
+  {
+    slug: 'ex-nihilo-fleur-narcotique', brand: 'Ex Nihilo', name: 'Fleur Narcotique',
+    price: 26900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: ['новинка'],
+    notes: { top: ['Личи', 'Персик', 'Бергамот'], heart: ['Пион', 'Жасмин'], base: ['Мох', 'Мускус'] },
+    longevityHours: 8, sillage: 4, accords: ['цветочный', 'фруктовый', 'мускусный'],
+    desc: 'Пьянящие белые цветы и сочное личи. Парижский бестселлер — аромат-униформа модной индустрии.',
+    accent: '#D8CBB0',
+  },
+  {
+    slug: 'armani-stronger-with-you-intensely', brand: 'Giorgio Armani', name: 'Stronger With You Intensely',
+    price: 15900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Розовый перец', 'Можжевельник'], heart: ['Шалфей', 'Корица'], base: ['Ваниль', 'Бобы тонка', 'Амбра'] },
+    longevityHours: 10, sillage: 4, accords: ['сладкий', 'пряный', 'амбра'],
+    desc: 'Тёплая ваниль с пряностями — лидер комплиментов от девушек по всем опросам. Осень, зима, свидания.',
+    accent: '#9C6432',
+  },
+
+  /* ─── TOM FORD PRIVATE BLEND ─── */
+  {
+    slug: 'tf-tobacco-vanille', brand: 'Tom Ford', name: 'Tobacco Vanille',
+    price: 34900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'], inStock: false,
+    notes: { top: ['Табачный лист', 'Пряности'], heart: ['Ваниль', 'Какао', 'Бобы тонка'], base: ['Сухофрукты', 'Древесные ноты'] },
+    longevityHours: 12, sillage: 5, accords: ['табачный', 'ваниль', 'гурманский'],
+    desc: 'Трубочный табак и густая ваниль — главный зимний люкс-аромат планеты. Разбирают быстрее, чем успеваем привозить.',
+    accent: '#6E4A22',
+  },
+  {
+    slug: 'tf-oud-wood', brand: 'Tom Ford', name: 'Oud Wood',
+    price: 32900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Уд', 'Розовое дерево', 'Кардамон'], heart: ['Сандал', 'Ветивер'], base: ['Бобы тонка', 'Амбра'] },
+    longevityHours: 9, sillage: 3, accords: ['уд', 'древесный', 'пряный'],
+    desc: 'Самый деликатный уд в парфюмерии: дорогое дерево без тяжести. Аромат тихой роскоши.',
+    accent: '#5C4632',
+  },
+  {
+    slug: 'tf-fucking-fabulous', brand: 'Tom Ford', name: 'Fucking Fabulous',
+    price: 36900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Лаванда', 'Шалфей'], heart: ['Кожа', 'Ирис'], base: ['Бобы тонка', 'Миндаль', 'Кашмеран'] },
+    longevityHours: 10, sillage: 4, accords: ['кожаный', 'сладкий', 'пудровый'],
+    desc: 'Кожа и миндальная ваниль с дерзким именем. Провокация, оформленная безупречно.',
+    accent: '#8C6A4A',
+  },
+  {
+    slug: 'tf-bitter-peach', brand: 'Tom Ford', name: 'Bitter Peach',
+    price: 34900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Персик', 'Кровавый апельсин'], heart: ['Ром', 'Коньяк', 'Давана'], base: ['Сандал', 'Ваниль', 'Бензоин'] },
+    longevityHours: 9, sillage: 4, accords: ['фруктовый', 'сладкий', 'гурманский'],
+    desc: 'Сочный персик в роме — вечерний, весёлый и очень заметный. Пара к Lost Cherry.',
+    accent: '#D96B45',
+  },
+  {
+    slug: 'tf-black-orchid', brand: 'Tom Ford', name: 'Black Orchid',
+    price: 18900, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Трюфель', 'Чёрная смородина'], heart: ['Орхидея', 'Специи'], base: ['Пачули', 'Ваниль', 'Ладан'] },
+    longevityHours: 10, sillage: 4, accords: ['восточный', 'цветочный', 'гурманский'],
+    desc: 'Тёмная орхидея и трюфель — вечерняя классика Tom Ford для женщин с характером.',
+    accent: '#3A2A3A',
+  },
+
+  /* ─── НИША ─── */
+  {
+    slug: 'creed-silver-mountain-water', brand: 'Creed', name: 'Silver Mountain Water',
+    price: 32900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Бергамот', 'Мандарин'], heart: ['Зелёный чай', 'Чёрная смородина'], base: ['Мускус', 'Сандал'] },
+    longevityHours: 7, sillage: 3, accords: ['свежий', 'цитрусовый', 'мускусный'],
+    desc: 'Горный ручей и зелёный чай: самый чистый и свежий Creed. Лето, офис, спорт.',
+    accent: '#B8C4CC',
+  },
+  {
+    slug: 'creed-green-irish-tweed', brand: 'Creed', name: 'Green Irish Tweed',
+    price: 31900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Лимонная вербена', 'Ирис'], heart: ['Фиалковый лист'], base: ['Сандал', 'Амбергрис'] },
+    longevityHours: 9, sillage: 3, accords: ['зелёный', 'свежий', 'фужерный'],
+    desc: 'Зелёный ирландский твид: свежесть скошенной травы в костюме джентльмена. Классика на все времена.',
+    accent: '#5E7A50',
+  },
+  {
+    slug: 'mfk-grand-soir', brand: 'Maison Francis Kurkdjian', name: 'Grand Soir',
+    price: 24900, volume: 70, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Бензоин'], heart: ['Ладан', 'Лаванда'], base: ['Амбра', 'Ваниль', 'Бобы тонка'] },
+    longevityHours: 12, sillage: 4, accords: ['амбра', 'ваниль', 'восточный'],
+    desc: '«Большой вечер»: янтарная карамельная амбра, обволакивающая как кашемировый плед. Вечерняя классика ниши.',
+    accent: '#C98A3A',
+  },
+  {
+    slug: 'mfk-aqua-universalis', brand: 'Maison Francis Kurkdjian', name: 'Aqua Universalis',
+    price: 21900, volume: 70, concentration: 'Eau de Toilette', gender: 'у', tags: [],
+    notes: { top: ['Бергамот', 'Лимон'], heart: ['Белые цветы'], base: ['Светлый мускус', 'Древесные ноты'] },
+    longevityHours: 6, sillage: 2, accords: ['свежий', 'цитрусовый', 'мускусный'],
+    desc: 'Запах свежевыстиранного белья и чистой кожи. Универсальная свежесть на каждый день.',
+    accent: '#D6DCE0',
+  },
+  {
+    slug: 'mfk-br540-extrait', brand: 'Maison Francis Kurkdjian', name: 'Baccarat Rouge 540 Extrait',
+    price: 39900, volume: 70, concentration: 'Extrait de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Шафран', 'Горький миндаль'], heart: ['Египетский жасмин'], base: ['Амбровое дерево', 'Мускус'] },
+    longevityHours: 14, sillage: 5, accords: ['амбра', 'сладкий', 'гурманский'],
+    desc: 'Ещё глубже, слаще и стойче обычного Baccarat Rouge. Максимальная версия легенды.',
+    accent: '#C22B3A',
+  },
+  {
+    slug: 'nishane-hacivat', brand: 'Nishane', name: 'Hacivat',
+    price: 23900, volume: 100, concentration: 'Extrait de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Ананас', 'Грейпфрут', 'Бергамот'], heart: ['Кедр', 'Пачули'], base: ['Дубовый мох', 'Древесные ноты'] },
+    longevityHours: 11, sillage: 4, accords: ['фруктовый', 'древесный', 'шипровый'],
+    desc: 'Турецкий ответ Aventus — многие считают, что вышло даже лучше. Ананас, кедр и безупречная стойкость.',
+    accent: '#D8B84A',
+  },
+  {
+    slug: 'nishane-ani', brand: 'Nishane', name: 'Ani',
+    price: 24900, volume: 100, concentration: 'Extrait de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Имбирь', 'Розовый перец', 'Бергамот'], heart: ['Роза', 'Кардамон'], base: ['Ваниль', 'Амбра', 'Мускус'] },
+    longevityHours: 12, sillage: 5, accords: ['сладкий', 'пряный', 'ваниль'],
+    desc: 'Имбирная ваниль с розой — тёплый, объёмный, обнимающий. Один из главных унисекс-хитов ниши.',
+    accent: '#B04A3A',
+  },
+  {
+    slug: 'mancera-red-tobacco', brand: 'Mancera', name: 'Red Tobacco',
+    price: 15900, volume: 120, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Корица', 'Уд', 'Шафран'], heart: ['Табак', 'Роза'], base: ['Ваниль', 'Сандал', 'Пачули'] },
+    longevityHours: 12, sillage: 5, accords: ['табачный', 'пряный', 'уд'],
+    desc: 'Пряный табак с удом — ядерная стойкость за разумные деньги. Зимний танк.',
+    accent: '#8E2F1F',
+  },
+  {
+    slug: 'mancera-cedrat-boise', brand: 'Mancera', name: 'Cedrat Boise',
+    price: 14900, volume: 120, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Цитрон', 'Чёрная смородина'], heart: ['Специи', 'Фрукты'], base: ['Кедр', 'Ваниль', 'Мускус'] },
+    longevityHours: 10, sillage: 4, accords: ['цитрусовый', 'древесный', 'фруктовый'],
+    desc: 'Свежий цитрус на древесной базе, который держится как ниша втрое дороже. Лето и офис.',
+    accent: '#C8B45A',
+  },
+  {
+    slug: 'montale-arabians-tonka', brand: 'Montale', name: 'Arabians Tonka',
+    price: 13900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Шафран', 'Бергамот'], heart: ['Уд', 'Болгарская роза'], base: ['Бобы тонка', 'Тростниковый сахар', 'Амбра'] },
+    longevityHours: 12, sillage: 5, accords: ['уд', 'сладкий', 'амбра'],
+    desc: 'Сладкий уд с тонкой — восточная роскошь с сумасшедшим шлейфом за вменяемые деньги.',
+    accent: '#7A4A1E',
+  },
+  {
+    slug: 'montale-intense-cafe', brand: 'Montale', name: 'Intense Cafe',
+    price: 11900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Цветочные ноты'], heart: ['Роза', 'Кофе'], base: ['Ваниль', 'Амбра', 'Белый мускус'] },
+    longevityHours: 10, sillage: 4, accords: ['гурманский', 'сладкий', 'цветочный'],
+    desc: 'Кофе с розой и ванилью: уютный гурманский шлейф, который замечают в лифте.',
+    accent: '#5E3A28',
+  },
+  {
+    slug: 'pdm-herod', brand: 'Parfums de Marly', name: 'Herod',
+    price: 27900, volume: 125, concentration: 'Eau de Parfum', gender: 'м', tags: ['хит'],
+    notes: { top: ['Корица', 'Перец'], heart: ['Табачный лист', 'Ладан'], base: ['Ваниль', 'Сандал', 'Ветивер'] },
+    longevityHours: 11, sillage: 4, accords: ['табачный', 'ваниль', 'пряный'],
+    desc: 'Ванильный табак королевской выделки — вечерняя классика для уверенных мужчин.',
+    accent: '#8A6A3E',
+  },
+  {
+    slug: 'pdm-delina', brand: 'Parfums de Marly', name: 'Delina',
+    price: 28900, volume: 75, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Личи', 'Ревень', 'Бергамот'], heart: ['Турецкая роза', 'Пион'], base: ['Ваниль', 'Мускус', 'Кашмеран'] },
+    longevityHours: 10, sillage: 4, accords: ['цветочный', 'фруктовый', 'сладкий'],
+    desc: 'Роза и личи в пудровом облаке — главный женский аромат ниши последних лет.',
+    accent: '#E8A8B8',
+  },
+  {
+    slug: 'pdm-pegasus', brand: 'Parfums de Marly', name: 'Pegasus',
+    price: 26900, volume: 125, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Миндаль', 'Бергамот'], heart: ['Гелиотроп', 'Жасмин'], base: ['Ваниль', 'Сандал', 'Амбра'] },
+    longevityHours: 11, sillage: 4, accords: ['пудровый', 'сладкий', 'ваниль'],
+    desc: 'Миндально-ванильная классика: элегантный, зимний, очень «дорогой» по звучанию.',
+    accent: '#C8B8A0',
+  },
+  {
+    slug: 'pdm-greenley', brand: 'Parfums de Marly', name: 'Greenley',
+    price: 27900, volume: 125, concentration: 'Eau de Parfum', gender: 'м', tags: ['новинка'],
+    notes: { top: ['Яблоко', 'Бергамот'], heart: ['Морские ноты', 'Петигрен'], base: ['Мускус', 'Кедр', 'Амбра'] },
+    longevityHours: 8, sillage: 3, accords: ['свежий', 'фруктовый', 'акватический'],
+    desc: 'Зелёное яблоко и морской бриз — свежий Marly на весну и лето.',
+    accent: '#7AA05A',
+  },
+  {
+    slug: 'kilian-love-dont-be-shy', brand: 'Kilian', name: "Love, Don't Be Shy",
+    price: 29900, volume: 50, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Нероли', 'Бергамот'], heart: ['Апельсиновый цвет', 'Роза'], base: ['Зефир', 'Ваниль', 'Мускус'] },
+    longevityHours: 9, sillage: 4, accords: ['сладкий', 'гурманский', 'цветочный'],
+    desc: 'Зефир и апельсиновый цвет — аромат-флирт, любимец Рианны. Сладко, но дорого-сладко.',
+    accent: '#E8C8D8',
+  },
+  {
+    slug: 'kilian-black-phantom', brand: 'Kilian', name: 'Black Phantom',
+    price: 29900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Ром', 'Кофе'], heart: ['Тёмный шоколад', 'Миндаль'], base: ['Сахарный тростник', 'Сандал'] },
+    longevityHours: 10, sillage: 4, accords: ['гурманский', 'сладкий', 'дымный'],
+    desc: 'Кофе, ром и тёмный шоколад — пиратский гурман для вечеров без правил.',
+    accent: '#2E2620',
+  },
+  {
+    slug: 'byredo-gypsy-water', brand: 'Byredo', name: 'Gypsy Water',
+    price: 24900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Бергамот', 'Лимон', 'Перец'], heart: ['Ладан', 'Сосновые иглы'], base: ['Ваниль', 'Сандал', 'Амбра'] },
+    longevityHours: 7, sillage: 3, accords: ['древесный', 'свежий', 'ваниль'],
+    desc: 'Лесной костёр и ваниль: свобода, завёрнутая в минималистичный флакон. Хит Byredo.',
+    accent: '#B0A088',
+  },
+  {
+    slug: 'byredo-mojave-ghost', brand: 'Byredo', name: 'Mojave Ghost',
+    price: 25900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: [], inStock: false,
+    notes: { top: ['Амбретта', 'Груша'], heart: ['Фиалка', 'Сандал'], base: ['Кашмеран', 'Кедр', 'Мускус'] },
+    longevityHours: 8, sillage: 3, accords: ['пудровый', 'древесный', 'мускусный'],
+    desc: 'Призрак пустыни Мохаве: пудровая груша и сандал. Нежный, обволакивающий, «свой» запах кожи.',
+    accent: '#D8C8B0',
+  },
+  {
+    slug: 'le-labo-another-13', brand: 'Le Labo', name: 'Another 13',
+    price: 28900, volume: 50, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Амброксан'], heart: ['Мускус', 'Жасмин'], base: ['Мох', 'Амбретта'] },
+    longevityHours: 9, sillage: 3, accords: ['мускусный', 'амбра', 'свежий'],
+    desc: 'Фирменный «запах чистой кожи», по которому узнают своих. Минимализм в аромате.',
+    accent: '#C4BCAC',
+  },
+  {
+    slug: 'xerjoff-erba-pura', brand: 'Xerjoff', name: 'Erba Pura',
+    price: 27900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Сицилийский апельсин', 'Лимон', 'Бергамот'], heart: ['Фруктовый микс'], base: ['Белый мускус', 'Ваниль', 'Амбра'] },
+    longevityHours: 12, sillage: 5, accords: ['фруктовый', 'сладкий', 'мускусный'],
+    desc: 'Фруктовая бомба на мускусной базе: шлейф, за которым оборачиваются. Итальянское солнце во флаконе.',
+    accent: '#E8A03A',
+  },
+  {
+    slug: 'amouage-reflection-man', brand: 'Amouage', name: 'Reflection Man',
+    price: 33900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Розмарин', 'Розовый перец'], heart: ['Ирис', 'Жасмин', 'Нероли'], base: ['Сандал', 'Ветивер', 'Пачули'] },
+    longevityHours: 9, sillage: 3, accords: ['цветочный', 'пудровый', 'древесный'],
+    desc: 'Белые цветы и ирис в мужском прочтении — самый элегантный «белый» аромат для мужчин.',
+    accent: '#D0D4DC',
+  },
+  {
+    slug: 'amouage-interlude-man', brand: 'Amouage', name: 'Interlude Man',
+    price: 34900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Бергамот', 'Орегано'], heart: ['Ладан', 'Опопонакс'], base: ['Уд', 'Сандал', 'Кожа'] },
+    longevityHours: 14, sillage: 5, accords: ['дымный', 'уд', 'пряный'],
+    desc: 'Дым, ладан и хаос, собранные в гармонию. Легендарный «аромат-стихия» из Омана.',
+    accent: '#6E5030',
+  },
+  {
+    slug: 'initio-oud-for-greatness', brand: 'Initio Parfums Privés', name: 'Oud for Greatness',
+    price: 31900, volume: 90, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Шафран', 'Лаванда', 'Мускатный орех'], heart: ['Уд'], base: ['Пачули', 'Мускус'] },
+    longevityHours: 13, sillage: 5, accords: ['уд', 'пряный', 'восточный'],
+    desc: 'Уд для величия: современный, чистый, мощный. Визитная карточка Initio.',
+    accent: '#3A3226',
+  },
+  {
+    slug: 'attar-hayati', brand: 'Attar Collection', name: 'Hayati',
+    price: 13900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Груша', 'Бергамот'], heart: ['Роза', 'Жасмин', 'Пион'], base: ['Мускус', 'Амбра', 'Ваниль'] },
+    longevityHours: 10, sillage: 4, accords: ['цветочный', 'фруктовый', 'сладкий'],
+    desc: 'Груша и роза в мускусном облаке — «жизнь моя» по-арабски. Нежный и очень стойкий.',
+    accent: '#E0B8C8',
+  },
+  {
+    slug: 'attar-musk-kashmir', brand: 'Attar Collection', name: 'Musk Kashmir',
+    price: 13500, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Ирис', 'Бергамот'], heart: ['Кашемировое дерево', 'Роза'], base: ['Белый мускус', 'Ваниль', 'Амбра'] },
+    longevityHours: 9, sillage: 3, accords: ['мускусный', 'пудровый', 'сладкий'],
+    desc: 'Кашемировый мускус: чистый, тёплый, уютный. Аромат «второй кожи» на каждый день.',
+    accent: '#D8D0C4',
+  },
+  {
+    slug: 'juliette-not-a-perfume', brand: 'Juliette Has A Gun', name: 'Not A Perfume',
+    price: 13900, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Цеталокс'], heart: ['Цеталокс'], base: ['Цеталокс'] },
+    longevityHours: 8, sillage: 2, accords: ['мускусный', 'амбра', 'свежий'],
+    desc: 'Одна молекула — а эффект «дорого пахнущей чистой кожи». Не парфюм, а суперсила.',
+    accent: '#E4DED4',
+  },
+  {
+    slug: 'tiziana-terenzi-kirke', brand: 'Tiziana Terenzi', name: 'Kirke',
+    price: 21900, volume: 100, concentration: 'Extrait de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Маракуйя', 'Персик'], heart: ['Малина', 'Ландыш'], base: ['Мускус', 'Ваниль', 'Гелиотроп'] },
+    longevityHours: 12, sillage: 5, accords: ['фруктовый', 'сладкий', 'мускусный'],
+    desc: 'Сочная маракуйя с мускусом — фруктовый шлейф-легенда, один из самых комплиментарных унисексов.',
+    accent: '#C86A8A',
+  },
+  {
+    slug: 'escentric-02', brand: 'Escentric Molecules', name: 'Escentric 02',
+    price: 12500, volume: 100, concentration: 'Eau de Toilette', gender: 'у', tags: [],
+    notes: { top: ['Амброксан'], heart: ['Ирис', 'Бузина'], base: ['Мускус', 'Кедр'] },
+    longevityHours: 7, sillage: 2, accords: ['мускусный', 'свежий', 'амбра'],
+    desc: 'Молекулярный минимализм: еле уловимый, но магнетический. Пахнет «тобой, только лучше».',
+    accent: '#CCD4D8',
+  },
+  {
+    slug: 'jo-malone-wood-sage', brand: 'Jo Malone', name: 'Wood Sage & Sea Salt',
+    price: 13900, volume: 100, concentration: 'Cologne', gender: 'у', tags: [],
+    notes: { top: ['Амбретта'], heart: ['Морская соль'], base: ['Шалфей', 'Древесные ноты'] },
+    longevityHours: 5, sillage: 2, accords: ['свежий', 'акватический', 'древесный'],
+    desc: 'Морской берег и шалфей: свежесть без сладости. Идеален для лета и многослойности.',
+    accent: '#B8C4B0',
+  },
+
+  /* ─── ДИЗАЙНЕРСКИЕ МУЖСКИЕ ─── */
+  {
+    slug: 'dior-sauvage-edp', brand: 'Dior', name: 'Sauvage Eau de Parfum',
+    price: 15900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: ['хит'],
+    notes: { top: ['Бергамот'], heart: ['Лаванда', 'Сычуаньский перец', 'Анис'], base: ['Амброксан', 'Ваниль'] },
+    longevityHours: 10, sillage: 4, accords: ['свежий', 'пряный', 'амбра'],
+    desc: 'Самый продаваемый мужской аромат мира. Свежий, дерзкий, узнаваемый с первой секунды.',
+    accent: '#2E3A48',
+  },
+  {
+    slug: 'bleu-de-chanel-edp', brand: 'Chanel', name: 'Bleu de Chanel',
+    price: 17900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: ['хит'],
+    notes: { top: ['Грейпфрут', 'Лимон', 'Мята'], heart: ['Имбирь', 'Жасмин'], base: ['Сандал', 'Кедр', 'Амбра'] },
+    longevityHours: 9, sillage: 3, accords: ['свежий', 'древесный', 'цитрусовый'],
+    desc: 'Безупречный мужской аромат «на всё»: работа, свидание, костюм, футболка. Ошибиться невозможно.',
+    accent: '#1E3A5E',
+  },
+  {
+    slug: 'acqua-di-gio-profondo', brand: 'Giorgio Armani', name: 'Acqua di Giò Profondo',
+    price: 12900, volume: 75, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Морские ноты', 'Бергамот'], heart: ['Розмарин', 'Лаванда'], base: ['Мускус', 'Пачули'] },
+    longevityHours: 8, sillage: 3, accords: ['акватический', 'свежий', 'фужерный'],
+    desc: 'Глубокая морская свежесть — современная версия легендарного Acqua di Giò.',
+    accent: '#1E4A6E',
+  },
+  {
+    slug: 'armani-acqua-di-gio', brand: 'Giorgio Armani', name: 'Acqua di Giò Pour Homme',
+    price: 11900, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: ['хит'],
+    notes: { top: ['Лайм', 'Бергамот', 'Жасмин'], heart: ['Морские ноты', 'Розмарин'], base: ['Белый мускус', 'Кедр'] },
+    longevityHours: 7, sillage: 3, accords: ['акватический', 'цитрусовый', 'свежий'],
+    desc: 'Аромат моря, который не выходит из моды почти 30 лет. Летняя классика №1.',
+    accent: '#5A8AA8',
+  },
+  {
+    slug: 'paco-one-million', brand: 'Rabanne', name: '1 Million',
+    price: 10900, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Грейпфрут', 'Мята'], heart: ['Корица', 'Роза'], base: ['Кожа', 'Амбра', 'Пачули'] },
+    longevityHours: 8, sillage: 4, accords: ['пряный', 'кожаный', 'сладкий'],
+    desc: 'Золотой слиток с корицей и кожей — клубная классика, которую слышно.',
+    accent: '#C8A030',
+  },
+  {
+    slug: 'paco-invictus', brand: 'Rabanne', name: 'Invictus',
+    price: 10500, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Грейпфрут', 'Морские ноты'], heart: ['Лавр', 'Жасмин'], base: ['Гваяк', 'Амбра'] },
+    longevityHours: 7, sillage: 3, accords: ['свежий', 'акватический', 'древесный'],
+    desc: 'Кубок победителя: свежий спортивный аромат для тех, кто привык выигрывать.',
+    accent: '#A8B8C0',
+  },
+  {
+    slug: 'jpg-le-male-elixir', brand: 'Jean Paul Gaultier', name: 'Le Male Elixir',
+    price: 13900, volume: 75, concentration: 'Parfum', gender: 'м', tags: ['хит', 'новинка'],
+    notes: { top: ['Лаванда', 'Мята'], heart: ['Ваниль', 'Бензоин'], base: ['Мёд', 'Бобы тонка', 'Табак'] },
+    longevityHours: 12, sillage: 5, accords: ['сладкий', 'ваниль', 'табачный'],
+    desc: 'Медовая лаванда с табаком — главный соблазнитель последних сезонов. Шлейф на весь вечер.',
+    accent: '#C87A2E',
+  },
+  {
+    slug: 'jpg-ultra-male', brand: 'Jean Paul Gaultier', name: 'Ultra Male',
+    price: 11900, volume: 75, concentration: 'EDT Intense', gender: 'м', tags: [],
+    notes: { top: ['Груша', 'Мята', 'Бергамот'], heart: ['Лаванда', 'Корица'], base: ['Ваниль', 'Амбра', 'Кедр'] },
+    longevityHours: 10, sillage: 5, accords: ['сладкий', 'фруктовый', 'ваниль'],
+    desc: 'Сладкая груша с лавандой — магнит для комплиментов в клубе и на свидании.',
+    accent: '#2E4A8E',
+  },
+  {
+    slug: 'versace-eros', brand: 'Versace', name: 'Eros',
+    price: 9900, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: ['хит'],
+    notes: { top: ['Мята', 'Зелёное яблоко', 'Лимон'], heart: ['Бобы тонка', 'Герань'], base: ['Ваниль', 'Ветивер', 'Кедр'] },
+    longevityHours: 9, sillage: 4, accords: ['свежий', 'сладкий', 'ваниль'],
+    desc: 'Мята и ваниль бога любви: молодёжная классика, проверенная миллионами свиданий.',
+    accent: '#3AA8A0',
+  },
+  {
+    slug: 'versace-eros-flame', brand: 'Versace', name: 'Eros Flame',
+    price: 10900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Мандарин', 'Чёрный перец'], heart: ['Герань', 'Роза'], base: ['Ваниль', 'Сандал', 'Бобы тонка'] },
+    longevityHours: 9, sillage: 4, accords: ['пряный', 'цитрусовый', 'ваниль'],
+    desc: 'Огненная версия Eros: пряный цитрус для холодного сезона и горячих вечеров.',
+    accent: '#C8442E',
+  },
+  {
+    slug: 'ch-bad-boy', brand: 'Carolina Herrera', name: 'Bad Boy',
+    price: 10900, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Чёрный перец', 'Бергамот'], heart: ['Шалфей', 'Кедр'], base: ['Какао', 'Бобы тонка', 'Амбра'] },
+    longevityHours: 8, sillage: 4, accords: ['пряный', 'сладкий', 'восточный'],
+    desc: 'Молния во флаконе: перец и какао для плохих парней с хорошим вкусом.',
+    accent: '#2A2E38',
+  },
+  {
+    slug: 'boss-bottled', brand: 'Hugo Boss', name: 'Boss Bottled',
+    price: 8900, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Яблоко', 'Слива', 'Бергамот'], heart: ['Корица', 'Герань'], base: ['Сандал', 'Ветивер', 'Кедр'] },
+    longevityHours: 7, sillage: 3, accords: ['фруктовый', 'древесный', 'пряный'],
+    desc: 'Яблоко и корица в деловом костюме — офисная классика, которая всегда уместна.',
+    accent: '#B0A890',
+  },
+  {
+    slug: 'terre-dhermes', brand: 'Hermès', name: "Terre d'Hermès",
+    price: 13900, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Апельсин', 'Грейпфрут'], heart: ['Перец', 'Пеларгония'], base: ['Ветивер', 'Кедр', 'Бензоин'] },
+    longevityHours: 9, sillage: 3, accords: ['цитрусовый', 'древесный', 'зелёный'],
+    desc: 'Земля и цитрус: аромат взрослого мужчины с безупречным вкусом. Икона Hermès.',
+    accent: '#C87830',
+  },
+  {
+    slug: 'ysl-y-edp', brand: 'Yves Saint Laurent', name: 'Y Eau de Parfum',
+    price: 12900, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Яблоко', 'Имбирь', 'Бергамот'], heart: ['Шалфей', 'Можжевельник'], base: ['Амбровое дерево', 'Бобы тонка', 'Кедр'] },
+    longevityHours: 9, sillage: 4, accords: ['свежий', 'фужерный', 'древесный'],
+    desc: 'Свежесть и древесная база в идеальном балансе — «умный кэжуал» в парфюмерии.',
+    accent: '#3E4650',
+  },
+  {
+    slug: 'prada-lhomme', brand: 'Prada', name: "L'Homme",
+    price: 11900, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Нероли', 'Чёрный перец'], heart: ['Ирис', 'Герань'], base: ['Кедр', 'Пачули', 'Амбра'] },
+    longevityHours: 7, sillage: 3, accords: ['пудровый', 'свежий', 'цветочный'],
+    desc: 'Ирисовая чистота и минимализм Prada: интеллигентный аромат для города.',
+    accent: '#C4C8CC',
+  },
+  {
+    slug: 'givenchy-gentleman-edp', brand: 'Givenchy', name: 'Gentleman EDP',
+    price: 12500, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Груша', 'Кардамон'], heart: ['Ирис', 'Лаванда'], base: ['Чёрная ваниль', 'Кожа', 'Пачули'] },
+    longevityHours: 8, sillage: 3, accords: ['пудровый', 'ваниль', 'кожаный'],
+    desc: 'Ирис и чёрная ваниль — бархатный вечерний джентльмен.',
+    accent: '#3A3430',
+  },
+  {
+    slug: 'azzaro-wanted-by-night', brand: 'Azzaro', name: 'Wanted by Night',
+    price: 11500, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Мандарин', 'Корица', 'Лаванда'], heart: ['Табак', 'Кожа'], base: ['Кедр', 'Бензоин'] },
+    longevityHours: 9, sillage: 4, accords: ['табачный', 'пряный', 'сладкий'],
+    desc: 'Ночной табак с корицей — аромат для тех, кого ищут. Клуб, вечер, зима.',
+    accent: '#6E3A28',
+  },
+  {
+    slug: 'armaf-club-de-nuit-intense', brand: 'Armaf', name: 'Club de Nuit Intense Man',
+    price: 4900, volume: 105, concentration: 'Eau de Toilette', gender: 'м', tags: ['хит'],
+    notes: { top: ['Лимон', 'Ананас', 'Чёрная смородина'], heart: ['Берёза', 'Роза', 'Жасмин'], base: ['Мускус', 'Амбра', 'Ваниль'] },
+    longevityHours: 10, sillage: 4, accords: ['фруктовый', 'дымный', 'древесный'],
+    desc: 'Легендарный «народный Aventus»: дымный ананас за 5% цены оригинала. Лучший старт в нише.',
+    accent: '#2A2A2E',
+  },
+
+  /* ─── ДИЗАЙНЕРСКИЕ ЖЕНСКИЕ ─── */
+  {
+    slug: 'chanel-no5-edp', brand: 'Chanel', name: 'N°5',
+    price: 19900, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Альдегиды', 'Иланг-иланг', 'Нероли'], heart: ['Роза', 'Жасмин', 'Ландыш'], base: ['Сандал', 'Ваниль', 'Ветивер'] },
+    longevityHours: 8, sillage: 3, accords: ['цветочный', 'пудровый', 'альдегидный'],
+    desc: 'Самые знаменитые духи в истории. Подарок, который не требует объяснений.',
+    accent: '#E8D890',
+  },
+  {
+    slug: 'chanel-chance-eau-tendre', brand: 'Chanel', name: 'Chance Eau Tendre',
+    price: 17500, volume: 100, concentration: 'Eau de Toilette', gender: 'ж', tags: [],
+    notes: { top: ['Айва', 'Грейпфрут'], heart: ['Жасмин', 'Гиацинт'], base: ['Мускус', 'Ирис', 'Кедр'] },
+    longevityHours: 6, sillage: 2, accords: ['цветочный', 'фруктовый', 'свежий'],
+    desc: 'Нежный шанс: айва и жасмин в розовом облаке. Самая деликатная Chanel.',
+    accent: '#F0C8CC',
+  },
+  {
+    slug: 'dior-jadore', brand: 'Dior', name: "J'adore",
+    price: 17900, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Иланг-иланг', 'Бергамот'], heart: ['Дамасская роза', 'Жасмин'], base: ['Тубероза', 'Мускус'] },
+    longevityHours: 8, sillage: 3, accords: ['цветочный', 'фруктовый', 'сладкий'],
+    desc: 'Золотой букет Dior: роза, жасмин и иланг. Женственность в чистом виде.',
+    accent: '#E0B858',
+  },
+  {
+    slug: 'dior-miss-dior', brand: 'Dior', name: 'Miss Dior',
+    price: 16900, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Личи', 'Мандарин'], heart: ['Грасская роза', 'Пион'], base: ['Мускус', 'Ваниль', 'Пачули'] },
+    longevityHours: 7, sillage: 3, accords: ['цветочный', 'сладкий', 'фруктовый'],
+    desc: 'Роза в шёлковом банте: романтичный аромат первых свиданий и весенних улиц.',
+    accent: '#E8A8B0',
+  },
+  {
+    slug: 'lancome-la-vie-est-belle', brand: 'Lancôme', name: 'La Vie Est Belle',
+    price: 14900, volume: 75, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Чёрная смородина', 'Груша'], heart: ['Ирис', 'Жасмин'], base: ['Пралине', 'Ваниль', 'Пачули'] },
+    longevityHours: 9, sillage: 4, accords: ['сладкий', 'гурманский', 'цветочный'],
+    desc: '«Жизнь прекрасна»: ирис с пралине, один из самых любимых женских ароматов планеты.',
+    accent: '#D89AB0',
+  },
+  {
+    slug: 'lancome-idole', brand: 'Lancôme', name: 'Idôle',
+    price: 12900, volume: 75, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Бергамот', 'Груша'], heart: ['Роза', 'Жасмин'], base: ['Белый мускус', 'Ваниль'] },
+    longevityHours: 7, sillage: 3, accords: ['цветочный', 'мускусный', 'свежий'],
+    desc: 'Чистая роза нового поколения в самом тонком флаконе мира.',
+    accent: '#E8C8D0',
+  },
+  {
+    slug: 'ysl-black-opium', brand: 'Yves Saint Laurent', name: 'Black Opium',
+    price: 14900, volume: 90, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Груша', 'Розовый перец'], heart: ['Кофе', 'Жасмин'], base: ['Ваниль', 'Пачули', 'Кедр'] },
+    longevityHours: 9, sillage: 4, accords: ['гурманский', 'сладкий', 'кофейный'],
+    desc: 'Кофе и ваниль в чёрных блёстках — аромат ночи, вечеринок и рок-н-ролла.',
+    accent: '#2E2430',
+  },
+  {
+    slug: 'ysl-libre', brand: 'Yves Saint Laurent', name: 'Libre',
+    price: 13900, volume: 90, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Мандарин', 'Лаванда', 'Чёрная смородина'], heart: ['Апельсиновый цвет', 'Жасмин'], base: ['Ваниль', 'Мускус', 'Кедр'] },
+    longevityHours: 8, sillage: 3, accords: ['цветочный', 'фужерный', 'ваниль'],
+    desc: 'Свобода: лаванда и апельсиновый цвет для независимых. Современная классика YSL.',
+    accent: '#E0C060',
+  },
+  {
+    slug: 'mugler-alien', brand: 'Mugler', name: 'Alien',
+    price: 15900, volume: 90, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Жасмин самбак'], heart: ['Кашмеран'], base: ['Белая амбра'] },
+    longevityHours: 10, sillage: 4, accords: ['цветочный', 'амбра', 'древесный'],
+    desc: 'Инопланетный жасмин на амбре: узнаваемый за километр фиолетовый кристалл.',
+    accent: '#6A4A9E',
+  },
+  {
+    slug: 'mugler-angel', brand: 'Mugler', name: 'Angel',
+    price: 15500, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Дыня', 'Кокос', 'Мандарин'], heart: ['Мёд', 'Красные ягоды'], base: ['Пачули', 'Шоколад', 'Карамель'] },
+    longevityHours: 12, sillage: 5, accords: ['гурманский', 'сладкий', 'восточный'],
+    desc: 'Первый гурманский аромат в истории: карамель, пачули и звезда. Или любовь, или страсть.',
+    accent: '#4A7AA8',
+  },
+  {
+    slug: 'vr-flowerbomb', brand: 'Viktor & Rolf', name: 'Flowerbomb',
+    price: 17500, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Чай', 'Бергамот'], heart: ['Жасмин', 'Роза', 'Орхидея', 'Фрезия'], base: ['Пачули', 'Мускус'] },
+    longevityHours: 9, sillage: 4, accords: ['цветочный', 'сладкий', 'восточный'],
+    desc: 'Цветочная бомба в гранате: взрыв тысячи цветов с ванильным шлейфом.',
+    accent: '#D89AA8',
+  },
+  {
+    slug: 'ch-good-girl', brand: 'Carolina Herrera', name: 'Good Girl',
+    price: 14500, volume: 80, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Миндаль', 'Кофе'], heart: ['Тубероза', 'Жасмин самбак'], base: ['Бобы тонка', 'Какао', 'Сандал'] },
+    longevityHours: 9, sillage: 4, accords: ['сладкий', 'цветочный', 'гурманский'],
+    desc: 'Хорошая девочка в туфельке на шпильке: миндаль, тубероза и какао. Днём ангел, вечером — нет.',
+    accent: '#2A2E48',
+  },
+  {
+    slug: 'armani-my-way', brand: 'Giorgio Armani', name: 'My Way',
+    price: 13500, volume: 90, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Апельсиновый цвет', 'Бергамот'], heart: ['Тубероза', 'Жасмин'], base: ['Белый мускус', 'Ваниль', 'Кедр'] },
+    longevityHours: 7, sillage: 3, accords: ['цветочный', 'свежий', 'мускусный'],
+    desc: 'Белые цветы и лёгкость дальних путешествий — нежный аромат на каждый день.',
+    accent: '#E8DCC8',
+  },
+  {
+    slug: 'armani-si', brand: 'Giorgio Armani', name: 'Sì',
+    price: 14900, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Чёрная смородина'], heart: ['Роза', 'Фрезия'], base: ['Ваниль', 'Пачули', 'Амброксан'] },
+    longevityHours: 8, sillage: 3, accords: ['фруктовый', 'цветочный', 'шипровый'],
+    desc: 'Скажи «да»: смородиновый ликёр на розе. Элегантность взрослой женщины.',
+    accent: '#B03A50',
+  },
+  {
+    slug: 'gucci-bloom', brand: 'Gucci', name: 'Bloom',
+    price: 13500, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Тубероза'], heart: ['Жасмин'], base: ['Корень ириса', 'Жасмин самбак'] },
+    longevityHours: 7, sillage: 3, accords: ['цветочный', 'белые цветы', 'пудровый'],
+    desc: 'Цветущий сад в розовом флаконе: тубероза и жасмин без сладости.',
+    accent: '#D8A8B8',
+  },
+  {
+    slug: 'versace-bright-crystal', brand: 'Versace', name: 'Bright Crystal',
+    price: 9900, volume: 90, concentration: 'Eau de Toilette', gender: 'ж', tags: [],
+    notes: { top: ['Гранат', 'Юдзу'], heart: ['Пион', 'Магнолия', 'Лотос'], base: ['Мускус', 'Красное дерево'] },
+    longevityHours: 6, sillage: 2, accords: ['цветочный', 'фруктовый', 'свежий'],
+    desc: 'Розовый кристалл: гранат и пион, лёгкость летнего платья.',
+    accent: '#F0B8C8',
+  },
+  {
+    slug: 'burberry-her', brand: 'Burberry', name: 'Her',
+    price: 13900, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Клубника', 'Ежевика'], heart: ['Жасмин', 'Фиалка'], base: ['Мускус', 'Амбра', 'Ваниль'] },
+    longevityHours: 8, sillage: 3, accords: ['фруктовый', 'сладкий', 'мускусный'],
+    desc: 'Лондонские ягоды на мускусе: молодой, сочный, очень обаятельный.',
+    accent: '#C84A60',
+  },
+  {
+    slug: 'dg-light-blue', brand: 'Dolce & Gabbana', name: 'Light Blue',
+    price: 10900, volume: 100, concentration: 'Eau de Toilette', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Сицилийский лимон', 'Яблоко'], heart: ['Жасмин', 'Бамбук'], base: ['Кедр', 'Амбра', 'Мускус'] },
+    longevityHours: 6, sillage: 3, accords: ['цитрусовый', 'свежий', 'фруктовый'],
+    desc: 'Средиземноморское лето: лимон и яблоко у синего моря. Вечный летний бестселлер.',
+    accent: '#7AB8D8',
+  },
+
+  /* ─── АРАБСКИЕ БРЕНДЫ: ОРИГИНАЛЫ ПО ЧЕСТНЫМ ЦЕНАМ ─── */
+  {
+    slug: 'lattafa-khamrah', brand: 'Lattafa', name: 'Khamrah',
+    price: 3990, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Корица', 'Мускатный орех', 'Бергамот'], heart: ['Финики', 'Пралине'], base: ['Ваниль', 'Бобы тонка', 'Амбровое дерево'] },
+    longevityHours: 10, sillage: 4, accords: ['гурманский', 'сладкий', 'пряный'],
+    desc: 'Финики, корица и пралине — арабский аромат, взорвавший соцсети. Звучит на 20 тысяч, стоит четыре.',
+    accent: '#A05A28',
+  },
+  {
+    slug: 'lattafa-yara', brand: 'Lattafa', name: 'Yara',
+    price: 2990, volume: 100, concentration: 'Eau de Parfum', gender: 'ж', tags: ['хит'],
+    notes: { top: ['Орхидея', 'Гелиотроп'], heart: ['Фруктовый микс'], base: ['Ваниль', 'Мускус', 'Сандал'] },
+    longevityHours: 8, sillage: 3, accords: ['сладкий', 'пудровый', 'фруктовый'],
+    desc: 'Розовая пудровая нежность — самый вирусный женский арабский аромат. Комплименты гарантированы.',
+    accent: '#E8B0C0',
+  },
+  {
+    slug: 'lattafa-asad', brand: 'Lattafa', name: 'Asad',
+    price: 3490, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Чёрный перец', 'Ананас', 'Табак'], heart: ['Кофе', 'Ирис'], base: ['Ваниль', 'Амбра', 'Бензоин'] },
+    longevityHours: 10, sillage: 4, accords: ['пряный', 'табачный', 'сладкий'],
+    desc: '«Лев» по-арабски: табак, кофе и ваниль в духе дорогих вечерних ароматов.',
+    accent: '#6E4A2A',
+  },
+  {
+    slug: 'lattafa-fakhar', brand: 'Lattafa', name: 'Fakhar Black',
+    price: 3290, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: [],
+    notes: { top: ['Лаванда', 'Мята', 'Бергамот'], heart: ['Корица', 'Яблоко'], base: ['Ваниль', 'Амбра', 'Пачули'] },
+    longevityHours: 8, sillage: 3, accords: ['фужерный', 'сладкий', 'пряный'],
+    desc: 'Достойная альтернатива дорогой синей классике — свежесть и ваниль на каждый день.',
+    accent: '#2A3040',
+  },
+  {
+    slug: 'lattafa-badee-al-oud', brand: 'Lattafa', name: "Bade'e Al Oud — Oud for Glory",
+    price: 3990, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Шафран', 'Мускатный орех'], heart: ['Уд', 'Пачули'], base: ['Амбра', 'Древесные ноты'] },
+    longevityHours: 12, sillage: 5, accords: ['уд', 'пряный', 'восточный'],
+    desc: 'Настоящий восточный уд с шафраном — звучание люксовой ниши за смешные деньги.',
+    accent: '#4A2E1A',
+  },
+  {
+    slug: 'lattafa-ana-abiyedh', brand: 'Lattafa', name: 'Ana Abiyedh',
+    price: 2790, volume: 60, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Шафран'], heart: ['Амбровое дерево'], base: ['Мускус', 'Древесные ноты'] },
+    longevityHours: 8, sillage: 3, accords: ['амбра', 'мускусный', 'сладкий'],
+    desc: '«Белый» амбровый аромат в духе Baccarat Rouge — минимализм и чистота.',
+    accent: '#E8DCC0',
+  },
+  {
+    slug: 'lattafa-raghba', brand: 'Lattafa', name: 'Raghba',
+    price: 2590, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Уд'], heart: ['Ваниль', 'Сахар'], base: ['Мускус', 'Амбра', 'Ладан'] },
+    longevityHours: 9, sillage: 4, accords: ['уд', 'ваниль', 'сладкий'],
+    desc: 'Сладкий дымный уд — визитная карточка арабской парфюмерии. Первый уд для знакомства.',
+    accent: '#5A3A20',
+  },
+  {
+    slug: 'lattafa-khamrah-qahwa', brand: 'Lattafa', name: 'Khamrah Qahwa',
+    price: 4290, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: ['новинка'], inStock: false,
+    notes: { top: ['Кардамон', 'Корица', 'Имбирь'], heart: ['Арабский кофе', 'Пралине'], base: ['Ваниль', 'Бензоин', 'Мускус'] },
+    longevityHours: 10, sillage: 4, accords: ['кофейный', 'гурманский', 'пряный'],
+    desc: 'Кофейная версия легендарного Khamrah: арабский кофе со специями и пралине.',
+    accent: '#7A4A2E',
+  },
+  {
+    slug: 'arabian-oud-kalemat', brand: 'Arabian Oud', name: 'Kalemat',
+    price: 11900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: ['хит'],
+    notes: { top: ['Анис', 'Черника'], heart: ['Мёд', 'Кашмеран'], base: ['Амбра', 'Ладан', 'Древесные ноты'] },
+    longevityHours: 12, sillage: 4, accords: ['медовый', 'амбра', 'сладкий'],
+    desc: 'Мёд, черника и ладан — «Слова», которые не нуждаются в переводе. Легенда арабского парфюма.',
+    accent: '#C89A3A',
+  },
+  {
+    slug: 'arabian-oud-madawi', brand: 'Arabian Oud', name: 'Madawi',
+    price: 13900, volume: 90, concentration: 'Eau de Parfum', gender: 'ж', tags: [],
+    notes: { top: ['Фрукты', 'Бергамот'], heart: ['Роза', 'Жасмин'], base: ['Уд', 'Ваниль', 'Мускус'] },
+    longevityHours: 10, sillage: 4, accords: ['цветочный', 'уд', 'сладкий'],
+    desc: 'Восточная принцесса: роза на нежном уде. Роскошь без тяжести.',
+    accent: '#C08A9A',
+  },
+  {
+    slug: 'arabian-oud-woody', brand: 'Arabian Oud', name: 'Woody',
+    price: 12900, volume: 100, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Пряности', 'Бергамот'], heart: ['Уд', 'Роза'], base: ['Сандал', 'Мускус', 'Амбра'] },
+    longevityHours: 11, sillage: 4, accords: ['уд', 'древесный', 'пряный'],
+    desc: 'Классический древесный уд от короля арабской парфюмерии — глубокий и благородный.',
+    accent: '#5E4028',
+  },
+  {
+    slug: 'afnan-9pm', brand: 'Afnan', name: '9PM',
+    price: 4490, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: ['хит'],
+    notes: { top: ['Яблоко', 'Корица', 'Бергамот'], heart: ['Апельсиновый цвет', 'Лаванда'], base: ['Ваниль', 'Амбра', 'Пачули'] },
+    longevityHours: 9, sillage: 4, accords: ['сладкий', 'фруктовый', 'ваниль'],
+    desc: 'Вечер начинается в девять: сладкое яблоко с корицей в духе Ultra Male, но за свои деньги.',
+    accent: '#3A2E4A',
+  },
+  {
+    slug: 'rasasi-hawas', brand: 'Rasasi', name: 'Hawas for Him',
+    price: 5990, volume: 100, concentration: 'Eau de Parfum', gender: 'м', tags: ['хит'],
+    notes: { top: ['Яблоко', 'Бергамот', 'Корица'], heart: ['Апельсиновый цвет', 'Кардамон'], base: ['Амбра', 'Мускус', 'Древесные ноты'] },
+    longevityHours: 10, sillage: 4, accords: ['акватический', 'фруктовый', 'амбра'],
+    desc: 'Синяя волна из Эмиратов: свежий, сочный, невероятно стойкий. Летний фаворит.',
+    accent: '#2E5A8E',
+  },
+  {
+    slug: 'antonio-banderas-blue-seduction', brand: 'Antonio Banderas', name: 'Blue Seduction',
+    price: 2490, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Дыня', 'Мята', 'Бергамот'], heart: ['Морские ноты', 'Кардамон'], base: ['Амбра', 'Мускус', 'Древесные ноты'] },
+    longevityHours: 6, sillage: 3, accords: ['акватический', 'свежий', 'фруктовый'],
+    desc: 'Свежая классика за свои деньги: дыня, мята и морской бриз. Проверенный временем магнит комплиментов.',
+    accent: '#2E6A9E',
+  },
+  {
+    slug: 'antonio-banderas-golden-secret', brand: 'Antonio Banderas', name: 'The Golden Secret',
+    price: 2690, volume: 100, concentration: 'Eau de Toilette', gender: 'м', tags: [],
+    notes: { top: ['Яблоко', 'Мята'], heart: ['Корица', 'Мускатный орех'], base: ['Кожа', 'Амбра', 'Мускус'] },
+    longevityHours: 6, sillage: 3, accords: ['пряный', 'сладкий', 'кожаный'],
+    desc: 'Золотой секрет: яблоко с корицей на кожаной базе. Бюджетный вечерний вариант, который звучит дороже цены.',
+    accent: '#C89A2E',
+  },
+  {
+    slug: 'al-haramain-amber-oud-gold', brand: 'Al Haramain', name: 'Amber Oud Gold Edition',
+    price: 6490, volume: 60, concentration: 'Eau de Parfum', gender: 'у', tags: [],
+    notes: { top: ['Бергамот', 'Зелёные ноты'], heart: ['Амбра', 'Специи'], base: ['Ваниль', 'Мускус', 'Сандал'] },
+    longevityHours: 10, sillage: 4, accords: ['амбра', 'сладкий', 'ваниль'],
+    desc: 'Золотая амбра в духе дорогого Killian Love — восточная сладость по-честному.',
+    accent: '#C8A030',
+  },
+];
+
+const ALL_RAW: RawProduct[] = [
+  ...RAW,
+  ...SEG_LUX_A,
+  ...SEG_KILIAN,
+  ...SEG_ARAB,
+  ...SEG_NICHE_TOP,
+  ...SEG_NICHE_2,
+  ...SEG_DESIGNER_M,
+  ...SEG_DESIGNER_W,
+  ...SEG_SELECTIVE,
+];
+
+/* защита от дублей между сегментами: первый победил */
+const seenSlugs = new Set<string>();
+export const PRODUCTS: Product[] = ALL_RAW.filter((p) => {
+  if (seenSlugs.has(p.slug)) return false;
+  seenSlugs.add(p.slug);
+  return true;
+}).map((p) => ({ ...p, inStock: p.inStock !== false }));
+
+/** официальное фото флакона (белый фон вырезан); путь учитывает подпапку хостинга */
+export function photoSrc(p: Product): string {
+  return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/photos/${p.slug}.png`;
+}
+
+export function getProduct(slug: string): Product | undefined {
+  return PRODUCTS.find((p) => p.slug === slug);
+}
+
+export function getSimilar(product: Product, count = 4): Product[] {
+  return PRODUCTS.filter((p) => p.slug !== product.slug)
+    .map((p) => ({
+      p,
+      score:
+        p.accords.filter((a) => product.accords.includes(a)).length * 2 +
+        (p.gender === product.gender ? 1 : 0) +
+        (p.inStock ? 0.5 : -3),
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, count)
+    .map((x) => x.p);
+}
+
+export const HITS = PRODUCTS.filter((p) => p.tags.includes('хит'));
+export const NEW = PRODUCTS.filter((p) => p.tags.includes('новинка'));
+export const BUDGET = PRODUCTS.filter((p) => p.price <= 6500);
+export const BRANDS = [...new Set(PRODUCTS.map((p) => p.brand))].sort();
+
+export const GENDER_LABEL: Record<Gender, string> = {
+  м: 'Мужской',
+  ж: 'Женский',
+  у: 'Унисекс',
+};
