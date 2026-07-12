@@ -234,6 +234,10 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .lead-form input,.lead-form textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);color:var(--txt);font-size:15px;padding:14px 16px;outline:none;transition:border-color .25s}
 .lead-form input:focus,.lead-form textarea:focus{border-color:var(--gold)}
 .lead-form textarea{resize:vertical;min-height:74px}
+.model-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(201,163,95,.1);border:1px solid rgba(201,163,95,.4);border-radius:var(--r-sm);padding:11px 14px;margin-bottom:16px;font-size:14px;color:var(--gold-bright)}
+.model-chip[hidden]{display:none}
+.model-chip button{background:none;border:none;color:var(--mut);font-size:15px;padding:4px 6px;flex:none}
+.model-chip button:hover{color:var(--txt)}
 .form-note{font-size:12.5px;color:var(--mut);margin-top:14px;line-height:1.55;text-align:center}
 .form-ok{display:none;text-align:center;padding:30px 6px}
 .form-ok .ic{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:rgba(89,201,106,.12);border:1px solid rgba(89,201,106,.4);display:grid;place-items:center;color:#7ad786}
@@ -359,8 +363,8 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
   </div>
   <div class="wrap hero-inner">
     <span class="live reveal"><span class="dot"></span><span id="liveLine">Астрахань · отвечаем в течение часа</span></span>
-    <h1 class="reveal d1">Оригинальные часы —<br>без наценки <em>бутиков</em></h1>
-    <p class="hero-sub reveal d2">Casio, Seiko, Tissot и Citizen в наличии в Астрахани. 100 моделей с реальными ценами прямо на этой странице. Примерите до покупки — платите только за то, что подошло.</p>
+    <h1 class="reveal d1">Точность — вежливость <em>королей</em></h1>
+    <p class="hero-sub reveal d2">Оригинальные Casio, Seiko, Tissot и Citizen в Астрахани. 100 моделей с реальными ценами прямо на этой странице — выбирайте, примеряйте, платите за то, что подошло.</p>
     <div class="hero-actions reveal d3">
       <a class="btn btn-gold" href="#catalog">Смотреть каталог
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -550,21 +554,14 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 
     <form class="lead-form reveal d2" id="leadForm" novalidate>
       <div id="formFields">
-        <div class="fld">
-          <label for="fName">Ваше имя</label>
-          <input type="text" id="fName" name="name" autocomplete="name" placeholder="Как к вам обращаться" required>
+        <input type="hidden" id="fModel" name="model">
+        <div class="model-chip" id="modelChip" hidden>
+          <span id="modelChipText"></span>
+          <button type="button" id="modelClear" aria-label="Убрать модель из заявки">✕</button>
         </div>
         <div class="fld">
           <label for="fContact">Телефон или ник в Telegram</label>
           <input type="text" id="fContact" name="contact" autocomplete="tel" placeholder="+7 ··· ··· ·· ·· или @nickname" required>
-        </div>
-        <div class="fld">
-          <label for="fModel">Модель</label>
-          <input type="text" id="fModel" name="model" placeholder="Заполнится сама, если выбрать в каталоге">
-        </div>
-        <div class="fld">
-          <label for="fMsg">Комментарий (необязательно)</label>
-          <textarea id="fMsg" name="msg" placeholder="Бюджет, повод, пожелания…"></textarea>
         </div>
         <button type="submit" class="btn btn-gold btn-block">Отправить заявку
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg>
@@ -790,10 +787,16 @@ function applyPreset(name){
 $$('[data-preset]').forEach(function(a){a.addEventListener('click',function(){applyPreset(a.dataset.preset)})});
 
 /* бронирование из карточки → форма */
+function setModel(v){
+  $('#fModel').value=v;
+  $('#modelChipText').textContent=v?'Модель: '+v:'';
+  $('#modelChip').hidden=!v;
+}
+$('#modelClear').addEventListener('click',function(){setModel('')});
 document.addEventListener('click',function(e){
   var b=e.target.closest('[data-book]');if(!b)return;
   var p=CAT.find(function(x){return x.i===+b.dataset.book});if(!p)return;
-  $('#fModel').value=p.n+' — '+fmt(p.p);
+  setModel(p.n+' — '+fmt(p.p));
   location.hash='#zayavka';
   toast('Модель добавлена в заявку — осталось оставить контакт');
 });
@@ -852,10 +855,10 @@ drawQuiz();
    Для боевого режима заменить sendLead() на POST к бэкенду или Telegram-боту. */
 $('#leadForm').addEventListener('submit',function(e){
   e.preventDefault();
-  var name=$('#fName').value.trim(),contact=$('#fContact').value.trim();
-  if(!name||!contact){toast('Заполните имя и контакт — иначе не сможем ответить');return}
-  var model=$('#fModel').value.trim(),msg=$('#fMsg').value.trim();
-  var text='Заявка с сайта TIME BRAND\nИмя: '+name+'\nСвязь: '+contact+(model?'\nМодель: '+model:'')+(msg?'\nКомментарий: '+msg:'');
+  var contact=$('#fContact').value.trim();
+  if(!contact){toast('Оставьте телефон или ник — иначе не сможем ответить');return}
+  var model=$('#fModel').value.trim();
+  var text='Заявка с сайта TIME BRAND\nСвязь: '+contact+(model?'\nМодель: '+model:'');
   sendLead(text);
 });
 function sendLead(text){
