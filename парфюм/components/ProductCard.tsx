@@ -40,12 +40,15 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="group relative" style={{ perspective: 800 }}>
+    <div
+      className="group relative transition-transform duration-500 ease-out hover:-translate-y-1.5"
+      style={{ perspective: 800 }}
+    >
       <motion.div
         onPointerMove={onPointerMove}
         onPointerLeave={resetTilt}
         style={{ rotateX: rx, rotateY: ry, transformStyle: 'preserve-3d' }}
-        whileHover={{ y: -6 }}
+        whileTap={{ scale: 0.97 }}
         transition={{ duration: 0.35, ease: 'easeOut' }}
         className="border hairline bg-graphite shadow-card transition-shadow duration-500 group-hover:shadow-[0_30px_55px_-18px_rgba(23,19,16,0.3)]"
       >

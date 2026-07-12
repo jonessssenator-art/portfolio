@@ -91,7 +91,7 @@ export default function ProductView({ product }: { product: Product }) {
       <div className="mt-6 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
         {/* галерея: огромное чистое фото, ниже — атмосферный кадр, если есть */}
         <div className="space-y-4 lg:space-y-6">
-          <div className="flex items-center justify-center bg-stage px-6 py-12 sm:py-16">
+          <div className="flex items-center justify-center rounded-2xl bg-stage px-6 py-12 shadow-[0_20px_50px_-24px_rgba(23,19,16,0.35)] dark:shadow-[0_25px_60px_-20px_rgba(0,0,0,0.7)] dark:ring-1 dark:ring-ivory/[0.06] sm:py-16">
             <img
               src={photoSrc(product)}
               alt={`${product.brand} ${product.name} — оригинальный флакон`}
@@ -109,7 +109,7 @@ export default function ProductView({ product }: { product: Product }) {
               width={1280}
               height={1714}
               loading="lazy"
-              className="aspect-[4/5] w-full object-cover"
+              className="aspect-[4/5] w-full rounded-2xl object-cover"
             />
           )}
         </div>
