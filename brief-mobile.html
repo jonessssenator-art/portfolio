@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Бриф на сайт</title>
+<title>Бриф лендинга — XXVII.EXE</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
-<meta name="description" content="Короткий бриф: ответьте на 11 вопросов, почти всё выбирается кнопками. Займёт 3 минуты.">
+<meta name="description" content="Короткий бриф: 18 коротких шагов, почти всё выбирается кнопками. Займёт ~5 минут.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -300,6 +300,8 @@
   }
   .field + .field { margin-top: 10px; }
   .hint { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+  .custom-box { width: 100%; }
+  .chips + .custom-box { margin-top: 12px; }
 
   /* ---------- bottom actions ---------- */
   .actions { margin-top: auto; padding-top: 22px; display: flex; flex-direction: column; gap: 10px; }
@@ -679,7 +681,7 @@ function render() {
 
 function renderIntro(scr) {
   scr.innerHTML = `
-    <div class="kicker"><span class="dot"></span>Бриф · 5 минут</div>
+    <div class="kicker"><span class="dot"></span>XXVII.EXE · Бриф · 5 минут</div>
     <h1>Что будем делать?</h1>
     <p class="sub">Ответьте на несколько вопросов, большинство выбирается кнопками. В конце ответы улетят мне одним сообщением.</p>
     <div class="avatar-row">
@@ -724,9 +726,20 @@ function renderStep(scr, step) {
   if (step.type === 'single') {
     const multi = step.multiple;
     if (multi && !Array.isArray(answers[step.id])) answers[step.id] = [];
+    const optionTexts = step.options.map(o => o.t);
+    let customVal = multi
+      ? (answers[step.id].find(v => !optionTexts.includes(v)) || '')
+      : (answers[step.id] && !optionTexts.includes(answers[step.id]) ? answers[step.id] : '');
+
     const wrap = document.createElement('div');
     wrap.className = 'options';
     let nextBtn = null;
+    let actions = null;
+
+    const updateNext = () => {
+      if (!nextBtn) return;
+      nextBtn.disabled = multi ? answers[step.id].length === 0 : !(answers[step.id] || '').length;
+    };
 
     step.options.forEach(o => {
       const sel = multi ? answers[step.id].includes(o.t) : answers[step.id] === o.t;
@@ -743,61 +756,159 @@ function renderStep(scr, step) {
           const i = arr.indexOf(o.t);
           if (i >= 0) arr.splice(i, 1); else arr.push(o.t);
           b.classList.toggle('selected');
-          nextBtn.disabled = arr.length === 0;
+          updateNext();
         } else {
           answers[step.id] = o.t;
+          customVal = '';
           wrap.querySelectorAll('.opt').forEach(x => x.classList.remove('selected'));
           b.classList.add('selected');
+          customBox.style.display = 'none';
+          actions.style.display = 'none';
           setTimeout(next, 300);
         }
       };
       wrap.appendChild(b);
     });
+
+    /* свой вариант */
+    const customBtn = document.createElement('button');
+    customBtn.className = 'opt' + (customVal ? ' selected' : '');
+    customBtn.innerHTML = `
+      <span class="ico">✏️</span>
+      <span class="txt">Свой вариант<small>Напишу своими словами</small></span>
+      <span class="mark">${CHECK_SVG}</span>
+    `;
+    wrap.appendChild(customBtn);
+
+    const customBox = document.createElement('div');
+    customBox.className = 'field custom-box';
+    customBox.style.display = customVal ? '' : 'none';
+    customBox.innerHTML = `<label>Свой вариант</label><input type="text" placeholder="Напишите свой ответ">`;
+    const customInp = customBox.querySelector('input');
+    customInp.value = customVal;
+    wrap.appendChild(customBox);
+
+    const setCustom = v => {
+      if (multi) {
+        const arr = answers[step.id];
+        const i = arr.indexOf(customVal);
+        if (i >= 0) arr.splice(i, 1);
+        if (v) arr.push(v);
+      } else {
+        answers[step.id] = v;
+      }
+      customVal = v;
+      updateNext();
+    };
+    customInp.oninput = () => setCustom(customInp.value.trim());
+
+    customBtn.onclick = () => {
+      const opening = customBox.style.display === 'none';
+      if (!multi) {
+        wrap.querySelectorAll('.opt').forEach(x => x.classList.remove('selected'));
+        if (answers[step.id] && optionTexts.includes(answers[step.id])) answers[step.id] = '';
+      }
+      if (opening) {
+        customBtn.classList.add('selected');
+        customBox.style.display = '';
+        setCustom(customInp.value.trim());
+        if (!multi) actions.style.display = '';
+        customInp.focus({ preventScroll: true });
+      } else {
+        customBtn.classList.remove('selected');
+        customBox.style.display = 'none';
+        setCustom('');
+        if (!multi) actions.style.display = 'none';
+      }
+    };
+
     scr.appendChild(wrap);
 
-    if (multi) {
-      const actions = document.createElement('div');
-      actions.className = 'actions';
-      nextBtn = document.createElement('button');
-      nextBtn.className = 'btn btn-black';
-      nextBtn.textContent = 'Дальше';
-      nextBtn.disabled = answers[step.id].length === 0;
-      nextBtn.onclick = next;
-      actions.appendChild(nextBtn);
-      scr.appendChild(actions);
-    }
+    actions = document.createElement('div');
+    actions.className = 'actions';
+    nextBtn = document.createElement('button');
+    nextBtn.className = 'btn btn-black';
+    nextBtn.textContent = 'Дальше';
+    nextBtn.onclick = next;
+    actions.appendChild(nextBtn);
+    if (!multi && !customVal) actions.style.display = 'none';
+    scr.appendChild(actions);
+    updateNext();
   }
 
   if (step.type === 'multi') {
     if (!answers[step.id]) answers[step.id] = [];
+    const optionTexts = step.options;
+    let customVal = answers[step.id].find(v => !optionTexts.includes(v)) || '';
+
     const wrap = document.createElement('div');
     wrap.className = 'chips';
+    let nextBtn = null;
+    const updateNext = () => { if (nextBtn) nextBtn.disabled = answers[step.id].length === 0; };
+
     step.options.forEach(o => {
       const b = document.createElement('button');
       const sel = answers[step.id].includes(o);
       b.className = 'chip' + (sel ? ' selected' : '');
-      b.innerHTML = `<span class="plus">${sel ? CHECK_SVG.replace('stroke="#fff"','') : PLUS_SVG}</span>${o}`;
+      b.innerHTML = `<span class="plus">${sel ? CHECK_SVG : PLUS_SVG}</span>${o}`;
       b.onclick = () => {
         const arr = answers[step.id];
         const i = arr.indexOf(o);
         if (i >= 0) arr.splice(i, 1); else arr.push(o);
         b.classList.toggle('selected');
         b.querySelector('.plus').innerHTML = arr.includes(o) ? CHECK_SVG : PLUS_SVG;
-        nextBtn.disabled = arr.length === 0;
+        updateNext();
       };
       wrap.appendChild(b);
     });
+
+    /* свой вариант */
+    const customChip = document.createElement('button');
+    customChip.className = 'chip' + (customVal ? ' selected' : '');
+    customChip.innerHTML = `<span class="plus">${customVal ? CHECK_SVG : PLUS_SVG}</span>✏️ Свой вариант`;
+    wrap.appendChild(customChip);
     scr.appendChild(wrap);
+
+    const customBox = document.createElement('div');
+    customBox.className = 'field custom-box';
+    customBox.style.display = customVal ? '' : 'none';
+    customBox.innerHTML = `<label>Свой вариант</label><input type="text" placeholder="Напишите свой ответ">`;
+    const customInp = customBox.querySelector('input');
+    customInp.value = customVal;
+    scr.appendChild(customBox);
+
+    const setCustom = v => {
+      const arr = answers[step.id];
+      const i = arr.indexOf(customVal);
+      if (i >= 0) arr.splice(i, 1);
+      if (v) arr.push(v);
+      customVal = v;
+      updateNext();
+    };
+    customInp.oninput = () => setCustom(customInp.value.trim());
+
+    customChip.onclick = () => {
+      const opening = customBox.style.display === 'none';
+      customChip.classList.toggle('selected', opening);
+      customChip.querySelector('.plus').innerHTML = opening ? CHECK_SVG : PLUS_SVG;
+      customBox.style.display = opening ? '' : 'none';
+      if (opening) {
+        setCustom(customInp.value.trim());
+        customInp.focus({ preventScroll: true });
+      } else {
+        setCustom('');
+      }
+    };
 
     const actions = document.createElement('div');
     actions.className = 'actions';
-    const nextBtn = document.createElement('button');
+    nextBtn = document.createElement('button');
     nextBtn.className = 'btn btn-black';
     nextBtn.textContent = 'Дальше';
-    nextBtn.disabled = answers[step.id].length === 0;
     nextBtn.onclick = next;
     actions.appendChild(nextBtn);
     scr.appendChild(actions);
+    updateNext();
   }
 
   if (step.type === 'text') {
@@ -874,7 +985,7 @@ function renderFinal(scr) {
     <div class="done-check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/><path d="M9 12.5l5 5L24 7.5" transform="translate(-2,0)"/></svg></div>
     <div class="kicker red"><span class="dot"></span>Финал</div>
     <h1>Готово! Осталось отправить</h1>
-    <p class="sub">Проверьте ответы и жмите кнопку — они придут мне одним сообщением в WhatsApp. Я отвечу в течение дня. Логотип, прайс и фото можно прислать следом в тот же чат.</p>
+    <p class="sub">Проверьте ответы и жмите кнопку — они придут мне одним сообщением в WhatsApp или Telegram, куда вам удобнее. Я отвечу в течение дня. Логотип, прайс и фото можно прислать следом в тот же чат.</p>
     <div class="summary">
       ${rows.map(r => `<div class="row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')}
     </div>
@@ -883,6 +994,10 @@ function renderFinal(scr) {
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.2 1.1-1.7 1.2-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.7 1.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.1z"/></svg>
         Отправить в WhatsApp
       </button>
+      <button class="btn btn-ghost" id="sendTg">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6 18.9 19c-.2 1-.8 1.2-1.6.8l-4.6-3.4-2.2 2.1c-.2.3-.5.5-.9.5l.3-4.6L18.4 6.7c.4-.3-.1-.5-.6-.2L7.5 13l-4.4-1.4c-1-.3-1-1 .2-1.4l17.2-6.7c.8-.3 1.5.2 1.4 1.1z"/></svg>
+        Отправить в Telegram
+      </button>
       <button class="skip" id="copyBtn">Скопировать ответы</button>
     </div>
   `;
@@ -890,6 +1005,8 @@ function renderFinal(scr) {
   const text = buildMessage(rows);
   scr.querySelector('#sendWa').onclick = () =>
     window.open('https://wa.me/79688666627?text=' + encodeURIComponent(text), '_blank');
+  scr.querySelector('#sendTg').onclick = () =>
+    window.open('https://t.me/jonessssenator?text=' + encodeURIComponent(text), '_blank');
   scr.querySelector('#copyBtn').onclick = () => {
     navigator.clipboard.writeText(text).then(() => toast('Ответы скопированы ✓'));
   };
