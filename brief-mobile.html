@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Бриф на сайт</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+<meta name="description" content="Короткий бриф: ответьте на 11 вопросов, почти всё выбирается кнопками. Займёт 3 минуты.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FFFFFF;
+    --panel: #F3F4F6;
+    --panel-line: #E9EAEE;
+    --ink: #17181B;
+    --muted: #8A8D95;
+    --black: #141519;
+    --blue: #A6BFE5;
+    --blue-soft: #DCE6F5;
+    --blue-ink: #4A6EA8;
+    --red: #E1746D;
+    --red-soft: #F7DEDC;
+    --red-ink: #B04B44;
+    --radius: 20px;
+  }
+
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.45;
+  }
+
+  .app {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px calc(20px + env(safe-area-inset-bottom));
+  }
+
+  /* десктоп: телефонная рамка на сером фоне */
+  @media (min-width: 640px) {
+    body {
+      background: #DCDDE0;
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .app {
+      width: 420px;
+      min-height: 860px;
+      max-height: 860px;
+      overflow-y: auto;
+      background: var(--bg);
+      border-radius: 44px;
+      box-shadow: 0 30px 80px rgba(20,21,25,.22), 0 0 0 10px #17181B, 0 0 0 12px #3a3b40;
+      padding: 24px 24px 28px;
+      scrollbar-width: none;
+    }
+    .app::-webkit-scrollbar { display: none; }
+    .toast { position: absolute; }
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 0 14px;
+  }
+  .back-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--panel-line);
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .15s;
+    visibility: hidden;
+  }
+  .back-btn.show { visibility: visible; }
+  .back-btn:active { background: var(--panel); }
+  .back-btn svg { width: 16px; height: 16px; stroke: var(--ink); stroke-width: 2.2; fill: none; }
+
+  .progress {
+    flex: 1;
+    display: flex;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .progress.show { opacity: 1; }
+  .progress span {
+    flex: 1; height: 4px;
+    border-radius: 99px;
+    background: var(--panel-line);
+    transition: background .3s;
+  }
+  .progress span.done { background: var(--black); }
+
+  .step-count {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    min-width: 44px;
+    text-align: right;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .step-count.show { opacity: 1; }
+
+  /* ---------- screens ---------- */
+  #screens { display: flex; flex-direction: column; flex: 1; }
+  .screen {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    animation: rise .3s ease both;
+  }
+  .screen.active { display: flex; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    align-self: flex-start;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--blue-ink);
+    background: var(--blue-soft);
+    padding: 6px 12px;
+    border-radius: 99px;
+    margin-bottom: 14px;
+  }
+  .kicker.red { color: var(--red-ink); background: var(--red-soft); }
+  .kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  h1 {
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    margin-bottom: 8px;
+    text-wrap: balance;
+  }
+  .sub {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin-bottom: 22px;
+    max-width: 34ch;
+  }
+
+  /* ---------- option cards ---------- */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15.5px;
+    font-weight: 500;
+    color: var(--ink);
+    transition: transform .12s, background .15s, border-color .15s;
+  }
+  .opt:active { transform: scale(.98); }
+
+  .opt .ico {
+    width: 40px; height: 40px;
+    border-radius: 14px;
+    background: var(--bg);
+    border: 1px solid var(--panel-line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: background .15s, border-color .15s;
+  }
+  .opt .txt { flex: 1; }
+  .opt .txt small {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .opt .mark {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid #D6D8DE;
+    background: var(--bg);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .opt .mark svg { width: 13px; height: 13px; stroke: #fff; stroke-width: 2.6; fill: none; opacity: 0; }
+
+  .opt.selected {
+    background: var(--black);
+    border-color: var(--black);
+    color: #fff;
+  }
+  .opt.selected .txt small { color: rgba(255,255,255,.55); }
+  .opt.selected .ico { background: rgba(255,255,255,.12); border-color: transparent; }
+  .opt.selected .mark { background: var(--blue); border-color: var(--blue); }
+  .opt.selected .mark svg { opacity: 1; }
+
+  .opt.disabled { opacity: .55; cursor: default; }
+  .opt.disabled:active { transform: none; }
+  .badge-soon {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    color: var(--red-ink);
+    background: var(--red-soft);
+    padding: 4px 9px;
+    border-radius: 99px;
+    flex-shrink: 0;
+  }
+
+  /* ---------- chips (multi) ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 99px;
+    padding: 11px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform .12s, background .15s, color .15s;
+  }
+  .chip:active { transform: scale(.96); }
+  .chip .plus {
+    width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .chip .plus svg { width: 12px; height: 12px; stroke: var(--muted); stroke-width: 2.4; fill: none; transition: stroke .15s; }
+  .chip.selected { background: var(--black); border-color: var(--black); color: #fff; }
+  .chip.selected .plus svg { stroke: var(--blue); }
+
+  /* ---------- text inputs ---------- */
+  .field {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    padding: 6px 18px;
+    transition: border-color .15s;
+  }
+  .field:focus-within { border-color: var(--black); background: var(--bg); }
+  .field label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 8px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    padding: 6px 0 12px;
+    outline: none;
+    resize: none;
+  }
+  .field + .field { margin-top: 10px; }
+  .hint { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+
+  /* ---------- bottom actions ---------- */
+  .actions { margin-top: auto; padding-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .btn {
+    width: 100%;
+    border: none;
+    border-radius: 99px;
+    padding: 17px;
+    font-family: inherit;
+    font-size: 15.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transition: transform .12s, opacity .15s;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn-black { background: var(--black); color: #fff; }
+  .btn-ghost { background: var(--panel); color: var(--ink); border: 1px solid var(--panel-line); }
+  .btn:disabled { opacity: .35; cursor: default; }
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .skip {
+    background: none; border: none;
+    font-family: inherit;
+    font-size: 13.5px; font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 6px;
+    align-self: center;
+  }
+
+  /* ---------- intro decorations ---------- */
+  .avatar-row { display: flex; align-items: center; margin: 2px 0 20px; }
+  .avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 3px solid var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600; color: #fff;
+    margin-left: -10px;
+    box-shadow: 0 2px 8px rgba(20,21,25,.08);
+  }
+  .avatar:first-child { margin-left: 0; }
+  .av1 { background: linear-gradient(135deg, #A6BFE5, #7E9FD4); }
+  .av2 { background: linear-gradient(135deg, #E1746D, #C85850); }
+  .av3 { background: linear-gradient(135deg, #2B2D33, #17181B); }
+  .avatar.count {
+    background: var(--panel);
+    color: var(--ink);
+    font-size: 12px;
+    border: 1px solid var(--panel-line);
+  }
+
+  .intro-stats {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .stat {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .stat b { display: block; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; }
+  .stat span { font-size: 12px; color: var(--muted); }
+  .stat b em { font-style: normal; }
+  .stat.blue b em { color: var(--blue-ink); }
+  .stat.red b em { color: var(--red-ink); }
+
+  /* ---------- final screen ---------- */
+  .done-check {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .done-check svg { width: 26px; height: 26px; stroke: var(--blue); stroke-width: 2.4; fill: none; }
+
+  .summary {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: var(--radius);
+    padding: 6px 18px;
+    margin-bottom: 4px;
+  }
+  .summary .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--panel-line);
+    font-size: 13.5px;
+  }
+  .summary .row:last-child { border-bottom: none; }
+  .summary .row .k { color: var(--muted); flex-shrink: 0; }
+  .summary .row .v { font-weight: 500; text-align: right; }
+
+  .toast {
+    position: fixed;
+    left: 50%; bottom: 30px;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--black);
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 99px;
+    box-shadow: 0 8px 24px rgba(20,21,25,.25);
+    transition: transform .3s cubic-bezier(.2,.9,.3,1.2), opacity .2s;
+    z-index: 50;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="topbar">
+    <button class="back-btn" id="backBtn" aria-label="Назад">
+      <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <div class="progress" id="progress"></div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+
+  <div id="screens"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= data ================= */
+
+const SERVICES = [
+  { id: 'landing', icon: '🚀', title: 'Лендинг', sub: 'Продающий сайт-страница', ready: true },
+  { id: 'crm',     icon: '📊', title: 'CRM-система', sub: 'Управление клиентами и заявками', ready: false },
+  { id: 'account', icon: '📦', title: 'Система учёта', sub: 'Товары, склад, финансы', ready: false },
+  { id: 'help',    icon: '💬', title: 'Хочу понять, что мне нужно', sub: 'Разберём задачу вместе', ready: false },
+];
+
+const STEPS = [
+  {
+    id: 'business', type: 'text', kicker: 'О вас',
+    title: 'Расскажите о вашем деле',
+    sub: 'Пара слов, этого достаточно.',
+    fields: [
+      { key: 'business', label: 'Чем занимаетесь', ph: 'Например: студия маникюра', req: true },
+      { key: 'city', label: 'Город / регион', ph: 'Например: Махачкала', req: true },
+    ],
+  },
+  {
+    id: 'format', type: 'single', kicker: 'О вас',
+    title: 'Как принимаете клиентов?',
+    options: [
+      { icon: '📍', t: 'Офлайн', s: 'Есть точка, офис или салон' },
+      { icon: '🌐', t: 'Онлайн', s: 'Работаю удалённо' },
+      { icon: '🔄', t: 'И офлайн, и онлайн' },
+    ],
+  },
+  {
+    id: 'advantage', type: 'text', kicker: 'О вас',
+    title: 'Чем вы лучше конкурентов?',
+    sub: 'Это станет главным аргументом на сайте.',
+    fields: [
+      { key: 'advantage', label: 'Главное отличие', ph: 'Почему выбирают именно вас', req: true },
+      { key: 'experience', label: 'Опыт и цифры, если есть', ph: 'Лет на рынке, клиенты, отзывы' },
+    ],
+  },
+  {
+    id: 'audience', type: 'text', kicker: 'Клиенты',
+    title: 'Кто ваши клиенты?',
+    sub: 'Кому продаём и какую проблему решаем. Своими словами.',
+    fields: [
+      { key: 'audience', label: 'Ваши клиенты', ph: 'Например: девушки 20-40 лет, хотят качественный маникюр рядом с домом', area: true, req: true },
+    ],
+  },
+  {
+    id: 'goal', type: 'single', multiple: true, kicker: 'Цель',
+    title: 'Что должен сделать посетитель сайта?',
+    sub: 'Можно выбрать несколько. Самое важное действие сделаем самым заметным.',
+    options: [
+      { icon: '📝', t: 'Оставить заявку', s: 'Форма с именем и телефоном' },
+      { icon: '📞', t: 'Позвонить', s: 'Кнопка звонка на видном месте' },
+      { icon: '✈️', t: 'Написать в мессенджер', s: 'WhatsApp или Telegram' },
+      { icon: '🛒', t: 'Купить или оплатить онлайн', s: 'Каталог и оплата' },
+    ],
+  },
+  {
+    id: 'leads', type: 'single', multiple: true, kicker: 'Заявки',
+    title: 'Куда присылать заявки с сайта?',
+    sub: 'Можно выбрать несколько вариантов.',
+    options: [
+      { icon: '💚', t: 'В WhatsApp' },
+      { icon: '💙', t: 'В Telegram' },
+      { icon: '✉️', t: 'На почту' },
+      { icon: '🤔', t: 'Пока не решил(а)', s: 'Подскажем оптимальный вариант' },
+    ],
+  },
+  {
+    id: 'traffic', type: 'single', multiple: true, kicker: 'Посетители',
+    title: 'Откуда люди попадут на сайт?',
+    sub: 'Можно выбрать несколько.',
+    options: [
+      { icon: '🎯', t: 'Реклама в Яндекс или Google' },
+      { icon: '📱', t: 'Соцсети', s: 'Instagram, ВК, TikTok' },
+      { icon: '📦', t: 'Авито и маркетплейсы' },
+      { icon: '🧾', t: 'Визитки и QR-код офлайн' },
+      { icon: '🗣️', t: 'Сарафанное радио' },
+      { icon: '🤷', t: 'Пока не знаю' },
+    ],
+  },
+  {
+    id: 'blocks', type: 'multi', kicker: 'Наполнение',
+    title: 'Что показать на сайте?',
+    sub: 'Выберите всё, что подходит. Лишнее уберём вместе.',
+    options: ['Цены и услуги', 'Портфолио, примеры работ', 'Отзывы клиентов', 'Этапы работы', 'Преимущества', 'Команда', 'Акции и спецпредложения', 'Частые вопросы', 'Карта и контакты'],
+  },
+  {
+    id: 'features', type: 'multi', kicker: 'Функции',
+    title: 'Что должно работать на сайте?',
+    sub: 'Кроме кнопок и текста. Можно несколько.',
+    options: ['Форма заявки', 'Кнопки WhatsApp и Telegram', 'Онлайн-запись', 'Калькулятор стоимости', 'Онлайн-оплата', 'Квиз: подбор под клиента', 'Чат на сайте', 'Счётчик посещений (аналитика)', 'Несколько страниц'],
+  },
+  {
+    id: 'mood', type: 'single', multiple: true, kicker: 'Дизайн',
+    title: 'Какое настроение у сайта?',
+    sub: 'Можно выбрать 1-2 варианта.',
+    options: [
+      { icon: '🖤', t: 'Премиум', s: 'Тёмный, дорогой, сдержанный' },
+      { icon: '🤍', t: 'Светлый минимализм', s: 'Воздух, чистота, ничего лишнего' },
+      { icon: '⚡', t: 'Яркий и смелый', s: 'Сочные цвета, энергия' },
+      { icon: '🧡', t: 'Тёплый и уютный', s: 'По-человечески, без официоза' },
+      { icon: '💼', t: 'Строгий, деловой', s: 'Корпоративный стиль' },
+      { icon: '🎨', t: 'На вкус дизайнера', s: 'Доверяю профессионалу' },
+    ],
+  },
+  {
+    id: 'brand', type: 'single', kicker: 'Фирменный стиль',
+    title: 'Есть логотип и фирменные цвета?',
+    options: [
+      { icon: '✅', t: 'Да, есть всё', s: 'Пришлю файлы' },
+      { icon: '🔤', t: 'Только логотип' },
+      { icon: '✨', t: 'Ничего нет', s: 'Нужно придумать' },
+    ],
+  },
+  {
+    id: 'taste', type: 'text', kicker: 'Вкус', optional: true,
+    title: 'Цвета и сайты, которые нравятся',
+    sub: 'Любой пункт можно оставить пустым.',
+    fields: [
+      { key: 'colors', label: 'Цвета: хочу / точно нет', ph: 'Например: хочу бежевый, не хочу красный' },
+      { key: 'refsLike', label: 'Сайты, которые нравятся', ph: 'Ссылки или названия' },
+      { key: 'refsDislike', label: 'Что не нравится у конкурентов', ph: 'Чего избегать на сайте' },
+    ],
+  },
+  {
+    id: 'content', type: 'single', kicker: 'Материалы',
+    title: 'Тексты и фотографии для сайта?',
+    options: [
+      { icon: '📁', t: 'Всё готово', s: 'Тексты и фото есть' },
+      { icon: '🗂️', t: 'Есть частично', s: 'Что-то есть, остальное допишем' },
+      { icon: '🪄', t: 'Ничего нет', s: 'Нужно сделать с нуля' },
+    ],
+  },
+  {
+    id: 'tech', type: 'single', kicker: 'Техника',
+    title: 'Домен и хостинг есть?',
+    sub: 'Домен - это адрес сайта, хостинг - место, где сайт живёт.',
+    options: [
+      { icon: '✅', t: 'Есть и домен, и хостинг' },
+      { icon: '🌐', t: 'Есть только домен' },
+      { icon: '🆕', t: 'Ничего нет', s: 'Помогу купить и настроить' },
+      { icon: '🤷', t: 'Не разбираюсь', s: 'Доверяю вам' },
+    ],
+  },
+  {
+    id: 'deadline', type: 'single', kicker: 'Сроки',
+    title: 'Когда нужен готовый сайт?',
+    options: [
+      { icon: '🔥', t: 'Срочно, за неделю' },
+      { icon: '📅', t: 'За 2-3 недели' },
+      { icon: '🗓️', t: 'В течение месяца' },
+      { icon: '🌿', t: 'Не горит', s: 'Главное сделать хорошо' },
+    ],
+  },
+  {
+    id: 'budget', type: 'single', kicker: 'Бюджет',
+    title: 'Какой бюджет комфортен?',
+    sub: 'Это помогает сразу предложить подходящее решение.',
+    options: [
+      { icon: '💰', t: 'До 15 тысяч' },
+      { icon: '💰', t: '15-30 тысяч' },
+      { icon: '💰', t: '30-60 тысяч' },
+      { icon: '🤝', t: 'Обсудим лично' },
+    ],
+  },
+  {
+    id: 'extra', type: 'text', kicker: 'Дополнительно', optional: true,
+    title: 'Что ещё важно знать?',
+    sub: 'Был ли сайт раньше, языки сайта, особые пожелания. Можно пропустить.',
+    fields: [
+      { key: 'extra', label: 'Ваш комментарий', ph: 'Например: был сайт, не нравился дизайн', area: true },
+    ],
+  },
+  {
+    id: 'contact', type: 'text', kicker: 'Контакты',
+    title: 'Как с вами связаться?',
+    sub: 'Напишу, уточню детали и назову точную стоимость.',
+    fields: [
+      { key: 'name', label: 'Как вас зовут', ph: 'Имя', req: true },
+      { key: 'phone', label: 'Телефон или Telegram', ph: '+7 900 000-00-00 или @ник', req: true },
+      { key: 'siteContacts', label: 'Контакты для сайта, если отличаются', ph: 'Телефон, Instagram, адрес, режим работы' },
+    ],
+  },
+];
+
+/* ================= state ================= */
+
+const answers = {};
+let stepIndex = -1; // -1 = intro
+
+const screensEl = document.getElementById('screens');
+const progressEl = document.getElementById('progress');
+const stepCountEl = document.getElementById('stepCount');
+const backBtn = document.getElementById('backBtn');
+const toastEl = document.getElementById('toast');
+
+const CHECK_SVG = '<svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>';
+const PLUS_SVG = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>';
+
+progressEl.innerHTML = STEPS.map(() => '<span></span>').join('');
+
+function toast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(() => toastEl.classList.remove('show'), 2200);
+}
+
+/* ================= rendering ================= */
+
+function render() {
+  const isIntro = stepIndex === -1;
+  const isFinal = stepIndex === STEPS.length;
+
+  backBtn.classList.toggle('show', !isIntro);
+  progressEl.classList.toggle('show', !isIntro && !isFinal);
+  stepCountEl.classList.toggle('show', !isIntro && !isFinal);
+
+  if (!isIntro && !isFinal) {
+    [...progressEl.children].forEach((s, i) => s.classList.toggle('done', i <= stepIndex));
+    stepCountEl.textContent = (stepIndex + 1) + ' / ' + STEPS.length;
+  }
+
+  screensEl.innerHTML = '';
+  const scr = document.createElement('div');
+  scr.className = 'screen active';
+
+  if (isIntro) renderIntro(scr);
+  else if (isFinal) renderFinal(scr);
+  else renderStep(scr, STEPS[stepIndex]);
+
+  screensEl.appendChild(scr);
+  window.scrollTo(0, 0);
+}
+
+function renderIntro(scr) {
+  scr.innerHTML = `
+    <div class="kicker"><span class="dot"></span>Бриф · 5 минут</div>
+    <h1>Что будем делать?</h1>
+    <p class="sub">Ответьте на несколько вопросов, большинство выбирается кнопками. В конце ответы улетят мне одним сообщением.</p>
+    <div class="avatar-row">
+      <div class="avatar av1">Д</div>
+      <div class="avatar av2">С</div>
+      <div class="avatar av3">К</div>
+      <div class="avatar count">+12</div>
+    </div>
+    <div class="intro-stats">
+      <div class="stat blue"><b><em>18</em></b><span>коротких вопросов</span></div>
+      <div class="stat red"><b><em>~5</em> мин</b><span>на заполнение</span></div>
+    </div>
+    <div class="options" id="serviceList"></div>
+  `;
+  const list = scr.querySelector('#serviceList');
+  SERVICES.forEach(s => {
+    const b = document.createElement('button');
+    b.className = 'opt' + (s.ready ? '' : ' disabled');
+    b.innerHTML = `
+      <span class="ico">${s.icon}</span>
+      <span class="txt">${s.title}<small>${s.sub}</small></span>
+      ${s.ready ? `<span class="mark">${CHECK_SVG}</span>` : '<span class="badge-soon">Скоро</span>'}
+    `;
+    b.onclick = () => {
+      if (!s.ready) { toast('Этот бриф пока в разработке 🛠️'); return; }
+      answers.service = s.title;
+      b.classList.add('selected');
+      setTimeout(() => { stepIndex = 0; render(); }, 280);
+    };
+    list.appendChild(b);
+  });
+}
+
+function renderStep(scr, step) {
+  let html = `
+    <div class="kicker"><span class="dot"></span>${step.kicker}</div>
+    <h1>${step.title}</h1>
+    ${step.sub ? `<p class="sub">${step.sub}</p>` : ''}
+  `;
+  scr.innerHTML = html;
+
+  if (step.type === 'single') {
+    const multi = step.multiple;
+    if (multi && !Array.isArray(answers[step.id])) answers[step.id] = [];
+    const wrap = document.createElement('div');
+    wrap.className = 'options';
+    let nextBtn = null;
+
+    step.options.forEach(o => {
+      const sel = multi ? answers[step.id].includes(o.t) : answers[step.id] === o.t;
+      const b = document.createElement('button');
+      b.className = 'opt' + (sel ? ' selected' : '');
+      b.innerHTML = `
+        <span class="ico">${o.icon}</span>
+        <span class="txt">${o.t}${o.s ? `<small>${o.s}</small>` : ''}</span>
+        <span class="mark">${CHECK_SVG}</span>
+      `;
+      b.onclick = () => {
+        if (multi) {
+          const arr = answers[step.id];
+          const i = arr.indexOf(o.t);
+          if (i >= 0) arr.splice(i, 1); else arr.push(o.t);
+          b.classList.toggle('selected');
+          nextBtn.disabled = arr.length === 0;
+        } else {
+          answers[step.id] = o.t;
+          wrap.querySelectorAll('.opt').forEach(x => x.classList.remove('selected'));
+          b.classList.add('selected');
+          setTimeout(next, 300);
+        }
+      };
+      wrap.appendChild(b);
+    });
+    scr.appendChild(wrap);
+
+    if (multi) {
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+      nextBtn = document.createElement('button');
+      nextBtn.className = 'btn btn-black';
+      nextBtn.textContent = 'Дальше';
+      nextBtn.disabled = answers[step.id].length === 0;
+      nextBtn.onclick = next;
+      actions.appendChild(nextBtn);
+      scr.appendChild(actions);
+    }
+  }
+
+  if (step.type === 'multi') {
+    if (!answers[step.id]) answers[step.id] = [];
+    const wrap = document.createElement('div');
+    wrap.className = 'chips';
+    step.options.forEach(o => {
+      const b = document.createElement('button');
+      const sel = answers[step.id].includes(o);
+      b.className = 'chip' + (sel ? ' selected' : '');
+      b.innerHTML = `<span class="plus">${sel ? CHECK_SVG.replace('stroke="#fff"','') : PLUS_SVG}</span>${o}`;
+      b.onclick = () => {
+        const arr = answers[step.id];
+        const i = arr.indexOf(o);
+        if (i >= 0) arr.splice(i, 1); else arr.push(o);
+        b.classList.toggle('selected');
+        b.querySelector('.plus').innerHTML = arr.includes(o) ? CHECK_SVG : PLUS_SVG;
+        nextBtn.disabled = arr.length === 0;
+      };
+      wrap.appendChild(b);
+    });
+    scr.appendChild(wrap);
+
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'btn btn-black';
+    nextBtn.textContent = 'Дальше';
+    nextBtn.disabled = answers[step.id].length === 0;
+    nextBtn.onclick = next;
+    actions.appendChild(nextBtn);
+    scr.appendChild(actions);
+  }
+
+  if (step.type === 'text') {
+    const reqOk = () => step.fields.every(x => !x.req || (answers[x.key] || '').length > 1);
+    const form = document.createElement('div');
+    step.fields.forEach(f => {
+      const fw = document.createElement('div');
+      fw.className = 'field';
+      fw.innerHTML = `<label>${f.label}</label>` +
+        (f.area
+          ? `<textarea rows="3" placeholder="${f.ph}" data-key="${f.key}"></textarea>`
+          : `<input type="text" placeholder="${f.ph}" data-key="${f.key}" enterkeyhint="next">`);
+      const inp = fw.querySelector('input, textarea');
+      inp.value = answers[f.key] || '';
+      inp.oninput = () => {
+        answers[f.key] = inp.value.trim();
+        nextBtn.disabled = !reqOk();
+      };
+      form.appendChild(fw);
+    });
+    scr.appendChild(form);
+
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'btn btn-black';
+    nextBtn.textContent = stepIndex === STEPS.length - 1 ? 'Готово' : 'Дальше';
+    nextBtn.disabled = !reqOk();
+    nextBtn.onclick = next;
+    actions.appendChild(nextBtn);
+    if (step.optional) {
+      const skip = document.createElement('button');
+      skip.className = 'skip';
+      skip.textContent = 'Пропустить';
+      skip.onclick = next;
+      actions.appendChild(skip);
+    }
+    scr.appendChild(actions);
+    setTimeout(() => form.querySelector('input, textarea')?.focus({ preventScroll: true }), 350);
+  }
+}
+
+function renderFinal(scr) {
+  const rows = [
+    ['Задача', answers.service],
+    ['Бизнес', answers.business],
+    ['Город', answers.city],
+    ['Формат', answers.format],
+    ['Отличие', answers.advantage],
+    ['Опыт', answers.experience],
+    ['Клиенты', answers.audience],
+    ['Цель сайта', answers.goal],
+    ['Заявки', answers.leads],
+    ['Трафик', answers.traffic],
+    ['Блоки', answers.blocks],
+    ['Функции', answers.features],
+    ['Настроение', answers.mood],
+    ['Фирстиль', answers.brand],
+    ['Цвета', answers.colors],
+    ['Нравится', answers.refsLike],
+    ['Избегать', answers.refsDislike],
+    ['Материалы', answers.content],
+    ['Домен и хостинг', answers.tech],
+    ['Сроки', answers.deadline],
+    ['Бюджет', answers.budget],
+    ['Дополнительно', answers.extra],
+    ['Имя', answers.name],
+    ['Связь', answers.phone],
+    ['Контакты для сайта', answers.siteContacts],
+  ].map(r => [r[0], Array.isArray(r[1]) ? r[1].join(', ') : r[1]])
+   .filter(r => r[1]);
+
+  scr.innerHTML = `
+    <div class="done-check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/><path d="M9 12.5l5 5L24 7.5" transform="translate(-2,0)"/></svg></div>
+    <div class="kicker red"><span class="dot"></span>Финал</div>
+    <h1>Готово! Осталось отправить</h1>
+    <p class="sub">Проверьте ответы и отправьте удобным способом. Я отвечу в течение дня. Логотип, прайс и фото можно прислать следом в тот же чат.</p>
+    <div class="summary">
+      ${rows.map(r => `<div class="row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')}
+    </div>
+    <div class="actions">
+      <button class="btn btn-black" id="sendWa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.2 1.1-1.7 1.2-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.7 1.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.1z"/></svg>
+        Отправить в WhatsApp
+      </button>
+      <button class="btn btn-ghost" id="sendTg">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6 18.9 19c-.2 1-.8 1.2-1.6.8l-4.6-3.4-2.2 2.1c-.2.3-.5.5-.9.5l.3-4.6L18.4 6.7c.4-.3-.1-.5-.6-.2L7.5 13l-4.4-1.4c-1-.3-1-1 .2-1.4l17.2-6.7c.8-.3 1.5.2 1.4 1.1z"/></svg>
+        Отправить в Telegram
+      </button>
+      <button class="skip" id="copyBtn">Скопировать ответы</button>
+    </div>
+  `;
+
+  const text = buildMessage(rows);
+  scr.querySelector('#sendWa').onclick = () =>
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+  scr.querySelector('#sendTg').onclick = () =>
+    window.open('https://t.me/share/url?url=%20&text=' + encodeURIComponent(text), '_blank');
+  scr.querySelector('#copyBtn').onclick = () => {
+    navigator.clipboard.writeText(text).then(() => toast('Ответы скопированы ✓'));
+  };
+}
+
+function buildMessage(rows) {
+  return '📋 Бриф на сайт\n\n' + rows.map(r => r[0] + ': ' + r[1]).join('\n');
+}
+
+/* ================= navigation ================= */
+
+function next() {
+  stepIndex++;
+  render();
+}
+
+backBtn.onclick = () => {
+  if (stepIndex >= 0) { stepIndex--; render(); }
+};
+
+render();
+</script>
+</body>
+</html>
