@@ -70,7 +70,7 @@ export default function Hero() {
   return (
     <section className="relative h-[88svh] max-h-[960px] min-h-[560px] overflow-hidden bg-[#171310]">
       <h1 className="sr-only">
-        27 Souls — оригинальная нишевая парфюмерия. Ароматы, которые запоминают.
+        Kozdzuoglu Parfum — оригинальная нишевая парфюмерия. Ароматы, которые запоминают.
       </h1>
 
       {/* сцена-постер: вертикальная на телефоне, широкая — на компьютере */}

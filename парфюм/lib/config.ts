@@ -3,16 +3,15 @@
  * Замени telegram на свой ник (без @) — туда будут приходить заказы.
  */
 export const SHOP = {
-  /** «27 Souls»: духи = души, 27 душ → 27 souls */
-  name: '27 Souls',
-  monogram: '27',
+  name: 'Kozdzuoglu Parfum',
+  monogram: 'K',
   tagline: 'Оригинальная нишевая парфюмерия',
   /** ник Telegram, куда приходят заказы (без @) */
   telegram: 'xxviiexe',
   city: 'Россия',
   /** порог бесплатной доставки, ₽ */
   freeShippingFrom: 20000,
-  promoCodes: { SOULS10: 0.1 } as Record<string, number>,
+  promoCodes: { KP10: 0.1 } as Record<string, number>,
   url: 'https://jonessssenator-art.github.io/portfolio/maison27',
 };
 

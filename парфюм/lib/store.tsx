@@ -52,11 +52,21 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (hydrated) localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    } catch {
+      /* приватный режим или отключено хранилище — просто не запоминаем */
+    }
   }, [cart, hydrated]);
 
   useEffect(() => {
-    if (hydrated) localStorage.setItem(FAVS_KEY, JSON.stringify(favs));
+    if (!hydrated) return;
+    try {
+      localStorage.setItem(FAVS_KEY, JSON.stringify(favs));
+    } catch {
+      /* приватный режим или отключено хранилище — просто не запоминаем */
+    }
   }, [favs, hydrated]);
 
   const value = useMemo<StoreState>(() => {

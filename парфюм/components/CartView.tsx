@@ -235,7 +235,7 @@ export default function CartView() {
                   setPromoInput(e.target.value);
                   setPromoError(false);
                 }}
-                placeholder="Например, SOULS10"
+                placeholder="Например, KP10"
                 className="field py-2.5"
                 aria-label="Промокод"
               />
