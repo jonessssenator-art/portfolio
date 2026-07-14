@@ -874,7 +874,7 @@ function renderFinal(scr) {
     <div class="done-check"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/><path d="M9 12.5l5 5L24 7.5" transform="translate(-2,0)"/></svg></div>
     <div class="kicker red"><span class="dot"></span>Финал</div>
     <h1>Готово! Осталось отправить</h1>
-    <p class="sub">Проверьте ответы и отправьте удобным способом. Я отвечу в течение дня. Логотип, прайс и фото можно прислать следом в тот же чат.</p>
+    <p class="sub">Проверьте ответы и жмите кнопку — они придут мне одним сообщением в WhatsApp. Я отвечу в течение дня. Логотип, прайс и фото можно прислать следом в тот же чат.</p>
     <div class="summary">
       ${rows.map(r => `<div class="row"><span class="k">${r[0]}</span><span class="v">${r[1]}</span></div>`).join('')}
     </div>
@@ -883,19 +883,13 @@ function renderFinal(scr) {
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.2 1.1-1.7 1.2-.5 0-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.7 1.6.3.2.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.3 1.1z"/></svg>
         Отправить в WhatsApp
       </button>
-      <button class="btn btn-ghost" id="sendTg">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.6 18.9 19c-.2 1-.8 1.2-1.6.8l-4.6-3.4-2.2 2.1c-.2.3-.5.5-.9.5l.3-4.6L18.4 6.7c.4-.3-.1-.5-.6-.2L7.5 13l-4.4-1.4c-1-.3-1-1 .2-1.4l17.2-6.7c.8-.3 1.5.2 1.4 1.1z"/></svg>
-        Отправить в Telegram
-      </button>
       <button class="skip" id="copyBtn">Скопировать ответы</button>
     </div>
   `;
 
   const text = buildMessage(rows);
   scr.querySelector('#sendWa').onclick = () =>
-    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
-  scr.querySelector('#sendTg').onclick = () =>
-    window.open('https://t.me/share/url?url=%20&text=' + encodeURIComponent(text), '_blank');
+    window.open('https://wa.me/79688666627?text=' + encodeURIComponent(text), '_blank');
   scr.querySelector('#copyBtn').onclick = () => {
     navigator.clipboard.writeText(text).then(() => toast('Ответы скопированы ✓'));
   };
