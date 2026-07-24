@@ -3,13 +3,13 @@
   --red: #ee1919;
   /* darker red — used for body-size text on light backgrounds (WCAG AA compliant, ~4.7:1) */
   --red-ink: #b91414;
-  --red-ink-soft: #c8371f;
   --dark: #1a1a1a;
   --light: #d9d9d9;
   --page-bg: #bab7b7;
   --white: #ffffff;
-  --cream: #f5f1ec;
   --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* bolder, more opinionated display face for headlines only — body copy stays on Inter for readability */
+  --font-display: "Unbounded", var(--font);
   --shadow-sm: 0 2px 10px rgba(26, 26, 26, 0.12);
   --shadow-md: 0 12px 32px rgba(26, 26, 26, 0.18);
   --ease: cubic-bezier(.2, .8, .2, 1);
@@ -60,7 +60,9 @@ button {
 
 .hero {
   display: flex;
-  min-height: 100svh;
+  /* content-sized, not forced to fill the screen — so the badges row never
+     has to chase the bottom edge of a full-height block to appear */
+  min-height: min(92svh, 820px);
   background: var(--light);
   flex-wrap: wrap;
 }
@@ -83,6 +85,16 @@ button {
   user-select: none;
 }
 
+.hero__image.is-hit .hero__portrait {
+  animation: heroHit 0.4s var(--ease);
+}
+
+@keyframes heroHit {
+  0% { transform: scale(1); filter: brightness(1) contrast(1); }
+  12% { transform: scale(1.035); filter: brightness(1.35) contrast(1.1); }
+  100% { transform: scale(1); filter: brightness(1) contrast(1); }
+}
+
 .hero__ripple-canvas {
   position: absolute;
   inset: 0;
@@ -91,11 +103,27 @@ button {
   pointer-events: none;
 }
 
+/* GPU depth-of-field layer (lens-blur.js) — sits over the plain <img>,
+   fades in only once it has actually rendered a frame; the <img> stays in
+   the DOM underneath as the fallback if WebGL isn't available */
+.hero__webgl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.hero__webgl.is-ready { opacity: 1; }
+.hero__image.has-webgl-portrait .hero__portrait { visibility: hidden; }
+
 .hero__content {
   flex: 1.4 1 520px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: clamp(24px, 4vw, 64px) clamp(20px, 5vw, 72px);
   gap: clamp(32px, 6vw, 56px);
 }
@@ -109,10 +137,11 @@ button {
 }
 
 .hero__name {
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--red);
   margin: 0;
 }
@@ -144,10 +173,13 @@ button {
   transform-origin: right center;
 }
 
+/* dropped further down into the open space below the nav — but capped,
+   not pinned to the very bottom edge, so it can't end up out of view */
 .hero__bottom {
   display: flex;
   gap: clamp(24px, 6vw, 88px);
   flex-wrap: wrap;
+  margin-top: clamp(40px, 12vh, 160px);
 }
 
 .hero__badge {
@@ -157,10 +189,19 @@ button {
   max-width: 320px;
 }
 
+/* icon + caption move together as one rigid unit so they never drift apart.
+   The transition adds a light lag behind the scroll position, so the row
+   eases toward its target instead of snapping — reads as "floating". */
+.hero__badge-parallax {
+  will-change: transform;
+  transition: transform 0.25s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+
 .hero__badge-icon {
   width: clamp(32px, 3vw, 42px);
   height: auto;
   flex-shrink: 0;
+  display: block;
 }
 
 .hero__badge p {
@@ -185,19 +226,27 @@ button {
   position: relative;
   background: var(--red);
   border-radius: 0 0 clamp(24px, 5vw, 80px) clamp(24px, 5vw, 80px);
-  padding: clamp(40px, 6vw, 96px) clamp(20px, 5vw, 72px) clamp(88px, 11vw, 170px);
+  padding: clamp(28px, 3vw, 56px) clamp(20px, 5vw, 72px) clamp(120px, 16vw, 280px);
   overflow: hidden;
   isolation: isolate;
 }
 
 .about__texture {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
+  /* matches the section's own bottom padding exactly, so the band sits in
+     reserved empty space below the text instead of stretching up behind it */
+  height: clamp(120px, 16vw, 280px);
   object-fit: cover;
   object-position: center bottom;
   z-index: -1;
+  pointer-events: none;
+  /* soft dissolve from flat red into the pattern instead of a hard edge */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%);
+  mask-image: linear-gradient(to bottom, transparent, black 30%);
 }
 
 .about__head {
@@ -234,10 +283,11 @@ button {
 .about__title {
   position: relative;
   z-index: 1;
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--white);
   margin: 0;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
@@ -266,7 +316,7 @@ button {
   letter-spacing: -0.005em;
   margin: 0;
   text-align: left;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 12px rgba(0, 0, 0, 0.25);
 }
 
 /* ---------- WORK ---------- */
@@ -277,10 +327,11 @@ button {
 }
 
 .work__title {
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--red);
   text-align: center;
   margin: 0 0 clamp(32px, 5vw, 64px);
@@ -386,10 +437,11 @@ button {
 }
 
 .footer__title {
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--white);
   margin: 0 0 20px;
   text-align: right;
@@ -420,11 +472,16 @@ button {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 45%;
+  /* fixed-ish band instead of a % of footer height, so it can't grow tall
+     enough to creep up behind the disclaimer/social text on any viewport */
+  height: clamp(64px, 12vw, 180px);
   object-fit: cover;
   object-position: center bottom;
   z-index: 0;
   pointer-events: none;
+  /* soft dissolve from flat red into the pattern instead of a hard edge */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 40%);
+  mask-image: linear-gradient(to bottom, transparent, black 40%);
 }
 
 /* ---------- CASE MODAL (Behance-style) ---------- */
@@ -495,10 +552,11 @@ button {
 }
 
 .case-modal__title {
-  font-weight: 800;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  line-height: 1.2;
+  letter-spacing: -0.005em;
   color: var(--dark);
   margin: 0 0 10px;
 }
@@ -514,10 +572,29 @@ button {
 
 /* ---------- RESPONSIVE ---------- */
 
-@media (max-width: 1024px) {
-  .work__grid { grid-auto-rows: clamp(64px, 11vw, 100px); }
+/* Ultra-wide monitors: cap line length instead of stretching edge-to-edge */
+@media (min-width: 1900px) {
+  .hero, .about, .work, .footer {
+    max-width: 1900px;
+    margin-inline: auto;
+  }
 }
 
+/* Tablets & small laptops: hero stacks, portfolio grid settles at 3 columns */
+@media (max-width: 1024px) {
+  .hero { flex-direction: column; }
+  /* reset width-oriented flex-basis so it isn't reinterpreted as a height hint in column mode */
+  .hero__image, .hero__content { flex: 0 1 auto; }
+  .hero__image { min-height: 46svh; }
+
+  .work__grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: clamp(110px, 15vw, 160px);
+  }
+  .work__card { grid-column: auto !important; grid-row: auto !important; }
+}
+
+/* Phones */
 @media (max-width: 767px) {
   .hero__image { min-height: 42svh; }
 
@@ -538,7 +615,6 @@ button {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: clamp(140px, 42vw, 220px);
   }
-  .work__card { grid-column: auto !important; grid-row: auto !important; }
 
   .footer { flex-direction: column; padding-top: clamp(28px, 8vw, 48px); }
   .footer__title, .footer__socials { text-align: left; }
@@ -555,18 +631,41 @@ button {
   }
 }
 
+/* Small phones (SE-class, 320-374px) */
 @media (max-width: 420px) {
   .hero__name { font-size: 2.1rem; }
   .about__title, .work__title, .footer__title { font-size: 2.1rem; }
-  .work__grid { grid-template-columns: 1fr 1fr; }
+  .work__grid { grid-template-columns: 1fr 1fr; grid-auto-rows: clamp(120px, 38vw, 180px); }
 }
 
+/* Short / landscape phones — don't force a full viewport-height hero */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero { min-height: auto; }
+  .hero__image { min-height: 220px; }
+  .hero__content { gap: 24px; }
+}
+
+/* Touch devices: no hover state to rely on for the "reveal" darken layer */
 @media (hover: none) {
   .work__card::after { display: none; }
   .js-hover-zoom:active { transform: scale(1.08); }
 }
 
+/* Notched phones / home-indicator safe areas (iPhone X+, viewport-fit=cover) */
+@supports (padding: max(0px)) {
+  .hero__content {
+    padding-left: max(clamp(20px, 5vw, 72px), env(safe-area-inset-left));
+    padding-right: max(clamp(20px, 5vw, 72px), env(safe-area-inset-right));
+  }
+  .footer {
+    padding-left: max(clamp(20px, 5vw, 72px), env(safe-area-inset-left));
+    padding-right: max(clamp(20px, 5vw, 72px), env(safe-area-inset-right));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js-hover-zoom, .work__card, .case-modal__panel, .case-modal { transition: none; }
+  .hero__image.is-hit .hero__portrait { animation: none; }
 }

@@ -9,14 +9,14 @@
 <link rel="icon" href="assets/icon-mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="hero" id="hero">
-  <div class="hero__image js-ripple-target" id="heroImage" aria-label="Клик — эффект волны">
-    <img src="assets/portrait-pixel.svg" alt="Портрет, пиксельный стиль" class="hero__portrait" draggable="false">
+  <div class="hero__image js-ripple-target" id="heroImage">
+    <img src="assets/portrait-pixel.svg" alt="Портрет Малика Султанбиева, пиксельный стиль" class="hero__portrait" draggable="false">
     <canvas class="hero__ripple-canvas" id="rippleCanvas"></canvas>
   </div>
 
@@ -36,11 +36,11 @@
     </div>
 
     <div class="hero__bottom">
-      <div class="hero__badge">
+      <div class="hero__badge hero__badge-parallax" id="parallaxMark">
         <img src="assets/icon-mark.svg" alt="" class="hero__badge-icon js-hover-zoom">
         <p>Бренд-дизайнер<br>из Дагестана</p>
       </div>
-      <div class="hero__badge">
+      <div class="hero__badge hero__badge-parallax" id="parallaxCircle">
         <img src="assets/icon-badge.svg" alt="" class="hero__badge-icon js-hover-zoom">
         <p>Исследую форму, смысл и культуру,<br>чтобы создавать сильные бренды</p>
       </div>
@@ -145,5 +145,6 @@
 </div>
 
 <script src="script.js"></script>
+<script type="module" src="lens-blur.js"></script>
 </body>
 </html>
