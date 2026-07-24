@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ee1919">
+<meta name="description" content="Малик Султанбиев — бренд-дизайнер из Дагестана. Портфолио, кейсы и услуги брендинга.">
+<title>Малик Султанбиев — Бренд-дизайнер из Дагестана</title>
+<link rel="icon" href="assets/icon-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero" id="hero">
+  <div class="hero__image js-ripple-target" id="heroImage" aria-label="Клик — эффект волны">
+    <img src="assets/portrait-pixel.svg" alt="Портрет, пиксельный стиль" class="hero__portrait" draggable="false">
+    <canvas class="hero__ripple-canvas" id="rippleCanvas"></canvas>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__top">
+      <h1 class="hero__name">Малик<br>Султанбиев</h1>
+
+      <div class="hero__meta">
+        <p class="hero__year">2026</p>
+        <nav class="hero__nav">
+          <a href="#hero" class="js-hover-zoom">Главная</a>
+          <a href="#about" class="js-hover-zoom">Обо мне</a>
+          <a href="#work" class="js-hover-zoom">Кейсы</a>
+          <a href="#contacts" class="js-hover-zoom">Контакты</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="hero__bottom">
+      <div class="hero__badge">
+        <img src="assets/icon-mark.svg" alt="" class="hero__badge-icon js-hover-zoom">
+        <p>Бренд-дизайнер<br>из Дагестана</p>
+      </div>
+      <div class="hero__badge">
+        <img src="assets/icon-badge.svg" alt="" class="hero__badge-icon js-hover-zoom">
+        <p>Исследую форму, смысл и культуру,<br>чтобы создавать сильные бренды</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="about" id="about">
+  <img src="assets/texture-mask.svg" alt="" class="about__texture" aria-hidden="true" loading="lazy" decoding="async">
+
+  <div class="about__head">
+    <div class="about__avatar">
+      <img src="assets/avatar-photo.jpg" alt="Малик Султанбиев" class="about__photo">
+      <img src="assets/logo-badge-large.svg" alt="malik.desgn" class="about__logo-spin" id="spinLogo">
+    </div>
+    <h2 class="about__title">Как все<br>было</h2>
+  </div>
+
+  <div class="about__text">
+    <div class="about__col">
+      <p>С самого детства мне было проще выражать мысли визуально, чем словами. Свои идеи я передавал через эскизы, форму и композицию, поэтому со временем поступил в художественную школу, где получил прочную основу в работе с визуальным языком.</p>
+      <p>С дизайном я познакомился уже во время учёбы в колледже. Тогда я понял, что визуал может не только выражать идеи, но и решать задачи, помогая брендам находить собственный характер. Именно в тот момент я решил связать свою жизнь с дизайном.</p>
+    </div>
+    <div class="about__col">
+      <p>Сегодня уже более пяти лет я создаю айдентику и визуальные системы для брендов. В своей работе я объединяю художественную базу, внимание к деталям и современный подход, чтобы создавать решения, которые остаются узнаваемыми и работают на уровне смысла.</p>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <h2 class="work__title">Мой цифровой<br>след</h2>
+
+  <div class="work__grid">
+    <button class="work__card js-open-case" data-title="Бренд-дизайн для Ислама Махачева" data-sub="Pound4Padel" style="grid-column:1;grid-row:1/3">
+      <span class="work__caption">Бренд-дизайн для Ислама Махачева — Pound4Padel</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Бренд-дизайн для Ислама Махачева" data-sub="Федерация падела Дагестана" style="grid-column:2;grid-row:1/3">
+      <span class="work__caption">Бренд-дизайн для Ислама Махачева — Федерация падела Дагестана</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Дизайн сайта" data-sub="Обучение по графическом дизайну 3.0 от Atmosfera.Buro" style="grid-column:4;grid-row:1/2">
+      <span class="work__caption">Дизайн сайта — обучение по графическом дизайну 3.0 от Atmosfera.Buro</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Дизайн сайта" data-sub="Обучение по графическом дизайну 3.0 от Atmosfera.Buro" style="grid-column:5;grid-row:1/2">
+      <span class="work__caption">Дизайн сайта — обучение по графическом дизайну 3.0 от Atmosfera.Buro</span>
+    </button>
+
+    <button class="work__card js-open-case" data-title="Дизайн сайта" data-sub="Консалтинговая компания Formula" style="grid-column:4;grid-row:3/4">
+      <span class="work__caption">Дизайн сайта консалтинговой компании Formula</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Бренд-дизайн" data-sub="Консалтинговая компания Formula" style="grid-column:1;grid-row:3/5">
+      <span class="work__caption">Бренд-дизайн для консалтинговой компании Formula</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Бренд-дизайн" data-sub="Консалтинговая компания" style="grid-column:3;grid-row:3/5">
+      <span class="work__caption">Бренд-дизайн для консалтинговой компании</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Бренд-дизайн" data-sub="Круассаная NEBOOLKA" style="grid-column:5;grid-row:3/5">
+      <span class="work__caption">Бренд-дизайн для круассаной NEBOOLKA</span>
+    </button>
+
+    <button class="work__card js-open-case" data-title="Бренд-дизайн" data-sub="Строительная компания АЛЬФА" style="grid-column:1;grid-row:5/7">
+      <span class="work__caption">Бренд-дизайн для строительной компании АЛЬФА</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Брендинг для Ислама Махачева" data-sub="Pound4Padel" style="grid-column:2;grid-row:5/7">
+      <span class="work__caption">Брендинг для Ислама Махачева Pound4Padel</span>
+    </button>
+    <button class="work__card js-open-case" data-title="Брендинг для Ислама Махачева" data-sub="Pound4Padel" style="grid-column:5;grid-row:5/7">
+      <span class="work__caption">Брендинг для Ислама Махачева Pound4Padel</span>
+    </button>
+  </div>
+</section>
+
+<footer class="footer" id="contacts">
+  <img src="assets/texture-mask.svg" alt="" class="footer__texture" aria-hidden="true" loading="lazy" decoding="async">
+
+  <div class="footer__left">
+    <a href="#hero" class="footer__logo js-hover-zoom" aria-label="На главную">
+      <img src="assets/icon-mark-white.svg" alt="">
+      <img src="assets/icon-badge-white.svg" alt="">
+    </a>
+    <p class="footer__disclaimer">Это портфолио дизайнера. Все работы представлены исключительно в демонстрационных целях.</p>
+  </div>
+
+  <div class="footer__right">
+    <h2 class="footer__title">Ищи меня<br>тут</h2>
+    <ul class="footer__socials">
+      <li><a href="https://instagram.com" target="_blank" rel="noopener" class="js-hover-zoom">Instagram</a></li>
+      <li><a href="https://t.me" target="_blank" rel="noopener" class="js-hover-zoom">Telegram</a></li>
+      <li><a href="https://behance.net" target="_blank" rel="noopener" class="js-hover-zoom">Behance</a></li>
+      <li><a href="https://pinterest.com" target="_blank" rel="noopener" class="js-hover-zoom">Pinterest</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="case-modal" id="caseModal">
+  <div class="case-modal__panel">
+    <button class="case-modal__close" id="caseModalClose" aria-label="Закрыть">✕</button>
+    <div class="case-modal__swatch"></div>
+    <p class="case-modal__eyebrow">Кейс</p>
+    <h3 class="case-modal__title" id="caseModalTitle"></h3>
+    <p class="case-modal__sub" id="caseModalSub"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
