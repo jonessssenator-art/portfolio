@@ -45,6 +45,7 @@ WORKS = [
     ("13-time-brand",       "TIME BRAND",        "Часы",         "Магазин часов в Астрахани: каталог 129 моделей с ценами, квиз-подбор и бронь в 1 клик.", "landings/13-time-brand/"),
     ("14-suranova-pm",      "Мария Суранова",    "Бьюти",        "Перманентный макияж бровей, губ и век. Обучение мастеров. Вологда.", "landings/14-suranova-pm/"),
     ("15-gsnv-lab",         "GSNV-Lab",          "Бьюти",        "Сеть салонов красоты и барбершопов в Астрахани: 12 салонов, 4 бренда.", "landings/15-gsnv-lab/"),
+    ("17-gudova-group",     "Gudova Group",      "Консалтинг",   "Строительный консалтинг: сметы, аудит и юр. сопровождение объектов на 3,86 млрд ₽.", "landings/17-gudova-group/"),
 ]
 
 def draw_grad_text(page, draw, xy, text, fnt, anchor="la", c1=ACC1, c2=ACC2):
@@ -100,7 +101,7 @@ def cover_page():
     d.text((cx, 700), "Современная адаптивная вёрстка под ключ.", font=f_body, anchor="mm", fill=MUTED)
     d.text((cx, 745), "Каждая работа — живая страница: откройте по ссылке.", font=f_body, anchor="mm", fill=MUTED)
 
-    stats = [("14", "проектов"), ("100%", "адаптив"), ("HTML/CSS/JS", "чистый код")]
+    stats = [("16", "проектов"), ("100%", "адаптив"), ("HTML/CSS/JS", "чистый код")]
     y = 950
     xs = [cx - 380, cx, cx + 380]
     for (v, lbl), x in zip(stats, xs):
