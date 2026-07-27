@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept C — Structured Grid</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@700,600,500,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "General Sans", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: #f4f2ee;
+    color: #0b0b0b;
+    min-height: 100vh;
+  }
+  .concept-tag {
+    position: fixed; top: 16px; left: 16px; z-index: 5;
+    font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    background: #0b0b0b; color: #f4f2ee; padding: 6px 10px; border-radius: 999px;
+  }
+  .grid {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto 1fr auto;
+    border-left: 1px solid rgba(11,11,11,0.15);
+  }
+  .grid > * { border-right: 1px solid rgba(11,11,11,0.15); }
+  .cell { padding: 20px; }
+
+  .bar { grid-column: 1 / -1; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(11,11,11,0.15); }
+  .bar span { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .bar span:last-child { color: #8c8a86; }
+
+  .headline-wrap { grid-column: 1 / span 6; grid-row: 2; display: grid; grid-template-columns: subgrid; align-items: center; border-bottom: 1px solid rgba(11,11,11,0.15); }
+  h1 {
+    grid-column: 1 / span 5;
+    margin: 0;
+    padding: clamp(16px,3vw,32px) 0;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 6.4vw, 6.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+  .dot { grid-column: 6; display: flex; align-items: center; justify-content: center; }
+  .dot i { width: 14px; height: 14px; background: #e21b1b; border-radius: 50%; }
+  h1 .accent { color: #e21b1b; }
+
+  footer { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; }
+  .foot-a { grid-column: 1 / span 3; padding: clamp(18px,3vw,32px) 20px; font-size: 15px; line-height: 1.5; color: #4a4946; border-right: 1px solid rgba(11,11,11,0.15); }
+  .foot-b { grid-column: 4 / span 3; padding: clamp(18px,3vw,32px) 20px; display: flex; align-items: center; justify-content: flex-end; }
+  .cta { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; border-bottom: 1.5px solid #0b0b0b; padding-bottom: 3px; }
+</style>
+</head>
+<body>
+  <div class="concept-tag">Концепция C — Structured Grid</div>
+
+  <div class="grid">
+    <div class="bar cell"><span>Malik Sultanbiev</span><span>Brand Designer — 2026</span></div>
+
+    <div class="headline-wrap">
+      <h1>Brands are not designed.<br><span class="accent">They</span> are built.</h1>
+      <div class="dot"><i></i></div>
+    </div>
+
+    <footer>
+      <div class="foot-a">Identity systems and visual strategy for brands that intend to be remembered.</div>
+      <div class="foot-b"><a class="cta">Start a brand project →</a></div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -600,11 +600,14 @@ button {
 
   .hero__top { flex-direction: column; align-items: flex-start; gap: 20px; }
   .hero__meta { text-align: left; width: 100%; }
-  .hero__nav { flex-direction: row; flex-wrap: wrap; gap: 4px 18px; }
-  .hero__nav a { padding: 4px 0; }
+  .hero__nav { flex-direction: row; flex-wrap: wrap; gap: 2px 18px; }
+  .hero__nav a { padding: 10px 0; } /* comfortable tap target on touch */
 
   .hero__bottom { flex-direction: column; gap: 22px; }
   .hero__badge { max-width: none; }
+
+  .footer__socials a { padding: 10px 0; }
+  .footer__socials { gap: 0; }
 
   .about__head { gap: 14px; }
   .about__title { width: 100%; margin-top: 8px; }
