@@ -192,13 +192,19 @@ section{padding:112px 0;position:relative;}
 .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:26px;}
 .hero-micro{font-size:13px;color:var(--muted);font-family:var(--font-mono);}
 
-.hero-stage{position:relative;aspect-ratio:1/1;max-height:560px;}
-.hero-stage canvas{position:absolute;inset:0;width:100%;height:100%;}
-.hero-stage .stage-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity .6s ease;}
+.hero-stage{position:relative;aspect-ratio:4/5;max-height:560px;border-radius:var(--radius-m);overflow:hidden;}
+.hero-stage canvas,.hero-stage .stage-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-stage .stage-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .6s ease;}
 .hero-stage.is-live .stage-poster{opacity:0;}
+.hero-stage .stage-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(10,11,12,.35) 0%, rgba(10,11,12,.15) 40%, rgba(10,11,12,.75) 100%),
+             linear-gradient(90deg, rgba(10,11,12,.25) 0%, transparent 30%);
+  mix-blend-mode:multiply;
+}
 .hero-stage .stage-caption{
-  position:absolute;bottom:0;left:0;font-family:var(--font-mono);font-size:11px;color:var(--muted);
-  letter-spacing:.05em;text-transform:uppercase;
+  position:absolute;bottom:16px;left:16px;font-family:var(--font-mono);font-size:11px;color:var(--muted);
+  letter-spacing:.05em;text-transform:uppercase;z-index:2;
 }
 
 .hero-stats{border-top:1px solid var(--line-dark);margin-top:56px;}
