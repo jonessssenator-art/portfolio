@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1a1d20" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="800" fill="#0A0B0C"/>
+  <rect width="800" height="800" fill="url(#grid)"/>
+
+  <!-- foundation -->
+  <rect x="180" y="620" width="440" height="24" fill="none" stroke="#C9773D" stroke-width="1.6"/>
+
+  <!-- columns -->
+  <g stroke="#5D6267" stroke-width="1.6">
+    <line x1="230" y1="620" x2="230" y2="260"/>
+    <line x1="340" y1="620" x2="340" y2="260"/>
+    <line x1="460" y1="620" x2="460" y2="260"/>
+    <line x1="570" y1="620" x2="570" y2="260"/>
+  </g>
+
+  <!-- floor slabs -->
+  <g fill="none" stroke="#C9773D" stroke-width="1.4" opacity="0.85">
+    <rect x="200" y="500" width="400" height="14"/>
+    <rect x="200" y="380" width="400" height="14"/>
+    <rect x="200" y="260" width="400" height="14"/>
+  </g>
+
+  <!-- roof line -->
+  <path d="M190 260 L400 160 L610 260" fill="none" stroke="#F4F1EA" stroke-width="1.6"/>
+
+  <!-- axis crosshair -->
+  <g stroke="#5D6267" stroke-width="1" opacity="0.6">
+    <line x1="400" y1="90" x2="400" y2="700"/>
+    <line x1="90" y1="400" x2="710" y2="400"/>
+  </g>
+
+  <!-- corner registration marks -->
+  <g stroke="#F4F1EA" stroke-width="2" stroke-linecap="round">
+    <path d="M110 90 H90 V110" fill="none"/>
+    <path d="M690 90 H710 V110" fill="none"/>
+    <path d="M110 710 H90 V690" fill="none"/>
+  </g>
+  <path d="M690 710 H710 V690" fill="none" stroke="#C9773D" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="400" cy="400" r="3" fill="#C9773D"/>
+</svg>
