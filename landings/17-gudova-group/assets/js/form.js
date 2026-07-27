@@ -11,12 +11,17 @@
   var form = document.getElementById('contact-form');
   if (!form) return;
 
+  // .form-progress and .form-success are siblings of <form> inside
+  // .form-card, not descendants of it — scope lookups to the shared
+  // parent so they're actually found (form.querySelector alone misses them).
+  var formCard = form.closest('.form-card') || form.parentElement || form;
+
   var content = window.GUDOVA_CONTENT || { contacts: { whatsapp: '' } };
   var track = window.gudovaTrack || function () {};
 
   var steps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
-  var progressDots = Array.prototype.slice.call(form.querySelectorAll('.form-progress span'));
-  var success = form.querySelector('.form-success');
+  var progressDots = Array.prototype.slice.call(formCard.querySelectorAll('.form-progress span'));
+  var success = formCard.querySelector('.form-success');
   var current = 0;
   var answers = {};
   var startedTracking = false;
