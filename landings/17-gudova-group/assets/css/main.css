@@ -193,15 +193,9 @@ section{padding:112px 0;position:relative;}
 .hero-micro{font-size:13px;color:var(--muted);font-family:var(--font-mono);}
 
 .hero-stage{position:relative;aspect-ratio:4/5;max-height:560px;border-radius:var(--radius-m);overflow:hidden;}
-.hero-stage canvas,.hero-stage .stage-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.hero-stage .stage-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .6s ease;}
+.hero-stage canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.hero-stage .stage-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity .6s ease;}
 .hero-stage.is-live .stage-poster{opacity:0;}
-.hero-stage .stage-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(10,11,12,.35) 0%, rgba(10,11,12,.15) 40%, rgba(10,11,12,.75) 100%),
-             linear-gradient(90deg, rgba(10,11,12,.25) 0%, transparent 30%);
-  mix-blend-mode:multiply;
-}
 .hero-stage .stage-caption{
   position:absolute;bottom:16px;left:16px;font-family:var(--font-mono);font-size:11px;color:var(--muted);
   letter-spacing:.05em;text-transform:uppercase;z-index:2;
@@ -500,6 +494,18 @@ details.price-details[open] summary::after{content:'–';}
 /* =========================================================
    RESPONSIVE
    ========================================================= */
+/* Common laptop width (13" MacBook Air ≈1280px and similar) — the
+   header's three flex:none groups (logo/nav-links/nav-right) don't
+   all fit in one row at full size; trim before the 1080px tablet
+   breakpoint kicks in. */
+@media (max-width:1320px){
+  .nav{gap:10px;padding-left:20px;padding-right:20px;}
+  .nav-links{gap:14px;}
+  .nav-links a{font-size:12px;}
+  .nav-phone{display:none;}
+  .nav-cta{padding:10px 16px;font-size:11.5px;}
+  .logo-mark{font-size:15px;gap:7px;}
+}
 @media (max-width:1080px){
   .hero .wrap{grid-template-columns:1fr;}
   .hero-stage{order:-1;max-height:340px;margin-bottom:8px;}

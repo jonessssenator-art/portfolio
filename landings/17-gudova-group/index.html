@@ -127,9 +127,8 @@
     </div>
 
     <div class="hero-stage" id="hero-stage" aria-hidden="true">
-      <img class="stage-poster" src="assets/images/gudova-hero-poster.jpg" alt="" width="1600" height="900" decoding="async" fetchpriority="high">
-      <video class="stage-video" id="hero-video" muted loop playsinline preload="none" poster="assets/images/gudova-hero-poster.jpg"></video>
-      <div class="stage-overlay"></div>
+      <img class="stage-poster" src="assets/images/hero-poster.svg" alt="" width="800" height="800" decoding="async" fetchpriority="high">
+      <canvas></canvas>
       <div class="stage-caption">digital twin · gudova group</div>
     </div>
   </div>
@@ -750,34 +749,21 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/animations.js" defer></script>
 <script src="assets/js/form.js" defer></script>
-<script>
-  (function () {
-    var stage = document.getElementById('hero-stage');
-    var video = document.getElementById('hero-video');
-    if (!stage || !video) return;
-    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return; // static poster stays visible, no video load at all
-
-    var isMobile = window.innerWidth <= 760;
-    var src = isMobile ? 'assets/video/gudova-hero-mobile.mp4' : 'assets/video/gudova-hero-desktop.mp4';
-
+<script type="module">
+  var stage = document.getElementById('hero-stage');
+  if (stage && window.innerWidth > 760 && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        io.disconnect();
-        var source = document.createElement('source');
-        source.src = src;
-        source.type = 'video/mp4';
-        video.appendChild(source);
-        video.load();
-        video.addEventListener('canplay', function () {
-          stage.classList.add('is-live');
-        }, { once: true });
-        video.play().catch(function () { /* autoplay blocked — poster stays visible */ });
+        if (entry.isIntersecting) {
+          io.disconnect();
+          import('./assets/js/three-scene.js').then(function (mod) {
+            mod.initHeroScene(stage);
+          }).catch(function () { /* poster stays visible */ });
+        }
       });
     }, { threshold: 0.1 });
     io.observe(stage);
-  })();
+  }
 </script>
 </body>
 </html>
