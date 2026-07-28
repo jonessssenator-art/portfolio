@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/main.css?v=3">
 
 <script type="application/ld+json">
 {
@@ -743,12 +743,12 @@
   <div class="lb-caption"></div>
 </div>
 
-<script src="assets/js/content.js"></script>
-<script src="assets/js/app.js" defer></script>
+<script src="assets/js/content.js?v=3"></script>
+<script src="assets/js/app.js?v=3" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/js/animations.js" defer></script>
-<script src="assets/js/form.js" defer></script>
+<script src="assets/js/animations.js?v=3" defer></script>
+<script src="assets/js/form.js?v=3" defer></script>
 <script type="module">
   var stage = document.getElementById('hero-stage');
   if (stage && window.innerWidth > 760 && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
@@ -756,7 +756,7 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           io.disconnect();
-          import('./assets/js/three-scene.js').then(function (mod) {
+          import('./assets/js/three-scene.js?v=3').then(function (mod) {
             mod.initHeroScene(stage);
           }).catch(function () { /* poster stays visible */ });
         }
