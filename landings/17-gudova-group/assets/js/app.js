@@ -198,23 +198,51 @@
 
   /* ---------- services sticky-scroll sync ---------- */
   function initServicesSync() {
-    var entries = document.querySelectorAll('.svc-entry');
+    var entries = Array.prototype.slice.call(document.querySelectorAll('.svc-entry'));
     var stageLayers = document.querySelectorAll('.svc-stage .stg-layer');
     var stageCaption = document.querySelector('.svc-stage .stg-caption');
-    if (!entries.length || !('IntersectionObserver' in window)) return;
-    var io = new IntersectionObserver(function (obsEntries) {
-      obsEntries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var id = entry.target.getAttribute('data-service');
-        entries.forEach(function (el) { el.classList.remove('is-active'); });
-        entry.target.classList.add('is-active');
-        stageLayers.forEach(function (l) {
-          l.classList.toggle('is-active', l.getAttribute('data-layer') === id);
-        });
-        if (stageCaption) stageCaption.textContent = entry.target.getAttribute('data-caption') || '';
+    if (!entries.length) return;
+
+    function setActive(target) {
+      var id = target.getAttribute('data-service');
+      entries.forEach(function (el) { el.classList.toggle('is-active', el === target); });
+      stageLayers.forEach(function (l) {
+        l.classList.toggle('is-active', l.getAttribute('data-layer') === id);
       });
-    }, { rootMargin: '-40% 0px -40% 0px' });
-    entries.forEach(function (el) { io.observe(el); });
+      if (stageCaption) stageCaption.textContent = target.getAttribute('data-caption') || '';
+    }
+
+    // Pick whichever entry's own center is closest to the viewport's
+    // vertical center — deterministic, unlike a narrow rootMargin band
+    // where two tall entries can both "intersect" at once and whichever
+    // is later in DOM order silently wins, desyncing list vs stage.
+    var ticking = false;
+    function pickClosest() {
+      ticking = false;
+      var viewportCenter = window.innerHeight / 2;
+      var closest = null;
+      var closestDist = Infinity;
+      entries.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        var elCenter = rect.top + rect.height / 2;
+        var dist = Math.abs(elCenter - viewportCenter);
+        if (dist < closestDist) { closestDist = dist; closest = el; }
+      });
+      if (closest) setActive(closest);
+    }
+    function requestPick() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(pickClosest);
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(requestPick, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+      entries.forEach(function (el) { io.observe(el); });
+    } else {
+      window.addEventListener('scroll', requestPick, { passive: true });
+    }
+    pickClosest();
   }
 
   document.addEventListener('DOMContentLoaded', function () {
