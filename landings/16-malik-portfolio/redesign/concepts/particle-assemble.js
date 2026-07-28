@@ -47,6 +47,11 @@
       sampleCanvas.width = W;
       sampleCanvas.height = H;
       const sctx = sampleCanvas.getContext("2d");
+      // match the resting <img>'s CSS filter so sampled particle colour is
+      // already grayscale/contrast-adjusted — otherwise the handoff at the
+      // end shows full-colour particles snapping to a grey photo, which
+      // reads as the image "changing tone"
+      sctx.filter = "grayscale(1) contrast(1.1)";
       sctx.drawImage(img, dx, dy, drawW, drawH);
 
       let data;
@@ -64,7 +69,9 @@
           const i = (y * W + x) * 4;
           const alpha = data[i + 3];
           if (alpha < 40) continue;
-          samples.push({ x, y, r: data[i], g: data[i + 1], b: data[i + 2], a: alpha / 255 });
+          // × 0.55 to match .portrait img's resting CSS opacity (b-cinematic.html) —
+          // keeps brightness continuous through the canvas→img handoff
+          samples.push({ x, y, r: data[i], g: data[i + 1], b: data[i + 2], a: (alpha / 255) * 0.55 });
         }
       }
       if (!samples.length) { debugBadge.textContent = "particles: FAILED (0 particles sampled — image may be blank)"; return; }
@@ -107,6 +114,10 @@
       const ctx = canvas.getContext("2d");
 
       img.style.opacity = "0";
+      // portraitDrift keeps animating opacity/scale in the background even
+      // while hidden (a CSS animation overrides inline opacity), which was
+      // the other source of the "tone changes" jump — pause it until handoff
+      img.style.animationPlayState = "paused";
 
       let start = null;
       function frame(now) {
@@ -135,6 +146,7 @@
           requestAnimationFrame(() => {
             canvas.style.opacity = "0";
             img.style.removeProperty("opacity"); // hand back to the CSS-defined 0.55
+            img.style.removeProperty("animation-play-state");
           });
           setTimeout(() => canvas.remove(), 600);
           debugBadge.textContent = `particles: DONE — ${particles.length} particles assembled`;
