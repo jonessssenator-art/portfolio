@@ -12,9 +12,13 @@
    * dependency and force-shows everything if nothing else already has. */
   const FORCE_REVEAL_MS = 1800;
   let revealed = false;
+  // No early-return guard here on purpose: this sweep must stay safe to call
+  // more than once (e.g. after revealHero() already ran) or below-the-fold
+  // ScrollTrigger reveals that fire later get permanently orphaned once the
+  // hero's own reveal has already flipped `revealed` to true. Every action
+  // below is idempotent — re-applying a final state to an already-visible
+  // element is a harmless no-op.
   function forceRevealAll() {
-    if (revealed) return;
-    revealed = true;
     document.body.classList.remove("is-loading");
     document.querySelectorAll(".reveal-line > span").forEach((el) => {
       el.style.transform = "translateY(0%)";
@@ -30,6 +34,20 @@
   }
   setTimeout(forceRevealAll, FORCE_REVEAL_MS);
   window.addEventListener("load", () => setTimeout(forceRevealAll, 400));
+
+  /* ---------- hero portrait: brief empty beat, then fade in with the headline ---------- */
+  try {
+    let portraitRevealed = false;
+    function revealPortrait() {
+      if (portraitRevealed) return;
+      portraitRevealed = true;
+      document.body.classList.add("is-revealed");
+    }
+    setTimeout(revealPortrait, 250);   // the deliberate "empty screen" beat
+    setTimeout(revealPortrait, 2000);  // hard fallback
+  } catch (err) {
+    document.body.classList.add("is-revealed");
+  }
 
   const hasGsap = typeof window.gsap !== "undefined";
   const hasScrollTrigger = typeof window.ScrollTrigger !== "undefined";
@@ -161,9 +179,12 @@
           revealed = true;
           document.body.classList.remove("is-loading");
         }
-        window.addEventListener("load", revealHero);
-        if (document.readyState === "complete") revealHero();
-        // belt and suspenders: if load never fires for some reason, the
+        // same 250ms beat as revealPortrait() above — headline and the
+        // particle portrait must appear together, not whenever every last
+        // page resource (fonts, CDN scripts, all 8 sections' images) has
+        // finished loading, which "load" could delay by seconds
+        setTimeout(revealHero, 250);
+        // belt and suspenders: if this never fires for some reason, the
         // top-level forceRevealAll() timeout still guarantees visibility
 
         if (hasScrollTrigger) {
