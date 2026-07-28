@@ -58,33 +58,45 @@
       }
 
       const STEP = 6;
-      const OFFSCREEN = 80;
-      const particles = [];
+      const samples = [];
       for (let y = 0; y < H; y += STEP) {
         for (let x = 0; x < W; x += STEP) {
           const i = (y * W + x) * 4;
           const alpha = data[i + 3];
           if (alpha < 40) continue;
-
-          const side = Math.floor(Math.random() * 4);
-          let sx, sy;
-          if (side === 0) { sx = Math.random() * W; sy = -OFFSCREEN - Math.random() * (H * 0.6); }
-          else if (side === 1) { sx = W + OFFSCREEN + Math.random() * (W * 0.6); sy = Math.random() * H; }
-          else if (side === 2) { sx = Math.random() * W; sy = H + OFFSCREEN + Math.random() * (H * 0.6); }
-          else { sx = -OFFSCREEN - Math.random() * (W * 0.6); sy = Math.random() * H; }
-
-          // wave delay: outer/right edge resolves first, sweeping inward
-          // toward the masked left edge — reads as directed motion, not noise
-          const wave = (W - x) / W;
-          particles.push({
-            startX: sx, startY: sy, tx: x, ty: y,
-            delay: wave * 0.55 + Math.random() * 0.18,
-            dur: 0.75 + Math.random() * 0.35,
-            r: data[i], g: data[i + 1], b: data[i + 2], a: alpha / 255,
-          });
+          samples.push({ x, y, r: data[i], g: data[i + 1], b: data[i + 2], a: alpha / 255 });
         }
       }
-      if (!particles.length) { debugBadge.textContent = "particles: FAILED (0 particles sampled — image may be blank)"; return; }
+      if (!samples.length) { debugBadge.textContent = "particles: FAILED (0 particles sampled — image may be blank)"; return; }
+
+      // Radial convergence instead of 4-random-sides: every particle now
+      // travels a short, straight hop in along the line from the
+      // silhouette's own centroid through its target pixel. Neighbouring
+      // pixels move on near-parallel paths instead of crossing the whole
+      // screen from independent random directions — that crossing was what
+      // read as a chaotic swarm rather than a face assembling.
+      let centerX = 0, centerY = 0;
+      for (const s of samples) { centerX += s.x; centerY += s.y; }
+      centerX /= samples.length; centerY /= samples.length;
+
+      const particles = samples.map((s) => {
+        const dx = s.x - centerX, dy = s.y - centerY;
+        const dist = Math.hypot(dx, dy) || 1;
+        const nx = dx / dist, ny = dy / dist;
+        const travel = 70 + Math.random() * 110; // short controlled hop, not a full-screen sweep
+        const jitter = 14;
+        const startX = s.x + nx * travel + (Math.random() - 0.5) * jitter;
+        const startY = s.y + ny * travel + (Math.random() - 0.5) * jitter;
+
+        // directional sweep across x, layered on top of the radial motion
+        const wave = (W - s.x) / W;
+        return {
+          startX, startY, tx: s.x, ty: s.y,
+          delay: wave * 0.4 + Math.random() * 0.15,
+          dur: 0.5 + Math.random() * 0.25,
+          r: s.r, g: s.g, b: s.b, a: s.a,
+        };
+      });
       debugBadge.textContent = `particles: OK — ${particles.length} particles, animating…`;
 
       const canvas = document.createElement("canvas");
@@ -108,10 +120,11 @@
           if (pt < 1) allDone = false;
           pt = Math.min(Math.max(pt, 0), 1);
           const ease = 1 - Math.pow(1 - pt, 3);
-          const cx = p.startX + (p.tx - p.startX) * ease;
-          const cy = p.startY + (p.ty - p.startY) * ease;
-          ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.a})`;
-          ctx.fillRect(cx, cy, STEP, STEP);
+          const appear = Math.min(pt / 0.35, 1); // soft fade-in instead of a hard pop
+          const px = p.startX + (p.tx - p.startX) * ease;
+          const py = p.startY + (p.ty - p.startY) * ease;
+          ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.a * appear})`;
+          ctx.fillRect(px, py, STEP, STEP);
         }
 
         if (!allDone) {
