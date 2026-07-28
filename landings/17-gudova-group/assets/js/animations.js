@@ -70,7 +70,13 @@
   document.addEventListener('DOMContentLoaded', function () {
     heroEntrance();
     revealHeads();
-    revealPanels('.svc-list', .1);
+    // .svc-list is deliberately NOT reveal-animated here: its items'
+    // opacity is driven live by initServicesSync() in app.js (dims
+    // inactive services, highlights the current one as you scroll).
+    // GSAP's tween leaves an inline opacity style behind that beats
+    // the .is-active CSS rule on specificity, permanently freezing
+    // whichever service happened to be active when the reveal fired
+    // (confirmed live: list and stage panel stayed out of sync).
     revealPanels('.proj-panel .pp-body > *', .06);
     revealPanels('.testi-grid', .08);
     revealPanels('.price-cards', .06);
