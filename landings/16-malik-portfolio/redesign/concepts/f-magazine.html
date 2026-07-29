@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Концепция F — Magazine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: #efece6;
+    color: #201d18;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .concept-tag {
+    position: fixed; top: 16px; left: 16px; z-index: 5;
+    font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    background: #201d18; color: #efece6; padding: 6px 10px; border-radius: 999px;
+  }
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 26px clamp(20px, 4vw, 56px) 18px;
+    border-bottom: 3px solid #201d18;
+  }
+  .masthead h1 {
+    margin: 0;
+    font-family: "Oswald", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+    letter-spacing: 0.01em;
+  }
+  .masthead span {
+    font-size: 12px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase;
+    color: #6b665c;
+  }
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  .copy {
+    display: flex; flex-direction: column; justify-content: center; gap: 22px;
+    padding: clamp(28px,4vw,48px) clamp(20px, 4vw, 56px);
+  }
+  .copy .tag {
+    align-self: flex-start;
+    font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    background: #c9962f; color: #201d18; padding: 5px 12px; border-radius: 999px;
+  }
+  .copy p {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    max-width: 460px;
+  }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px; align-self: flex-start;
+    font-size: 15px; font-weight: 600;
+    border: 1px solid #201d18; padding: 14px 24px; border-radius: 999px;
+  }
+  .photo { position: relative; overflow: hidden; background: #201d18; }
+  .photo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 15%;
+    filter: grayscale(1) contrast(1.05) brightness(1.05);
+  }
+  @media (max-width: 760px) {
+    main { grid-template-columns: 1fr; }
+    .photo { height: 46vh; order: -1; }
+  }
+</style>
+</head>
+<body>
+  <div class="concept-tag">Концепция F — Magazine</div>
+  <div class="masthead">
+    <h1>Малик Султанбиев</h1>
+    <span>Выпуск 2026</span>
+  </div>
+  <main>
+    <div class="copy">
+      <span class="tag">Бренд-дизайнер</span>
+      <p>Айдентика для брендов, которые хотят расти, а не просто хорошо выглядеть.</p>
+      <a class="cta">Обсудить проект →</a>
+    </div>
+    <div class="photo"><img src="../../assets/portrait-pixel.svg" alt=""></div>
+  </main>
+</body>
+</html>

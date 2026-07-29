@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Концепция E — Ultra Minimal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: #ffffff;
+    color: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .concept-tag {
+    position: fixed; top: 16px; left: 16px; z-index: 5;
+    font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    background: #0a0a0a; color: #fff; padding: 6px 10px; border-radius: 999px;
+  }
+  .bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 28px clamp(20px, 4vw, 56px) 0;
+    font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase;
+    color: #8a8a8a;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin: 0 clamp(20px, 4vw, 56px);
+  }
+  main { flex: 1; display: flex; align-items: center; padding: 0 clamp(20px, 4vw, 56px); }
+  h1 {
+    margin: 0;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 8vw, 7rem);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    max-width: 1100px;
+  }
+  h1 em { font-style: normal; color: #b9b9b9; }
+  footer {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding: clamp(24px,4vw,40px) clamp(20px, 4vw, 56px) clamp(28px, 5vw, 56px);
+    border-top: 1px solid #eee;
+    margin: 0 clamp(20px, 4vw, 56px);
+    gap: 24px;
+  }
+  footer p { max-width: 340px; font-size: 15px; line-height: 1.5; color: #555; margin: 0; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 15px; font-weight: 600;
+    border-bottom: 1.5px solid #0a0a0a; padding-bottom: 3px;
+  }
+</style>
+</head>
+<body>
+  <div class="concept-tag">Концепция E — Ultra Minimal (без портрета)</div>
+  <div class="bar">
+    <span>Малик Султанбиев</span>
+    <span>2026</span>
+  </div>
+  <main>
+    <h1>Бренд-дизайнер.<br><em>Работаю на результат,</em><br>не на портфолио.</h1>
+  </main>
+  <footer>
+    <p>Айдентика, сайты и визуальная стратегия для брендов, которые хотят расти.</p>
+    <a class="cta">Обсудить проект →</a>
+  </footer>
+</body>
+</html>
