@@ -251,5 +251,6 @@
   try {
     initAccordion(".work-row", ".js-work-toggle", ".work-row__panel");
     initAccordion(".process-row", ".js-process-toggle", ".process-row__body");
+    initAccordion(".faq-row", ".js-faq-toggle", ".faq-row__panel");
   } catch (err) { /* accordions are progressive enhancement over static content */ }
 })();
