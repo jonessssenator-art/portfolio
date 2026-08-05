@@ -63,6 +63,7 @@
     } else if (input) {
       valid = input.hasAttribute('data-optional') || input.value.trim().length > 0;
       if (input.type === 'email' && input.value.trim() && !/^\S+@\S+\.\S+$/.test(input.value.trim())) valid = false;
+      if (input.type === 'tel' && input.value.trim() && !/^[+0-9()\-\s]{7,20}$/.test(input.value.trim())) valid = false;
       answers[key] = input.value.trim();
     }
     group.classList.toggle('has-error', !valid);
@@ -101,6 +102,13 @@
     el.addEventListener('focus', markStarted, { once: true });
   });
 
+  var consentInput = form.querySelector('#f-consent');
+  if (consentInput) {
+    consentInput.addEventListener('change', function () {
+      if (consentInput.checked) consentInput.closest('.form-consent').classList.remove('has-error');
+    });
+  }
+
   form.addEventListener('click', function (e) {
     var nextBtn = e.target.closest('[data-action="next"]');
     var prevBtn = e.target.closest('[data-action="prev"]');
@@ -127,6 +135,7 @@
       consent.focus();
       return;
     }
+    if (consent) consent.closest('.form-consent').classList.remove('has-error');
 
     var lines = [
       'Заявка с сайта GUDOVA GROUP',
@@ -147,7 +156,7 @@
     track('form_submit', { role: answers.role || null });
 
     steps.forEach(function (s) { s.classList.remove('is-active'); });
-    form.querySelector('.form-progress').style.display = 'none';
+    formCard.querySelector('.form-progress').style.display = 'none';
     if (success) success.classList.add('is-active');
 
     window.open(waUrl, '_blank', 'noopener');

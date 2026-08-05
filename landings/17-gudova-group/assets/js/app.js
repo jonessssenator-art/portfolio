@@ -64,6 +64,7 @@
     var menu = document.querySelector('.mobile-menu');
     if (!toggle || !menu) return;
     var lastFocused = null;
+    menu.inert = true;
 
     function focusablesIn(container) {
       return Array.prototype.slice.call(
@@ -74,7 +75,9 @@
     function open() {
       lastFocused = document.activeElement;
       menu.classList.add('is-open');
+      menu.inert = false;
       toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Закрыть меню');
       document.body.style.overflow = 'hidden';
       var focusables = focusablesIn(menu);
       if (focusables[0]) focusables[0].focus();
@@ -83,11 +86,24 @@
 
     function close() {
       menu.classList.remove('is-open');
+      menu.inert = true;
       toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Открыть меню');
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKeydown);
       if (lastFocused) lastFocused.focus();
     }
+
+    // menu-toggle is hidden above 920px (full nav shows instead) — if the
+    // viewport crosses that while the menu is open (rotate, resize a split
+    // window), the close button disappears with the menu still covering
+    // the screen and no way out except Escape
+    var desktopQuery = window.matchMedia('(min-width:921px)');
+    var onBreakpointChange = function (e) {
+      if (e.matches && menu.classList.contains('is-open')) close();
+    };
+    if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', onBreakpointChange);
+    else if (desktopQuery.addListener) desktopQuery.addListener(onBreakpointChange);
 
     function onKeydown(e) {
       if (e.key === 'Escape') { close(); return; }
@@ -126,6 +142,7 @@
     var nextBtn = lightbox.querySelector('.lb-next');
     var index = 0;
     var lastFocused = null;
+    lightbox.inert = true;
 
     function show(i) {
       index = (i + triggers.length) % triggers.length;
@@ -139,6 +156,7 @@
       lastFocused = document.activeElement;
       show(i);
       lightbox.classList.add('is-open');
+      lightbox.inert = false;
       document.body.style.overflow = 'hidden';
       closeBtn.focus();
       document.addEventListener('keydown', onKeydown);
@@ -147,6 +165,7 @@
 
     function close() {
       lightbox.classList.remove('is-open');
+      lightbox.inert = true;
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKeydown);
       if (lastFocused) lastFocused.focus();
