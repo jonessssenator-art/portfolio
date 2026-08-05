@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контакты — Фрезер</title>
+<meta name="description" content="Контакты, адрес и заявка на аренду пространства «Фрезер». Ответим в WhatsApp в течение дня.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Фрезер — пространство для мероприятий">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Контакты — Фрезер">
+<meta property="og:description" content="Контакты, адрес и заявка на аренду пространства «Фрезер». Ответим в WhatsApp в течение дня.">
+<meta property="og:url" content="https://frezer.ru/kontakty.html">
+<meta property="og:image" content="https://frezer.ru/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='58' fill='%231F1F1F'/%3E%3Ccircle cx='60' cy='60' r='46' fill='none' stroke='%23C72B28' stroke-width='3'/%3E%3Ccircle cx='60' cy='60' r='16' fill='%23E8DAB6'/%3E%3Ccircle cx='60' cy='60' r='5' fill='%231F1F1F'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="index.html"><img class="brand-logo" src="assets/logo-red.png" alt="Фрезер — пространство для мероприятий"></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html">Главная</a>
+      <a href="prostranstvo.html">Пространство</a>
+      <a href="meropriyatiya.html">Мероприятия</a>
+      <a href="ceny.html">Услуги и цены</a>
+      <a href="kontakty.html" aria-current="page">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn--red" data-cfg-href="whatsapp" href="https://wa.me/79000000000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BE%D0%B1%20%D0%B0%D1%80%D0%B5%D0%BD%D0%B4%D0%B5%20%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%B0%20%C2%AB%D0%A4%D1%80%D0%B5%D0%B7%D0%B5%D1%80%C2%BB." target="_blank" rel="noopener"><span class="btn-label-full">Оставить заявку</span><span class="btn-label-short">Заявка</span></a>
+      <button class="nav-toggle" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">контакты</span>
+    <h1>Свяжитесь с нами</h1>
+    <p class="page-hero__lede lede">Быстрее всего — в WhatsApp: отвечаем в течение дня и присылаем цены под вашу дату.</p>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container">
+    <div class="grid grid--2" style="align-items:start;">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">заявка</span>
+          <h2>Оставить заявку</h2>
+        </div>
+        <form class="form" id="lead-form" action="https://wa.me/79000000000" method="get" target="_blank" rel="noopener">
+          <div>
+            <label for="f-name">Имя</label>
+            <input id="f-name" name="name" type="text" placeholder="Как к вам обращаться" required>
+          </div>
+          <div>
+            <label for="f-phone">Телефон</label>
+            <input id="f-phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <div>
+            <label for="f-date">Дата мероприятия</label>
+            <input id="f-date" name="date" type="text" placeholder="Например, 20 сентября или «уточняю»">
+          </div>
+          <div>
+            <label for="f-comment">Комментарий</label>
+            <textarea id="f-comment" name="comment" placeholder="Формат мероприятия, число гостей"></textarea>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn--red">Отправить в WhatsApp</button>
+            <span class="form__status" aria-live="polite"></span>
+          </div>
+        </form>
+        <noscript><p class="note">В браузере отключён JavaScript: кнопка откроет WhatsApp без автозаполнения — просто напишите своё имя, телефон и дату мероприятия прямо в чате.</p></noscript>
+      </div>
+
+      <div>
+        <div class="section-head">
+          <span class="eyebrow">реквизиты</span>
+          <h2>Как ещё связаться</h2>
+        </div>
+        <div class="grid" style="gap:1rem;">
+          <div class="feature">
+            <h3>Телефон</h3>
+            <p><a data-cfg="phoneDisplay" data-cfg-href="phoneHref" href="tel:+79000000000" style="color:var(--red);font-weight:700;"></a></p>
+          </div>
+          <div class="feature">
+            <h3>WhatsApp</h3>
+            <p><a data-cfg-href="whatsapp" href="https://wa.me/79000000000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BE%D0%B1%20%D0%B0%D1%80%D0%B5%D0%BD%D0%B4%D0%B5%20%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%B0%20%C2%AB%D0%A4%D1%80%D0%B5%D0%B7%D0%B5%D1%80%C2%BB." target="_blank" rel="noopener" style="color:var(--red);font-weight:700;">Написать напрямую</a></p>
+          </div>
+          <div class="feature">
+            <h3>Telegram</h3>
+            <p><a data-cfg-href="telegram" href="https://t.me/frezer_space" target="_blank" rel="noopener" style="color:var(--red);font-weight:700;">Написать в Telegram</a></p>
+          </div>
+          <div class="feature">
+            <h3>Адрес</h3>
+            <p><span data-cfg="addressDisplay"></span></p>
+          </div>
+          <div class="feature">
+            <h3>Режим работы</h3>
+            <p><span data-cfg="workHours"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">как добраться</span>
+      <h2>Карта проезда</h2>
+    </div>
+    <div class="graphic-block graphic-block--black" style="min-height:340px;border:1px dashed rgba(232,218,182,.3);">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:70px;height:70px;">
+        <path d="M60 15 C40 15 28 30 28 48 C28 72 60 105 60 105 C60 105 92 72 92 48 C92 30 80 15 60 15 Z" stroke="#C72B28" stroke-width="5"/>
+        <circle cx="60" cy="48" r="14" fill="#C72B28"/>
+      </svg>
+      <span class="graphic-block__caption">Карта появится здесь после подтверждения адреса площадки</span>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="assets/logo-cream.png" alt="Фрезер">
+        <p style="max-width:320px;opacity:.75;font-size:.94rem;">Пространство для мероприятий на территории бывшего завода «Фрезер».</p>
+      </div>
+      <div>
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="prostranstvo.html">Пространство</a></li>
+          <li><a href="meropriyatiya.html">Мероприятия</a></li>
+          <li><a href="ceny.html">Услуги и цены</a></li>
+          <li><a href="kontakty.html">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li><a data-cfg="phoneDisplay" data-cfg-href="phoneHref" href="tel:+79000000000"></a></li>
+          <li><a data-cfg-href="whatsapp" href="https://wa.me/79000000000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%B5%D0%B5%20%D0%BE%D0%B1%20%D0%B0%D1%80%D0%B5%D0%BD%D0%B4%D0%B5%20%D0%BF%D1%80%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%B0%20%C2%AB%D0%A4%D1%80%D0%B5%D0%B7%D0%B5%D1%80%C2%BB." target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><span data-cfg="addressDisplay"></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 «Фрезер» — пространство для мероприятий</span>
+      <span>Сайт: xxvii</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
