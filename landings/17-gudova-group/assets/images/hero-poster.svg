@@ -41,9 +41,11 @@
   <rect width="800" height="800" fill="#0A0B0C"/>
   <rect width="800" height="800" fill="url(#grid)"/>
 
-  <!-- building + frame decorations scaled up ~15% and shifted toward the
-       upper-right of the canvas (was reading too small / too low-center) -->
-  <g transform="translate(-20,-100) scale(1.15)">
+  <!-- building + frame decorations scaled up ~15% and shifted up (was
+       reading too small / too low-center); x-translate of -60 keeps the
+       scale centered on the artwork's own midpoint (x=400) so left/right
+       margins stay equal instead of the drawing drifting toward one edge -->
+  <g transform="translate(-60,-100) scale(1.15)">
 
   <!-- foundation -->
   <rect class="foundation" x="180" y="620" width="440" height="24" fill="none" stroke="#C9773D" stroke-width="1.6"/>

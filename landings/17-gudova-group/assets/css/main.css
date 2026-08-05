@@ -139,7 +139,7 @@ section{padding:112px 0;position:relative;}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px var(--gutter);max-width:var(--max);margin:0 auto;}
 
 .logo-mark{display:flex;align-items:center;gap:10px;color:var(--text-light);font-weight:600;font-size:17px;letter-spacing:.01em;flex:none;}
-.logo-mark svg{flex:none;}
+.logo-mark img{flex:none;}
 .logo-mark .g2{color:var(--copper);}
 
 .nav-links{display:flex;gap:24px;flex:none;}
@@ -553,6 +553,11 @@ details.price-details[open] summary::after{content:'–';}
   .option-grid{grid-template-columns:1fr;}
 }
 @media (max-width:760px){
+  .svc-stage,.scanner-visual{display:none;}
+  .trust-strip .wrap{flex-direction:column;align-items:flex-start;gap:14px;}
+  .founder-path{flex-direction:column;}
+  .founder-path span{border-right:none;border-bottom:1px solid var(--line-light);text-align:left;}
+  .founder-path span:last-child{border-bottom:none;}
   .mobile-bar{
     display:flex;position:fixed;left:0;right:0;bottom:0;z-index:150;
     background:var(--dark-1);border-top:1px solid var(--line-dark);
