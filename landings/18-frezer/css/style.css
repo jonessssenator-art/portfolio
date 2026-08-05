@@ -143,7 +143,7 @@ p { margin: 0 0 1em; }
   padding-top: 0.9rem;
   padding-bottom: 0.9rem;
 }
-.brand-logo { height: 82px; width: auto; flex-shrink: 0; }
+.brand-logo { height: 123px; width: auto; flex-shrink: 0; }
 
 .main-nav {
   display: flex;
