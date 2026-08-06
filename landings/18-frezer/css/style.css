@@ -285,6 +285,7 @@ p { margin: 0 0 1em; }
   overflow: hidden;
   border: 1px solid rgba(31,31,31,0.1);
 }
+.card__photo { width: 100%; height: 190px; object-fit: cover; display: block; }
 .card__body { padding: 1.2rem 1.3rem; }
 .card__tag {
   display: inline-block;
@@ -313,6 +314,14 @@ p { margin: 0 0 1em; }
 .graphic-block--blue { background: var(--blue); }
 .graphic-block--cream { background: var(--cream); }
 .graphic-block svg { width: 32%; height: 32%; opacity: 0.92; }
+.photo-block {
+  position: relative;
+  min-height: 260px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
 .graphic-block__caption {
   position: absolute;
   left: 0; right: 0; bottom: 0;
