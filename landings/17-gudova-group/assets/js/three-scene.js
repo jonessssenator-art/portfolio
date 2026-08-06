@@ -1,25 +1,31 @@
 /**
- * GUDOVA GROUP — procedural "digital twin" scene (ES module).
+ * GUDOVA GROUP — procedural "digital twin" scene.
  * No external 3D models: several wireframe structures (foundation,
  * columns, ring beams, diagonal bracing, glass floor slabs) built
  * entirely from Three.js primitives — nothing to fake, every shape is
  * generated in code. The scene cycles through a handful of building
  * forms every 15s, replaying the same "assembly" entrance each time.
  *
- * Loaded via a gated dynamic import from index.html so it never blocks
- * first paint. Skipped entirely on narrow viewports / reduced-motion /
- * missing WebGL — the static SVG poster stays visible in all of those
- * cases, per the brief's own fallback instructions.
+ * Plain classic script (not an ES module) expecting a global THREE —
+ * loaded via assets/js/vendor/three.min.js right before this file.
+ * ES modules can't load at all over file:// (every engine blocks
+ * cross-origin module fetches from a null origin), and this page is
+ * routinely opened straight off disk, not through a dev server, so a
+ * module build would silently never run outside of a real http(s) host.
+ * Gated from index.html: skipped entirely on narrow viewports /
+ * reduced-motion / missing WebGL — the static SVG poster stays visible
+ * in all of those cases, per the brief's own fallback instructions.
  */
-import * as THREE from './vendor/three.module.js';
+(function () {
+var THREE = window.THREE;
 
-const COPPER = 0xc9773d;
-const STEEL = 0x5d6267;
-const CONCRETE = 0x1a1d20;
-const GLASS = 0x3a4048;
-const CYCLE_MS = 15000;
+var COPPER = 0xde6800;
+var STEEL = 0x6e6e6e;
+var CONCRETE = 0x1a1d20;
+var GLASS = 0x3a4048;
+var CYCLE_MS = 15000;
 
-export function initHeroScene(container) {
+function initHeroScene(container) {
   if (!container) return null;
   const canvas = container.querySelector('canvas');
   if (!canvas) return null;
@@ -30,6 +36,16 @@ export function initHeroScene(container) {
   } catch (e) {
     return null; // no WebGL — poster stays visible
   }
+
+  // the canvas clears to fully transparent (see setClearColor below) so
+  // wherever the model doesn't cover, whatever sits behind it shows
+  // through — that's normally the point, but the poster's OWN roofline
+  // sketch, corner marks and axis crosshair are absolutely positioned
+  // in the exact same box, so without hiding it the moment WebGL is
+  // actually live, the 2D fallback drawing and the 3D scene render on
+  // top of each other simultaneously.
+  const poster = container.querySelector('.stage-poster');
+  if (poster) poster.style.opacity = '0';
 
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isCompact = window.innerWidth < 1080;
@@ -498,3 +514,6 @@ export function initHeroScene(container) {
 
   return { stop: stop_ };
 }
+
+window.initHeroScene = initHeroScene;
+})();

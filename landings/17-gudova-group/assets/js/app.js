@@ -129,38 +129,52 @@
     });
   }
 
-  /* ---------- certificate lightbox ---------- */
+  /* ---------- lightbox (certificates + per-project photo galleries) ----------
+     triggers are grouped by data-lightbox-group (default group for anything
+     without one, which keeps the 3 certificate triggers behaving as before);
+     prev/next only cycles within the clicked trigger's own group */
   function initLightbox() {
-    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
+    var allTriggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
     var lightbox = document.querySelector('.lightbox');
-    if (!triggers.length || !lightbox) return;
+    if (!allTriggers.length || !lightbox) return;
 
     var img = lightbox.querySelector('img');
     var caption = lightbox.querySelector('.lb-caption');
+    var counter = lightbox.querySelector('.lb-counter');
     var closeBtn = lightbox.querySelector('.lb-close');
     var prevBtn = lightbox.querySelector('.lb-prev');
     var nextBtn = lightbox.querySelector('.lb-next');
+    var groupTriggers = [];
     var index = 0;
     var lastFocused = null;
     lightbox.inert = true;
 
     function show(i) {
-      index = (i + triggers.length) % triggers.length;
-      var trigger = triggers[index];
+      index = (i + groupTriggers.length) % groupTriggers.length;
+      var trigger = groupTriggers[index];
       img.src = trigger.getAttribute('data-lightbox');
-      img.alt = trigger.querySelector('img') ? trigger.querySelector('img').alt : '';
+      img.alt = trigger.getAttribute('data-caption') || (trigger.querySelector('img') ? trigger.querySelector('img').alt : '');
       caption.textContent = trigger.getAttribute('data-caption') || '';
+      if (counter) counter.textContent = groupTriggers.length > 1 ? (index + 1) + ' / ' + groupTriggers.length : '';
+      var multi = groupTriggers.length > 1;
+      if (prevBtn) prevBtn.hidden = !multi;
+      if (nextBtn) nextBtn.hidden = !multi;
     }
 
-    function open(i) {
+    function open(trigger) {
+      var group = trigger.getAttribute('data-lightbox-group') || 'default';
+      groupTriggers = allTriggers.filter(function (t) {
+        return (t.getAttribute('data-lightbox-group') || 'default') === group;
+      });
+      var startIndex = groupTriggers.indexOf(trigger);
       lastFocused = document.activeElement;
-      show(i);
+      show(startIndex < 0 ? 0 : startIndex);
       lightbox.classList.add('is-open');
       lightbox.inert = false;
       document.body.style.overflow = 'hidden';
       closeBtn.focus();
       document.addEventListener('keydown', onKeydown);
-      track('certificate_open', { index: i });
+      track('lightbox_open', { group: group });
     }
 
     function close() {
@@ -183,8 +197,8 @@
       }
     }
 
-    triggers.forEach(function (trigger, i) {
-      trigger.addEventListener('click', function () { open(i); });
+    allTriggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function () { open(trigger); });
     });
     closeBtn.addEventListener('click', close);
     if (prevBtn) prevBtn.addEventListener('click', function () { show(index - 1); });
@@ -198,6 +212,7 @@
   function initScanner() {
     var items = document.querySelectorAll('.scanner-item');
     var visualLayers = document.querySelectorAll('.scanner-visual .sv-layer');
+    var visualNums = document.querySelectorAll('.scanner-visual .sv-num');
     var visualCaption = document.querySelector('.scanner-visual .sv-caption');
     items.forEach(function (item) {
       item.addEventListener('click', function () {
@@ -207,6 +222,9 @@
         var layerId = item.getAttribute('data-layer');
         visualLayers.forEach(function (l) {
           l.classList.toggle('is-active', l.getAttribute('data-layer') === layerId);
+        });
+        visualNums.forEach(function (n) {
+          n.classList.toggle('is-active', n.getAttribute('data-num') === layerId);
         });
         if (visualCaption && !isOpen) {
           visualCaption.textContent = item.getAttribute('data-caption') || '';

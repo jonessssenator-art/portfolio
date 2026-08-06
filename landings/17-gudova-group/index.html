@@ -116,6 +116,12 @@
         </div>
       </div>
     </div>
+
+    <div class="hero-stage" id="hero-stage" aria-hidden="true">
+      <img class="stage-poster" src="assets/images/hero-poster.svg?v=2" alt="" width="800" height="800" decoding="async" fetchpriority="high">
+      <canvas></canvas>
+      <div class="stage-caption">digital twin · gudova group</div>
+    </div>
   </div>
 </section>
 
@@ -182,16 +188,25 @@
       </div>
 
       <div class="scanner-visual" aria-hidden="true">
-        <svg viewBox="0 0 300 375" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="375" fill="var(--dark-2)"/>
-          <g class="sv-layer is-active" data-layer="cost"><rect x="20" y="320" width="260" height="38" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="34" y="343" fill="var(--copper)" font-family="var(--font-mono)" font-size="9">01 · СТОИМОСТЬ СМР</text></g>
-          <g class="sv-layer" data-layer="volumes"><rect x="20" y="278" width="260" height="38" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="34" y="301" fill="var(--copper)" font-family="var(--font-mono)" font-size="9">02 · ОБЪЁМЫ РАБОТ</text></g>
-          <g class="sv-layer" data-layer="docs"><rect x="20" y="236" width="260" height="38" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="34" y="259" fill="var(--copper)" font-family="var(--font-mono)" font-size="9">03 · ДОКУМЕНТАЦИЯ</text></g>
-          <g class="sv-layer" data-layer="contract"><rect x="20" y="194" width="260" height="38" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="34" y="217" fill="var(--copper)" font-family="var(--font-mono)" font-size="9">04 · ДОГОВОР</text></g>
-          <g class="sv-layer" data-layer="changes"><rect x="20" y="152" width="260" height="38" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="34" y="175" fill="var(--copper)" font-family="var(--font-mono)" font-size="9">05 · ИЗМЕНЕНИЯ</text></g>
-          <g class="sv-layer" data-layer="margin"><rect x="20" y="110" width="260" height="38" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="34" y="133" fill="var(--copper)" font-family="var(--font-mono)" font-size="9">06 · МАРЖА</text></g>
-          <g class="sv-layer" data-layer="expertise"><rect x="20" y="68" width="260" height="38" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="34" y="91" fill="var(--copper)" font-family="var(--font-mono)" font-size="9">07 · ЭКСПЕРТИЗА</text></g>
-          <g stroke="var(--line-dark)" stroke-width="1"><line x1="20" y1="358" x2="280" y2="358"/></g>
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <circle class="sv-ring-bg" cx="150" cy="150" r="40" fill="none"/>
+          <circle class="sv-ring-bg" cx="150" cy="150" r="76" fill="none"/>
+          <circle class="sv-ring-bg" cx="150" cy="150" r="112" fill="none"/>
+          <circle class="sv-center-dot" cx="150" cy="150" r="3"/>
+          <path class="sv-layer is-active" data-layer="cost" d="M 229.79 71.40 A 112 112 0 0 0 150.00 38.00"/>
+          <path class="sv-layer" data-layer="volumes" d="M 261.20 163.37 A 112 112 0 0 0 237.57 80.17"/>
+          <path class="sv-layer" data-layer="docs" d="M 208.88 245.28 A 112 112 0 0 0 259.19 174.92"/>
+          <path class="sv-layer" data-layer="contract" d="M 112.22 255.44 A 112 112 0 0 0 198.59 250.91"/>
+          <path class="sv-layer" data-layer="changes" d="M 44.01 186.20 A 112 112 0 0 0 101.41 250.91"/>
+          <path class="sv-layer" data-layer="margin" d="M 55.62 89.70 A 112 112 0 0 0 40.81 174.92"/>
+          <path class="sv-layer" data-layer="expertise" d="M 138.29 38.61 A 112 112 0 0 0 62.43 80.17"/>
+          <text class="sv-num is-active" data-num="cost" x="201.0" y="28.2" text-anchor="middle">01</text>
+          <text class="sv-num" data-num="volumes" x="277.0" y="113.9" text-anchor="middle">02</text>
+          <text class="sv-num" data-num="docs" x="257.4" y="226.8" text-anchor="middle">03</text>
+          <text class="sv-num" data-num="contract" x="156.9" y="281.8" text-anchor="middle">04</text>
+          <text class="sv-num" data-num="changes" x="51.2" y="237.6" text-anchor="middle">05</text>
+          <text class="sv-num" data-num="margin" x="19.9" y="127.4" text-anchor="middle">06</text>
+          <text class="sv-num" data-num="expertise" x="86.6" y="34.2" text-anchor="middle">07</text>
         </svg>
         <div class="sv-caption">Слой: стоимость СМР</div>
       </div>
@@ -284,15 +299,27 @@
       </div>
 
       <div class="svc-stage" aria-hidden="true">
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-          <rect width="300" height="300" fill="var(--dark-1)"/>
-          <g class="stg-layer is-active" data-layer="smeta"><rect x="30" y="240" width="240" height="34" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="44" y="261" fill="var(--copper)" font-family="var(--font-mono)" font-size="9.5">01 · СМЕТА</text></g>
-          <g class="stg-layer" data-layer="audit"><rect x="30" y="200" width="240" height="34" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="44" y="221" fill="var(--copper)" font-family="var(--font-mono)" font-size="9.5">02 · АУДИТ</text></g>
-          <g class="stg-layer" data-layer="legal"><rect x="30" y="160" width="240" height="34" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="44" y="181" fill="var(--copper)" font-family="var(--font-mono)" font-size="9.5">03 · ЮРИДИЧЕСКИЙ</text></g>
-          <g class="stg-layer" data-layer="zakazchik"><rect x="30" y="120" width="240" height="34" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="44" y="141" fill="var(--copper)" font-family="var(--font-mono)" font-size="9.5">04 · ЗАКАЗЧИК</text></g>
-          <g class="stg-layer" data-layer="docs"><rect x="30" y="80" width="240" height="34" fill="none" stroke="var(--copper)" stroke-width="1.5"/><text x="44" y="101" fill="var(--copper)" font-family="var(--font-mono)" font-size="9.5">05 · ДОКУМЕНТАЦИЯ</text></g>
-          <line x1="30" y1="274" x2="270" y2="274" stroke="var(--line-dark)"/>
-        </svg>
+        <div class="rail-track"></div>
+        <div class="stg-layer rail is-active" data-layer="smeta">
+          <span class="rail-dot"></span>
+          <div class="rail-text"><span class="rail-num">01</span><span class="rail-name">Сметное сопровождение</span></div>
+        </div>
+        <div class="stg-layer rail" data-layer="audit">
+          <span class="rail-dot"></span>
+          <div class="rail-text"><span class="rail-num">02</span><span class="rail-name">Аудит инвестиционного проекта</span></div>
+        </div>
+        <div class="stg-layer rail" data-layer="legal">
+          <span class="rail-dot"></span>
+          <div class="rail-text"><span class="rail-num">03</span><span class="rail-name">Юридическое сопровождение</span></div>
+        </div>
+        <div class="stg-layer rail" data-layer="zakazchik">
+          <span class="rail-dot"></span>
+          <div class="rail-text"><span class="rail-num">04</span><span class="rail-name">Технический заказчик и строительный контроль</span></div>
+        </div>
+        <div class="stg-layer rail" data-layer="docs">
+          <span class="rail-dot"></span>
+          <div class="rail-text"><span class="rail-num">05</span><span class="rail-name">Исполнительно-техническая документация</span></div>
+        </div>
         <div class="stg-caption">Слой 1 · Сметное сопровождение</div>
       </div>
     </div>
@@ -310,102 +337,138 @@
       <div class="txt">в портфолио компании. 3,86 млрд ₽ — совокупная стоимость пяти проектов с раскрытой стоимостью контрактов. Фото ниже — иллюстративные, не съёмка конкретных объектов.</div>
     </div>
 
-    <div class="proj-panel">
-      <div class="pp-index">01</div>
-      <div class="pp-icon has-photo"><img src="assets/images/proj-01-school.jpg" alt="" width="640" height="480" loading="lazy" decoding="async"></div>
-      <div class="pp-body">
-        <div class="tag">Образование</div>
-        <h3>Школа на 1224 места (СОШ №58), п. Семендер</h3>
-        <div class="pp-meta">
-          <div><span>Регион</span><b>Республика Дагестан</b></div>
-          <div><span>Контракт</span><b>1 160 000 000 ₽</b></div>
+    <div class="proj-list">
+      <article class="proj-panel">
+        <button class="pp-icon has-photo" data-lightbox="assets/images/proj-01-school.jpg" data-lightbox-group="proj-01" data-caption="Школа на 1224 места (СОШ №58), п. Семендер — главный фасад" aria-label="Открыть фото проекта: Школа на 1224 места">
+          <img src="assets/images/proj-01-school.jpg" alt="" width="640" height="480" loading="lazy" decoding="async">
+          <span class="pp-count">4 фото</span>
+        </button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-01-school-2.jpg" data-lightbox-group="proj-01" data-caption="Класс с современной мебелью"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-01-school-3.jpg" data-lightbox-group="proj-01" data-caption="Светлый коридор школы"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-01-school-4.jpg" data-lightbox-group="proj-01" data-caption="Трибуны спортивного зала"></button>
+        <div class="pp-body">
+          <div class="pp-top"><span class="pp-index">01</span><span class="tag">Образование</span></div>
+          <h3>Школа на 1224 места (СОШ №58), п. Семендер</h3>
+          <div class="pp-meta">
+            <div><span>Регион</span><b>Республика Дагестан</b></div>
+            <div><span>Контракт</span><b>1 160 000 000 ₽</b></div>
+          </div>
+          <details><summary>Подробнее</summary><p>Крупнейший объект в портфолио — сопровождение сметной и исполнительно-технической документации школы на 1224 ученических места. В рамках сопровождения: проверка объёмов по актам КС-2/КС-3, контроль соответствия смете на этапах фундамента, монолита и отделки, формирование пакета документов для ввода объекта в эксплуатацию.</p></details>
         </div>
-        <details><summary>Подробнее</summary><p>Крупнейший объект в портфолио — сопровождение сметной и исполнительно-технической документации школы на 1224 ученических места.</p></details>
-      </div>
-    </div>
+      </article>
 
-    <div class="proj-panel">
-      <div class="pp-index">02</div>
-      <div class="pp-icon has-photo"><img src="assets/images/proj-02-theater.jpg" alt="" width="640" height="480" loading="lazy" decoding="async"></div>
-      <div class="pp-body">
-        <div class="tag">Культура</div>
-        <h3>Реконструкция Азербайджанского гос. драмтеатра</h3>
-        <div class="pp-meta">
-          <div><span>Регион</span><b>г. Дербент, РД</b></div>
-          <div><span>Контракт</span><b>379 576 820 ₽</b></div>
+      <article class="proj-panel">
+        <button class="pp-icon has-photo" data-lightbox="assets/images/proj-02-theater.jpg" data-lightbox-group="proj-02" data-caption="Реконструкция Азербайджанского гос. драмтеатра — фасад" aria-label="Открыть фото проекта: реконструкция драмтеатра">
+          <img src="assets/images/proj-02-theater.jpg" alt="" width="640" height="480" loading="lazy" decoding="async">
+          <span class="pp-count">4 фото</span>
+        </button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-02-theater-2.jpg" data-lightbox-group="proj-02" data-caption="Зрительный зал и сцена"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-02-theater-3.jpg" data-lightbox-group="proj-02" data-caption="Коринфские колонны фасада"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-02-theater-4.jpg" data-lightbox-group="proj-02" data-caption="Реставрация исторической кладки"></button>
+        <div class="pp-body">
+          <div class="pp-top"><span class="pp-index">02</span><span class="tag">Культура</span></div>
+          <h3>Реконструкция Азербайджанского гос. драмтеатра</h3>
+          <div class="pp-meta">
+            <div><span>Регион</span><b>г. Дербент, РД</b></div>
+            <div><span>Контракт</span><b>379 576 820 ₽</b></div>
+          </div>
+          <details><summary>Подробнее</summary><p>Пересчёт сметной стоимости и сопровождение при повторном прохождении экспертизы на достоверность. Отдельное направление — согласование изменений в проектной документации при реставрационных работах и фиксация скрытых работ по историческим конструкциям.</p></details>
         </div>
-        <details><summary>Подробнее</summary><p>Пересчёт сметной стоимости и сопровождение при повторном прохождении экспертизы на достоверность.</p></details>
-      </div>
-    </div>
+      </article>
 
-    <div class="proj-panel">
-      <div class="pp-index">03</div>
-      <div class="pp-icon has-photo"><img src="assets/images/proj-03-water.jpg" alt="" width="640" height="480" loading="lazy" decoding="async"></div>
-      <div class="pp-body">
-        <div class="tag">Инфраструктура</div>
-        <h3>Водовод «Кайтаг — Дербент», 1 этап</h3>
-        <div class="pp-meta">
-          <div><span>Регион</span><b>Республика Дагестан</b></div>
-          <div><span>Контракт</span><b>1 129 474 760 ₽</b></div>
+      <article class="proj-panel">
+        <button class="pp-icon has-photo" data-lightbox="assets/images/proj-03-water.jpg" data-lightbox-group="proj-03" data-caption="Водовод «Кайтаг — Дербент» — строительство трассы" aria-label="Открыть фото проекта: водовод Кайтаг — Дербент">
+          <img src="assets/images/proj-03-water.jpg" alt="" width="640" height="480" loading="lazy" decoding="async">
+          <span class="pp-count">4 фото</span>
+        </button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-03-water-2.jpg" data-lightbox-group="proj-03" data-caption="Сварка стыков трубопровода"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-03-water-3.jpg" data-lightbox-group="proj-03" data-caption="Запорная арматура водовода"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-03-water-4.jpg" data-lightbox-group="proj-03" data-caption="Трасса водовода на местности"></button>
+        <div class="pp-body">
+          <div class="pp-top"><span class="pp-index">03</span><span class="tag">Инфраструктура</span></div>
+          <h3>Водовод «Кайтаг — Дербент», 1 этап</h3>
+          <div class="pp-meta">
+            <div><span>Регион</span><b>Республика Дагестан</b></div>
+            <div><span>Контракт</span><b>1 129 474 760 ₽</b></div>
+          </div>
+          <details><summary>Подробнее</summary><p>Сопровождение сметной документации магистрального водовода на этапе строительства. Контроль актов освидетельствования скрытых работ на каждом участке трассы, сверка исполнительной документации с проектом, приёмка узлов запорной арматуры.</p></details>
         </div>
-        <details><summary>Подробнее</summary><p>Сопровождение сметной документации магистрального водовода на этапе строительства.</p></details>
-      </div>
-    </div>
+      </article>
 
-    <div class="proj-panel">
-      <div class="pp-index">04</div>
-      <div class="pp-icon has-photo"><img src="assets/images/proj-04-greenhouse.jpg" alt="" width="640" height="480" loading="lazy" decoding="async"></div>
-      <div class="pp-body">
-        <div class="tag">Сельское хозяйство</div>
-        <h3>Тепличный комплекс: блоки и ирригация, 3 этап</h3>
-        <div class="pp-meta">
-          <div><span>Регион</span><b>Россия</b></div>
-          <div><span>Контракт</span><b>512 940 946 ₽</b></div>
+      <article class="proj-panel">
+        <button class="pp-icon has-photo" data-lightbox="assets/images/proj-04-greenhouse.jpg" data-lightbox-group="proj-04" data-caption="Тепличный комплекс — внешний вид блоков" aria-label="Открыть фото проекта: тепличный комплекс">
+          <img src="assets/images/proj-04-greenhouse.jpg" alt="" width="640" height="480" loading="lazy" decoding="async">
+          <span class="pp-count">4 фото</span>
+        </button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-04-greenhouse-2.jpg" data-lightbox-group="proj-04" data-caption="Ряды томатов внутри тепличного блока"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-04-greenhouse-3.jpg" data-lightbox-group="proj-04" data-caption="Капельный полив в рядах рассады"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-04-greenhouse-4.jpg" data-lightbox-group="proj-04" data-caption="Комплекс с высоты птичьего полёта"></button>
+        <div class="pp-body">
+          <div class="pp-top"><span class="pp-index">04</span><span class="tag">Сельское хозяйство</span></div>
+          <h3>Тепличный комплекс: блоки и ирригация, 3 этап</h3>
+          <div class="pp-meta">
+            <div><span>Регион</span><b>Россия</b></div>
+            <div><span>Контракт</span><b>512 940 946 ₽</b></div>
+          </div>
+          <details><summary>Подробнее</summary><p>Сопровождение сметной документации тепличного комплекса и системы ирригации. Проверка расчёта материалов по каждому блоку, контроль актов на монтаж инженерных систем полива и вентиляции при поэтапной сдаче.</p></details>
         </div>
-        <details><summary>Подробнее</summary><p>Сопровождение сметной документации тепличного комплекса и системы ирригации.</p></details>
-      </div>
-    </div>
+      </article>
 
-    <div class="proj-panel">
-      <div class="pp-index">05</div>
-      <div class="pp-icon has-photo"><img src="assets/images/proj-05-meat.jpg" alt="" width="640" height="480" loading="lazy" decoding="async"></div>
-      <div class="pp-body">
-        <div class="tag">Производство</div>
-        <h3>Мясоперерабатывающее предприятие, 1 этап</h3>
-        <div class="pp-meta">
-          <div><span>Регион</span><b>Россия</b></div>
-          <div><span>Контракт</span><b>678 000 000 ₽</b></div>
+      <article class="proj-panel">
+        <button class="pp-icon has-photo" data-lightbox="assets/images/proj-05-meat.jpg" data-lightbox-group="proj-05" data-caption="Мясоперерабатывающее предприятие — здание цеха" aria-label="Открыть фото проекта: мясоперерабатывающее предприятие">
+          <img src="assets/images/proj-05-meat.jpg" alt="" width="640" height="480" loading="lazy" decoding="async">
+          <span class="pp-count">3 фото</span>
+        </button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-05-meat-2.jpg" data-lightbox-group="proj-05" data-caption="Технологическая линия из нержавеющей стали"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-05-meat-3.jpg" data-lightbox-group="proj-05" data-caption="Складской комплекс с стеллажным хранением"></button>
+        <div class="pp-body">
+          <div class="pp-top"><span class="pp-index">05</span><span class="tag">Производство</span></div>
+          <h3>Мясоперерабатывающее предприятие, 1 этап</h3>
+          <div class="pp-meta">
+            <div><span>Регион</span><b>Россия</b></div>
+            <div><span>Контракт</span><b>678 000 000 ₽</b></div>
+          </div>
+          <details><summary>Подробнее</summary><p>Сопровождение сметной документации предприятия с законченным производственным циклом. Формирование ведомостей объёмов по инженерным сетям и холодильному оборудованию, контроль соответствия факта смете на этапе монтажа.</p></details>
         </div>
-        <details><summary>Подробнее</summary><p>Сопровождение сметной документации предприятия с законченным производственным циклом.</p></details>
-      </div>
-    </div>
+      </article>
 
-    <div class="proj-panel">
-      <div class="pp-index">06</div>
-      <div class="pp-icon has-photo"><img src="assets/images/proj-06-gymnasium.jpg" alt="" width="640" height="480" loading="lazy" decoding="async"></div>
-      <div class="pp-body">
-        <div class="tag">Образование</div>
-        <h3>Капитальное строительство «Мариинская гимназия»</h3>
-        <div class="pp-meta">
-          <div><span>Регион</span><b>п. Шолоховский, Ростовская обл.</b></div>
-          <div><span>Контракт</span><b>по запросу</b></div>
+      <article class="proj-panel">
+        <button class="pp-icon has-photo" data-lightbox="assets/images/proj-06-gymnasium.jpg" data-lightbox-group="proj-06" data-caption="«Мариинская гимназия» — фасад" aria-label="Открыть фото проекта: Мариинская гимназия">
+          <img src="assets/images/proj-06-gymnasium.jpg" alt="" width="640" height="480" loading="lazy" decoding="async">
+          <span class="pp-count">4 фото</span>
+        </button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-06-gymnasium-2.jpg" data-lightbox-group="proj-06" data-caption="Историческое здание в готическом стиле"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-06-gymnasium-3.jpg" data-lightbox-group="proj-06" data-caption="Парадная мраморная лестница"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-06-gymnasium-4.jpg" data-lightbox-group="proj-06" data-caption="Реставрационные леса на фасаде"></button>
+        <div class="pp-body">
+          <div class="pp-top"><span class="pp-index">06</span><span class="tag">Образование</span></div>
+          <h3>Капитальное строительство «Мариинская гимназия»</h3>
+          <div class="pp-meta">
+            <div><span>Регион</span><b>п. Шолоховский, Ростовская обл.</b></div>
+            <div><span>Контракт</span><b>по запросу</b></div>
+          </div>
+          <details><summary>Подробнее</summary><p>Стоимость контракта по этому объекту раскрывается по запросу — уточняйте при обращении. Капитальное строительство сопровождается контролем актов на каждом этапе — от фундамента до фасадных и отделочных работ исторического облика здания.</p></details>
         </div>
-        <details><summary>Подробнее</summary><p>Стоимость контракта по этому объекту раскрывается по запросу — уточняйте при обращении.</p></details>
-      </div>
-    </div>
+      </article>
 
-    <div class="proj-panel">
-      <div class="pp-index">07</div>
-      <div class="pp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 20 9 8 13 15 16 10 21 20Z"/></svg></div>
-      <div class="pp-body">
-        <div class="tag">Туризм</div>
-        <h3>Всесезонный туристско-рекреационный комплекс «Эльбрус»</h3>
-        <div class="pp-meta">
-          <div><span>Регион</span><b>Россия</b></div>
-          <div><span>Контракт</span><b>по запросу</b></div>
+      <article class="proj-panel">
+        <button class="pp-icon has-photo" data-lightbox="assets/images/proj-07-elbrus.jpg" data-lightbox-group="proj-07" data-caption="Гора Эльбрус — место расположения комплекса" aria-label="Открыть фото проекта: туристский комплекс Эльбрус">
+          <img src="assets/images/proj-07-elbrus.jpg" alt="" width="800" height="500" loading="lazy" decoding="async">
+          <span class="pp-count">4 фото</span>
+        </button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-07-elbrus-2.jpg" data-lightbox-group="proj-07" data-caption="Канатная дорога в горах"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-07-elbrus-3.jpg" data-lightbox-group="proj-07" data-caption="Горнолыжный склон с подъёмником"></button>
+        <button class="lb-extra" hidden data-lightbox="assets/images/proj-07-elbrus-4.jpg" data-lightbox-group="proj-07" data-caption="Здание горного приюта"></button>
+        <div class="pp-body">
+          <div class="pp-top"><span class="pp-index">07</span><span class="tag">Туризм</span></div>
+          <h3>Всесезонный туристско-рекреационный комплекс «Эльбрус»</h3>
+          <div class="pp-meta">
+            <div><span>Регион</span><b>Россия</b></div>
+            <div><span>Контракт</span><b>по запросу</b></div>
+          </div>
+          <details><summary>Подробнее</summary><p>Пересчёт сметной стоимости в рамках постановления Правительства РФ №1315 и сопровождение при повторном прохождении экспертизы. Учитывается специфика горного строительства — логистика, сезонность работ и повышенные требования к фундаментам в условиях многолетней мерзлоты.</p></details>
         </div>
-        <details><summary>Подробнее</summary><p>Пересчёт сметной стоимости в рамках постановления Правительства РФ №1315 и сопровождение при повторном прохождении экспертизы.</p></details>
-      </div>
+      </article>
     </div>
 
     <div class="proj-cta">
@@ -568,19 +631,24 @@
       <h2>Квалификация подтверждена официально</h2>
       <p>Уровень «А», 5‑й квалификационный разряд по сметному ценообразованию в градостроительной деятельности — плюс дипломы и свидетельства профильных отраслевых организаций. Нажмите на изображение, чтобы увеличить.</p>
     </div>
-    <div class="certs-grid">
-      <button class="cert-card" data-lightbox="assets/images/cert-minstroy.jpg" data-caption="Университет Минстроя РФ — «Сметное движение», 2023">
-        <img src="assets/images/cert-minstroy.jpg" alt="Сертификат Университета Минстроя РФ" width="600" height="850" loading="lazy" decoding="async">
-        <div class="cap">Университет Минстроя РФ — «Сметное движение», 2023</div>
-      </button>
-      <button class="cert-card" data-lightbox="assets/images/cert-attestat.jpg" data-caption="Квалификационный аттестат «Сметчик», уровень А-5">
-        <img src="assets/images/cert-attestat.jpg" alt="Квалификационный аттестат сметчика" width="600" height="850" loading="lazy" decoding="async">
-        <div class="cap">Квалификационный аттестат «Сметчик», уровень А‑5</div>
-      </button>
-      <button class="cert-card" data-lightbox="assets/images/cert-soyuz.jpg" data-caption="Союз инженеров-сметчиков, свидетельство участника">
-        <img src="assets/images/cert-soyuz.jpg" alt="Свидетельство Союза инженеров-сметчиков" width="600" height="850" loading="lazy" decoding="async">
-        <div class="cap">Союз инженеров-сметчиков, свидетельство участника</div>
-      </button>
+    <div class="certs-fan-wrap">
+      <div class="certs-fan">
+        <button class="cert-card fan-1" data-lightbox="assets/images/cert-attestat.jpg" data-lightbox-group="certs" data-caption="Квалификационный аттестат «Сметчик», уровень А-5">
+          <img src="assets/images/cert-attestat.jpg" alt="Квалификационный аттестат сметчика" width="495" height="700" loading="lazy" decoding="async">
+        </button>
+        <button class="cert-card fan-2" data-lightbox="assets/images/cert-minstroy.jpg" data-lightbox-group="certs" data-caption="Университет Минстроя РФ — «Сметное движение», 2023">
+          <img src="assets/images/cert-minstroy.jpg" alt="Сертификат Университета Минстроя РФ" width="495" height="700" loading="lazy" decoding="async">
+        </button>
+        <button class="cert-card fan-3" data-lightbox="assets/images/cert-soyuz.jpg" data-lightbox-group="certs" data-caption="Союз инженеров-сметчиков, свидетельство участника">
+          <img src="assets/images/cert-soyuz.jpg" alt="Свидетельство Союза инженеров-сметчиков" width="495" height="700" loading="lazy" decoding="async">
+        </button>
+      </div>
+      <div class="certs-fan-hint">3 документа — наведите или коснитесь, чтобы разложить веером</div>
+      <div class="certs-fan-labels">
+        <div class="fan-label"><span class="dot"></span><b>Сертификат</b>&nbsp;Университет Минстроя РФ, 2023</div>
+        <div class="fan-label"><span class="dot"></span><b>Аттестат</b>&nbsp;«Сметчик», уровень А‑5</div>
+        <div class="fan-label"><span class="dot"></span><b>Свидетельство</b>&nbsp;Союз инженеров-сметчиков</div>
+      </div>
     </div>
   </div>
 </section>
@@ -736,12 +804,13 @@
   </div>
 </footer>
 
-<div class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр сертификата">
+<div class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото">
   <button class="lb-close" aria-label="Закрыть"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <button class="lb-nav lb-prev" aria-label="Предыдущий сертификат"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <button class="lb-nav lb-prev" aria-label="Предыдущее фото"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
   <img src="" alt="">
-  <button class="lb-nav lb-next" aria-label="Следующий сертификат"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+  <button class="lb-nav lb-next" aria-label="Следующее фото"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
   <div class="lb-caption"></div>
+  <div class="lb-counter"></div>
 </div>
 
 <script src="assets/js/content.js?v=10"></script>
@@ -750,6 +819,31 @@
 <script src="assets/js/vendor/ScrollTrigger.min.js?v=10" defer></script>
 <script src="assets/js/animations.js?v=10" defer></script>
 <script src="assets/js/form.js?v=10" defer></script>
+
+<script>
+  /* gated load — skips the ~0.65MB Three.js bundle entirely on narrow
+     viewports and prefers-reduced-motion; the SVG poster (already drawn
+     as the fully-assembled building) stays as the visible hero graphic
+     in both cases and on any WebGL init failure. Classic scripts, not
+     ES modules: modules can't load at all over file://, and this file
+     gets opened straight off disk far more often than through a server. */
+  (function () {
+    var canRun = window.matchMedia('(min-width: 760px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canRun) return;
+    var s1 = document.createElement('script');
+    s1.src = 'assets/js/vendor/three.min.js?v=1';
+    s1.onload = function () {
+      var s2 = document.createElement('script');
+      s2.src = 'assets/js/three-scene.js?v=1';
+      s2.onload = function () {
+        if (window.initHeroScene) window.initHeroScene(document.getElementById('hero-stage'));
+      };
+      document.body.appendChild(s2);
+    };
+    document.body.appendChild(s1);
+  })();
+</script>
 
 </body>
 </html>
