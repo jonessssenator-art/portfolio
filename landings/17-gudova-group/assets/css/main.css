@@ -31,7 +31,7 @@
 }
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
@@ -402,9 +402,13 @@ details.price-details[open] summary::after{content:'–';}
    TESTIMONIALS
    ========================================================= */
 .testi{background:var(--dark-1);color:var(--text-light);}
-.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);}
-.testi-card{background:var(--dark-1);padding:32px 30px;}
-.testi-card .tq{font-family:var(--font-mono);font-size:32px;color:var(--copper);line-height:1;margin-bottom:10px;}
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.testi-card{
+  background:var(--dark-2);border:1px solid var(--line-dark);border-radius:var(--radius-m);
+  padding:32px 30px 28px;position:relative;overflow:hidden;
+}
+.testi-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--copper);}
+.testi-card .tq{font-family:var(--font-sans);font-weight:700;font-size:44px;color:var(--copper);line-height:1;margin-bottom:6px;opacity:.85;}
 .testi-card p{font-size:14.5px;color:rgba(244,241,234,.85);line-height:1.65;margin-bottom:20px;}
 .testi-who{border-top:1px solid var(--line-dark);padding-top:14px;}
 .testi-who b{display:block;font-size:14px;color:var(--text-light);}
@@ -534,8 +538,10 @@ details.price-details[open] summary::after{content:'–';}
 @media (max-width:920px){
   .nav-links,.nav-phone{display:none;}
   .menu-toggle{display:flex;}
+  .hero-stats{margin-top:36px;}
   .stat-row{grid-template-columns:1fr;}
-  .stat-cell{border-right:none;border-bottom:1px solid var(--line-dark);padding-bottom:20px;margin-bottom:8px;}
+  .stat-cell{padding-top:16px;border-right:none;border-bottom:1px solid var(--line-dark);padding-bottom:14px;margin-bottom:0;}
+  .stat-cell .num{font-size:20px;}
   .price-cards{grid-template-columns:repeat(2,1fr);}
   .proj-panel{grid-template-columns:1fr;}
   .proj-panel .pp-icon{max-width:160px;}
