@@ -63,8 +63,7 @@
       .from('.hero-copy h1', { y: 20, opacity: 0, duration: .7 }, '-=.3')
       .from('.hero-copy .lede', { y: 14, opacity: 0, duration: .6 }, '-=.4')
       .from('.hero-copy .audience', { y: 10, opacity: 0, duration: .5 }, '-=.4')
-      .from('.hero-ctas .btn', { y: 10, opacity: 0, duration: .5, stagger: .08 }, '-=.3')
-      .from('.hero-stage', { opacity: 0, duration: .8 }, '-=.6');
+      .from('.hero-ctas .btn', { y: 10, opacity: 0, duration: .5, stagger: .08 }, '-=.3');
   }
 
   document.addEventListener('DOMContentLoaded', function () {

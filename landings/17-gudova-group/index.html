@@ -116,12 +116,6 @@
         </div>
       </div>
     </div>
-
-    <div class="hero-stage" id="hero-stage" aria-hidden="true">
-      <img class="stage-poster" src="assets/images/hero-poster.svg?v=2" alt="" width="800" height="800" decoding="async" fetchpriority="high">
-      <canvas></canvas>
-      <div class="stage-caption">digital twin · gudova group</div>
-    </div>
   </div>
 </section>
 
@@ -756,21 +750,6 @@
 <script src="assets/js/vendor/ScrollTrigger.min.js?v=10" defer></script>
 <script src="assets/js/animations.js?v=10" defer></script>
 <script src="assets/js/form.js?v=10" defer></script>
-<script type="module">
-  var stage = document.getElementById('hero-stage');
-  if (stage && window.innerWidth > 760 && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          io.disconnect();
-          import('./assets/js/three-scene.js?v=10').then(function (mod) {
-            mod.initHeroScene(stage);
-          }).catch(function () { /* poster stays visible */ });
-        }
-      });
-    }, { threshold: 0.1 });
-    io.observe(stage);
-  }
-</script>
+
 </body>
 </html>
