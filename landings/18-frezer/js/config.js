@@ -4,9 +4,9 @@
   и они подтянутся на все 5 страниц автоматически.
 */
 window.FREZER_CONFIG = {
-  phoneDisplay: "+7 (900) 000-00-00", // TODO: заменить на реальный номер
-  phoneHref: "tel:+79000000000",
-  whatsappDigits: "79000000000",       // TODO: реальный номер в формате 79XXXXXXXXX
+  phoneDisplay: "+7 (985) 190-61-81",
+  phoneHref: "tel:+79851906181",
+  whatsappDigits: "79851906181",
   telegram: "https://t.me/frezer_space", // TODO: реальный юзернейм
   instagram: "#",                        // TODO: ссылка на Instagram
   vk: "#",                               // TODO: ссылка на VK

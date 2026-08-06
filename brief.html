@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Бриф — лендинг (для заказчика)</title>
-<meta name="description" content="Бриф-анкета на разработку лендинга: 12 разделов вопросов и чек-лист материалов.">
+<meta name="description" content="Короткий бриф на разработку лендинга: 9 главных вопросов, ~5 минут. Заполняется прямо в браузере, ответы отправляются в WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   body { margin: 0; }
@@ -26,374 +27,371 @@
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0E0B16;
-      --surface: #171224;
-      --ink: #ECEAF2;
-      --muted: #9B94AC;
-      --line: #2B2440;
-      --accent: #D9FF3F;
-      --accent-ink: #D9FF3F;
-      --mark-bg: #232B0E;
-      --hl-shadow: none;
-      --hl-color: var(--accent);
+      --bg: #0E0B16; --surface: #171224; --ink: #ECEAF2; --muted: #9B94AC; --line: #2B2440;
+      --accent: #D9FF3F; --accent-ink: #D9FF3F; --mark-bg: #232B0E; --hl-shadow: none; --hl-color: var(--accent);
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0E0B16;
-    --surface: #171224;
-    --ink: #ECEAF2;
-    --muted: #9B94AC;
-    --line: #2B2440;
-    --accent: #D9FF3F;
-    --accent-ink: #D9FF3F;
-    --mark-bg: #232B0E;
-    --hl-shadow: none;
-    --hl-color: var(--accent);
+    --bg: #0E0B16; --surface: #171224; --ink: #ECEAF2; --muted: #9B94AC; --line: #2B2440;
+    --accent: #D9FF3F; --accent-ink: #D9FF3F; --mark-bg: #232B0E; --hl-shadow: none; --hl-color: var(--accent);
   }
   :root[data-theme="light"] {
-    --bg: #F7F6FA;
-    --surface: #FFFFFF;
-    --ink: #17131F;
-    --muted: #6A6577;
-    --line: #E3E0EB;
-    --accent: #D9FF3F;
-    --accent-ink: #3E4A00;
-    --mark-bg: #EFF5D2;
-    --hl-shadow: inset 0 -0.45em var(--accent);
-    --hl-color: currentColor;
+    --bg: #F7F6FA; --surface: #FFFFFF; --ink: #17131F; --muted: #6A6577; --line: #E3E0EB;
+    --accent: #D9FF3F; --accent-ink: #3E4A00; --mark-bg: #EFF5D2; --hl-shadow: inset 0 -0.45em var(--accent); --hl-color: currentColor;
   }
 
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.6;
-    font-size: 16px;
-  }
-  .page {
-    max-width: 46rem;
-    margin: 0 auto;
-    padding: 3rem 1.25rem 5rem;
-  }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; font-size: 16px; }
+  .page { max-width: 38rem; margin: 0 auto; padding: 2.5rem 1.25rem 6.5rem; }
 
   .eyebrow {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.6em;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.9rem;
   }
-  .eyebrow b {
-    color: var(--accent-ink);
-    background: var(--mark-bg);
-    padding: 0.15em 0.5em;
-    font-weight: 600;
-  }
+  .eyebrow b { color: var(--accent-ink); background: var(--mark-bg); padding: 0.15em 0.5em; font-weight: 600; letter-spacing: 0.16em; }
+  .fill-status { font-weight: 600; color: var(--ink); letter-spacing: 0.04em; }
 
-  h1 {
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-    margin: 0 0 1.25rem;
-  }
-  h1 .hl {
-    box-shadow: var(--hl-shadow);
-    color: var(--hl-color);
-  }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.15rem); line-height: 1.14; letter-spacing: -0.02em; text-wrap: balance; margin: 0 0 1rem; }
+  h1 .hl { box-shadow: var(--hl-shadow); color: var(--hl-color); }
 
   .intro {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    padding: 1.1rem 1.3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-bottom: 1.5rem;
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    padding: 0.9rem 1.1rem; font-size: 0.92rem; color: var(--muted); margin-bottom: 1.6rem;
   }
-  .intro p { margin: 0; }
   .intro b { color: var(--accent-ink); }
 
   .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 2.5rem;
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 3rem;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 2rem;
+    font-family: var(--mono); font-size: 0.82rem; color: var(--muted); margin-bottom: 2.2rem;
   }
-  .meta .blank {
-    color: var(--ink);
-    border-bottom: 1px dotted var(--muted);
-    min-width: 11rem;
-    display: inline-block;
+  .meta label { display: flex; align-items: center; gap: 0.6em; }
+  .meta label .meta-label { white-space: nowrap; flex-shrink: 0; }
+  .meta input {
+    font-family: var(--mono); font-size: 0.82rem; color: var(--ink); background: transparent; border: none;
+    border-bottom: 1px dotted var(--muted); padding: 0.15em 0.1em; min-width: 9rem; outline: none;
+    transition: border-color .15s;
   }
+  .meta input:focus { border-bottom-style: solid; border-bottom-color: var(--accent-ink); }
 
-  section { margin-bottom: 2.75rem; }
-  h2 {
-    font-size: 1.25rem;
-    letter-spacing: -0.01em;
-    display: flex;
-    align-items: baseline;
-    gap: 0.7rem;
-    margin: 0 0 1.1rem;
-    padding-top: 1.4rem;
+  .q {
+    padding: 1.35rem 0;
     border-top: 1px solid var(--line);
   }
-  h2 .num {
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent-ink);
-    background: var(--mark-bg);
-    padding: 0.2em 0.55em;
-    flex-shrink: 0;
+  .q:first-of-type { border-top: none; padding-top: 0; }
+  .q .qhead {
+    display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.15rem;
   }
-
-  .q { margin: 0 0 1.15rem; }
-  .q .qt { margin: 0 0 0.35rem; }
   .q .qn {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-right: 0.5em;
+    font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--accent-ink);
+    background: var(--mark-bg); padding: 0.15em 0.5em; flex-shrink: 0;
   }
-  .answer {
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    color: var(--muted);
-    border-bottom: 1px dotted var(--muted);
-    padding-bottom: 1.4rem;
-    max-width: 38rem;
-  }
+  .q .qt { margin: 0; font-size: 1.02rem; }
+  .q .qsub { margin: 0.2rem 0 0.6rem; font-size: 0.85rem; color: var(--muted); }
 
-  ul.checks {
-    list-style: none;
-    padding: 0;
-    margin: 0.4rem 0 1.15rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    max-width: 38rem;
+  textarea.answer, input.answer {
+    display: block; width: 100%; font-family: var(--sans); font-size: 0.95rem; color: var(--ink);
+    background: transparent; border: none; border-bottom: 1px dotted var(--muted);
+    padding: 0.1rem 0.1rem 0.5rem; outline: none; resize: none; overflow: hidden; min-height: 1.8em;
+    transition: border-color .15s;
   }
-  ul.checks li {
-    display: flex;
-    gap: 0.65rem;
-    align-items: baseline;
-  }
-  ul.checks li::before {
-    content: "";
-    width: 0.85rem;
-    height: 0.85rem;
-    border: 1.5px solid var(--muted);
-    flex-shrink: 0;
-    transform: translateY(0.15rem);
-  }
-  .note {
-    font-size: 0.88rem;
-    color: var(--muted);
-    margin: -0.5rem 0 1rem;
-  }
+  textarea.answer::placeholder, input.answer::placeholder { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); }
+  textarea.answer:focus, input.answer:focus,
+  textarea.answer:not(:placeholder-shown), input.answer:not(:placeholder-shown) { border-bottom-style: solid; border-bottom-color: var(--accent-ink); }
 
-  .checklist {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    padding: 1.3rem 1.4rem 1.1rem;
+  .row2 { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .row2 > div { flex: 1; min-width: 11rem; }
+  .row2 label.mini { display: block; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  ul.checks { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; }
+  ul.checks li.other-row { flex-basis: 100%; display: flex; align-items: center; gap: 0.6rem; margin-top: 0.2rem; }
+  ul.checks label { display: flex; gap: 0.55rem; align-items: center; cursor: pointer; font-size: 0.92rem; }
+  ul.checks input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none; width: 0.85rem; height: 0.85rem;
+    border: 1.5px solid var(--muted); flex-shrink: 0; background: var(--surface); cursor: pointer;
+    transition: background .12s, border-color .12s;
   }
-  .checklist h2 { border-top: none; padding-top: 0; }
+  ul.checks input[type="checkbox"]:checked { background: var(--accent-ink); border-color: var(--accent-ink); }
+  ul.checks input[type="checkbox"]:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+  ul.checks .other-input {
+    font-family: var(--sans); font-size: 0.9rem; color: var(--ink); background: transparent; border: none;
+    border-bottom: 1px dotted var(--muted); padding: 0.1rem 0.1rem 0.3rem; outline: none; flex: 1; min-width: 8rem;
+  }
+  ul.checks .other-input:focus { border-bottom-style: solid; border-bottom-color: var(--accent-ink); }
 
   .outro {
-    margin-top: 2.5rem;
-    padding: 1.1rem 1.3rem;
-    background: var(--mark-bg);
-    color: var(--ink);
+    margin-top: 1.6rem; padding: 1.1rem 1.2rem 1.25rem; background: var(--mark-bg); color: var(--ink);
   }
-  .outro p { margin: 0 0 0.4rem; }
-  .outro p:last-child { margin: 0; }
-  .contact-blank {
-    border-bottom: 1px dotted var(--muted);
-    min-width: 12rem;
-    display: inline-block;
+  .outro p { margin: 0 0 0.8rem; font-size: 0.92rem; }
+  .outro-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; }
+  .btn {
+    font-family: var(--sans); font-size: 0.88rem; font-weight: 600; color: var(--bg); background: var(--accent-ink);
+    border: none; padding: 0.7em 1.15em; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5em;
+    transition: opacity .15s, transform .12s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--muted); }
+  .btn-link {
+    background: none; border: none; color: var(--ink); text-decoration: underline; text-underline-offset: 2px;
+    font-size: 0.82rem; font-weight: 500; cursor: pointer; padding: 0.4em 0;
+  }
+  .direct-contacts { margin-top: 0.8rem; font-size: 0.82rem; color: var(--muted); }
+  .direct-contacts a { color: inherit; }
+
+  .sticky-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line);
+    padding: 0.65rem 1.25rem; display: flex; justify-content: center; box-shadow: 0 -6px 20px rgba(0,0,0,.06); z-index: 10;
+  }
+  .sticky-bar .btn { width: 100%; max-width: 20rem; justify-content: center; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 4.5rem; transform: translateX(-50%) translateY(12px);
+    background: var(--ink); color: var(--bg); font-size: 0.85rem; font-weight: 500; padding: 0.7em 1.1em;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25); z-index: 20; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 480px) {
+    .page { padding: 2rem 1rem 6.5rem; }
+    .btn { width: 100%; justify-content: center; }
   }
 </style>
 </head>
 <body>
 
 <div class="page">
-  <div class="eyebrow"><b>Бриф</b> · анкета для заказчика · заполнение ~15–20 минут</div>
-  <h1>Бриф на разработку <span class="hl">лендинга</span> (Landing&nbsp;Page)</h1>
+  <div class="eyebrow"><b>Бриф</b> · короткая анкета · ~5 минут <span class="fill-status" id="fillStatus"></span></div>
+  <h1>Бриф на разработку <span class="hl">лендинга</span></h1>
 
   <div class="intro">
-    <p><b>Что это.</b> Бриф — короткая анкета, которая помогает мне понять ваш бизнес и задачу, чтобы сделать сайт, который продаёт, а не просто «красивую страницу».</p>
-    <p><b>Как заполнять.</b> Отвечайте своими словами, прямо в документе после каждого пункта. Если на вопрос пока нет ответа — пишите «не знаю» или «на ваше усмотрение», подскажу.</p>
-    <p><b>Чем подробнее — тем точнее результат</b> и меньше правок.</p>
+    <b>9 вопросов, только суть.</b> Остальные детали (тексты, фото, мелкие правки) уточню в переписке — это не займёт много времени. Не знаете ответ — пишите «не знаю», подскажу сам. Ответы сохраняются в этом браузере.
   </div>
 
   <div class="meta">
-    <span>📅 Дата заполнения: <span class="blank">&nbsp;</span></span>
-    <span>🏢 Проект / название: <span class="blank">&nbsp;</span></span>
+    <label><span class="meta-label">📅 Дата:</span> <input type="date" class="answer" id="metaDate" data-key="date" data-label="Дата"></label>
+    <label><span class="meta-label">🏢 Проект:</span> <input type="text" class="answer" id="metaProject" data-key="project" data-label="Проект" placeholder="название"></label>
   </div>
 
-  <section>
-    <h2><span class="num">01</span>О компании и продукте</h2>
-    <div class="q"><p class="qt"><span class="qn">1.1</span>Чем занимаетесь, что продаёте (услуга / товар)?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">1.2</span>В каком городе/регионе работаете? Принимаете клиентов офлайн, онлайн или везде?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">1.3</span>Сколько лет на рынке, ключевые цифры (клиенты, проекты, отзывы) — если есть и можно показать?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">1.4</span>В чём ваше главное отличие от конкурентов (почему выбирают именно вас)?</p><div class="answer">Ответ:</div></div>
-  </section>
+  <div class="q">
+    <div class="qhead"><span class="qn">1</span><p class="qt">Чем занимаетесь и в каком городе работаете?</p></div>
+    <textarea class="answer" rows="1" data-key="1" data-label="Бизнес и город" placeholder="Например: маникюрная студия, Астрахань"></textarea>
+  </div>
 
-  <section>
-    <h2><span class="num">02</span>Цель сайта</h2>
-    <div class="q">
-      <p class="qt"><span class="qn">2.1</span>Какое <b>главное действие</b> должен совершить посетитель? (отметьте)</p>
-      <ul class="checks">
-        <li>Оставить заявку / записаться</li>
-        <li>Позвонить</li>
-        <li>Написать в мессенджер (WhatsApp / Telegram)</li>
-        <li>Перейти в каталог / на оплату</li>
-        <li>Другое: ________________</li>
-      </ul>
-    </div>
-    <div class="q"><p class="qt"><span class="qn">2.2</span>Куда должны приходить заявки? (WhatsApp, Telegram, почта, CRM (система управления клиентами) — укажите контакт/аккаунт)</p><div class="answer">Ответ:</div></div>
-    <div class="q">
-      <p class="qt"><span class="qn">2.3</span>Откуда пойдёт трафик (посетители)? (отметьте)</p>
-      <ul class="checks">
-        <li>Реклама в Яндекс / Google</li>
-        <li>Соцсети (Instagram, ВК, TikTok)</li>
-        <li>Авито / маркетплейсы</li>
-        <li>Визитки / офлайн (QR-код)</li>
-        <li>Пока не знаю</li>
-      </ul>
-    </div>
-  </section>
+  <div class="q">
+    <div class="qhead"><span class="qn">2</span><p class="qt">Кто ваши клиенты и какую их проблему вы решаете?</p></div>
+    <textarea class="answer" rows="1" data-key="2" data-label="Клиенты и проблема" placeholder="Например: женщины 25-45, ищут мастера рядом с домом"></textarea>
+  </div>
 
-  <section>
-    <h2><span class="num">03</span>Целевая аудитория</h2>
-    <div class="q"><p class="qt"><span class="qn">3.1</span>Кто ваши клиенты (пол, возраст, доход, интересы)?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">3.2</span>Какую проблему клиента вы решаете? Какие у него возражения и страхи перед покупкой?</p><div class="answer">Ответ:</div></div>
-  </section>
+  <div class="q">
+    <div class="qhead"><span class="qn">3</span><p class="qt">Почему выбирают именно вас, а не конкурентов?</p></div>
+    <textarea class="answer" rows="1" data-key="3" data-label="Отличие от конкурентов" placeholder="Ответ…"></textarea>
+  </div>
 
-  <section>
-    <h2><span class="num">04</span>Конкуренты и референсы (примеры)</h2>
-    <div class="q"><p class="qt"><span class="qn">4.1</span>1–3 сайта конкурентов (ссылки):</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">4.2</span>1–3 сайта, которые вам <b>нравятся по стилю</b> (не обязательно из вашей ниши) — и что именно нравится:</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">4.3</span>Что вам <b>не нравится</b> в сайтах конкурентов (чего избегать)?</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section>
-    <h2><span class="num">05</span>Структура: какие блоки нужны на лендинге</h2>
-    <p class="note">Отметьте нужное, лишнее уберите:</p>
-    <ul class="checks">
-      <li>Первый экран с заголовком и кнопкой</li>
-      <li>О компании</li>
-      <li>Услуги / товары + <b>цены</b> (или «от …»)</li>
-      <li>Калькулятор стоимости</li>
-      <li>Галерея работ / портфолио (в т.ч. «До / После»)</li>
-      <li>Этапы работы («как мы работаем»)</li>
-      <li>Преимущества / почему мы</li>
-      <li>Команда / мастера</li>
-      <li>Отзывы клиентов</li>
-      <li>Частые вопросы (FAQ)</li>
-      <li>Акция / спецпредложение</li>
-      <li>Форма заявки / онлайн-запись</li>
-      <li>Карта и контакты</li>
-      <li>Другое: ________________</li>
+  <div class="q">
+    <div class="qhead"><span class="qn">4</span><p class="qt">Что должен сделать посетитель на сайте — и куда слать заявки?</p></div>
+    <ul class="checks" data-multi="4" data-label="Главное действие">
+      <li><label><input type="checkbox" value="Оставить заявку"> Оставить заявку</label></li>
+      <li><label><input type="checkbox" value="Позвонить"> Позвонить</label></li>
+      <li><label><input type="checkbox" value="Написать в мессенджер"> Написать в мессенджер</label></li>
+      <li><label><input type="checkbox" value="Купить / оплатить"> Купить / оплатить</label></li>
     </ul>
-  </section>
+    <textarea class="answer" rows="1" data-key="4-target" data-label="Куда слать заявки" placeholder="Куда приходят заявки: WhatsApp / Telegram / почта — контакт"></textarea>
+  </div>
 
-  <section>
-    <h2><span class="num">06</span>Дизайн и фирменный стиль</h2>
-    <div class="q"><p class="qt"><span class="qn">6.1</span>Есть ли <b>логотип</b> и фирменные цвета? (пришлите файлы; если нет — сделаю/подберу)</p><div class="answer">Ответ:</div></div>
-    <div class="q">
-      <p class="qt"><span class="qn">6.2</span>Желаемое настроение сайта (отметьте 1–3):</p>
-      <ul class="checks">
-        <li>Премиум / люкс (тёмный, дорогой)</li>
-        <li>Светлый и минималистичный</li>
-        <li>Яркий и энергичный</li>
-        <li>Тёплый, «человечный», уютный</li>
-        <li>Строгий, деловой / корпоративный</li>
-        <li>На ваш профессиональный вкус</li>
-      </ul>
-    </div>
-    <div class="q"><p class="qt"><span class="qn">6.3</span>Любимые / обязательные цвета и те, которых точно избегать:</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">6.4</span>Язык(и) сайта:</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section>
-    <h2><span class="num">07</span>Функциональность и интеграции</h2>
-    <div class="q">
-      <p class="qt"><span class="qn">7.1</span>Что должно работать на сайте? (отметьте)</p>
-      <ul class="checks">
-        <li>Форма заявки (имя, телефон, комментарий)</li>
-        <li>Кнопки WhatsApp / Telegram / звонок</li>
-        <li>Калькулятор стоимости</li>
-        <li>Онлайн-оплата</li>
-        <li>Квиз (пошаговый опрос с подбором)</li>
-        <li>Чат / виджет</li>
-        <li>Многостраничность (несколько разделов)</li>
-        <li>Другое: ________________</li>
-      </ul>
-    </div>
-    <div class="q"><p class="qt"><span class="qn">7.2</span>Нужна ли веб-аналитика (Яндекс.Метрика / Google Analytics) и пиксели рекламы?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">7.3</span>Есть ли уже CRM (система управления заявками) или таблица, куда заносить лиды?</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section>
-    <h2><span class="num">08</span>Контент: кто предоставляет материалы</h2>
-    <div class="q"><p class="qt"><span class="qn">8.1</span><b>Тексты</b> — есть готовые, или писать мне?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">8.2</span><b>Фотографии</b> — свои есть? Или использовать качественные стоковые (свободная лицензия)?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">8.3</span><b>Логотип</b> в векторе (SVG/AI/PDF) — есть?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">8.4</span>Прайс / список услуг с ценами — приложите файлом или текстом:</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section>
-    <h2><span class="num">09</span>Контакты на сайте</h2>
-    <div class="q"><p class="qt"><span class="qn">9.1</span>Телефон(ы) для кнопок «Позвонить»:</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">9.2</span>WhatsApp / Telegram (номер или ссылка):</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">9.3</span>Соцсети (Instagram, ВК и т.д. — ссылки/ники):</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">9.4</span>Адрес, режим работы (если нужно показывать):</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">9.5</span>Реквизиты / ИНН (если нужна страница политики конфиденциальности по 152-ФЗ):</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section>
-    <h2><span class="num">10</span>Технические детали</h2>
-    <div class="q"><p class="qt"><span class="qn">10.1</span>Есть ли <b>домен</b> (адрес сайта)? Если да — какой; если нет — нужна помощь с покупкой?</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">10.2</span>Есть ли <b>хостинг</b> (где разместить сайт)? (можно бесплатно на GitHub Pages)</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">10.3</span>Был ли раньше сайт? Что с ним не так?</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section>
-    <h2><span class="num">11</span>Сроки и бюджет</h2>
-    <div class="q"><p class="qt"><span class="qn">11.1</span>Желаемый срок запуска (дедлайн):</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">11.2</span>Ориентировочный бюджет (это помогает подобрать оптимальное решение):</p><div class="answer">Ответ:</div></div>
-    <div class="q"><p class="qt"><span class="qn">11.3</span>Кто принимает финальное решение и согласовывает макет?</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section>
-    <h2><span class="num">12</span>Дополнительно</h2>
-    <div class="q"><p class="qt">Что ещё важно знать о проекте, чего я не спросил?</p><div class="answer">Ответ:</div></div>
-  </section>
-
-  <section class="checklist">
-    <h2><span class="num">✓</span>Чек-лист: что прислать вместе с брифом</h2>
-    <ul class="checks">
-      <li>Логотип (по возможности в векторе) и фирменные цвета</li>
-      <li>Прайс / список услуг с ценами</li>
-      <li>Тексты (если есть) или ключевые тезисы</li>
-      <li>Фотографии работ / товаров / команды</li>
-      <li>Ссылки: соцсети, конкуренты, понравившиеся сайты</li>
-      <li>Контакты: телефон, WhatsApp/Telegram, адрес, режим работы</li>
+  <div class="q">
+    <div class="qhead"><span class="qn">5</span><p class="qt">Что уже готово из материалов?</p></div>
+    <ul class="checks" data-multi="5" data-label="Готовые материалы">
+      <li><label><input type="checkbox" value="Логотип и цвета"> Логотип и цвета</label></li>
+      <li><label><input type="checkbox" value="Тексты"> Тексты</label></li>
+      <li><label><input type="checkbox" value="Фотографии"> Фотографии</label></li>
+      <li><label><input type="checkbox" value="Прайс / цены"> Прайс / цены</label></li>
+      <li><label><input type="checkbox" value="Ничего нет, нужна помощь"> Ничего нет, нужна помощь</label></li>
     </ul>
-  </section>
+  </div>
 
-  <div class="outro">
-    <p><b>Спасибо!</b> После получения брифа я уточню детали (если потребуется), оценю сроки и стоимость и приступлю к работе.</p>
-    <p>Связь: <a href="https://wa.me/79688666627" style="color: inherit; font-weight: 600;">WhatsApp +7 968 866-66-27</a> · <a href="https://t.me/jonessssenator" style="color: inherit; font-weight: 600;">Telegram @jonessssenator</a></p>
+  <div class="q">
+    <div class="qhead"><span class="qn">6</span><p class="qt">Какое настроение / стиль сайта хочется?</p></div>
+    <ul class="checks" data-multi="6" data-label="Стиль">
+      <li><label><input type="checkbox" value="Премиум, тёмный"> Премиум, тёмный</label></li>
+      <li><label><input type="checkbox" value="Светлый минимализм"> Светлый минимализм</label></li>
+      <li><label><input type="checkbox" value="Яркий, энергичный"> Яркий, энергичный</label></li>
+      <li><label><input type="checkbox" value="Тёплый, уютный"> Тёплый, уютный</label></li>
+      <li><label><input type="checkbox" value="Строгий, деловой"> Строгий, деловой</label></li>
+      <li><label><input type="checkbox" value="На ваш вкус"> На ваш вкус</label></li>
+    </ul>
+    <textarea class="answer" rows="1" data-key="6-refs" data-label="Референсы" placeholder="Необязательно: сайты, которые нравятся / не нравятся"></textarea>
+  </div>
+
+  <div class="q">
+    <div class="qhead"><span class="qn">7</span><p class="qt">Домен и хостинг уже есть?</p></div>
+    <ul class="checks" data-multi="7" data-label="Домен / хостинг">
+      <li><label><input type="checkbox" value="Есть домен"> Есть домен</label></li>
+      <li><label><input type="checkbox" value="Есть хостинг"> Есть хостинг</label></li>
+      <li><label><input type="checkbox" value="Ничего нет, нужна помощь"> Ничего нет, нужна помощь</label></li>
+      <li><label><input type="checkbox" value="Не разбираюсь, доверяю вам"> Не разбираюсь, доверяю вам</label></li>
+    </ul>
+  </div>
+
+  <div class="q">
+    <div class="qhead"><span class="qn">8</span><p class="qt">Срок и бюджет?</p></div>
+    <div class="row2">
+      <div><label class="mini">Срок</label><textarea class="answer" rows="1" data-key="8-deadline" data-label="Срок" placeholder="Например: за 2 недели"></textarea></div>
+      <div><label class="mini">Бюджет</label><textarea class="answer" rows="1" data-key="8-budget" data-label="Бюджет" placeholder="Например: 15-30 тыс."></textarea></div>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="qhead"><span class="qn">9</span><p class="qt">Как с вами связаться?</p></div>
+    <div class="row2">
+      <div><label class="mini">Имя</label><input type="text" class="answer" data-key="9-name" data-label="Имя" placeholder="Как вас зовут"></div>
+      <div><label class="mini">Телефон / WhatsApp / Telegram</label><input type="text" class="answer" data-key="9-contact" data-label="Контакт" placeholder="+7 900 000-00-00 или @ник"></div>
+    </div>
+    <p class="qsub">Что ещё важно — пишите сюда же, необязательно:</p>
+    <textarea class="answer" rows="1" data-key="9-extra" data-label="Комментарий" placeholder="Необязательно"></textarea>
+  </div>
+
+  <div class="outro" id="outro">
+    <p><b>Готово!</b> Проверьте ответы выше и жмите кнопку — они придут мне одним сообщением. Остальное уточню в переписке.</p>
+    <div class="outro-actions">
+      <button class="btn" id="sendWa">Отправить в WhatsApp</button>
+      <button class="btn btn-ghost" id="sendTg">Отправить в Telegram</button>
+      <button class="btn-link" id="copyBtn">Скопировать ответы</button>
+    </div>
+    <p class="direct-contacts">Или напрямую: <a href="https://wa.me/79688666627">WhatsApp +7 968 866-66-27</a> · <a href="https://t.me/jonessssenator">Telegram @jonessssenator</a></p>
   </div>
 </div>
+
+<div class="sticky-bar" id="stickyBar">
+  <button class="btn" id="stickyBtn">Отправить бриф ↓</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'xxvii_brief_short_v1';
+  var page = document.querySelector('.page');
+  var toastEl = document.getElementById('toast');
+  var fillStatus = document.getElementById('fillStatus');
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastEl._t);
+    toastEl._t = setTimeout(function () { toastEl.classList.remove('show'); }, 2200);
+  }
+
+  function autoGrow(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { saved = {}; }
+
+  var textFields = Array.prototype.slice.call(page.querySelectorAll('textarea.answer, input.answer, .other-input'));
+  var checkboxes = Array.prototype.slice.call(page.querySelectorAll('ul.checks input[type="checkbox"]'));
+
+  textFields.forEach(function (el) {
+    var key = el.dataset.key;
+    if (saved[key]) el.value = saved[key];
+    if (el.tagName === 'TEXTAREA') autoGrow(el);
+  });
+  checkboxes.forEach(function (el) {
+    var key = el.closest('ul').dataset.multi;
+    var arr = saved[key + ':checks'];
+    if (Array.isArray(arr) && arr.indexOf(el.value) !== -1) el.checked = true;
+  });
+
+  if (!document.getElementById('metaDate').value) {
+    document.getElementById('metaDate').valueAsDate = new Date();
+  }
+
+  var saveTimer = null;
+  function persist() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      var data = {};
+      textFields.forEach(function (el) { if (el.value.trim()) data[el.dataset.key] = el.value; });
+      var groups = {};
+      checkboxes.forEach(function (el) {
+        var key = el.closest('ul').dataset.multi;
+        if (!groups[key]) groups[key] = [];
+        if (el.checked) groups[key].push(el.value);
+      });
+      Object.keys(groups).forEach(function (k) { data[k + ':checks'] = groups[k]; });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      updateFillStatus();
+    }, 200);
+  }
+
+  function updateFillStatus() {
+    var total = textFields.length;
+    var filled = textFields.filter(function (el) { return el.value.trim().length > 0; }).length;
+    fillStatus.textContent = filled > 0 ? ('· заполнено ' + filled + ' из ' + total) : '';
+  }
+
+  textFields.forEach(function (el) {
+    el.addEventListener('input', function () {
+      if (el.tagName === 'TEXTAREA') autoGrow(el);
+      persist();
+    });
+  });
+  checkboxes.forEach(function (el) { el.addEventListener('change', persist); });
+  updateFillStatus();
+
+  function collectRows() {
+    var rows = [];
+    var seen = {};
+    var nodes = page.querySelectorAll('[data-key], ul.checks[data-multi]');
+    nodes.forEach(function (node) {
+      if (node.matches('input.answer, textarea.answer')) {
+        var v = node.value.trim();
+        if (v) rows.push([node.dataset.label, v]);
+      } else if (node.matches('.other-input')) {
+        return;
+      } else if (node.matches('ul.checks[data-multi]')) {
+        var key = node.dataset.multi;
+        if (seen[key]) return;
+        seen[key] = true;
+        var vals = [];
+        node.querySelectorAll('input[type="checkbox"]:checked').forEach(function (cb) { vals.push(cb.value); });
+        var other = node.querySelector('.other-input');
+        if (other && other.value.trim()) vals.push(other.value.trim());
+        if (vals.length) rows.push([node.dataset.label, vals.join(', ')]);
+      }
+    });
+    return rows;
+  }
+
+  function buildMessage(rows) {
+    return '📋 Бриф на лендинг\n\n' + rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
+  }
+
+  function requireSomeAnswers(rows) {
+    if (rows.length === 0) { toast('Заполните хотя бы пару полей перед отправкой'); return false; }
+    return true;
+  }
+
+  document.getElementById('sendWa').onclick = function () {
+    var rows = collectRows();
+    if (!requireSomeAnswers(rows)) return;
+    window.open('https://wa.me/79688666627?text=' + encodeURIComponent(buildMessage(rows)), '_blank');
+  };
+  document.getElementById('sendTg').onclick = function () {
+    var rows = collectRows();
+    if (!requireSomeAnswers(rows)) return;
+    window.open('https://t.me/jonessssenator?text=' + encodeURIComponent(buildMessage(rows)), '_blank');
+  };
+  document.getElementById('copyBtn').onclick = function () {
+    var rows = collectRows();
+    if (!requireSomeAnswers(rows)) return;
+    navigator.clipboard.writeText(buildMessage(rows)).then(function () { toast('Ответы скопированы ✓'); });
+  };
+  document.getElementById('stickyBtn').onclick = function () {
+    document.getElementById('outro').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+})();
+</script>
 
 </body>
 </html>

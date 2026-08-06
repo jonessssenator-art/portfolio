@@ -40,11 +40,18 @@
   --panel:#131316;
   --panel2:#18181c;
   --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.28);
   --txt:#f2efe9;
   --mut:#a29e94;
+  --mut-soft:#726d63;
   --gold:#c9a35f;
   --gold-bright:#e3c185;
   --gold-grad:linear-gradient(115deg,#b18c47,#e3c185 55%,#b18c47);
+  /* статус «живой»/«в наличии» — служебный сигнал, отдельно от золота бренда */
+  --success:#59c96a;
+  --success-bright:#7ad786;
+  --success-line:rgba(89,201,106,.4);
+  --success-tint:rgba(89,201,106,.12);
   --ff:'Inter',ui-sans-serif,system-ui,-apple-system,sans-serif;
   --fd:'Cormorant Garamond',Georgia,serif;
   --r:10px; --r-sm:8px; --r-pill:999px;
@@ -76,7 +83,7 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .btn svg{width:17px;height:17px;flex:none}
 .btn-gold{background:var(--gold-grad);color:#181307;box-shadow:0 6px 24px rgba(201,163,95,.22)}
 .btn-gold:hover{filter:brightness(1.07);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--txt);border-color:rgba(255,255,255,.28)}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line-strong)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
 .btn-sm{min-height:42px;padding:0 18px;font-size:13.5px}
 .btn-block{width:100%}
@@ -107,19 +114,23 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.93) 0%,rgba(11,11,13,.72) 42%,rgba(11,11,13,.25) 75%,rgba(11,11,13,.45) 100%),linear-gradient(0deg,var(--bg) 0%,transparent 22%)}
 .hero-inner{position:relative;z-index:1;padding-block:clamp(70px,10vw,120px)}
 .hero .live{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--mut);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 16px;background:rgba(19,19,22,.6)}
-.hero .live .dot{width:7px;height:7px;border-radius:50%;background:#59c96a;box-shadow:0 0 10px #59c96a;animation:pulse 2s infinite}
+.hero .live .dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success);animation:pulse 2s infinite}
 @keyframes pulse{50%{opacity:.4}}
 .hero h1{font-family:var(--fd);font-weight:600;font-size:clamp(42px,6.6vw,84px);line-height:1.02;letter-spacing:.002em;margin:24px 0 0;max-width:15ch}
 .hero h1 em{font-style:italic;color:var(--gold-bright)}
 .hero-sub{font-size:clamp(16px,1.5vw,18.5px);color:#cfcabf;margin:22px 0 0;max-width:47ch;line-height:1.65}
 .hero-actions{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-.hero-trust{display:flex;gap:clamp(24px,4vw,48px);margin-top:clamp(36px,5vw,56px);flex-wrap:wrap}
-.hero-trust .t .n{font-size:clamp(26px,2.6vw,34px);font-weight:700;letter-spacing:-.01em;color:var(--txt)}
-.hero-trust .t .n small{font-size:60%;color:var(--gold)}
-.hero-trust .t .l{font-size:13px;color:var(--mut);margin-top:4px}
+/* trust-чипы hero: единичные факты вместо цифр соцсетей — см. дизайн-концепцию раздел 02 */
+.hero-trust{display:flex;gap:10px;margin-top:clamp(28px,4vw,40px);flex-wrap:wrap}
+.hero-trust .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:var(--r-pill);padding:10px 18px;font-size:13.5px;color:var(--txt);background:rgba(19,19,22,.5)}
+.hero-trust .chip b{color:var(--gold-bright);font-weight:700;font-size:15px}
 .fresh-review{display:inline-flex;align-items:center;gap:10px;margin-top:26px;font-size:13.5px;color:#cfcabf;border-top:1px solid var(--line);padding-top:20px;max-width:52ch;transition:.25s}
 .fresh-review:hover{color:var(--gold-bright)}
-.fresh-review .dot{width:7px;height:7px;border-radius:50%;background:#59c96a;box-shadow:0 0 10px #59c96a;flex:none;animation:pulse 2s infinite}
+.fresh-review .dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success);flex:none;animation:pulse 2s infinite}
+/* без idle-анимации: в hero уже дышит live-точка — второй движущийся элемент лишний (см. дизайн-концепцию, раздел 06) */
+.hero-cue{display:flex;width:fit-content;align-items:center;gap:8px;margin-top:18px;font-size:12.5px;color:var(--mut);transition:.25s}
+.hero-cue:hover{color:var(--gold-bright)}
+.hero-cue svg{width:15px;height:15px;flex:none}
 
 /* ============================================================ MARQUEE */
 .marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--panel)}
@@ -139,7 +150,7 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .col-card .cap{position:absolute;left:0;right:0;bottom:0;padding:20px;background:linear-gradient(0deg,rgba(9,9,11,.92),transparent);display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
 .col-card .cap .t{font-family:var(--fd);font-size:24px;font-weight:600;line-height:1.1}
 .col-card .cap .d{font-size:12.5px;color:var(--mut);margin-top:4px}
-.col-card .cap .arr{width:40px;height:40px;flex:none;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:grid;place-items:center;transition:.3s}
+.col-card .cap .arr{width:40px;height:40px;flex:none;border:1px solid var(--line-strong);border-radius:50%;display:grid;place-items:center;transition:.3s}
 .col-card .cap .arr svg{width:15px;height:15px}
 .col-card:hover .cap .arr{background:var(--gold);border-color:var(--gold);color:#181307}
 
@@ -162,11 +173,14 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .p-ph{position:relative;aspect-ratio:3/4;overflow:hidden;background:#0e0e10}
 .p-ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
 .p-card:hover .p-ph img{transform:scale(1.05)}
-.p-badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:600;letter-spacing:.06em;padding:5px 11px;border-radius:var(--r-pill);background:rgba(9,9,11,.72);border:1px solid rgba(89,201,106,.4);color:#7ad786;backdrop-filter:blur(4px)}
+.p-badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:600;letter-spacing:.06em;padding:5px 11px;border-radius:var(--r-pill);background:rgba(9,9,11,.72);border:1px solid var(--success-line);color:var(--success-bright);backdrop-filter:blur(4px)}
 .p-body{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
 .p-name{font-size:14.5px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
-.p-spec{font-size:12.5px;color:var(--mut);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.p-price{font-size:19px;font-weight:700;color:var(--gold-bright);margin-top:auto;padding-top:8px}
+.p-spec{font-size:12.5px;color:var(--mut);line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-price-row{display:flex;align-items:baseline;gap:8px;margin-top:auto;padding-top:8px;flex-wrap:wrap}
+.p-price{font-size:19px;font-weight:700;color:var(--gold-bright)}
+.p-orig{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;color:var(--mut-soft)}
+.p-orig svg{width:10px;height:10px;color:var(--gold)}
 .p-actions{display:flex;gap:8px;margin-top:10px}
 .p-book{flex:1;min-height:44px;border-radius:var(--r-sm);border:none;background:var(--gold-grad);color:#181307;font-size:13.5px;font-weight:600;transition:.25s}
 .p-book:hover{filter:brightness(1.07)}
@@ -196,19 +210,6 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .qr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .qr-actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
 
-/* ============================================================ LIFESTYLE + STEPS */
-.life{position:relative;overflow:hidden;border-block:1px solid var(--line)}
-.life img{width:100%;height:clamp(340px,48vw,560px);object-fit:cover}
-.life::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.88) 0%,rgba(11,11,13,.45) 55%,transparent 100%)}
-.life .life-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;z-index:1}
-.life h2{font-family:var(--fd);font-size:clamp(28px,4vw,48px);font-weight:600;line-height:1.08;margin:14px 0 0;max-width:17ch}
-.life p{color:#cfcabf;max-width:42ch;margin:16px 0 0;font-size:15.5px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,36px);margin-top:44px}
-.step{border-top:2px solid var(--gold);padding-top:20px}
-.step .num{font-family:var(--fd);font-size:44px;font-weight:600;color:var(--gold);line-height:1}
-.step h3{font-size:17.5px;font-weight:600;margin:14px 0 8px}
-.step p{font-size:14.5px;color:var(--mut);margin:0;line-height:1.6}
-
 /* ============================================================ TRUST */
 .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2.4vw,28px);margin-top:44px}
 .tr-item{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:26px 24px}
@@ -217,11 +218,19 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .tr-item h3{font-size:16.5px;font-weight:600;margin:0 0 8px}
 .tr-item p{font-size:14px;color:var(--mut);margin:0;line-height:1.6}
 
+/* ============================================================ VIDEO */
+.video-box{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;max-height:520px;margin-top:40px;background:#0e0e10}
+.video-box img,.video-box video{width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.video-box .badge{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:20px}
+.video-box .play{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--line-strong);background:rgba(9,9,11,.5);display:grid;place-items:center;backdrop-filter:blur(4px)}
+.video-box .play svg{width:22px;height:22px;color:var(--txt);margin-left:3px}
+.video-box .cap{font-family:var(--fd);font-size:clamp(19px,2.6vw,26px);color:var(--txt)}
+
 /* ============================================================ REVIEWS (реальные фото и цитаты из канала отзывов) */
 .rev-band{background:var(--panel);border-block:1px solid var(--line)}
 .rev-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px}
 .rev-head .fresh{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--mut);border:1px solid var(--line);border-radius:var(--r-pill);padding:8px 16px;background:var(--bg)}
-.rev-head .fresh .dot{width:7px;height:7px;border-radius:50%;background:#59c96a;box-shadow:0 0 10px #59c96a}
+.rev-head .fresh .dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success)}
 .rev-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,3vw,32px);align-items:start}
 .rev-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .rev-photo{position:relative;aspect-ratio:1/1;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line);background:#0e0e10;cursor:pointer}
@@ -255,7 +264,7 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .model-chip button:hover{color:var(--txt)}
 .form-note{font-size:12.5px;color:var(--mut);margin-top:14px;line-height:1.55;text-align:center}
 .form-ok{display:none;text-align:center;padding:30px 6px}
-.form-ok .ic{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:rgba(89,201,106,.12);border:1px solid rgba(89,201,106,.4);display:grid;place-items:center;color:#7ad786}
+.form-ok .ic{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;background:var(--success-tint);border:1px solid var(--success-line);display:grid;place-items:center;color:var(--success-bright)}
 .form-ok .ic svg{width:26px;height:26px}
 .form-ok h3{font-family:var(--fd);font-size:26px;margin:0 0 10px}
 .form-ok p{color:var(--mut);font-size:14.5px;margin:0 0 20px}
@@ -269,6 +278,8 @@ h2.sec-title{font-family:var(--fd);font-weight:600;font-size:clamp(30px,4.4vw,52
 .faq summary .x{width:30px;height:30px;flex:none;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--gold);transition:transform .3s;font-weight:400;font-size:18px}
 .faq details[open] summary .x{transform:rotate(45deg)}
 .faq .a{padding:0 4px 24px;color:var(--mut);font-size:14.5px;line-height:1.7;max-width:70ch}
+.faq-close{display:flex;align-items:center;justify-content:center;gap:18px;margin:36px auto 0;max-width:860px;flex-wrap:wrap;text-align:center}
+.faq-close span{font-family:var(--fd);font-size:20px;color:var(--txt)}
 
 /* ============================================================ FOOTER */
 footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--panel)}
@@ -298,7 +309,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 
 /* ============================================================ ИЗБРАННОЕ */
 .p-badge.hit{border-color:rgba(201,163,95,.6);color:var(--gold-bright)}
-.fav-btn{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(9,9,11,.55);color:#f2efe9;display:grid;place-items:center;transition:.25s;z-index:2;backdrop-filter:blur(4px);padding:0}
+.fav-btn{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line-strong);background:rgba(9,9,11,.55);color:var(--txt);display:grid;place-items:center;transition:.25s;z-index:2;backdrop-filter:blur(4px);padding:0}
 .fav-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
 .fav-btn.on{background:var(--gold-grad);color:#181307;border-color:transparent}
 .fav-btn.on svg{fill:currentColor;stroke:none}
@@ -359,7 +370,9 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
 .fav-empty{color:var(--mut);font-size:14.5px;padding:16px 0}
 
 /* ============================================================ СРАВНЕНИЕ */
-.cmp-btn{position:absolute;top:10px;left:10px;z-index:2;display:flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 10px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.25);background:rgba(9,9,11,.55);color:#f2efe9;font-size:11.5px;font-weight:600;transition:.25s;backdrop-filter:blur(4px)}
+/* top:44px — не 10px, чтобы не перекрывать .p-badge (тоже top:10px;left:10px): раньше кнопка «Сравнить»
+   рисовалась поверх бейджа «Хит продаж/В наличии» и полностью его прятала */
+.cmp-btn{position:absolute;top:44px;left:10px;z-index:2;display:flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 10px;border-radius:var(--r-pill);border:1px solid var(--line-strong);background:rgba(9,9,11,.55);color:var(--txt);font-size:11.5px;font-weight:600;transition:.25s;backdrop-filter:blur(4px)}
 .cmp-btn i{width:14px;height:14px;border-radius:3px;border:1.5px solid currentColor;flex:none;display:grid;place-items:center}
 .cmp-btn i svg{width:9px;height:9px;opacity:0}
 .cmp-btn.on{background:var(--gold-grad);color:#181307;border-color:transparent}
@@ -400,11 +413,9 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
   .rev-inner{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
   .qr-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr;gap:26px}
   .foot-grid{grid-template-columns:1fr 1fr}
   .sticky-bar{display:flex}
   body{padding-bottom:calc(74px + env(safe-area-inset-bottom))}
-  .life img{min-height:420px}
   /* iOS зумит страницу при фокусе в контрол с font-size < 16px */
   .cat-search input,.sel,.lead-form input,.lead-form textarea,.form-ok textarea{font-size:16px}
 }
@@ -439,9 +450,9 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
   <div class="wrap nav-inner">
     <a href="#top" class="logo" aria-label="Time Brand">
       <svg class="mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <circle cx="24" cy="24" r="21.4" stroke="#c9a35f" stroke-width="1.3"/>
-        <path d="M24 5v4.2" stroke="#c9a35f" stroke-width="1.5" stroke-linecap="round"/>
-        <text x="24" y="30.5" text-anchor="middle" font-family="Georgia,serif" font-weight="600" font-size="17" fill="#f2efe9">TB</text>
+        <circle cx="24" cy="24" r="21.4" style="stroke:var(--gold)" stroke-width="1.3"/>
+        <path d="M24 5v4.2" style="stroke:var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+        <text x="24" y="30.5" text-anchor="middle" font-family="Georgia,serif" font-weight="600" font-size="17" style="fill:var(--txt)">TB</text>
       </svg>
       <span class="txt">Time&nbsp;<em>Brand</em></span>
     </a>
@@ -486,16 +497,19 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
       <a class="btn btn-gold" href="#catalog">Смотреть каталог
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="btn btn-ghost" href="#podbor">Подбор за 30 секунд</a>
     </div>
     <div class="hero-trust reveal d3">
-      <div class="t"><div class="n" data-count="257" data-suffix=" 000+">257 000+</div><div class="l">подписчиков в Instagram*</div></div>
-      <div class="t"><div class="n" data-count="129" data-suffix="">129</div><div class="l">моделей в каталоге сайта</div></div>
-      <div class="t"><div class="n"><small>от</small> 2 990 ₽</div><div class="l">реальные цены, без «уточняйте»</div></div>
+      <span class="chip"><b data-count="129" data-suffix="">129</b>&nbsp;моделей в наличии</span>
+      <span class="chip">Оплата после примерки</span>
+      <span class="chip">Ответ за час</span>
     </div>
     <a class="fresh-review reveal d3" href="#reviews">
       <span class="dot"></span>
       <span>«Всё, часы забрал брат, спасибо большое» — реальный отзыв, 12 июля</span>
+    </a>
+    <a class="hero-cue reveal d3" href="#collections">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Не знаете, что выбрать? Листайте вниз
     </a>
   </div>
 </header>
@@ -507,32 +521,63 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
   </div>
 </div>
 
-<!-- ================= COLLECTIONS ================= -->
+<!-- ================= ВЫБОР ПО СТИЛЮ ================= -->
+<!-- было «Коллекции» по брендам — теперь по сценарию покупки, ближе к тому, зачем человек вообще зашёл (см. wireframe, блок 02).
+     Фото lifestyle по сценариям ещё не отсняты — временно переиспользуем имиджевые нейрофото по смыслу; заменить, когда будут реальные. -->
 <section class="section wrap" id="collections">
-  <span class="eyebrow reveal">Коллекции</span>
+  <span class="eyebrow reveal">Какие часы вам нужны</span>
   <h2 class="sec-title reveal d1">С чего начать выбор</h2>
-  <p class="sec-sub reveal d2">Четыре направления, которые покупают чаще всего. Нажмите — покажем подходящие модели из наличия.</p>
+  <p class="sec-sub reveal d2">Четыре сценария, под которые чаще всего выбирают часы. Нажмите — покажем подходящие модели из наличия.</p>
   <div class="collections">
-    <a class="col-card tilt reveal" href="#catalog" data-preset="gshock">
-      <img src="images/ai/ai-gshock-metal.jpg" alt="G-Shock — ударопрочные часы" loading="lazy" decoding="async">
+    <a class="col-card tilt reveal" href="#catalog" data-preset="work">
+      <img src="images/ai/ai-prx.jpg" alt="Часы для работы — деловой стиль" loading="lazy" decoding="async">
       <span class="shine"></span>
-      <div class="cap"><div><div class="t">G-Shock</div><div class="d">Неубиваемая классика</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="cap"><div><div class="t">Для работы</div><div class="d">Деловой стиль, Swiss Made</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </a>
-    <a class="col-card tilt reveal d1" href="#catalog" data-preset="tissot">
-      <img src="images/ai/ai-prx.jpg" alt="Tissot — швейцарские часы" loading="lazy" decoding="async">
+    <a class="col-card tilt reveal d1" href="#catalog" data-preset="sport">
+      <img src="images/ai/ai-gshock-metal.jpg" alt="Часы для спорта — ударопрочные" loading="lazy" decoding="async">
       <span class="shine"></span>
-      <div class="cap"><div><div class="t">Tissot</div><div class="d">Swiss Made без переплат</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="cap"><div><div class="t">Для спорта</div><div class="d">Неубиваемая классика G-Shock</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </a>
-    <a class="col-card tilt reveal d2" href="#catalog" data-preset="seiko">
-      <img src="images/ai/ai-seiko5.jpg" alt="Seiko — японская механика" loading="lazy" decoding="async">
+    <a class="col-card tilt reveal d2" href="#catalog" data-preset="classic">
+      <img src="images/ai/ai-seiko5.jpg" alt="Классика на каждый день — японская механика" loading="lazy" decoding="async">
       <span class="shine"></span>
-      <div class="cap"><div><div class="t">Seiko</div><div class="d">Живая японская механика</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="cap"><div><div class="t">Классика на каждый день</div><div class="d">Живая японская механика</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </a>
-    <a class="col-card tilt reveal d3" href="#catalog" data-preset="budget">
-      <img src="images/ai/ai-casio-gold.jpg" alt="Casio Vintage — ретро" loading="lazy" decoding="async">
+    <a class="col-card tilt reveal d3" href="#catalog" data-preset="gift">
+      <img src="images/ai/ai-casio-gold.jpg" alt="Часы в подарок — доступный вход в тему" loading="lazy" decoding="async">
       <span class="shine"></span>
-      <div class="cap"><div><div class="t">До 10 000 ₽</div><div class="d">Стильный вход в тему</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div class="cap"><div><div class="t">В подарок</div><div class="d">До 10 000 ₽, стильный выбор</div></div><span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
     </a>
+  </div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section class="section quiz-sec" id="podbor">
+  <div class="wrap">
+    <span class="eyebrow reveal">Изюминка сайта</span>
+    <h2 class="sec-title reveal d1">Подбор часов за 30 секунд</h2>
+    <p class="sec-sub reveal d2">Три вопроса — и мы покажем модели из реального наличия под ваш бюджет. Быстрее, чем листать сто карточек.</p>
+
+    <div class="quiz-box reveal">
+      <div class="quiz-steps" aria-hidden="true"><div class="st" id="qs1"><i></i></div><div class="st" id="qs2"><i></i></div><div class="st" id="qs3"><i></i></div></div>
+
+      <div id="quizFlow">
+        <p class="quiz-q" id="quizQ">Себе или в подарок?</p>
+        <div class="quiz-opts" id="quizOpts"></div>
+        <button class="quiz-back" id="quizBack">← Назад</button>
+      </div>
+
+      <div class="quiz-res" id="quizRes">
+        <p class="qr-title">Вот что мы подобрали</p>
+        <p class="qr-sub" id="qrSub"></p>
+        <div class="qr-grid" id="qrGrid"></div>
+        <div class="qr-actions">
+          <button class="btn btn-ghost" id="qrAll">Показать все подходящие в каталоге</button>
+          <button class="btn btn-ghost" id="qrRestart">Пройти заново</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -557,6 +602,12 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
     </div>
     <div class="cat-row">
       <label class="cat-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3" stroke-linecap="round"/></svg><input type="search" id="catSearch" placeholder="Поиск: PRX, G-Shock, механика…" aria-label="Поиск по каталогу" autocorrect="off" autocapitalize="off"></label>
+      <select class="sel" id="styleSel" aria-label="Стиль">
+        <option value="all">Любой стиль</option>
+        <option value="sport">Спорт</option>
+        <option value="classic">Классика</option>
+        <option value="casual">На каждый день</option>
+      </select>
       <select class="sel" id="priceSel" aria-label="Бюджет">
         <option value="all">Любой бюджет</option>
         <option value="0-10000">До 10 000 ₽</option>
@@ -570,6 +621,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
         <option value="cheap">Сначала дешевле</option>
         <option value="exp">Сначала дороже</option>
       </select>
+      <button class="chip" id="hitsChip" aria-pressed="false">Только хиты</button>
       <span class="cat-count" id="catCount"></span>
     </div>
   </div>
@@ -587,57 +639,10 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
   <button class="btn btn-gold btn-sm" id="cmpOpen">Сравнить</button>
 </div>
 
-<!-- ================= QUIZ ================= -->
-<section class="section quiz-sec" id="podbor">
-  <div class="wrap">
-    <span class="eyebrow reveal">Изюминка сайта</span>
-    <h2 class="sec-title reveal d1">Подбор часов за 30 секунд</h2>
-    <p class="sec-sub reveal d2">Три вопроса — и мы покажем модели из реального наличия под ваш бюджет. Быстрее, чем листать сто карточек.</p>
-
-    <div class="quiz-box reveal">
-      <div class="quiz-steps" aria-hidden="true"><div class="st" id="qs1"><i></i></div><div class="st" id="qs2"><i></i></div><div class="st" id="qs3"><i></i></div></div>
-
-      <div id="quizFlow">
-        <p class="quiz-q" id="quizQ">Для кого выбираете часы?</p>
-        <div class="quiz-opts" id="quizOpts"></div>
-        <button class="quiz-back" id="quizBack">← Назад</button>
-      </div>
-
-      <div class="quiz-res" id="quizRes">
-        <p class="qr-title">Вот что мы подобрали</p>
-        <p class="qr-sub" id="qrSub"></p>
-        <div class="qr-grid" id="qrGrid"></div>
-        <div class="qr-actions">
-          <button class="btn btn-ghost" id="qrAll">Показать все подходящие в каталоге</button>
-          <button class="btn btn-ghost" id="qrRestart">Пройти заново</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= LIFESTYLE ================= -->
-<div class="life reveal">
-  <img src="images/ai/ai-lifestyle.jpg" alt="Часы Time Brand на запястье" loading="lazy" decoding="async">
-  <div class="wrap life-copy">
-    <span class="eyebrow">Условия покупки</span>
-    <h2>Оплата после примерки</h2>
-    <p>В Астрахани примерите вживую, по России — проверите комплект и часы при получении. Не подошли — не платите.</p>
-  </div>
-</div>
-
-<!-- ================= HOW TO BUY ================= -->
-<section class="section wrap">
-  <span class="eyebrow reveal">Как купить</span>
-  <h2 class="sec-title reveal d1">Три шага до часов на руке</h2>
-  <div class="steps">
-    <div class="step reveal"><div class="num">01</div><h3>Оставьте заявку</h3><p>Выберите модель в каталоге или пройдите подбор — и отправьте заявку. Это ни к чему не обязывает.</p></div>
-    <div class="step reveal d1"><div class="num">02</div><h3>Подтвердим наличие и цену</h3><p>Ответим в течение часа в рабочее время: наличие, финальная цена, сроки. Без спама и навязывания.</p></div>
-    <div class="step reveal d2"><div class="num">03</div><h3>Примерка и оплата</h3><p>В Астрахани — примерка в магазине. В другие города — доставка с проверкой при получении.</p></div>
-  </div>
-</section>
-
 <!-- ================= TRUST ================= -->
+<!-- Срок гарантии/условия возврата и рабочие часы — открытые вопросы из ТЗ (раздел 5), пока не подставляю
+     конкретные цифры, которых не знаю: лучше честная общая формулировка, чем придуманный срок.
+     Фото команды/точки продаж сюда же, когда пришлют реальное — свою «команду» на реальном бизнесе не рисую. -->
 <section class="section wrap" id="trust" style="padding-top:0">
   <span class="eyebrow reveal">Почему нам доверяют</span>
   <h2 class="sec-title reveal d1">Только оригинал — и это легко проверить</h2>
@@ -645,7 +650,25 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
     <div class="tr-item reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Гарантия подлинности</h3><p>Каждая модель — оригинал с документами и полным комплектом. Проверяйте серийные номера.</p></div>
     <div class="tr-item reveal d1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Ответ в течение часа</h3><p>Пишете — отвечаем. В рабочее время реакция на заявку занимает меньше часа.</p></div>
     <div class="tr-item reveal d2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" stroke-linejoin="round"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></div><h3>Доставка по России</h3><p>Отправляем в любой город с проверкой при получении. По Астрахани — самовывоз и примерка: ТЦ «Олимпик», 1 и 3 этаж.</p></div>
-    <div class="tr-item reveal d3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 8a5 5 0 1 0-10 0c0 5-2 6-2 6h14s-2-1-2-6z" stroke-linejoin="round"/><path d="M10 18a2 2 0 0 0 4 0" stroke-linecap="round"/></svg></div><h3>Нас легко проверить</h3><p>Открытый канал с товарами, публичные отзывы и 257 000+ подписчиков в Instagram*.</p></div>
+    <div class="tr-item reveal d3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4h8l4 6-10 11L2 10z" stroke-linejoin="round"/><path d="M2 10h20M8 4l2 6-2 11M16 4l-2 6 2 11" stroke-linejoin="round"/></svg></div><h3>Нас легко проверить</h3><p>Открытый канал с реальными товарами <a href="https://t.me/timebrand" target="_blank" rel="noopener" style="color:var(--gold-bright)">@timebrand</a>, публичные отзывы покупателей и два магазина в Астрахани, куда можно прийти лично.</p></div>
+  </div>
+</section>
+
+<!-- ================= ВИДЕО ================= -->
+<!-- Реального видео витрины/распаковки ещё нет (открытый вопрос из ТЗ) — вместо сломанного <video> с несуществующим
+     файлом честная заглушка «скоро появится» на существующем имиджевом кадре. Когда видео пришлют: заменить
+     .video-box img на <video muted playsinline controls poster="images/hero.jpg" src="images/video-store.mp4">
+     и убрать .badge с текстом-заглушкой. -->
+<section class="section wrap" id="video" style="padding-top:0">
+  <span class="eyebrow reveal">Смотрите сами</span>
+  <h2 class="sec-title reveal d1">15 секунд — и все сомнения на месте</h2>
+  <p class="sec-sub reveal d2">Видео витрины и распаковки от первого лица, без монтажа — лучшее доказательство, что магазин настоящий.</p>
+  <div class="video-box reveal">
+    <img src="images/hero.jpg" alt="Видео витрины скоро появится" loading="lazy" decoding="async">
+    <div class="badge">
+      <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l12-7z"/></svg></span>
+      <span class="cap">Видео скоро появится</span>
+    </div>
   </div>
 </section>
 
@@ -678,12 +701,49 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
           <div class="rev-q"><p>«Всё, часы забрал брат, спасибо большое! Вам всего хорошего, торговли вам 🤝»</p><div class="d">12 июля</div></div>
         </div>
         <div class="rev-cta">
-          <a class="btn btn-gold" href="https://t.me/otzivi_time_brand" target="_blank" rel="noopener">Весь канал отзывов
+          <a class="btn btn-gold" href="#catalog">Выбрать часы
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://t.me/otzivi_time_brand" target="_blank" rel="noopener">Весь канал отзывов
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg>
           </a>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section wrap" id="faq" style="padding-top:0">
+  <span class="eyebrow reveal">Вопросы</span>
+  <h2 class="sec-title reveal d1">Отвечаем до того, как вы спросили</h2>
+  <div class="faq reveal d2">
+    <details>
+      <summary>Это точно оригиналы? <span class="x">+</span></summary>
+      <div class="a">Да. Работаем только с оригинальными Casio, Seiko, Tissot, Citizen и Fossil: полный комплект, документы, серийные номера. При получении можете проверить всё до оплаты — в этом и смысл.</div>
+    </details>
+    <details>
+      <summary>Почему дешевле, чем в торговых центрах? <span class="x">+</span></summary>
+      <div class="a">У нас нет аренды бутика в ТЦ и наценки «за витрину». Продаём через Telegram и Instagram напрямую, поэтому те же модели стоят заметно дешевле.</div>
+    </details>
+    <details>
+      <summary>Как проходит доставка в другой город? <span class="x">+</span></summary>
+      <div class="a">Отправляем проверенными службами с описью и возможностью осмотра при получении. Сначала осматриваете часы и комплект — потом оплачиваете.</div>
+    </details>
+    <details>
+      <summary>Можно примерить перед покупкой? <span class="x">+</span></summary>
+      <div class="a">В Астрахани — да, приходите и меряйте. Две точки в ТЦ «Олимпик»: 1 и 3 этаж. Напишите заранее, чтобы нужная модель ждала вас в магазине.</div>
+    </details>
+    <details>
+      <summary>Нужной модели нет в каталоге. Привезёте? <span class="x">+</span></summary>
+      <div class="a">Скорее всего, да. Оставьте заявку с названием модели — найдём и привезём под заказ, сроки и цену скажем сразу.</div>
+    </details>
+  </div>
+  <div class="faq-close reveal d3">
+    <span>Остались вопросы?</span>
+    <a class="btn btn-gold" href="#zayavka">Оставить заявку
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
 </section>
 
@@ -697,6 +757,7 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
       <ul class="reveal d3">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Ответ в течение часа в рабочее время</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Бронь ни к чему не обязывает</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Оплата после примерки — не подошли, не платите</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Поможем выбрать, если сомневаетесь</li>
       </ul>
     </div>
@@ -728,34 +789,6 @@ footer{border-top:1px solid var(--line);padding:60px 0 40px;background:var(--pan
         <a class="btn btn-gold btn-block" href="https://t.me/shamil_time_brand" target="_blank" rel="noopener" id="okTgBtn">Открыть чат менеджера</a>
       </div>
     </form>
-  </div>
-</section>
-
-<!-- ================= FAQ ================= -->
-<section class="section wrap" id="faq" style="padding-top:0">
-  <span class="eyebrow reveal">Вопросы</span>
-  <h2 class="sec-title reveal d1">Отвечаем до того, как вы спросили</h2>
-  <div class="faq reveal d2">
-    <details>
-      <summary>Это точно оригиналы? <span class="x">+</span></summary>
-      <div class="a">Да. Работаем только с оригинальными Casio, Seiko, Tissot, Citizen и Fossil: полный комплект, документы, серийные номера. При получении можете проверить всё до оплаты — в этом и смысл.</div>
-    </details>
-    <details>
-      <summary>Почему дешевле, чем в торговых центрах? <span class="x">+</span></summary>
-      <div class="a">У нас нет аренды бутика в ТЦ и наценки «за витрину». Продаём через Telegram и Instagram напрямую, поэтому те же модели стоят заметно дешевле.</div>
-    </details>
-    <details>
-      <summary>Как проходит доставка в другой город? <span class="x">+</span></summary>
-      <div class="a">Отправляем проверенными службами с описью и возможностью осмотра при получении. Сначала осматриваете часы и комплект — потом оплачиваете.</div>
-    </details>
-    <details>
-      <summary>Можно примерить перед покупкой? <span class="x">+</span></summary>
-      <div class="a">В Астрахани — да, приходите и меряйте. Две точки в ТЦ «Олимпик»: 1 и 3 этаж. Напишите заранее, чтобы нужная модель ждала вас в магазине.</div>
-    </details>
-    <details>
-      <summary>Нужной модели нет в каталоге. Привезёте? <span class="x">+</span></summary>
-      <div class="a">Скорее всего, да. Оставьте заявку с названием модели — найдём и привезём под заказ, сроки и цену скажем сразу.</div>
-    </details>
   </div>
 </section>
 
@@ -907,7 +940,7 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefe
 }
 
 /* ---------- каталог ---------- */
-var state={brand:'all',price:'all',sort:'top',q:'',shown:12};
+var state={brand:'all',price:'all',style:'all',sort:'top',q:'',onlyHits:false,shown:12};
 var grid=$('#catGrid'),PAGE=12;
 var fmt=function(n){return n.toLocaleString('ru-RU')+' ₽'};
 
@@ -920,6 +953,8 @@ function styleOf(p){
 function filtered(){
   var list=CAT.filter(function(p){
     if(state.brand!=='all'&&p.b!==state.brand)return false;
+    if(state.style!=='all'&&styleOf(p)!==state.style)return false;
+    if(state.onlyHits&&!p.hit)return false;
     if(state.price!=='all'){var pr=state.price.split('-');if(p.p<+pr[0]||p.p>+pr[1])return false}
     if(state.q){var q=state.q.toUpperCase();
       var hay=(p.n+' '+p.b+' '+p.s+' '+p.m).toUpperCase();
@@ -934,16 +969,23 @@ function filtered(){
 }
 var HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z" stroke-linejoin="round"/></svg>';
 var CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+/* приоритет бейджа: реальный низкий остаток > хит продаж > обычное «в наличии».
+   поле stock необязательное — появится в catalog.js, когда владелец пришлёт реальные остатки */
+function badgeHTML(p){
+  if(typeof p.stock==='number'&&p.stock>0&&p.stock<=3)return '<span class="p-badge hit">Осталось '+p.stock+' шт.</span>';
+  if(p.hit)return '<span class="p-badge hit">Хит продаж</span>';
+  return '<span class="p-badge">В наличии</span>';
+}
 function cardHTML(p){
   return '<article class="p-card" data-id="'+p.i+'">'
     +'<div class="p-ph"><img src="'+p.img+'" alt="'+esc(p.n)+'" loading="lazy" decoding="async">'
-    +'<span class="p-badge'+(p.hit?' hit':'')+'">'+(p.hit?'Хит продаж':'В наличии')+'</span>'
+    +badgeHTML(p)
     +'<button class="cmp-btn'+(cmpHas(p.i)?' on':'')+'" data-cmp="'+p.i+'" aria-label="Добавить к сравнению" aria-pressed="'+cmpHas(p.i)+'"><i>'+CHECK+'</i>Сравнить</button>'
     +'<button class="fav-btn'+(favHas(p.i)?' on':'')+'" data-fav="'+p.i+'" aria-label="В избранное" aria-pressed="'+!!favHas(p.i)+'">'+HEART+'</button></div>'
     +'<div class="p-body">'
     +'<div class="p-name">'+esc(p.n)+'</div>'
     +'<div class="p-spec">'+esc(p.s)+'</div>'
-    +'<div class="p-price">'+fmt(p.p)+'</div>'
+    +'<div class="p-price-row"><div class="p-price">'+fmt(p.p)+'</div><span class="p-orig">'+CHECK+'оригинал</span></div>'
     +'<div class="p-actions">'
     +'<button class="p-book" data-book="'+p.i+'">Забронировать</button>'
     +'<a class="p-tg" href="'+p.l+'" target="_blank" rel="noopener" aria-label="Пост о модели в Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></a>'
@@ -975,7 +1017,13 @@ $('#brandChips').addEventListener('click',function(e){
   state.brand=b.dataset.brand;state.shown=PAGE;render();
 });
 $('#priceSel').addEventListener('change',function(){state.price=this.value;state.shown=PAGE;render()});
+$('#styleSel').addEventListener('change',function(){state.style=this.value;state.shown=PAGE;render()});
 $('#sortSel').addEventListener('change',function(){state.sort=this.value;state.shown=PAGE;render()});
+$('#hitsChip').addEventListener('click',function(){
+  state.onlyHits=!state.onlyHits;
+  this.classList.toggle('on',state.onlyHits);this.setAttribute('aria-pressed',state.onlyHits);
+  state.shown=PAGE;render();
+});
 var qTimer;
 $('#catSearch').addEventListener('input',function(){clearTimeout(qTimer);var v=this.value;qTimer=setTimeout(function(){state.q=v.trim();state.shown=PAGE;render()},200)});
 render();
@@ -983,13 +1031,14 @@ if(!CAT.length){
   $('#catEmpty').textContent='Каталог не загрузился. Обновите страницу или напишите нам в Telegram — подберём вручную.';
 }
 
-/* пресеты из «Коллекций» */
+/* пресеты из блока «Выбор по стилю» — сценарий покупки, а не бренд напрямую */
 function applyPreset(name){
-  state.q='';$('#catSearch').value='';state.price='all';$('#priceSel').value='all';state.brand='all';
-  if(name==='gshock'){state.q='G-SHOCK';$('#catSearch').value='G-SHOCK'}
-  else if(name==='tissot'){state.brand='Tissot'}
-  else if(name==='seiko'){state.brand='Seiko'}
-  else if(name==='budget'){state.price='0-10000';$('#priceSel').value='0-10000'}
+  state.q='';$('#catSearch').value='';state.price='all';$('#priceSel').value='all';state.brand='all';state.style='all';$('#styleSel').value='all';
+  state.onlyHits=false;$('#hitsChip').classList.remove('on');$('#hitsChip').setAttribute('aria-pressed','false');
+  if(name==='work'){state.brand='Tissot'}
+  else if(name==='sport'){state.style='sport';$('#styleSel').value='sport'}
+  else if(name==='classic'){state.brand='Seiko'}
+  else if(name==='gift'){state.price='0-10000';$('#priceSel').value='0-10000'}
   $$('#brandChips .chip').forEach(function(c){c.classList.toggle('on',c.dataset.brand===state.brand)});
   state.shown=PAGE;render();
 }
@@ -1059,12 +1108,12 @@ function openProduct(id){
   var html='<div class="prod">'
     +'<div class="prod-ph"><img src="'+p.img+'" alt="'+esc(p.n)+'">'
     +'<button class="fav-btn'+(favHas(p.i)?' on':'')+'" data-fav="'+p.i+'" aria-label="В избранное" aria-pressed="'+!!favHas(p.i)+'">'+HEART+'</button>'
-    +(p.hit?'<span class="p-badge hit">Хит продаж</span>':'')
+    +badgeHTML(p)
     +'</div>'
     +'<div class="prod-info">'
     +'<div class="prod-brand">'+esc(p.b)+' · '+(p.m==='механика'?'механика':'кварц')+'</div>'
     +'<h3>'+esc(p.n)+'</h3>'
-    +'<div class="prod-price">'+fmt(p.p)+'</div>'
+    +'<div class="prod-price">'+fmt(p.p)+' <span class="p-orig">'+CHECK+'оригинал</span></div>'
     +(p.sp&&p.sp.length?'<ul class="prod-specs">'+p.sp.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>':'')
     +'<div class="prod-actions"><button class="btn btn-gold" data-book="'+p.i+'">Забронировать</button></div>'
     +'<a class="prod-tglink" href="'+p.l+'" target="_blank" rel="noopener">Пост об этой модели в канале <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.2c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-.9.5l.3-4.6 8.4-7.6c.4-.3-.1-.5-.6-.2L7.4 13 2.9 11.6c-1-.3-1-.9.2-1.4L20.5 3.4c.8-.3 1.5.2 1.3 1z"/></svg></a>'
@@ -1156,7 +1205,7 @@ updateCmpBar();
 
 /* ---------- квиз ---------- */
 var QS=[
-  {q:'Для кого выбираете часы?',opts:[['Мужские','муж'],['Женские','жен'],['Не важно','any']]},
+  {q:'Себе или в подарок?',opts:[['Себе','self'],['В подарок','gift'],['Не важно','any']]},
   {q:'Какой бюджет?',opts:[['До 10 000 ₽','0-10000'],['10–25 тыс. ₽','10000-25000'],['25–40 тыс. ₽','25000-40000'],['Не важен','any']]},
   {q:'Какой характер у часов?',opts:[['Спорт и улица','sport'],['Классика и костюм','classic'],['На каждый день','casual'],['Удивите меня','any']]}
 ];
@@ -1175,8 +1224,9 @@ $('#quizOpts').addEventListener('click',function(e){
 $('#quizBack').addEventListener('click',function(){if(qStep>0){qStep--;drawQuiz()}});
 $('#qrRestart').addEventListener('click',function(){qStep=0;qAns=[];$('#quizRes').style.display='none';$('#quizFlow').style.display='block';drawQuiz()});
 function quizMatch(relax){
+  /* вопрос 1 (себе/в подарок) не фильтрует каталог — в данных нет поля «получатель»,
+     он только меняет формулировку результата в quizResult(); реальные фильтры — бюджет и характер */
   return CAT.filter(function(p){
-    if(qAns[0]!=='any'&&!(p.g===qAns[0]||p.g==='уни'))return false;
     if(qAns[1]!=='any'){var pr=qAns[1].split('-');var lo=+pr[0],hi=+pr[1];
       if(relax){lo*=0.8;hi*=1.25}
       if(p.p<lo||p.p>hi)return false}
@@ -1198,9 +1248,10 @@ function quizResult(){
   // перемешиваем топ, чтобы подбор был живым
   var pick=m.slice(0,12).sort(function(){return Math.random()-.5}).slice(0,3);
   $('#qrGrid').innerHTML=pick.map(cardHTML).join('');
+  var forWhom=qAns[0]==='gift'?'в подарок':qAns[0]==='self'?'для себя':'под ваши ответы';
   $('#qrSub').textContent=fallback
     ?'Точных совпадений не нашлось — вот похожие модели из наличия:'
-    :'Под ваши ответы в наличии: '+m.length+' модел'+plural(m.length)+'. Вот три из них:';
+    :'Хорошо подойдёт '+forWhom+': в наличии '+m.length+' модел'+plural(m.length)+'. Вот три из них:';
   $('#qrAll').onclick=function(){
     state.brand='all';state.q='';$('#catSearch').value='';
     state.price=(!fallback&&qAns[1]!=='any')?qAns[1]:'all';$('#priceSel').value=state.price;
