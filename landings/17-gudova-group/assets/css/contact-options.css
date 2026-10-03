@@ -1,0 +1,32 @@
+
+.contact-options{display:flex;justify-content:center;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.contact-options button{padding:10px 18px;border:1px solid #eee9df40;border-radius:24px;color:#eee9df;font:500 12px var(--font-sans);background:transparent;cursor:pointer}
+.contact-options button[aria-pressed=true]{color:#1b2632;background:#ffb162;border-color:#ffb162}
+.contact-options button:focus-visible{outline:2px solid #ffb162;outline-offset:3px}
+#contacts .cta-layout{max-width:1312px;width:calc(100% - 96px);margin-inline:auto}
+#contacts[data-contact-style=panel] .cta-layout{background:#eee9df;border-radius:24px;overflow:hidden;gap:0;padding:0;grid-template-columns:1fr 1fr}
+#contacts[data-contact-style=panel] .cta-copy{padding:48px 36px;align-self:stretch;display:flex;flex-direction:column;background:#e4ddcf}
+#contacts[data-contact-style=panel] .contact-statement{color:#1b2632;font-size:clamp(18px,1.5vw,25px)}
+#contacts[data-contact-style=panel] .cta-fallback{margin-top:auto;padding-top:40px}
+#contacts[data-contact-style=panel] .cta-fallback a{color:#2c3b4d;border-color:#2c3b4d25}
+#contacts[data-contact-style=panel] .cta-fallback svg{stroke:#a35139}
+#contacts[data-contact-style=panel] .form-card{border:0;box-shadow:none;border-radius:0;padding:48px 36px}
+#contacts[data-contact-style=centered] .cta-layout{grid-template-columns:1fr;gap:32px;max-width:1000px;padding:0}
+#contacts[data-contact-style=centered] .cta-copy{text-align:center}
+#contacts[data-contact-style=centered] .contact-statement{font-size:clamp(22px,2.3vw,34px);margin-bottom:24px}
+#contacts[data-contact-style=centered] .cta-fallback{display:flex;flex-direction:row;justify-content:center;gap:28px;max-width:none;flex-wrap:wrap}
+#contacts[data-contact-style=centered] .cta-fallback a{border:0;padding:8px 0;font-size:15px;gap:10px}
+#contacts[data-contact-style=centered] .form-card{padding:36px 48px;border-radius:20px}
+#contacts[data-contact-style=centered] .contact-form-title{text-align:center}
+#contacts[data-contact-style=centered] .option-grid{grid-template-columns:repeat(4,1fr)}
+#contacts[data-contact-style=dark] .cta-layout{gap:64px;padding:0;align-items:center}
+#contacts[data-contact-style=dark] .cta-copy{border-top:2px solid #ffb162;padding-top:30px}
+#contacts[data-contact-style=dark] .form-card{background:#243344;border:1px solid #eee9df35;box-shadow:none;border-radius:8px;padding:40px}
+#contacts[data-contact-style=dark] .form-card h2,#contacts[data-contact-style=dark] .form-card h3{color:#eee9df}
+#contacts[data-contact-style=dark] .form-card p,#contacts[data-contact-style=dark] .form-card label{color:#d5d8dc}
+#contacts[data-contact-style=dark] .option-chip{background:transparent;color:#eee9df;border-color:#eee9df40}
+#contacts[data-contact-style=dark] .option-chip[aria-pressed=true]{background:#ffb162;color:#1b2632;border-color:#ffb162}
+#contacts[data-contact-style=dark] .form-card input,#contacts[data-contact-style=dark] .form-card textarea{background:#1b2632;color:#eee9df;border-color:#eee9df40}
+#contacts[data-contact-style=dark] .form-card input::placeholder,#contacts[data-contact-style=dark] .form-card textarea::placeholder{color:#c0c7cf}
+@media(max-width:1000px){#contacts .cta-layout{width:calc(100% - 48px)}#contacts[data-contact-style=panel] .cta-copy,#contacts[data-contact-style=panel] .form-card{padding:32px 24px}#contacts[data-contact-style=panel] .contact-statement{font-size:clamp(13px,1.5vw,18px)}}
+@media(max-width:760px){#contacts .cta-layout{width:calc(100% - 32px)}#contacts[data-contact-style=panel] .cta-layout,#contacts[data-contact-style=dark] .cta-layout{grid-template-columns:1fr;gap:0}#contacts[data-contact-style=dark] .cta-layout{gap:28px}#contacts[data-contact-style=panel] .contact-statement,#contacts[data-contact-style=centered] .contact-statement{font-size:clamp(12px,3.25vw,23px)}#contacts[data-contact-style=panel] .cta-fallback{padding-top:0}#contacts[data-contact-style=centered] .cta-fallback{flex-direction:column;align-items:center;gap:2px}#contacts[data-contact-style=centered] .form-card,#contacts[data-contact-style=dark] .form-card{padding:28px 22px}#contacts[data-contact-style=centered] .option-grid{grid-template-columns:repeat(2,1fr)}.contact-options{gap:6px;padding-inline:16px}.contact-options button{font-size:10px;padding:9px 12px}}

@@ -1,0 +1,29 @@
+
+.founder-options{display:flex;justify-content:center;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+.founder-options button{padding:10px 18px;border:1px solid var(--border);border-radius:24px;color:var(--fg);background:var(--card);font:500 12px var(--font-sans);cursor:pointer}
+.founder-options button[aria-pressed=true]{background:#ffb162;color:#1b2632;border-color:#ffb162}
+.founder-options button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#about .founder-layout{max-width:1312px;width:calc(100% - 96px);padding:0}
+#about .founder-name{max-width:none;font-size:clamp(28px,3vw,44px)}
+#about[data-founder-style=classic] .founder-layout{grid-template-columns:320px minmax(0,1fr);gap:64px}
+#about[data-founder-style=classic] .founder-path{display:flex;flex-wrap:wrap;gap:8px}
+#about[data-founder-style=classic] .founder-path span{flex:1;min-width:100px;border-radius:8px}
+#about[data-founder-style=classic] .founder-copy{border-top:2px solid var(--accent);padding-top:24px}
+#about[data-founder-style=card] .founder-layout{grid-template-columns:360px minmax(0,1fr);gap:0;background:var(--card);border:1px solid var(--border);border-radius:24px;overflow:hidden}
+#about[data-founder-style=card] .founder-visual{padding:24px;background:var(--surface);gap:24px}
+#about[data-founder-style=card] .founder-photo img{border-radius:14px}
+#about[data-founder-style=card] .founder-copy{padding:40px}
+#about[data-founder-style=card] .founder-name{font-size:36px}
+#about[data-founder-style=card] .founder-path{display:flex;flex-wrap:wrap;gap:8px}
+#about[data-founder-style=card] .founder-path span{flex:0 1 auto;min-height:44px;padding:10px 18px;border-radius:22px}
+#about[data-founder-style=card] .founder-quote{font-size:16px}
+#about[data-founder-style=portrait] .founder-layout{grid-template-columns:minmax(0,1fr) 380px;gap:72px}
+#about[data-founder-style=portrait] .founder-visual{grid-column:2;grid-row:1}
+#about[data-founder-style=portrait] .founder-copy{grid-column:1;grid-row:1}
+#about[data-founder-style=portrait] .founder-name{max-width:580px;font-size:clamp(32px,3.4vw,49px);line-height:1.12}
+#about[data-founder-style=portrait] .founder-photo img{border-radius:120px 120px 16px 16px}
+#about[data-founder-style=portrait] .founder-path{display:flex;flex-wrap:wrap;gap:0;border-block:1px solid var(--border);padding:12px 0}
+#about[data-founder-style=portrait] .founder-path span{flex:1 1 30%;border:0;border-radius:0;background:none;color:var(--fg);min-height:44px}
+#about[data-founder-style=portrait] .founder-quote{border-left:0;border-top:2px solid var(--accent);padding:20px 0 0}
+@media(max-width:1000px){#about .founder-layout{width:calc(100% - 48px)}#about[data-founder-style=classic] .founder-layout{grid-template-columns:280px minmax(0,1fr);gap:32px}#about[data-founder-style=card] .founder-layout{grid-template-columns:300px minmax(0,1fr)}#about[data-founder-style=card] .founder-copy{padding:28px}#about[data-founder-style=portrait] .founder-layout{grid-template-columns:minmax(0,1fr) 300px;gap:32px}}
+@media(max-width:760px){#about .founder-layout{width:calc(100% - 40px)}#about[data-founder-style] .founder-layout{grid-template-columns:1fr;gap:30px}#about[data-founder-style=card] .founder-layout{gap:0}#about[data-founder-style=portrait] .founder-visual,#about[data-founder-style=portrait] .founder-copy{grid-column:auto;grid-row:auto}#about .founder-visual{max-width:380px;width:100%;margin-inline:auto}#about .founder-copy .founder-name{font-size:30px}#about[data-founder-style=card] .founder-visual{max-width:none}#about[data-founder-style=card] .founder-copy{padding:28px 24px}.founder-options{gap:6px;padding-inline:16px}.founder-options button{font-size:10px;padding:9px 12px}}
