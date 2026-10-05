@@ -59,11 +59,13 @@
 
   function heroEntrance() {
     var tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
-    tl.from('.hero-copy .eyebrow', { y: 14, opacity: 0, duration: .5 })
-      .from('.hero-copy h1', { y: 20, opacity: 0, duration: .7 }, '-=.3')
-      .from('.hero-copy .lede', { y: 14, opacity: 0, duration: .6 }, '-=.4')
-      .from('.hero-copy .audience', { y: 10, opacity: 0, duration: .5 }, '-=.4')
-      .from('.hero-ctas .btn', { y: 10, opacity: 0, duration: .5, stagger: .08 }, '-=.3');
+    tl.from('.hero-media', { scale: 1.08, opacity: 0, duration: 1.1, ease: 'power1.out' })
+      .from('.hero-content .eyebrow', { y: 14, opacity: 0, duration: .5 }, '-=.6')
+      .from('.hero-content h1', { y: 28, opacity: 0, duration: .8 }, '-=.3')
+      .from('.hero-content .lede', { y: 14, opacity: 0, duration: .6 }, '-=.5')
+      .from('.hero-content .audience', { y: 10, opacity: 0, duration: .5 }, '-=.4')
+      .from('.hero-ctas .btn', { y: 10, opacity: 0, duration: .5, stagger: .08 }, '-=.3')
+      .from('.hero-stats-bar .stat-cell', { y: 12, opacity: 0, duration: .5, stagger: .08 }, '-=.2');
   }
 
   document.addEventListener('DOMContentLoaded', function () {

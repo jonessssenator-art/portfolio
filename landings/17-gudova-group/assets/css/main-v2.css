@@ -32,10 +32,11 @@
   --line-strong:rgba(28,28,28,.24);
   --danger:#C9583F;
 
-  /* Единый строгий шрифт на весь сайт — Manrope.
+  /* V2: единый строгий, технический шрифт на весь сайт — Roboto
+     (по референсу smrte.ru, у которого шрифт нарочито сухой/инженерный).
      Три переменные оставлены как алиасы, чтобы не переписывать
      каждое правило: все они ведут на один и тот же шрифт. */
-  --font:'Manrope',Arial,Helvetica,sans-serif;
+  --font:'Roboto',Arial,Helvetica,sans-serif;
   --font-serif:var(--font);
   --font-sans:var(--font);
   --font-mono:var(--font);
@@ -229,7 +230,7 @@ section{padding:104px 0;position:relative;}
 .hero-rotator{position:relative;min-height:1.7em;margin:0 0 34px;max-width:760px;overflow:hidden;}
 .hero-rotator span{
   position:absolute;left:0;top:0;right:0;opacity:0;
-  font-size:15.5px;font-weight:600;color:var(--accent-deep);line-height:1.4;
+  font-size:15.5px;font-weight:700;color:var(--accent-deep);line-height:1.4;
   animation:hero-rotate 15s infinite;
 }
 .hero-rotator span:nth-child(1){animation-delay:0s;}
@@ -808,4 +809,25 @@ section{border-bottom:1px solid var(--line);}
 .ac-legal-note{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3);}
 @media(max-width:760px){
   .ac-trust{padding:26px 22px;}
+}
+
+/* =========================================================
+   V2 — по референсу smrte.ru: более строгий/технический шрифт
+   (Roboto вместо Manrope) + блок крупных цифр компании.
+   Фирменный оранжевый и вся остальная вёрстка не менялись.
+   ========================================================= */
+h1,h2,h3,h4{font-weight:700;letter-spacing:-.02em;}
+
+.stats-v2{background:var(--paper-2);padding:64px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.stats-v2-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px;}
+.stat-v2-item{min-width:0;}
+.stat-v2-num{font-family:var(--font);font-weight:900;font-size:clamp(40px,4.5vw,60px);line-height:1;color:var(--accent-deep);letter-spacing:-.02em;}
+.stat-v2-label{margin-top:14px;font-size:14px;color:var(--ink-2);line-height:1.45;max-width:230px;}
+@media(max-width:920px){
+  .stats-v2-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px;}
+}
+@media(max-width:560px){
+  .stats-v2{padding:48px 0;}
+  .stats-v2-grid{grid-template-columns:1fr;gap:28px;}
+  .stat-v2-label{max-width:none;}
 }
