@@ -208,45 +208,87 @@
     });
   }
 
-  function initStageDetails() {
-    var buttons = Array.from(document.querySelectorAll('.stage-toggle'));
-    if (!buttons.length) return;
-    function collapseAll() {
-      buttons.forEach(function (button) {
-        button.setAttribute('aria-expanded', 'false');
-        button.innerHTML = 'Подробнее <span aria-hidden="true">+</span>';
-        document.getElementById(button.getAttribute('aria-controls')).hidden = true;
-      });
-    }
-    collapseAll();
-    buttons.forEach(function (button) {
-      button.hidden = false;
-      button.addEventListener('click', function () {
-        var wasOpen = button.getAttribute('aria-expanded') === 'true';
-        collapseAll();
-        if (!wasOpen) {
-          button.setAttribute('aria-expanded', 'true');
-          button.innerHTML = 'Свернуть <span aria-hidden="true">−</span>';
-          document.getElementById(button.getAttribute('aria-controls')).hidden = false;
+  /* ---------- risk scanner accordion (mobile + desktop) ---------- */
+  function initScanner() {
+    var items = document.querySelectorAll('.scanner-item');
+    var visualLayers = document.querySelectorAll('.scanner-visual .sv-layer');
+    var visualNums = document.querySelectorAll('.scanner-visual .sv-num');
+    var visualCaption = document.querySelector('.scanner-visual .sv-caption');
+    items.forEach(function (item) {
+      item.addEventListener('click', function () {
+        var isOpen = item.getAttribute('aria-expanded') === 'true';
+        items.forEach(function (other) { other.setAttribute('aria-expanded', 'false'); });
+        item.setAttribute('aria-expanded', String(!isOpen));
+        var layerId = item.getAttribute('data-layer');
+        visualLayers.forEach(function (l) {
+          l.classList.toggle('is-active', l.getAttribute('data-layer') === layerId);
+        });
+        visualNums.forEach(function (n) {
+          n.classList.toggle('is-active', n.getAttribute('data-num') === layerId);
+        });
+        if (visualCaption && !isOpen) {
+          visualCaption.textContent = item.getAttribute('data-caption') || '';
         }
-      });
-    });
-    document.querySelectorAll('[data-stage-close]').forEach(function (close) {
-      close.hidden = false;
-      close.addEventListener('click', function () {
-        var trigger = document.getElementById('stage-toggle-' + close.dataset.stageClose);
-        collapseAll();
-        trigger.focus();
       });
     });
   }
 
+  /* ---------- services sticky-scroll sync ---------- */
+  function initServicesSync() {
+    var entries = Array.prototype.slice.call(document.querySelectorAll('.svc-entry'));
+    var stageLayers = document.querySelectorAll('.svc-stage .stg-layer');
+    var stageCaption = document.querySelector('.svc-stage .stg-caption');
+    if (!entries.length) return;
+
+    function setActive(target) {
+      var id = target.getAttribute('data-service');
+      entries.forEach(function (el) { el.classList.toggle('is-active', el === target); });
+      stageLayers.forEach(function (l) {
+        l.classList.toggle('is-active', l.getAttribute('data-layer') === id);
+      });
+      if (stageCaption) stageCaption.textContent = target.getAttribute('data-caption') || '';
+    }
+
+    // Pick whichever entry's own center is closest to the viewport's
+    // vertical center — deterministic, unlike a narrow rootMargin band
+    // where two tall entries can both "intersect" at once and whichever
+    // is later in DOM order silently wins, desyncing list vs stage.
+    var ticking = false;
+    function pickClosest() {
+      ticking = false;
+      var viewportCenter = window.innerHeight / 2;
+      var closest = null;
+      var closestDist = Infinity;
+      entries.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        var elCenter = rect.top + rect.height / 2;
+        var dist = Math.abs(elCenter - viewportCenter);
+        if (dist < closestDist) { closestDist = dist; closest = el; }
+      });
+      if (closest) setActive(closest);
+    }
+    function requestPick() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(pickClosest);
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(requestPick, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+      entries.forEach(function (el) { io.observe(el); });
+    } else {
+      window.addEventListener('scroll', requestPick, { passive: true });
+    }
+    pickClosest();
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
-    initStageDetails();
     initHeaderScroll();
     initActiveNav();
     initMobileMenu();
     initLightbox();
+    initScanner();
+    initServicesSync();
     wireAnalyticsHooks();
   });
 })();

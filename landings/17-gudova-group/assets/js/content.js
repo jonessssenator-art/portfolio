@@ -9,9 +9,9 @@
 window.GUDOVA_CONTENT = {
   contacts: {
     phone: '+79896650707',
-    phoneDisplay: '+7 989 665-07-07',
+    phoneDisplay: '+7 (989) 665 07 07',
     whatsapp: '79896650707',
-    email: 'gudbuilding@gmail.com',
+    email: 'gudova.group@mail.ru',
     address: 'РД, г. Махачкала, ул. Радищева, 4'
   }
 };

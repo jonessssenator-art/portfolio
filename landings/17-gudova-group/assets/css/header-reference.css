@@ -1,0 +1,61 @@
+/* Two-row white header following the supplied reference across all variants. */
+.reference-header,.reference-header.is-scrolled{background:#fff;backdrop-filter:none;border-bottom:0;box-shadow:0 1px 0 #00000005;color:#536b80}.reference-header-inner{max-width:1920px;margin:auto;padding:0 6%}.reference-top{display:flex;align-items:center;gap:28px;min-height:118px;padding:24px 0 16px}.reference-header .logo-mark{display:flex;gap:14px;color:#4c5870;font-size:28px;line-height:.94;letter-spacing:-.04em;flex:none}.reference-header .logo-mark img,html[data-variant=navy] .reference-header .logo-mark img{width:76px;height:49px;filter:none;object-fit:contain}.reference-wordmark small{display:block;font-size:6px;font-weight:400;letter-spacing:.025em;line-height:1.4;margin-top:5px;text-transform:uppercase}.reference-header .brand-descriptor{display:block;color:#536b80;border:0;padding:0;font:500 12px/1.2 var(--font-sans);text-transform:uppercase;max-width:160px}.reference-actions{display:flex;align-items:center;gap:22px;margin-left:auto}.reference-actions>a{white-space:nowrap}.header-tender,.header-callback{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:14px 22px;border-radius:40px;text-transform:uppercase;font-size:11px;font-weight:500;line-height:1;color:#fff;transition:background .2s}.header-tender{background:#484e55}.header-tender:hover{background:#303740}.header-callback{background:#ce6d56}.header-callback:hover{background:#b85c47}.reference-header .nav-phone{font:600 18px var(--font-sans);color:#494f58;display:block;order:initial;margin-left:10px}.reference-navigation{display:flex;align-items:center;justify-content:space-between;max-width:1120px;gap:30px;padding:14px 0 30px}.reference-navigation>a,.reference-navigation summary{font-size:16px;font-weight:600;line-height:1.4;color:#536b80}.reference-navigation>a:hover{color:#ce6d56}.reference-navigation .header-services{margin:0;font-size:16px}.reference-navigation .header-services nav{left:0;right:auto;top:35px;background:#fff;border-color:#e2e5e8;color:#536b80;border-radius:4px}.reference-navigation .header-services nav a{color:#536b80}.reference-navigation .header-services nav a:hover{background:#f3f4f5}.reference-header .menu-toggle{display:none!important}.mobile-menu{top:218px}html{scroll-padding-top:235px}section,.service-detail,.phase,.proj-panel,.document-card{scroll-margin-top:235px}
+@media(max-width:1200px){.reference-header-inner{padding:0 4%}.reference-top{gap:22px;min-height:110px}.reference-actions{gap:12px}.reference-header .brand-descriptor{font-size:10px}.reference-header .logo-mark{font-size:24px}.reference-header .nav-phone{font-size:15px;margin-left:0}.header-tender,.header-callback{padding:13px 17px;min-height:44px;font-size:10px}.reference-navigation{max-width:none}.reference-navigation>a,.reference-navigation summary{font-size:14px}}
+@media(max-width:920px){.reference-header .brand-descriptor{display:none}.reference-top{min-height:94px}.reference-actions{gap:10px}.reference-header .logo-mark img{width:42px;height:38px}.reference-header .logo-mark{font-size:21px}.reference-header .nav-phone{font-size:13px}.reference-navigation{gap:16px;padding-bottom:23px}.reference-navigation>a,.reference-navigation summary{font-size:12px}html{scroll-padding-top:205px}section,.service-detail,.phase,.proj-panel,.document-card{scroll-margin-top:205px}}
+@media(max-width:700px){.reference-header-inner{padding:0 20px}.reference-top{min-height:88px;padding:16px 0;gap:14px}.reference-header .logo-mark{font-size:22px;gap:10px}.reference-header .logo-mark img{width:42px;height:38px}.reference-header .reference-actions{margin-left:auto}.header-tender,.reference-header .nav-phone{display:none}.header-callback{font-size:9px;padding:12px 14px;min-height:38px}.reference-header .menu-toggle{display:flex!important;width:36px;height:36px;border:0}.reference-header .menu-toggle span{background:#536b80}.reference-navigation{display:none}.mobile-menu{top:130px}html{scroll-padding-top:145px}section,.service-detail,.phase,.proj-panel,.document-card{scroll-margin-top:145px}}
+@media(max-width:370px){.reference-header-inner{padding:0 14px}.reference-top{gap:8px}.reference-header .logo-mark{font-size:19px}.header-callback{padding:11px;font-size:8px}}
+
+/* Original Michroma lettering from the supplied PDF. */
+@font-face{font-family:GudovaMichroma;src:url('../fonts/michroma-logo.woff2?v=2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+.reference-wordmark{font-family:GudovaMichroma,sans-serif;font-size:20px;font-weight:400;line-height:1.4375;letter-spacing:.0625em;text-align:center;color:#ff983f}
+.reference-wordmark small{font-family:var(--font-sans);color:#536b80;font-size:6px;letter-spacing:0;margin-top:2px}
+@media(max-width:1200px){.reference-wordmark{font-size:18px}}
+@media(max-width:920px){.reference-wordmark{font-size:16px}}
+@media(max-width:700px){.reference-wordmark{font-size:15px}.reference-wordmark small{font-size:5px}.reference-header .logo-mark{gap:8px}}
+@media(max-width:370px){.reference-wordmark{font-size:13px}}
+
+/* Single-line brand and centered navigation. */
+.reference-wordmark{white-space:nowrap;font-size:19px}
+.reference-navigation{margin-inline:auto;width:100%;max-width:1120px}
+@media(max-width:1200px){.reference-wordmark{font-size:16px}.reference-top{gap:16px}}
+@media(max-width:920px){.reference-wordmark{font-size:13px}.reference-header .logo-mark img{width:38px}.reference-actions{gap:8px}}
+@media(max-width:700px){.reference-wordmark{font-size:12px}.reference-header .logo-mark img{width:34px}.reference-top{flex-wrap:wrap;gap:10px}.reference-header .logo-mark{gap:7px}.reference-header .header-callback{display:none}.reference-header .menu-toggle{margin-left:auto}}
+@media(max-width:370px){.reference-wordmark{font-size:11px}}
+
+/* Main navigation overlays the slideshow. */
+.smart-hero{position:relative}
+.hero-navigation{position:absolute;inset:0 0 auto;z-index:10;padding:0 6%;background:linear-gradient(180deg,rgba(15,25,36,.86),rgba(15,25,36,.5) 70%,transparent)}
+.hero-navigation .reference-navigation{display:flex;max-width:1120px;padding:25px 0 36px;gap:24px;margin:auto}
+.hero-navigation .reference-navigation>a,.hero-navigation .reference-navigation summary{color:#fff;text-shadow:0 1px 5px #0006;font-size:16px}
+.hero-navigation .reference-navigation>a:hover,.hero-navigation .reference-navigation summary:hover{color:#ffb162}
+.hero-navigation .header-services{position:relative;margin:0}
+.hero-navigation .header-services nav{top:34px;z-index:20;max-width:calc(100vw - 48px);text-shadow:none}
+.smart-hero .hero-slide{padding-top:135px}
+html{scroll-padding-top:175px}section,.service-detail,.phase,.proj-panel,.document-card{scroll-margin-top:175px}
+@media(max-width:920px){.hero-navigation{padding:0 4%}.hero-navigation .reference-navigation{gap:14px}.hero-navigation .reference-navigation>a,.hero-navigation .reference-navigation summary{font-size:13px}}
+@media(max-width:700px){.hero-navigation{padding:0 24px}.hero-navigation .reference-navigation{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 12px;padding:20px 0 30px;text-align:center}.hero-navigation .reference-navigation>a,.hero-navigation .reference-navigation summary{font-size:12px}.hero-navigation .header-services nav{left:0;right:auto;width:310px;text-align:left}.smart-hero .hero-slide,html[data-variant=editorial] .hero-slide{padding-top:130px}.mobile-menu{top:130px}}
+
+/* Header and variant controls remain in the normal page flow. */
+.site-header.reference-header,.site-header.reference-header.is-scrolled{position:relative;top:auto}
+.variant-bar{position:relative;top:auto}
+html{scroll-padding-top:24px}section,.service-detail,.phase,.proj-panel,.document-card{scroll-margin-top:24px}
+
+.back-to-top{position:fixed;right:28px;bottom:28px;z-index:90;width:50px;height:50px;display:grid;place-items:center;border:1px solid #eee9df40;border-radius:50%;background:#2c3b4d;color:#fff;box-shadow:0 6px 22px #0003;cursor:pointer;transition:background .2s,transform .2s}.back-to-top[hidden]{display:none}.back-to-top:hover{background:#a35139;transform:translateY(-3px)}.back-to-top:focus-visible{outline:3px solid #ffb162;outline-offset:4px}@media(max-width:760px){.back-to-top{right:18px;bottom:calc(88px + env(safe-area-inset-bottom));width:46px;height:46px}}@media(prefers-reduced-motion:reduce){.back-to-top{transition:none}}
+
+.variant-bar{display:flex;justify-content:flex-end;align-items:center;min-height:46px;height:auto;padding:6px 6%;background:var(--surface);border-bottom:1px solid var(--border)}
+.theme-switch{display:flex;gap:3px;border:1px solid var(--border);padding:3px;border-radius:24px;background:var(--card)}
+.theme-switch button{display:grid;place-items:center;width:34px;height:30px;border:0;border-radius:20px;background:transparent;color:var(--fg);cursor:pointer}
+.theme-switch button[aria-pressed=true]{background:#ffb162;color:#1b2632}
+.theme-switch button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+@media(max-width:700px){.variant-bar{padding:6px 20px}}
+
+.site-footer .logo-mark{display:flex;align-items:center;gap:14px}
+.site-footer .logo-mark img,html[data-variant=navy] .site-footer .logo-mark img{width:76px;height:49px;object-fit:contain;filter:none}
+.site-footer .reference-wordmark{color:#ff983f;font-weight:400}
+@media(max-width:700px){.site-footer .logo-mark{gap:7px}.site-footer .logo-mark img,html[data-variant=navy] .site-footer .logo-mark img{width:34px;height:38px}}
+
+.reference-actions .theme-switch{flex:none;background:#f5f3ef;border-color:#d8d9db}.reference-actions .theme-switch button{color:#2c3b4d}.reference-actions{gap:16px}.mobile-menu{top:118px}
+@media(max-width:1200px){.reference-actions{gap:10px}.reference-top{gap:12px}.reference-header-inner{padding-inline:3%}.header-tender,.header-callback{padding-inline:13px}}
+@media(max-width:920px) and (min-width:701px){.reference-header .header-tender{display:none}}
+@media(max-width:700px){.reference-header-inner{padding-inline:16px}.reference-top{flex-wrap:nowrap;gap:8px}.reference-header .menu-toggle{margin-left:0;flex:none}.reference-actions .theme-switch{padding:2px;gap:0}.reference-actions .theme-switch button{width:27px;height:28px}.reference-header .reference-actions{margin-left:auto}.reference-wordmark{font-size:11px}.mobile-menu{top:88px}}
+@media(max-width:370px){.reference-wordmark{font-size:9px}.reference-header .logo-mark img{width:28px}}
