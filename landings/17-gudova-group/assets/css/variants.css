@@ -69,3 +69,4 @@ html[data-variant=editorial]{--surface:#EEE9DF;--surface-2:#C9C1B1;--card:#f5f0e
 .founder-path span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;box-sizing:border-box;line-height:1.35;padding:10px 14px}
 
 .footer-bottom .xx-credit{color:var(--cream);text-decoration:underline;text-underline-offset:3px;text-decoration-color:#eee9df60;transition:color .2s,text-decoration-color .2s}.footer-bottom .xx-credit:hover{color:var(--orange);text-decoration-color:var(--orange)}
+.rail-status,.pp-index{display:none!important}
